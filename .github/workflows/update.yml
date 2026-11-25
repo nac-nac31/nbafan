@@ -30,6 +30,9 @@ jobs:
           SWID: ${{ secrets.SWID }}
         run: python scripts/fetch.py
       - name: İstatistikleri hesapla ve siteyi üret
+        env:
+          ESPN_S2: ${{ secrets.ESPN_S2 }}
+          SWID: ${{ secrets.SWID }}
         run: python scripts/build.py
       - name: Veriyi kaydet
         run: |

@@ -137,14 +137,27 @@ def compute(raw):
 def localize_logos(teams, out):
     """Logoları siteye kopyalar; ESPN'in özel yüklenen resimleri başka sitelerden doğrudan açılmıyor."""
     import urllib.request
+    import shutil
     d = out / "logos"
     d.mkdir(parents=True, exist_ok=True)
+    manual = pathlib.Path("logos")  # repoya elle eklenen logolar (ör. logos/10.png) her zaman önceliklidir
+    cookie = ""
+    if os.environ.get("ESPN_S2") and os.environ.get("SWID"):
+        cookie = f"espn_s2={os.environ['ESPN_S2']}; SWID={os.environ['SWID']}"
     for t in teams:
+        own = sorted(manual.glob(f"{t['id']}.*")) if manual.is_dir() else []
+        if own:
+            shutil.copy(own[0], d / own[0].name)
+            t["logo"] = f"logos/{own[0].name}"
+            print(f"logo (elle eklenen): {t['name']}")
+            continue
         url = t.get("logo")
         if not url:
             continue
         try:
             req = urllib.request.Request(url, headers={"User-Agent": "Mozilla/5.0", "Referer": "https://fantasy.espn.com/"})
+            if cookie and "fantasy.espn.com" in url:
+                req.add_header("Cookie", cookie)
             with urllib.request.urlopen(req, timeout=30) as r:
                 body, ctype = r.read(), r.headers.get("Content-Type", "")
             ext = "svg" if "svg" in ctype or url.endswith(".svg") else "png" if "png" in ctype else "gif" if "gif" in ctype else "webp" if "webp" in ctype else "jpg"
@@ -155,6 +168,8 @@ def localize_logos(teams, out):
             print(f"logo ok: {t['name']} ({ctype}, {len(body)} bayt)")
         except Exception as e:  # logo yoksa kısaltma gösterilir
             print(f"logo alınamadı: {t['name']}: {e}")
+            if "mystique" in (url or ""):
+                t["logo"] = ""  # özel resim çerezsiz açılmıyor; kısaltma gösterilsin
 
 
 def main():

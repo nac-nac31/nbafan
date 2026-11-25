@@ -26,3 +26,10 @@ python scripts/build.py
 - **All-play:** Takım her hafta diğer 11 takımın hepsiyle oynasaydı kazanacağı kategori oranı.
 - **Şans endeksi:** Gerçek kategori kazanma oranı eksi all-play oranı.
 - **Power ranking:** %60 sezon all-play + %40 son iki haftanın all-play maç galibiyet oranı.
+
+## Takım logoları
+
+ESPN'in hazır logoları kendiliğinden gelir. Takımların kendi yüklediği resimler ESPN'de giriş yapmayı gerektirdiği için iki yol var:
+
+- Repo ayarlarında `ESPN_S2` ve `SWID` secret'larını eklemek (Settings → Secrets and variables → Actions).
+- Resmi repoya `logos/<takım id>.png` olarak eklemek. Elle eklenen resim her zaman önceliklidir.
