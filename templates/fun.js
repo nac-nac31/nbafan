@@ -2,7 +2,7 @@
 const EN=document.documentElement.lang==='en';
 const FX=EN?{
   kicker:'League gossip',title:'Fun stats',
-  intro:n=>`Built from ${n} days of daily lineups, every add, drop and trade, and the draft. Everything is measured in 9-cat value (z-score per game), counting only what was above a bench-level player.`,
+  intro:n=>`Built from ${n} days of daily lineups, every add, drop and trade, and the draft. Everything is measured in ${DATA.cats.length}-cat value (z-score per game), counting only what was above a bench-level player.`,
   jump:{trade:'Trades',bench:'Bench',rival:'Rivalries',rec:'Records',waiver:'Waivers',regret:'Regrets',draft:'Draft',pers:'Personalities',inj:'Injuries'},
   mon:['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'],
   sl:{PTS:'pts',REB:'reb',AST:'ast',STL:'stl',BLK:'blk','3PM':'3pm'},
@@ -22,7 +22,7 @@ const FX=EN?{
   P:{paint:['Paint beasts','Owns the boards, the blocks and FG%.'],rain:['Make it rain','Threes and points by the bucket.'],dime:['Dime factory','Assists and steals run the offense.'],thief:['Pickpockets','Nobody steals more.'],line:['Free-throw snipers','Lives at the line and makes them.'],puntft:['Punting FT%','Gave up free throws to win the big-man cats.'],puntto:['Turnovers? Whatever','Playing fast and loose for points and assists.'],careful:['Ball security','Fewest turnovers, even if the passing suffers.'],scorer:['Bucket getters','Top of the league in points.'],balanced:['Jack of all trades','No glaring hole in any category.'],grinder:['Waiver addict','Always on the wire.'],loyal:['Set and forget','Barely touches the roster.'],rebuild:['Building for next year','Struggling across the board.']}
 }:{
   kicker:'Ligin dedikodusu',title:'Eğlenceli istatistikler',
-  intro:n=>`${n} günlük kadro, her ekleme, bırakma ve takas ile draft verisinden çıkarıldı. Hepsi 9 kategori değeriyle (maç başı z-skoru) ölçülür ve yedek seviyesindeki bir oyuncunun üstünde kalan kısım sayılır.`,
+  intro:n=>`${n} günlük kadro, her ekleme, bırakma ve takas ile draft verisinden çıkarıldı. Hepsi ${DATA.cats.length} kategori değeriyle (maç başı z-skoru) ölçülür ve yedek seviyesindeki bir oyuncunun üstünde kalan kısım sayılır.`,
   jump:{trade:'Takaslar',bench:'Yedek',rival:'Rekabet',rec:'Rekorlar',waiver:'Waiver',regret:'Pişmanlık',draft:'Draft',pers:'Kişilik',inj:'Sakatlık'},
   mon:['Oca','Şub','Mar','Nis','May','Haz','Tem','Ağu','Eyl','Eki','Kas','Ara'],
   sl:{PTS:'sayı',REB:'rib',AST:'asist',STL:'top çalma',BLK:'blok','3PM':'üçlük'},

@@ -17,9 +17,10 @@ STAT_NAMES = {"0": "PTS", "1": "BLK", "2": "STL", "3": "AST", "6": "REB", "11": 
               "39": "QD", "40": "MIN", "42": "GS", "44": "GP"}
 SLOT_NAMES = {"0": "PG", "1": "SG", "2": "SF", "3": "PF", "4": "C", "5": "G", "6": "F", "7": "SG/SF",
               "8": "G/F", "9": "PF/C", "10": "F/C", "11": "UTIL", "12": "BE", "13": "IR"}
-# Şu anki motorun (build.py, fun.py) sabit varsaydığı ayarlar.
-ENGINE_CATS = {"0", "6", "3", "2", "1", "17", "19", "20", "11"}
-ENGINE_SLOTS = {"0": 1, "1": 1, "2": 1, "3": 1, "4": 1, "5": 1, "6": 1, "11": 3}
+# Motorun (build.py, fun.py) desteklediği ayarlar.
+ENGINE_SCORING = ("H2H_CATEGORY", "H2H_MOST_CATEGORIES")
+ENGINE_CATS = {"0", "1", "2", "3", "4", "5", "6", "11", "13", "14", "15", "16", "17", "18", "19", "20", "21", "37", "38"}
+FUN_CATS = {"0", "1", "2", "3", "6", "11", "17", "19", "20"}  # eğlence sayfasının günlük verisinde olanlar
 
 
 def current_season(today=None):
@@ -60,18 +61,17 @@ def parse_config(league):
 
 
 def support(cfg):
-    """(destekleniyor mu, eksik/uyumsuz olanlar listesi)"""
-    issues = []
-    if cfg["scoringType"] != "H2H_CATEGORY":
-        issues.append(f"puanlama türü {cfg['scoringType']} (şimdilik sadece H2H kategori)")
-    if set(cfg["cats"]) != ENGINE_CATS:
-        issues.append("kategoriler 9-cat değil: " + ", ".join(cfg["catNames"]))
-    starters = {k: v for k, v in cfg["slots"].items() if k not in ("12", "13")}
-    if starters != ENGINE_SLOTS:
-        issues.append("kadro slotları farklı: " + ", ".join(f"{SLOT_NAMES.get(k, k)}×{v}" for k, v in starters.items()))
-    if cfg["playoffTeams"] not in (2, 4, 6, 8):
-        issues.append(f"playoff takım sayısı {cfg['playoffTeams']}")
-    return not issues, issues
+    """(destekleniyor mu, engel listesi, uyarılar)"""
+    issues, notes = [], []
+    if cfg["scoringType"] not in ENGINE_SCORING:
+        issues.append(f"puanlama türü {cfg['scoringType']} (şimdilik H2H kategori ve most categories)")
+    bad = [STAT_NAMES.get(c, c) for c in cfg["cats"] if c not in ENGINE_CATS]
+    if bad:
+        issues.append("desteklenmeyen kategoriler: " + ", ".join(bad))
+    nofun = [STAT_NAMES.get(c, c) for c in cfg["cats"] if c in ENGINE_CATS and c not in FUN_CATS]
+    if nofun:
+        notes.append("eğlence sayfası bu kategorileri saymaz: " + ", ".join(nofun))
+    return not issues, issues, notes
 
 
 def inspect(league_id, season=None, espn_s2=None, swid=None):
@@ -91,8 +91,8 @@ def inspect(league_id, season=None, espn_s2=None, swid=None):
             return {**out, "ok": False, "access": "not_found", "reason": "Bu ID ve sezon için lig bulunamadı."}
         return {**out, "ok": False, "access": "error", "reason": f"ESPN hata verdi: HTTP {e.code}"}
     cfg = parse_config(league)
-    ok, issues = support(cfg)
-    return {**out, "ok": ok, "access": "cookies" if espn_s2 else "public", "config": cfg,
+    ok, issues, notes = support(cfg)
+    return {**out, "ok": ok, "access": "cookies" if espn_s2 else "public", "config": cfg, "notes": notes,
             "reason": None if ok else "Şu an desteklenmiyor: " + "; ".join(issues)}
 
 
