@@ -297,7 +297,7 @@ def build_fun(raw, data, daily, logs, Z, seasons=None, cur_season=None):
         if st["how"] != "drop":
             continue
         v, n, tot = log_value(st["pid"], st["start"] + 1)
-        if n >= 3:
+        if n >= 3 and next_team(st["pid"], st["start"]) != st["team"]:  # geri alınanlar pişmanlık sayılmaz
             regrets.append({"team": st["team"], "pid": st["pid"], "name": pname(st["pid"]), "sp": st["start"],
                             "date": fmt_day(sp_date.get(st["start"])), "val": round(v, 1), "n": n, "pg": per_game(tot, n),
                             "now": next_team(st["pid"], st["start"])})
@@ -335,7 +335,8 @@ def build_fun(raw, data, daily, logs, Z, seasons=None, cur_season=None):
             r["now"] = round(r["now"], 1)
             del r["score"]
         rows.sort(key=lambda r: -r["net"])
-        trade_cards.append({"sp": x["sp"], "date": fmt_day(sp_date.get(x["sp"]) or x.get("date")), "sides": rows,
+        near = min((sp for sp in sp_date if sp >= x["sp"]), default=None)
+        trade_cards.append({"sp": x["sp"], "date": fmt_day(x.get("date") or sp_date.get(near)), "sides": rows,
                             "gap": rows[0]["net"]})
     trade_cards.sort(key=lambda c: -c["gap"])
     out["trades"] = trade_cards
