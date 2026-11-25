@@ -469,7 +469,7 @@
   }
  },
  "league": "Fantasy 26-27",
- "updated": "25 Kasım 2026, 20:35",
+ "updated": "25 Kasım 2026, 21:01",
  "weeks": [
   1,
   2,
@@ -494,7 +494,7 @@
    "id": 1,
    "name": "Children of Planet Earth",
    "abbrev": "CPE",
-   "logo": "",
+   "logo": "logos/1.jpg",
    "cat": [
     19,
     25,
@@ -594,7 +594,7 @@
    "id": 2,
    "name": "CHADELITES",
    "abbrev": "PSL",
-   "logo": "",
+   "logo": "logos/2.jpg",
    "cat": [
     24,
     20,
@@ -994,7 +994,7 @@
    "id": 6,
    "name": "Acibadem Elephants",
    "abbrev": "FIL",
-   "logo": "",
+   "logo": "logos/6.jpg",
    "cat": [
     27,
     18,
@@ -1094,7 +1094,7 @@
    "id": 7,
    "name": "BATH CANARIES",
    "abbrev": "AAG",
-   "logo": "",
+   "logo": "logos/7.jpg",
    "cat": [
     20,
     25,
@@ -1294,7 +1294,7 @@
    "id": 10,
    "name": "Adana Heybeliler Tekstil",
    "abbrev": "HEY",
-   "logo": "",
+   "logo": "logos/10.jpg",
    "cat": [
     19,
     26,
@@ -1394,7 +1394,7 @@
    "id": 12,
    "name": "Soprano's",
    "abbrev": "SOP",
-   "logo": "",
+   "logo": "logos/12.jpg",
    "cat": [
     23,
     22,
@@ -1594,7 +1594,7 @@
    "id": 14,
    "name": "Tooney Tunes",
    "abbrev": "AT",
-   "logo": "",
+   "logo": "logos/14.jpg",
    "cat": [
     23,
     22,
