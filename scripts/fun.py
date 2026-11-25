@@ -195,7 +195,19 @@ def build_fun(raw, data, daily, logs, Z, seasons=None, cur_season=None):
     out["benchWorst"] = sorted(worst_all, key=lambda x: -x["val"])[:5]
 
     # ---------- işlemler: sahiplik dönemleri ----------
-    txs = sorted(tx.values(), key=lambda x: (x["sp"], x.get("date") or 0))
+    # ESPN onaylanan takasın oyuncu listesini işlem kaydında vermiyor: takasları günlük kadro değişiminden çıkar
+    covered = {(i[1], x["sp"]) for x in tx.values() for i in x["items"] if i[0] == "TRADE"}
+    moves, prev = {}, {}
+    for k in sorted(days, key=int):
+        cur = {pid: int(ts) for ts, rows in days[k].items() for pid, _, _ in rows}
+        for pid, t in cur.items():
+            if prev.get(pid) and prev[pid] != t and (pid, int(k)) not in covered:
+                pair = tuple(sorted((prev[pid], t)))
+                moves.setdefault((int(k), pair), []).append(["TRADE", pid, prev[pid], t])
+        prev = cur
+    txl = list(tx.values()) + [{"type": "TRADE_INFERRED", "sp": sp, "date": None, "team": pair[0], "items": items}
+                               for (sp, pair), items in moves.items()]
+    txs = sorted(txl, key=lambda x: (x["sp"], x.get("date") or 0))
     stints = []  # {pid, team, start, end, how}
     openst = {}
     for p in draft:
