@@ -176,6 +176,8 @@ def player_row(pl, season, on_team):
         "owned": round((pl.get("ownership") or {}).get("percentOwned", 0), 1),
         "gp": gp_now, "seasonGp": int(sea.get("42", 0)), "min": round(mins, 1), "src": src,
         "_mix": pack(mix), "_now": pack(cur), "_proj": pack(proj) if proj else None,
+        "pro": pl.get("proTeamId"),
+        "g": {k: round(mix.get(k, 0), 3) for k in ("0", "6", "3", "2", "1", "17", "11", "13", "14", "15", "16")},
     }
 
 
@@ -225,7 +227,110 @@ def build_players(raw, season):
         r["valProj"] = round(sum(zs(r["_proj"]).values()), 2) if r["_proj"] else None
         r["s"] = {c: (round(v, 3) if "%" in c else round(v, 1)) for c, v in r["_now"]["s"].items()}
         del r["_mix"], r["_now"], r["_proj"]
+        if r["team"] == 0:
+            del r["g"]
     return sorted(rows, key=lambda r: -r["val"])
+
+
+def phi(x):
+    import math
+    return 0.5 * (1 + math.erf(x / math.sqrt(2)))
+
+
+ACTIVE_SLOTS = 10  # PG, SG, SF, PF, C, G, F, 3x UTIL
+
+
+def project_week(raw, data):
+    """Devam eden haftanın sonunu tahmin eder: kalan maçlar, günlük 10 kişilik kadro, normal yaklaşım."""
+    import math
+    M, L, sched = raw["matchups"], raw["league"], raw.get("proschedule")
+    cur = data.get("current") or {}
+    week = cur.get("week")
+    if not sched or not week or not cur.get("matchups"):
+        return
+    keys = {}
+    for m in M["schedule"]:
+        if "home" in m:
+            keys.setdefault(m["matchupPeriodId"], set()).update(int(k) for k in (m["home"].get("pointsByScoringPeriod") or {}))
+    prev = keys.get(week - 1)
+    start = (max(prev) + 1) if prev else min(keys.get(week, {1}))
+    length = 7 * (L["settings"]["scheduleSettings"].get("matchupPeriodLength") or 1)
+    days = range(start, start + length)
+    games = {}  # proTeamId -> [scoringPeriod,...] kalan
+    for t in sched["settings"]["proTeams"]:
+        for sp, gl in (t.get("proGamesByScoringPeriod") or {}).items():
+            if int(sp) in days and any(not g.get("statsOfficial") for g in gl):
+                games.setdefault(t["id"], []).append(int(sp))
+    slots = {}
+    for t in raw.get("rosters", {}).get("teams", []):
+        for e in t["roster"]["entries"]:
+            slots[e["playerId"]] = e.get("lineupSlotId")
+    byteam = {}
+    for p in data["players"]:
+        if p["team"] and slots.get(p["id"]) != 13 and p["inj"] not in ("Sakat", "IR"):
+            byteam.setdefault(p["team"], []).append(p)
+    mvals = {}
+    for m in M["schedule"]:
+        if m.get("matchupPeriodId") == week and "home" in m and "away" in m:
+            for side in ("home", "away"):
+                sc = (m[side].get("cumulativeScore") or {}).get("scoreByStat") or {}
+                mvals[m[side]["teamId"]] = {k: v["score"] for k, v in sc.items()}
+    proj = {}
+    for tid, base in mvals.items():
+        rem = {k: 0.0 for k in ("0", "6", "3", "2", "1", "17", "11", "13", "14", "15", "16")}
+        var = {k: 0.0 for k in rem}
+        n = 0
+        per_player = {}
+        for d in days:
+            playing = [p for p in byteam.get(tid, []) if d in games.get(p["pro"], [])]
+            playing.sort(key=lambda p: -p["val"])
+            for p in playing[:ACTIVE_SLOTS]:
+                n += 1
+                per_player[p["id"]] = per_player.get(p["id"], 0) + 1
+                for k, v in p["g"].items():
+                    rem[k] += v
+                    var[k] += max(v, (0.4 * v) ** 2)
+        for k in rem:  # model hatası: ortalamalar, dakikalar ve kadro kararları belirsiz
+            var[k] += (0.15 * rem[k]) ** 2
+        tot = {k: base.get(k, 0) + rem[k] for k in rem}
+        mu, sd = {}, {}
+        for c in CATS:
+            if c == "19":
+                fga = tot["14"] or 1
+                mu[c], sd[c] = tot["13"] / fga, math.sqrt(var["13"]) / fga
+            elif c == "20":
+                fta = tot["16"] or 1
+                mu[c], sd[c] = tot["15"] / fta, math.sqrt(var["15"]) / fta
+            else:
+                mu[c], sd[c] = tot[c], math.sqrt(var[c])
+        proj[tid] = {"mu": mu, "sd": sd, "games": n, "left": per_player}
+    for mt in cur["matchups"]:
+        h, a = proj.get(mt["home"]), proj.get(mt["away"])
+        if not h or not a:
+            continue
+        pc = {}
+        for c in CATS:
+            diff = h["mu"][c] - a["mu"][c]
+            if c in LOWER_IS_BETTER:
+                diff = -diff
+            s = math.sqrt(h["sd"][c] ** 2 + a["sd"][c] ** 2)
+            pc[CN[c]] = 1.0 if (s == 0 and diff > 0) else 0.0 if (s == 0 and diff < 0) else 0.5 if s == 0 else phi(diff / s)
+        dist = [1.0]  # kazanılan kategori sayısının olasılık dağılımı
+        for q in pc.values():
+            dist = [(dist[i] if i < len(dist) else 0) * (1 - q) + (dist[i - 1] * q if i >= 1 else 0) for i in range(len(dist) + 1)]
+        mt["proj"] = {
+            "win": round(sum(dist[5:]), 3), "pc": {k: round(v, 3) for k, v in pc.items()},
+            "score": [sum(1 for v in pc.values() if v > 0.5), sum(1 for v in pc.values() if v < 0.5)],
+            "games": [h["games"], a["games"]],
+            "mu": [{CN[c]: round(h["mu"][c], 3) for c in CATS}, {CN[c]: round(a["mu"][c], 3) for c in CATS}],
+        }
+    left = {}
+    for t in proj.values():
+        left.update(t["left"])
+    for p in data["players"]:
+        if p["team"]:
+            p["left"] = left.get(p["id"], 0)
+    cur["days"] = [start, start + length - 1]
 
 
 def owner_key(team):
@@ -313,12 +418,16 @@ def main():
     season = int(os.environ.get("SEASON") or current_season())
     raw_dir = pathlib.Path("data/raw") / str(season)
     raw = {n: json.loads((raw_dir / f"{n}.json").read_text()) for n in ("league", "matchups")}
-    for n in ("rosters", "freeagents"):
+    for n in ("rosters", "freeagents", "proschedule"):
         f = raw_dir / f"{n}.json"
         if f.exists():
             raw[n] = json.loads(f.read_text())
     data = compute(raw)
     data["players"] = build_players(raw, season)
+    project_week(raw, data)
+    for mt in data.get("current", {}).get("matchups", []):
+        if "proj" in mt:
+            print(f"tahmin: {mt['home']} - {mt['away']}: %{mt['proj']['win']*100:.0f} ({mt['proj']['games']} maç)")
     print(f"oyuncular: {len(data['players'])} ({sum(1 for p in data['players'] if p['team'] == 0)} serbest)")
     seasons = {season: (raw["league"], data)}
     for y in raw["league"].get("status", {}).get("previousSeasons", []):

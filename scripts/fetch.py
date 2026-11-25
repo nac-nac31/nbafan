@@ -40,6 +40,10 @@ def main():
     fa = get(season, ["kona_player_info"], {"x-fantasy-filter": json.dumps(FA_FILTER)}, f"&scoringPeriodId={sp}")
     (out / "freeagents.json").write_text(json.dumps(fa, ensure_ascii=False))
     print(f"{season} serbest oyuncular ok: {len(fa.get('players', []))}")
+    url = f"https://lm-api-reads.fantasy.espn.com/apis/v3/games/fba/seasons/{season}?view=proTeamSchedules_wl"
+    with urllib.request.urlopen(urllib.request.Request(url, headers={"User-Agent": "nbafan-stats"}), timeout=60) as r:
+        (out / "proschedule.json").write_text(r.read().decode())
+    print(f"{season} NBA takvimi ok")
     fetch_history(league)
 
 
