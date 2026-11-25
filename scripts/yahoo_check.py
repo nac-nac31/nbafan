@@ -4,7 +4,7 @@ sys.path.insert(0, str(pathlib.Path(__file__).parent))
 import yahoo_api as y
 
 y.access_token()
-print("Yahoo girişi: TAMAM")
+print("Yahoo girişi: TAMAM", "| izinler:", y.SCOPE or "?")
 g = y.get("game/nba")["fantasy_content"]["game"][0]
 print("NBA oyunu:", g.get("game_key"), g.get("season"))
 u = y.get("users;use_login=1/games;game_keys=nba/leagues")

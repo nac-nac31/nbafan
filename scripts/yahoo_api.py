@@ -4,6 +4,7 @@ import base64, json, os, urllib.error, urllib.parse, urllib.request
 TOKEN = "https://api.login.yahoo.com/oauth2/get_token"
 API = "https://fantasysports.yahooapis.com/fantasy/v2/"
 _access = None
+SCOPE = None
 
 
 def access_token():
@@ -20,7 +21,10 @@ def access_token():
                                                             "Content-Type": "application/x-www-form-urlencoded"})
     try:
         with urllib.request.urlopen(req, timeout=30) as r:
-            _access = json.load(r)["access_token"]
+            tok = json.load(r)
+            _access = tok["access_token"]
+            global SCOPE
+            SCOPE = tok.get("scope") or tok.get("xoauth_yahoo_guid") and "guid var"
     except urllib.error.HTTPError as e:
         raise SystemExit(f"Yahoo giriş anahtarı reddedildi: HTTP {e.code} {e.read().decode(errors='replace')[:200]}")
     return _access
@@ -29,5 +33,8 @@ def access_token():
 def get(path):
     sep = "&" if "?" in path else "?"
     req = urllib.request.Request(API + path + sep + "format=json", headers={"Authorization": f"Bearer {access_token()}"})
-    with urllib.request.urlopen(req, timeout=60) as r:
-        return json.load(r)
+    try:
+        with urllib.request.urlopen(req, timeout=60) as r:
+            return json.load(r)
+    except urllib.error.HTTPError as e:
+        raise SystemExit(f"Yahoo API {path}: HTTP {e.code} {e.read().decode(errors='replace')[:400]}")
