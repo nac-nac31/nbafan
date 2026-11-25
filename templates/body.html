@@ -300,6 +300,7 @@ function render(){const h=(location.hash||'#bu-hafta').slice(1);
   app.innerHTML=`<div class="view">${h.startsWith('takim-')?profile(+h.slice(6)):V[v]()}</div>`;
   document.querySelectorAll('nav.tabs a').forEach(a=>{if(a.dataset.v===v)a.setAttribute('aria-current','page');else a.removeAttribute('aria-current')});
   app.querySelectorAll('.chips button[data-w]').forEach(b=>b.onclick=()=>{selWeek=+b.dataset.w;render()});
+  app.querySelectorAll('[data-fs]').forEach(b=>b.onclick=()=>{FN=b.dataset.fs==='cur'?FN0:FN0.past[b.dataset.fs];render()});
   app.querySelectorAll('[data-jump]').forEach(b=>b.onclick=()=>{const el=document.getElementById(b.dataset.jump);if(el)window.scrollTo({top:el.getBoundingClientRect().top+scrollY-70,behavior:'smooth'})});
   const pq=document.getElementById('pq');
   if(pq){const sel={pav:'av',ppos:'pos',pmode:'mode',psort:'sort'};

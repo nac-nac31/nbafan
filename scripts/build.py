@@ -613,6 +613,21 @@ def main():
         logs = json.loads(gpath.read_text()) if gpath.exists() else {}
         data["fun"] = fun.build_fun(raw, data, daily, logs, ZREF, seasons, season)
         f = data["fun"] or {}
+        for y in sorted(seasons):
+            dp, rd = pathlib.Path("data/daily") / f"{y}.json", pathlib.Path("data/raw") / str(y)
+            if y == season or not f or not dp.exists() or not (rd / "matchups.json").exists():
+                continue
+            ry = {n: json.loads((rd / f"{n}.json").read_text()) for n in ("league", "matchups")}
+            if (rd / "proschedule.json").exists():
+                ry["proschedule"] = json.loads((rd / "proschedule.json").read_text())
+            gl = json.loads((rd / "gamelogs.json").read_text()) if (rd / "gamelogs.json").exists() else {}
+            fy = fun.build_fun(ry, seasons[y][1], json.loads(dp.read_text()), gl, ZREF, None, y)
+            if fy:
+                for k in ("blowouts", "rivals", "owned", "closeCount", "nGames"):
+                    fy.pop(k, None)
+                fy["records"].pop("week", None)
+                f.setdefault("past", {})[str(y)] = fy
+                print(f"eğlence {y}:", len(fy.get("trades", [])), "takas,", len(fy["waiver"]["top"]), "waiver,", fy["days"], "gün")
         print("eğlence:", len(f.get("bench", [])), "takım yedek,", len((f.get("waiver") or {}).get("top", [])), "waiver,",
               len(f.get("trades", [])), "takas,", len(f.get("regrets", [])), "pişmanlık")
     except Exception as e:

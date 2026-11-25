@@ -111,9 +111,12 @@ def build_fun(raw, data, daily, logs, Z, seasons=None, cur_season=None):
     names = {t["id"]: t["name"] for t in data["teams"]}
     pname = lambda pid: (meta.get(str(pid)) or [str(pid)])[0]
     elig = {int(k): [s for s in v[2] if s in SLOTS] for k, v in meta.items()}
-    pvals = {p["id"]: p for p in data["players"]}
-    vals = sorted((p["val"] for p in data["players"]), reverse=True)
-    repl = vals[min(len(vals) - 1, 12 * 11)] if vals else 0  # ~132. oyuncu: yedek seviyesi
+    pvals = {p["id"]: p for p in data.get("players") or []}
+    vals = sorted((p["val"] for p in data.get("players") or []), reverse=True)
+    if not vals:  # geçmiş sezon: oyuncu değerini maç kayıtlarının ortalamasından al
+        vals = sorted((statistics.mean(gz(l, Z) for l in g.values()) for g in logs.values() if len(g) >= 10), reverse=True)
+    nteam = len(data["teams"])
+    repl = vals[min(len(vals) - 1, nteam * 11)] if vals else 0  # ~132. oyuncu: yedek seviyesi
     # skor dönemleri -> hafta ve tarih
     sp_week, week_sps = {}, {}
     for m in raw["matchups"]["schedule"]:
@@ -129,7 +132,8 @@ def build_fun(raw, data, daily, logs, Z, seasons=None, cur_season=None):
                 sp_date[int(k)] = min(sp_date.get(int(k), g["date"]), g["date"])
     done_weeks = set(range(1, len(data["weeks"]) + 1))
     latest = max((int(k) for k in days), default=0)
-    out = {"repl": round(repl, 2)}
+    out = {"repl": round(repl, 2), "teams": {t["id"]: [t["name"], owner_key_of(lt)] for t in data["teams"]
+                                              for lt in raw["league"]["teams"] if lt["id"] == t["id"]}}
 
     # ---------- 1) Yedekte kalanlar: optimal kadro vs gerçek ----------
     bench = {t: {"gain": 0.0, "pts": 0, "games": 0, "lost": [], "worst": None, "empty": 0} for t in teams}
@@ -197,11 +201,12 @@ def build_fun(raw, data, daily, logs, Z, seasons=None, cur_season=None):
     # ---------- işlemler: sahiplik dönemleri ----------
     # ESPN onaylanan takasın oyuncu listesini işlem kaydında vermiyor: takasları günlük kadro değişiminden çıkar
     covered = {(i[1], x["sp"]) for x in tx.values() for i in x["items"] if i[0] == "TRADE"}
+    added = {(i[1], i[3], x["sp"] + d) for x in tx.values() for i in x["items"] if i[0] == "ADD" for d in (-1, 0, 1)}
     moves, prev = {}, {}
     for k in sorted(days, key=int):
         cur = {pid: int(ts) for ts, rows in days[k].items() for pid, _, _ in rows}
         for pid, t in cur.items():
-            if prev.get(pid) and prev[pid] != t and (pid, int(k)) not in covered:
+            if prev.get(pid) and prev[pid] != t and (pid, int(k)) not in covered and (pid, t, int(k)) not in added:
                 pair = tuple(sorted((prev[pid], t)))
                 moves.setdefault((int(k), pair), []).append(["TRADE", pid, prev[pid], t])
         prev = cur
@@ -258,6 +263,11 @@ def build_fun(raw, data, daily, logs, Z, seasons=None, cur_season=None):
     def per_game(tot, n):
         return {c: round(tot.get(c, 0) / n, 1) for c in ("PTS", "REB", "AST", "STL", "BLK", "3PM")} if n else {}
 
+    def next_team(pid, sp):
+        """Bırakıldıktan sonra oyuncuyu ilk alan takım (yoksa 0)."""
+        nx = [st for st in stints if st["pid"] == pid and st["how"] in ("waiver", "fa", "trade") and st["start"] >= sp]
+        return min(nx, key=lambda st: st["start"])["team"] if nx else 0
+
     def owner_now(pid):
         p = pvals.get(pid)
         return p["team"] if p else 0
@@ -290,7 +300,7 @@ def build_fun(raw, data, daily, logs, Z, seasons=None, cur_season=None):
         if n >= 3:
             regrets.append({"team": st["team"], "pid": st["pid"], "name": pname(st["pid"]), "sp": st["start"],
                             "date": fmt_day(sp_date.get(st["start"])), "val": round(v, 1), "n": n, "pg": per_game(tot, n),
-                            "now": owner_now(st["pid"])})
+                            "now": next_team(st["pid"], st["start"])})
     regrets.sort(key=lambda r: -r["val"])
     seen = set()
     out["regrets"] = [r for r in regrets if not ((r["pid"], r["team"]) in seen or seen.add((r["pid"], r["team"])))][:8]

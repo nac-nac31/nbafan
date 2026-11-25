@@ -51,6 +51,7 @@ def main():
     fetch_history(league)
 
 
+CACHE_V = 2
 # günlük kutu skorlarından saklanan istatistikler (sıra önemli)
 GSTATS = ["0", "6", "3", "2", "1", "17", "11", "13", "14", "15", "16", "40"]
 
@@ -71,12 +72,17 @@ def fetch_daily(season, league):
     path = pathlib.Path("data/daily") / f"{season}.json"
     path.parent.mkdir(parents=True, exist_ok=True)
     cache = json.loads(path.read_text()) if path.exists() else {}
+    if cache.get("v") != CACHE_V:  # biçim değişti: her günü yeniden çek
+        cache = {"v": CACHE_V}
     days, tx, meta = cache.setdefault("days", {}), cache.setdefault("tx", {}), cache.setdefault("players", {})
     st = league.get("status", {})
     first, latest = st.get("firstScoringPeriod", 1), st.get("latestScoringPeriod", 1)
+    if st.get("finalScoringPeriod"):
+        latest = min(latest, st["finalScoringPeriod"])
+    done = not st.get("isActive", True) or season < current_season()
     n = 0
     for sp in range(first, latest + 1):
-        if str(sp) in days and sp < latest - 1:
+        if str(sp) in days and (done or sp < latest - 1):
             continue
         d = get(season, ["mBoxscore", "mTransactions2"], query=f"&scoringPeriodId={sp}")
         day = {}
@@ -97,7 +103,10 @@ def fetch_daily(season, league):
         if day:
             days[str(sp)] = day
         for x in d.get("transactions", []):
-            if x.get("status") != "EXECUTED" or x.get("type") not in ("FREEAGENT", "WAIVER", "TRADE_ACCEPT", "TRADE_UPHOLD"):
+            ok = x.get("status") == "EXECUTED" and x.get("type") in ("FREEAGENT", "WAIVER", "TRADE_UPHOLD")
+            # onaylanan takasın kabul kaydının durumu boş gelir; içinde yer açmak için yapılan bırakmalar var
+            ok = ok or (x.get("type") == "TRADE_ACCEPT" and x.get("status") in (None, "EXECUTED"))
+            if not ok:
                 continue
             items = [[i["type"], i["playerId"], i.get("fromTeamId", 0), i.get("toTeamId", 0)] for i in x.get("items", [])
                      if i.get("type") in ("ADD", "DROP", "TRADE")]
@@ -147,6 +156,10 @@ def fetch_history(league):
                 d = get(y, views)
                 (out / f"{name}.json").write_text(json.dumps(d, ensure_ascii=False))
             print(f"{y} geçmiş sezon ok: {len(d.get('schedule', []))} maç")
+            url = f"https://lm-api-reads.fantasy.espn.com/apis/v3/games/fba/seasons/{y}?view=proTeamSchedules_wl"
+            with urllib.request.urlopen(urllib.request.Request(url, headers={"User-Agent": "nbafan-stats"}), timeout=60) as r:
+                (out / "proschedule.json").write_text(r.read().decode())
+            fetch_daily(y, json.loads((out / "league.json").read_text()))
         except Exception as e:  # çerez yoksa ya da ESPN izin vermezse
             print(f"{y} geçmiş sezon alınamadı: {e}")
 

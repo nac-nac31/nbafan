@@ -304,6 +304,10 @@ a.orow:hover{background:var(--surface-2)}
 .ov.b{font-weight:700}
 
 /* ---- Eğlence ---- */
+.seg{display:inline-flex;align-self:flex-start;background:var(--surface-2);border:1px solid var(--line);border-radius:999px;padding:3px;gap:2px}
+.seg button{border:0;background:none;border-radius:999px;padding:6px 14px;font-family:var(--f-data);font-size:12.5px;font-weight:600;color:var(--muted);cursor:pointer}
+.seg button[aria-pressed="true"]{background:var(--accent);color:var(--accent-ink)}
+.seg button:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
 
 .fjump{margin-top:-4px}
 .fjump button{padding:6px 12px;font-size:12.5px}
