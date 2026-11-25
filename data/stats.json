@@ -694,7 +694,7 @@
    "id": 3,
    "name": "31 Chechkers",
    "abbrev": "31C",
-   "logo": "https://g.espncdn.com/lm-static/logo-packs/core/Mascots/mascots-9.svg",
+   "logo": "logos/3.svg",
    "cat": [
     28,
     16,
@@ -794,7 +794,7 @@
    "id": 4,
    "name": "Kerem’s Deluxe Team",
    "abbrev": "KDT",
-   "logo": "https://g.espncdn.com/lm-static/fba/images/default_logos/1.svg",
+   "logo": "logos/4.svg",
    "cat": [
     11,
     34,
@@ -894,7 +894,7 @@
    "id": 5,
    "name": "BEGE",
    "abbrev": "BEGE",
-   "logo": "https://g.espncdn.com/lm-static/fba/images/default_logos/9.svg",
+   "logo": "logos/5.svg",
    "cat": [
     25,
     19,
@@ -1194,7 +1194,7 @@
    "id": 9,
    "name": "Kalifornia Bulldogs",
    "abbrev": "BULL",
-   "logo": "https://g.espncdn.com/lm-static/logo-packs/core/CatsAndDogs/cats_dogs-2.svg",
+   "logo": "logos/9.svg",
    "cat": [
     23,
     22,
@@ -1494,7 +1494,7 @@
    "id": 13,
    "name": "Doggy dogs",
    "abbrev": "DDD",
-   "logo": "https://g.espncdn.com/lm-static/fba/images/default_logos/20.svg",
+   "logo": "logos/13.svg",
    "cat": [
     26,
     19,
