@@ -33,3 +33,7 @@ ESPN'in hazır logoları kendiliğinden gelir. Takımların kendi yüklediği re
 
 - Repo ayarlarında `ESPN_S2` ve `SWID` secret'larını eklemek (Settings → Secrets and variables → Actions).
 - Resmi repoya `logos/<takım id>.png` olarak eklemek. Elle eklenen resim her zaman önceliklidir.
+
+## Dil
+
+`site/index.html` Türkçe, `site/en.html` İngilizce. İngilizce sayfa `scripts/i18n_en.py` içindeki çevirilerle aynı şablondan üretilir; şablona yeni bir metin eklenince oraya karşılığı da eklenmeli.

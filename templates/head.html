@@ -35,7 +35,7 @@ a{color:inherit}
 .top .in{position:relative;z-index:1}
 .top .in{padding-block:18px 20px;display:flex;justify-content:space-between;align-items:flex-end;gap:12px}
 .brand{font-family:var(--f-data);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--head-muted)}
-.top h1{font-family:var(--f-display);font-weight:800;font-size:clamp(34px,8vw,48px);line-height:1;margin:4px 0 0;text-transform:uppercase;letter-spacing:.01em}
+.top h1{white-space:nowrap;font-family:var(--f-display);font-weight:800;font-size:clamp(34px,8vw,48px);line-height:1;margin:4px 0 0;text-transform:uppercase;letter-spacing:.01em}
 .chip{font-family:var(--f-data);font-size:11px;color:var(--head-muted);text-align:right;line-height:1.5}
 .chip b{display:inline-block;color:var(--head-ink);background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.14);padding:3px 8px;border-radius:999px;font-weight:500;margin-bottom:4px}
 
@@ -278,6 +278,10 @@ button.tcard{font:inherit;color:inherit;cursor:pointer;width:100%}
 .panel>.wb{padding:0 14px 12px}
 .pj{font-size:10.5px;color:var(--muted)}
 .cats-t thead td{font-size:10px;color:var(--muted);text-transform:uppercase;letter-spacing:.06em;border-top:0}
+.hr{display:flex;flex-direction:column;align-items:flex-end;gap:8px;flex:none}
+.chip{white-space:nowrap}
+.lang{font-family:var(--f-data);font-size:11px;letter-spacing:.08em;color:var(--head-ink);text-decoration:none;border:1px solid rgba(255,255,255,.25);border-radius:6px;padding:3px 8px}
+.lang:hover,.lang:focus-visible{background:rgba(255,255,255,.1);outline:none}
 footer .in{font-size:12px;color:var(--muted);padding-block:8px 0}
 @media (prefers-reduced-motion:no-preference){.view{animation:fade .18s ease-out}@keyframes fade{from{opacity:.4;transform:translateY(4px)}to{opacity:1;transform:none}}}
 </style>

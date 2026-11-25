@@ -414,6 +414,34 @@ def localize_logos(teams, out):
                 t["logo"] = ""  # özel resim çerezsiz açılmıyor; kısaltma gösterilsin
 
 
+def render_page(data, lang):
+    import copy
+    tpl = pathlib.Path("templates")
+    head, body = (tpl / "head.html").read_text(), (tpl / "body.html").read_text()
+    if lang == "en":
+        from i18n_en import PAIRS, MONTHS, INJ, SLOT
+        for tr, en in sorted(PAIRS, key=lambda x: -len(x[0])):
+            body = body.replace(tr, en)
+        head = head.replace("Lig Raporu", "League Report")
+        import re
+        body = re.sub(r"%\$\{([^{}]*)\}", r"${\1}%", body)  # %50 -> 50%
+        data = copy.deepcopy(data)
+        now = datetime.datetime.now(ZoneInfo("Europe/Istanbul"))
+        data["updated"] = f"{MONTHS[now.month - 1][:3]} {now.day}, {now.year}, {now:%H:%M}"
+        for p in data.get("players", []):
+            p["inj"] = INJ.get(p["inj"], p["inj"])
+            if p.get("slot"):
+                p["slot"] = SLOT.get(p["slot"], p["slot"])
+        body = body.replace('href="en.html" hreflang="en"', 'href="./" hreflang="tr"').replace('location.hash">EN<', 'location.hash">TR<')
+    payload = json.dumps(data, ensure_ascii=False).replace("</", "<\\/")
+    page = (
+        f'<!doctype html>\n<html lang="{lang}"><head><meta charset="utf-8">'
+        '<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">'
+        + head + "</head><body>" + body.replace("__DATA__", payload) + "</body></html>\n"
+    )
+    return page.replace('<h1 id="lg">Fantasy 26-27</h1>', f'<h1 id="lg">{data["league"]}</h1>')
+
+
 def main():
     season = int(os.environ.get("SEASON") or current_season())
     raw_dir = pathlib.Path("data/raw") / str(season)
@@ -452,17 +480,9 @@ def main():
     if os.environ.get("SKIP_LOGOS") != "1":
         localize_logos(data["teams"], out)
     pathlib.Path("data/stats.json").write_text(json.dumps(data, ensure_ascii=False, indent=1))
-    tpl = pathlib.Path("templates")
-    page = (
-        '<!doctype html>\n<html lang="tr"><head><meta charset="utf-8">'
-        '<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">'
-        + (tpl / "head.html").read_text()
-        + "</head><body>"
-        + (tpl / "body.html").read_text().replace("__DATA__", json.dumps(data, ensure_ascii=False).replace("</", "<\\/"))
-        + "</body></html>\n"
-    )
-    page = page.replace("<h1 id=\"lg\">Fantasy 26-27</h1>", f"<h1 id=\"lg\">{data['league']}</h1>")
-    (out / "index.html").write_text(page)
+    out.mkdir(exist_ok=True)
+    (out / "index.html").write_text(render_page(data, "tr"))
+    (out / "en.html").write_text(render_page(data, "en"))
     print(f"site/index.html yazıldı: {len(data['weeks'])} hafta, {len(data['teams'])} takım")
 
 
