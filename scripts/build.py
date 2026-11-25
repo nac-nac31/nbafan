@@ -140,25 +140,42 @@ POS = {1: "PG", 2: "SG", 3: "SF", 4: "PF", 5: "C"}
 INJ = {"OUT": "Sakat", "DAY_TO_DAY": "Belirsiz", "INJURY_RESERVE": "IR", "SUSPENSION": "Ceza"}
 
 
+W_L15, W_SEASON, W_PROJ = 0.5, 0.3, 0.2  # son 15 gün, sezon, sezon öncesi ESPN projeksiyonu
+
+
+def blend(parts):
+    tot = sum(w for _, w in parts)
+    keys = set().union(*[a.keys() for a, _ in parts])
+    num = lambda v: v if isinstance(v, (int, float)) else 0
+    return {k: sum(num(a.get(k, 0)) * w for a, w in parts) / tot for k in keys}
+
+
 def player_row(pl, season, on_team):
-    stats = {s["id"]: s for s in pl.get("stats", [])}
-    pick = None
-    for sid in (f"02{season}", f"00{season}"):  # son 15 gün, yoksa sezon ortalaması
-        a = (stats.get(sid) or {}).get("averageStats") or {}
-        if a.get("42", 0) >= 3 or (sid.startswith("00") and a):
-            pick = (sid, a)
-            break
-    if not pick:
+    stats = {s["id"]: (s.get("averageStats") or {}) for s in pl.get("stats", [])}
+    l15, sea, proj = stats.get(f"02{season}", {}), stats.get(f"00{season}", {}), stats.get(f"10{season}", {})
+    now = []
+    if l15.get("42", 0) >= 3:
+        now.append((l15, W_L15))
+    if sea.get("42", 0) >= 1:
+        now.append((sea, W_SEASON))
+    if not now and not proj:
         return None
-    sid, a = pick
-    season_avg = (stats.get(f"00{season}") or {}).get("averageStats") or {}
+    parts = now + ([(proj, W_PROJ)] if proj else [])
+    mix = blend(parts)
+    cur = blend(now) if now else proj
+    src = " + ".join(n for n, ok in (("son 15 gün", l15.get("42", 0) >= 3), ("sezon", sea.get("42", 0) >= 1), ("projeksiyon", bool(proj))) if ok)
+
+    def pack(a):
+        return {"s": {CN[c]: a.get(c, 0) for c in CATS}, "fga": a.get("14", 0), "fta": a.get("16", 0)}
+
+    gp_now = int((l15 if l15.get("42", 0) >= 3 else sea).get("42", 0))
+    mins = (l15 if l15.get("42", 0) >= 3 else sea or proj).get("40", 0)
     return {
         "id": pl["id"], "name": pl["fullName"], "pos": POS.get(pl.get("defaultPositionId"), ""),
         "inj": INJ.get(pl.get("injuryStatus") or "", ""), "team": on_team,
         "owned": round((pl.get("ownership") or {}).get("percentOwned", 0), 1),
-        "gp": int(a.get("42", 0)), "seasonGp": int(season_avg.get("42", 0)), "min": round(a.get("40", 0) / max(1, a.get("42", 1)), 1) if a.get("40", 0) > 60 else round(a.get("40", 0), 1),
-        "src": "son 15 gün" if sid.startswith("02") else "sezon",
-        "s": {CN[c]: a.get(c, 0) for c in CATS}, "fga": a.get("14", 0), "fta": a.get("16", 0),
+        "gp": gp_now, "seasonGp": int(sea.get("42", 0)), "min": round(mins, 1), "src": src,
+        "_mix": pack(mix), "_now": pack(cur), "_proj": pack(proj) if proj else None,
     }
 
 
@@ -178,29 +195,36 @@ def build_players(raw, season):
             r["fa"] = p.get("status", "FREEAGENT")
             rows.append(r)
     pool = [r for r in rows if r["gp"] >= 3] or rows
-    pool = sorted(pool, key=lambda r: -r["s"]["PTS"])[:220]
-    mean = {c: statistics.mean(r["s"][c] for r in pool) for c in CN.values()}
-    sd = {c: statistics.pstdev(r["s"][c] for r in pool) or 1 for c in CN.values()}
-    fga = statistics.mean(r["fga"] for r in pool) or 1
-    fta = statistics.mean(r["fta"] for r in pool) or 1
-    imp_fg = [(r["s"]["FG%"] - mean["FG%"]) * r["fga"] / fga for r in pool]
-    imp_ft = [(r["s"]["FT%"] - mean["FT%"]) * r["fta"] / fta for r in pool]
-    sd_fg, sd_ft = statistics.pstdev(imp_fg) or 1, statistics.pstdev(imp_ft) or 1
-    for r in rows:
+    pool = sorted(pool, key=lambda r: -r["_mix"]["s"]["PTS"])[:220]
+    P = [r["_mix"] for r in pool]
+    mean = {c: statistics.mean(x["s"][c] for x in P) for c in CN.values()}
+    sd = {c: statistics.pstdev(x["s"][c] for x in P) or 1 for c in CN.values()}
+    fga = statistics.mean(x["fga"] for x in P) or 1
+    fta = statistics.mean(x["fta"] for x in P) or 1
+    sd_fg = statistics.pstdev([(x["s"]["FG%"] - mean["FG%"]) * x["fga"] / fga for x in P]) or 1
+    sd_ft = statistics.pstdev([(x["s"]["FT%"] - mean["FT%"]) * x["fta"] / fta for x in P]) or 1
+
+    def zs(x):
         z = {}
         for c in CN.values():
             if c == "FG%":
-                z[c] = (r["s"][c] - mean[c]) * r["fga"] / fga / sd_fg
+                z[c] = (x["s"][c] - mean[c]) * x["fga"] / fga / sd_fg
             elif c == "FT%":
-                z[c] = (r["s"][c] - mean[c]) * r["fta"] / fta / sd_ft
+                z[c] = (x["s"][c] - mean[c]) * x["fta"] / fta / sd_ft
             elif c == "TO":
-                z[c] = -(r["s"][c] - mean[c]) / sd[c]
+                z[c] = -(x["s"][c] - mean[c]) / sd[c]
             else:
-                z[c] = (r["s"][c] - mean[c]) / sd[c]
+                z[c] = (x["s"][c] - mean[c]) / sd[c]
+        return z
+
+    for r in rows:
+        z = zs(r["_mix"])
         r["z"] = {c: round(v, 2) for c, v in z.items()}
         r["val"] = round(sum(z.values()), 2)
-        r["s"] = {c: (round(v, 3) if "%" in c else round(v, 1)) for c, v in r["s"].items()}
-        del r["fga"], r["fta"]
+        r["valNow"] = round(sum(zs(r["_now"]).values()), 2)
+        r["valProj"] = round(sum(zs(r["_proj"]).values()), 2) if r["_proj"] else None
+        r["s"] = {c: (round(v, 3) if "%" in c else round(v, 1)) for c, v in r["_now"]["s"].items()}
+        del r["_mix"], r["_now"], r["_proj"]
     return sorted(rows, key=lambda r: -r["val"])
 
 

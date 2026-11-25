@@ -102,10 +102,11 @@ V.takimim=()=>{
   const maxV=Math.max(1,...P.map(p=>Math.abs(p.val)));
   const prow=(p,extra)=>{const z=topz(p),best=z.slice(0,2),worst=z[z.length-1];
     return `<div class="pl"><div class="pn"><div class="nm">${esc(p.name)}${p.inj?` <span class="pill down">${p.inj}</span>`:''}${p===drop?' <span class="pill flat">Bırakma adayı</span>':''}</div>
-     <small>${p.pos}${p.slot?' · '+p.slot:''} · ${p.min} dk · ${p.src}${extra||''}</small>
+     <small>${p.pos}${p.slot?' · '+p.slot:''} · ${p.min} dk${extra||''}</small>
+     <small>Şu anki form ${zfmt(p.valNow)}${p.valProj!=null?` · Sezon öncesi projeksiyon ${zfmt(p.valProj)}`:''}${p.valProj!=null&&p.valProj-p.valNow>=4.5?' · <b class="pos">Toparlanma adayı</b>':''}${p.valProj!=null&&p.valNow-p.valProj>=4.5?' · <b class="neg">Beklentinin üstünde</b>':''}</small>
      <small>Güçlü: ${best.map(([c,v])=>`${c} ${zfmt(v)}`).join(', ')} · Zayıf: ${worst[0]} ${zfmt(worst[1])}</small></div>
      <div class="pv"><span class="${p.val>=0?'pos':'neg'}">${zfmt(p.val)}</span><span class="vbar"><i style="${p.val>=0?'left:50%':'right:50%'};width:${Math.min(50,Math.abs(p.val)/maxV*50)}%"></i></span></div></div>`};
-  const roster=`<section class="sec"><h2>Kadron</h2><p class="hint">Değer: oyuncunun son 15 gündeki 9 kategorideki katkısının toplamı (ligdeki oyunculara göre z-skoru). 0 ortalama oyuncu demek.</p>
+  const roster=`<section class="sec"><h2>Kadron</h2><p class="hint">Değer: 9 kategorideki katkının toplamı (ligdeki oyunculara göre z-skoru, 0 ortalama oyuncu). Hesapta %50 son 15 gün, %30 sezon ortalaması, %20 ESPN'in sezon öncesi projeksiyonu var. \"Toparlanma adayı\" projeksiyonunun çok altında oynayan oyuncu demek.</p>
    <div class="panel">${mine.map(p=>prow(p)).join('')||'<p class="hint" style="padding:14px">Kadro verisi yok.</p>'}</div></section>`;
   // waiver
   const w={};DATA.cats.forEach(c=>{let x=1;const r=t.rank[c];if(r>=8)x+=.5;if(chase.has(c))x+=.75;if(r===12&&!chase.has(c))x=.4;w[c]=x});
