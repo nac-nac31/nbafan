@@ -1,0 +1,1208 @@
+{
+ "league": "Fantasy 26-27",
+ "updated": "25 Kasım 2026",
+ "weeks": [
+  1,
+  2,
+  3,
+  4,
+  5
+ ],
+ "currentWeek": 6,
+ "cats": [
+  "PTS",
+  "REB",
+  "AST",
+  "STL",
+  "BLK",
+  "3PM",
+  "FG%",
+  "FT%",
+  "TO"
+ ],
+ "teams": [
+  {
+   "id": 1,
+   "name": "Children of Planet Earth",
+   "cat": [
+    19,
+    25,
+    1
+   ],
+   "catPct": 0.43333333333333335,
+   "apPct": 0.5595959595959596,
+   "ap": [
+    271,
+    212,
+    12
+   ],
+   "mrec": [
+    1,
+    4,
+    0
+   ],
+   "weekly": [
+    1,
+    7,
+    8,
+    9,
+    6
+   ],
+   "games": [
+    {
+     "w": 1,
+     "opp": "BATH CANARIES",
+     "score": "4-5",
+     "res": "M",
+     "beat": 1
+    },
+    {
+     "w": 2,
+     "opp": "Tooney Tunes",
+     "score": "2-7",
+     "res": "M",
+     "beat": 7
+    },
+    {
+     "w": 3,
+     "opp": "Kerem’s Deluxe Team",
+     "score": "8-1",
+     "res": "G",
+     "beat": 8
+    },
+    {
+     "w": 4,
+     "opp": "Kalifornia Bulldogs",
+     "score": "3-6",
+     "res": "M",
+     "beat": 9
+    },
+    {
+     "w": 5,
+     "opp": "31 Chechkers",
+     "score": "2-6-1",
+     "res": "M",
+     "beat": 6
+    }
+   ],
+   "avg": {
+    "PTS": 651.4,
+    "REB": 227.4,
+    "AST": 151.4,
+    "STL": 41.6,
+    "BLK": 22.8,
+    "3PM": 71.4,
+    "FG%": 0.46301468999999995,
+    "FT%": 0.8229671980000001,
+    "TO": 88.4
+   },
+   "adds": 8,
+   "moves": 97,
+   "trades": 0,
+   "recent": 0.6818181818181818,
+   "luck": -0.1262626262626263,
+   "power": 0.6084848484848484,
+   "rank": {
+    "PTS": 2,
+    "REB": 4,
+    "AST": 4,
+    "STL": 5,
+    "BLK": 7,
+    "3PM": 3,
+    "FG%": 8,
+    "FT%": 1,
+    "TO": 12
+   }
+  },
+  {
+   "id": 2,
+   "name": "CHADELITES",
+   "cat": [
+    24,
+    20,
+    1
+   ],
+   "catPct": 0.5444444444444444,
+   "apPct": 0.5515151515151515,
+   "ap": [
+    268,
+    217,
+    10
+   ],
+   "mrec": [
+    4,
+    1,
+    0
+   ],
+   "weekly": [
+    6,
+    11,
+    4,
+    5,
+    6
+   ],
+   "games": [
+    {
+     "w": 1,
+     "opp": "31 Chechkers",
+     "score": "3-6",
+     "res": "M",
+     "beat": 6
+    },
+    {
+     "w": 2,
+     "opp": "Doggy dogs",
+     "score": "5-4",
+     "res": "G",
+     "beat": 11
+    },
+    {
+     "w": 3,
+     "opp": "Soprano's",
+     "score": "5-4",
+     "res": "G",
+     "beat": 4
+    },
+    {
+     "w": 4,
+     "opp": "Adana Heybeliler Tekstil",
+     "score": "6-3",
+     "res": "G",
+     "beat": 5
+    },
+    {
+     "w": 5,
+     "opp": "BEGE",
+     "score": "5-3-1",
+     "res": "G",
+     "beat": 6
+    }
+   ],
+   "avg": {
+    "PTS": 609.2,
+    "REB": 238.6,
+    "AST": 146.0,
+    "STL": 52.8,
+    "BLK": 27.4,
+    "3PM": 59.8,
+    "FG%": 0.47474818799999996,
+    "FT%": 0.72604963,
+    "TO": 74.2
+   },
+   "adds": 33,
+   "moves": 117,
+   "trades": 0,
+   "recent": 0.5,
+   "luck": -0.007070707070707116,
+   "power": 0.5309090909090909,
+   "rank": {
+    "PTS": 6,
+    "REB": 1,
+    "AST": 6,
+    "STL": 1,
+    "BLK": 3,
+    "3PM": 8,
+    "FG%": 3,
+    "FT%": 12,
+    "TO": 4
+   }
+  },
+  {
+   "id": 3,
+   "name": "31 Chechkers",
+   "cat": [
+    28,
+    16,
+    1
+   ],
+   "catPct": 0.6333333333333333,
+   "apPct": 0.4686868686868687,
+   "ap": [
+    227,
+    258,
+    10
+   ],
+   "mrec": [
+    4,
+    1,
+    0
+   ],
+   "weekly": [
+    8,
+    2,
+    1,
+    4,
+    9
+   ],
+   "games": [
+    {
+     "w": 1,
+     "opp": "CHADELITES",
+     "score": "6-3",
+     "res": "G",
+     "beat": 8
+    },
+    {
+     "w": 2,
+     "opp": "BATH CANARIES",
+     "score": "5-4",
+     "res": "G",
+     "beat": 2
+    },
+    {
+     "w": 3,
+     "opp": "Tooney Tunes",
+     "score": "4-5",
+     "res": "M",
+     "beat": 1
+    },
+    {
+     "w": 4,
+     "opp": "Kerem’s Deluxe Team",
+     "score": "7-2",
+     "res": "G",
+     "beat": 4
+    },
+    {
+     "w": 5,
+     "opp": "Children of Planet Earth",
+     "score": "6-2-1",
+     "res": "G",
+     "beat": 9
+    }
+   ],
+   "avg": {
+    "PTS": 618.8,
+    "REB": 211.8,
+    "AST": 146.2,
+    "STL": 29.2,
+    "BLK": 17.8,
+    "3PM": 66.4,
+    "FG%": 0.46674376000000006,
+    "FT%": 0.810102528,
+    "TO": 79.2
+   },
+   "adds": 3,
+   "moves": 90,
+   "trades": 0,
+   "recent": 0.5909090909090909,
+   "luck": 0.1646464646464646,
+   "power": 0.5175757575757576,
+   "rank": {
+    "PTS": 3,
+    "REB": 7,
+    "AST": 5,
+    "STL": 12,
+    "BLK": 10,
+    "3PM": 5,
+    "FG%": 5,
+    "FT%": 5,
+    "TO": 7
+   }
+  },
+  {
+   "id": 4,
+   "name": "Kerem’s Deluxe Team",
+   "cat": [
+    11,
+    34,
+    0
+   ],
+   "catPct": 0.24444444444444444,
+   "apPct": 0.28484848484848485,
+   "ap": [
+    138,
+    351,
+    6
+   ],
+   "mrec": [
+    0,
+    5,
+    0
+   ],
+   "weekly": [
+    2,
+    2,
+    0,
+    2,
+    0
+   ],
+   "games": [
+    {
+     "w": 1,
+     "opp": "Tooney Tunes",
+     "score": "4-5",
+     "res": "M",
+     "beat": 2
+    },
+    {
+     "w": 2,
+     "opp": "Kalifornia Bulldogs",
+     "score": "2-7",
+     "res": "M",
+     "beat": 2
+    },
+    {
+     "w": 3,
+     "opp": "Children of Planet Earth",
+     "score": "1-8",
+     "res": "M",
+     "beat": 0
+    },
+    {
+     "w": 4,
+     "opp": "31 Chechkers",
+     "score": "2-7",
+     "res": "M",
+     "beat": 2
+    },
+    {
+     "w": 5,
+     "opp": "Doggy dogs",
+     "score": "2-7",
+     "res": "M",
+     "beat": 0
+    }
+   ],
+   "avg": {
+    "PTS": 469.6,
+    "REB": 148.0,
+    "AST": 118.4,
+    "STL": 31.2,
+    "BLK": 14.6,
+    "3PM": 56.0,
+    "FG%": 0.446468204,
+    "FT%": 0.8008143860000001,
+    "TO": 59.6
+   },
+   "adds": 1,
+   "moves": 20,
+   "trades": 1,
+   "recent": 0.09090909090909091,
+   "luck": -0.040404040404040414,
+   "power": 0.20727272727272728,
+   "rank": {
+    "PTS": 12,
+    "REB": 12,
+    "AST": 11,
+    "STL": 11,
+    "BLK": 12,
+    "3PM": 11,
+    "FG%": 11,
+    "FT%": 8,
+    "TO": 1
+   }
+  },
+  {
+   "id": 5,
+   "name": "BEGE",
+   "cat": [
+    25,
+    19,
+    1
+   ],
+   "catPct": 0.5666666666666667,
+   "apPct": 0.5323232323232323,
+   "ap": [
+    260,
+    228,
+    7
+   ],
+   "mrec": [
+    2,
+    3,
+    0
+   ],
+   "weekly": [
+    2,
+    7,
+    9,
+    6,
+    4
+   ],
+   "games": [
+    {
+     "w": 1,
+     "opp": "Soprano's",
+     "score": "4-5",
+     "res": "M",
+     "beat": 2
+    },
+    {
+     "w": 2,
+     "opp": "Adana Heybeliler Tekstil",
+     "score": "8-1",
+     "res": "G",
+     "beat": 7
+    },
+    {
+     "w": 3,
+     "opp": "Kalifornia Bulldogs",
+     "score": "6-3",
+     "res": "G",
+     "beat": 9
+    },
+    {
+     "w": 4,
+     "opp": "Acibadem Elephants",
+     "score": "4-5",
+     "res": "M",
+     "beat": 6
+    },
+    {
+     "w": 5,
+     "opp": "CHADELITES",
+     "score": "3-5-1",
+     "res": "M",
+     "beat": 4
+    }
+   ],
+   "avg": {
+    "PTS": 583.8,
+    "REB": 178.4,
+    "AST": 113.4,
+    "STL": 39.6,
+    "BLK": 30.8,
+    "3PM": 65.8,
+    "FG%": 0.47424188999999994,
+    "FT%": 0.818473018,
+    "TO": 61.0
+   },
+   "adds": 17,
+   "moves": 75,
+   "trades": 0,
+   "recent": 0.45454545454545453,
+   "luck": 0.03434343434343434,
+   "power": 0.5012121212121212,
+   "rank": {
+    "PTS": 9,
+    "REB": 11,
+    "AST": 12,
+    "STL": 7,
+    "BLK": 1,
+    "3PM": 6,
+    "FG%": 4,
+    "FT%": 3,
+    "TO": 2
+   }
+  },
+  {
+   "id": 6,
+   "name": "Acibadem Elephants",
+   "cat": [
+    27,
+    18,
+    0
+   ],
+   "catPct": 0.6,
+   "apPct": 0.6323232323232323,
+   "ap": [
+    310,
+    179,
+    6
+   ],
+   "mrec": [
+    4,
+    1,
+    0
+   ],
+   "weekly": [
+    6,
+    6,
+    10,
+    6,
+    11
+   ],
+   "games": [
+    {
+     "w": 1,
+     "opp": "Doggy dogs",
+     "score": "3-6",
+     "res": "M",
+     "beat": 6
+    },
+    {
+     "w": 2,
+     "opp": "Soprano's",
+     "score": "6-3",
+     "res": "G",
+     "beat": 6
+    },
+    {
+     "w": 3,
+     "opp": "Adana Heybeliler Tekstil",
+     "score": "6-3",
+     "res": "G",
+     "beat": 10
+    },
+    {
+     "w": 4,
+     "opp": "BEGE",
+     "score": "5-4",
+     "res": "G",
+     "beat": 6
+    },
+    {
+     "w": 5,
+     "opp": "Kalifornia Bulldogs",
+     "score": "7-2",
+     "res": "G",
+     "beat": 11
+    }
+   ],
+   "avg": {
+    "PTS": 720.2,
+    "REB": 220.6,
+    "AST": 154.0,
+    "STL": 42.6,
+    "BLK": 25.2,
+    "3PM": 75.6,
+    "FG%": 0.46558507000000005,
+    "FT%": 0.818202672,
+    "TO": 82.4
+   },
+   "adds": 20,
+   "moves": 120,
+   "trades": 0,
+   "recent": 0.7727272727272727,
+   "luck": -0.03232323232323231,
+   "power": 0.6884848484848485,
+   "rank": {
+    "PTS": 1,
+    "REB": 5,
+    "AST": 2,
+    "STL": 3,
+    "BLK": 5,
+    "3PM": 2,
+    "FG%": 6,
+    "FT%": 4,
+    "TO": 11
+   }
+  },
+  {
+   "id": 7,
+   "name": "BATH CANARIES",
+   "cat": [
+    20,
+    25,
+    0
+   ],
+   "catPct": 0.4444444444444444,
+   "apPct": 0.3505050505050505,
+   "ap": [
+    169,
+    317,
+    9
+   ],
+   "mrec": [
+    3,
+    2,
+    0
+   ],
+   "weekly": [
+    1,
+    0,
+    5,
+    1,
+    4
+   ],
+   "games": [
+    {
+     "w": 1,
+     "opp": "Children of Planet Earth",
+     "score": "5-4",
+     "res": "G",
+     "beat": 1
+    },
+    {
+     "w": 2,
+     "opp": "31 Chechkers",
+     "score": "4-5",
+     "res": "M",
+     "beat": 0
+    },
+    {
+     "w": 3,
+     "opp": "Doggy dogs",
+     "score": "5-4",
+     "res": "G",
+     "beat": 5
+    },
+    {
+     "w": 4,
+     "opp": "Soprano's",
+     "score": "5-4",
+     "res": "G",
+     "beat": 1
+    },
+    {
+     "w": 5,
+     "opp": "Adana Heybeliler Tekstil",
+     "score": "1-8",
+     "res": "M",
+     "beat": 4
+    }
+   ],
+   "avg": {
+    "PTS": 548.0,
+    "REB": 212.6,
+    "AST": 152.6,
+    "STL": 34.0,
+    "BLK": 16.8,
+    "3PM": 58.2,
+    "FG%": 0.445128968,
+    "FT%": 0.745784498,
+    "TO": 81.4
+   },
+   "adds": 1,
+   "moves": 69,
+   "trades": 0,
+   "recent": 0.22727272727272727,
+   "luck": 0.09393939393939393,
+   "power": 0.3012121212121212,
+   "rank": {
+    "PTS": 10,
+    "REB": 6,
+    "AST": 3,
+    "STL": 9,
+    "BLK": 11,
+    "3PM": 9,
+    "FG%": 12,
+    "FT%": 10,
+    "TO": 10
+   }
+  },
+  {
+   "id": 9,
+   "name": "Kalifornia Bulldogs",
+   "cat": [
+    23,
+    22,
+    0
+   ],
+   "catPct": 0.5111111111111111,
+   "apPct": 0.5878787878787879,
+   "ap": [
+    287,
+    200,
+    8
+   ],
+   "mrec": [
+    3,
+    2,
+    0
+   ],
+   "weekly": [
+    6,
+    6,
+    9,
+    10,
+    8
+   ],
+   "games": [
+    {
+     "w": 1,
+     "opp": "Adana Heybeliler Tekstil",
+     "score": "5-4",
+     "res": "G",
+     "beat": 6
+    },
+    {
+     "w": 2,
+     "opp": "Kerem’s Deluxe Team",
+     "score": "7-2",
+     "res": "G",
+     "beat": 6
+    },
+    {
+     "w": 3,
+     "opp": "BEGE",
+     "score": "3-6",
+     "res": "M",
+     "beat": 9
+    },
+    {
+     "w": 4,
+     "opp": "Children of Planet Earth",
+     "score": "6-3",
+     "res": "G",
+     "beat": 10
+    },
+    {
+     "w": 5,
+     "opp": "Acibadem Elephants",
+     "score": "2-7",
+     "res": "M",
+     "beat": 8
+    }
+   ],
+   "avg": {
+    "PTS": 616.6,
+    "REB": 210.8,
+    "AST": 177.4,
+    "STL": 44.6,
+    "BLK": 25.0,
+    "3PM": 61.0,
+    "FG%": 0.45783136999999996,
+    "FT%": 0.7937480060000001,
+    "TO": 80.4
+   },
+   "adds": 13,
+   "moves": 98,
+   "trades": 0,
+   "recent": 0.8181818181818182,
+   "luck": -0.07676767676767682,
+   "power": 0.68,
+   "rank": {
+    "PTS": 4,
+    "REB": 8,
+    "AST": 1,
+    "STL": 2,
+    "BLK": 6,
+    "3PM": 7,
+    "FG%": 10,
+    "FT%": 9,
+    "TO": 9
+   }
+  },
+  {
+   "id": 10,
+   "name": "Adana Heybeliler Tekstil",
+   "cat": [
+    19,
+    26,
+    0
+   ],
+   "catPct": 0.4222222222222222,
+   "apPct": 0.5393939393939394,
+   "ap": [
+    261,
+    222,
+    12
+   ],
+   "mrec": [
+    1,
+    4,
+    0
+   ],
+   "weekly": [
+    10,
+    2,
+    5,
+    4,
+    10
+   ],
+   "games": [
+    {
+     "w": 1,
+     "opp": "Kalifornia Bulldogs",
+     "score": "4-5",
+     "res": "M",
+     "beat": 10
+    },
+    {
+     "w": 2,
+     "opp": "BEGE",
+     "score": "1-8",
+     "res": "M",
+     "beat": 2
+    },
+    {
+     "w": 3,
+     "opp": "Acibadem Elephants",
+     "score": "3-6",
+     "res": "M",
+     "beat": 5
+    },
+    {
+     "w": 4,
+     "opp": "CHADELITES",
+     "score": "3-6",
+     "res": "M",
+     "beat": 4
+    },
+    {
+     "w": 5,
+     "opp": "BATH CANARIES",
+     "score": "8-1",
+     "res": "G",
+     "beat": 10
+    }
+   ],
+   "avg": {
+    "PTS": 601.6,
+    "REB": 189.4,
+    "AST": 139.2,
+    "STL": 39.8,
+    "BLK": 22.8,
+    "3PM": 80.8,
+    "FG%": 0.46322763,
+    "FT%": 0.821751394,
+    "TO": 78.2
+   },
+   "adds": 11,
+   "moves": 105,
+   "trades": 1,
+   "recent": 0.6363636363636364,
+   "luck": -0.1171717171717172,
+   "power": 0.5781818181818182,
+   "rank": {
+    "PTS": 8,
+    "REB": 9,
+    "AST": 7,
+    "STL": 6,
+    "BLK": 8,
+    "3PM": 1,
+    "FG%": 7,
+    "FT%": 2,
+    "TO": 6
+   }
+  },
+  {
+   "id": 12,
+   "name": "Soprano's",
+   "cat": [
+    23,
+    22,
+    0
+   ],
+   "catPct": 0.5111111111111111,
+   "apPct": 0.4121212121212121,
+   "ap": [
+    200,
+    287,
+    8
+   ],
+   "mrec": [
+    2,
+    3,
+    0
+   ],
+   "weekly": [
+    8,
+    4,
+    2,
+    0,
+    2
+   ],
+   "games": [
+    {
+     "w": 1,
+     "opp": "BEGE",
+     "score": "5-4",
+     "res": "G",
+     "beat": 8
+    },
+    {
+     "w": 2,
+     "opp": "Acibadem Elephants",
+     "score": "3-6",
+     "res": "M",
+     "beat": 4
+    },
+    {
+     "w": 3,
+     "opp": "CHADELITES",
+     "score": "4-5",
+     "res": "M",
+     "beat": 2
+    },
+    {
+     "w": 4,
+     "opp": "BATH CANARIES",
+     "score": "4-5",
+     "res": "M",
+     "beat": 0
+    },
+    {
+     "w": 5,
+     "opp": "Tooney Tunes",
+     "score": "7-2",
+     "res": "G",
+     "beat": 2
+    }
+   ],
+   "avg": {
+    "PTS": 526.0,
+    "REB": 185.6,
+    "AST": 132.6,
+    "STL": 32.8,
+    "BLK": 21.0,
+    "3PM": 46.6,
+    "FG%": 0.484114432,
+    "FT%": 0.8079417299999999,
+    "TO": 73.8
+   },
+   "adds": 6,
+   "moves": 37,
+   "trades": 0,
+   "recent": 0.09090909090909091,
+   "luck": 0.09898989898989896,
+   "power": 0.28363636363636363,
+   "rank": {
+    "PTS": 11,
+    "REB": 10,
+    "AST": 8,
+    "STL": 10,
+    "BLK": 9,
+    "3PM": 12,
+    "FG%": 2,
+    "FT%": 6,
+    "TO": 3
+   }
+  },
+  {
+   "id": 13,
+   "name": "Doggy dogs",
+   "cat": [
+    26,
+    19,
+    0
+   ],
+   "catPct": 0.5777777777777777,
+   "apPct": 0.5555555555555556,
+   "ap": [
+    272,
+    217,
+    6
+   ],
+   "mrec": [
+    3,
+    2,
+    0
+   ],
+   "weekly": [
+    8,
+    10,
+    5,
+    10,
+    4
+   ],
+   "games": [
+    {
+     "w": 1,
+     "opp": "Acibadem Elephants",
+     "score": "6-3",
+     "res": "G",
+     "beat": 8
+    },
+    {
+     "w": 2,
+     "opp": "CHADELITES",
+     "score": "4-5",
+     "res": "M",
+     "beat": 10
+    },
+    {
+     "w": 3,
+     "opp": "BATH CANARIES",
+     "score": "4-5",
+     "res": "M",
+     "beat": 5
+    },
+    {
+     "w": 4,
+     "opp": "Tooney Tunes",
+     "score": "5-4",
+     "res": "G",
+     "beat": 10
+    },
+    {
+     "w": 5,
+     "opp": "Kerem’s Deluxe Team",
+     "score": "7-2",
+     "res": "G",
+     "beat": 4
+    }
+   ],
+   "avg": {
+    "PTS": 610.0,
+    "REB": 236.4,
+    "AST": 132.6,
+    "STL": 42.0,
+    "BLK": 27.4,
+    "3PM": 58.2,
+    "FG%": 0.494549222,
+    "FT%": 0.735121606,
+    "TO": 75.2
+   },
+   "adds": 20,
+   "moves": 117,
+   "trades": 0,
+   "recent": 0.6363636363636364,
+   "luck": 0.022222222222222143,
+   "power": 0.5878787878787879,
+   "rank": {
+    "PTS": 5,
+    "REB": 2,
+    "AST": 9,
+    "STL": 4,
+    "BLK": 4,
+    "3PM": 10,
+    "FG%": 1,
+    "FT%": 11,
+    "TO": 5
+   }
+  },
+  {
+   "id": 14,
+   "name": "Tooney Tunes",
+   "cat": [
+    23,
+    22,
+    0
+   ],
+   "catPct": 0.5111111111111111,
+   "apPct": 0.5252525252525253,
+   "ap": [
+    255,
+    230,
+    10
+   ],
+   "mrec": [
+    3,
+    2,
+    0
+   ],
+   "weekly": [
+    6,
+    9,
+    5,
+    7,
+    1
+   ],
+   "games": [
+    {
+     "w": 1,
+     "opp": "Kerem’s Deluxe Team",
+     "score": "5-4",
+     "res": "G",
+     "beat": 6
+    },
+    {
+     "w": 2,
+     "opp": "Children of Planet Earth",
+     "score": "7-2",
+     "res": "G",
+     "beat": 9
+    },
+    {
+     "w": 3,
+     "opp": "31 Chechkers",
+     "score": "5-4",
+     "res": "G",
+     "beat": 5
+    },
+    {
+     "w": 4,
+     "opp": "Doggy dogs",
+     "score": "4-5",
+     "res": "M",
+     "beat": 7
+    },
+    {
+     "w": 5,
+     "opp": "Soprano's",
+     "score": "2-7",
+     "res": "M",
+     "beat": 1
+    }
+   ],
+   "avg": {
+    "PTS": 602.4,
+    "REB": 231.8,
+    "AST": 129.8,
+    "STL": 35.6,
+    "BLK": 28.0,
+    "3PM": 70.2,
+    "FG%": 0.46098636400000004,
+    "FT%": 0.8078210699999999,
+    "TO": 79.6
+   },
+   "adds": 7,
+   "moves": 93,
+   "trades": 0,
+   "recent": 0.36363636363636365,
+   "luck": -0.014141414141414232,
+   "power": 0.4606060606060607,
+   "rank": {
+    "PTS": 7,
+    "REB": 3,
+    "AST": 10,
+    "STL": 8,
+    "BLK": 2,
+    "3PM": 4,
+    "FG%": 9,
+    "FT%": 7,
+    "TO": 8
+   }
+  }
+ ],
+ "beats": [
+  {
+   "team": "Adana Heybeliler Tekstil",
+   "w": 1,
+   "opp": "Kalifornia Bulldogs",
+   "score": "4-5",
+   "beat": 10
+  },
+  {
+   "team": "Doggy dogs",
+   "w": 2,
+   "opp": "CHADELITES",
+   "score": "4-5",
+   "beat": 10
+  },
+  {
+   "team": "Kalifornia Bulldogs",
+   "w": 3,
+   "opp": "BEGE",
+   "score": "3-6",
+   "beat": 9
+  },
+  {
+   "team": "Children of Planet Earth",
+   "w": 4,
+   "opp": "Kalifornia Bulldogs",
+   "score": "3-6",
+   "beat": 9
+  },
+  {
+   "team": "Kalifornia Bulldogs",
+   "w": 5,
+   "opp": "Acibadem Elephants",
+   "score": "2-7",
+   "beat": 8
+  }
+ ],
+ "steals": [
+  {
+   "team": "BATH CANARIES",
+   "w": 1,
+   "opp": "Children of Planet Earth",
+   "score": "5-4",
+   "beat": 1
+  },
+  {
+   "team": "BATH CANARIES",
+   "w": 4,
+   "opp": "Soprano's",
+   "score": "5-4",
+   "beat": 1
+  },
+  {
+   "team": "31 Chechkers",
+   "w": 2,
+   "opp": "BATH CANARIES",
+   "score": "5-4",
+   "beat": 2
+  },
+  {
+   "team": "Soprano's",
+   "w": 5,
+   "opp": "Tooney Tunes",
+   "score": "7-2",
+   "beat": 2
+  }
+ ]
+}
