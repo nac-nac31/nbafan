@@ -319,7 +319,7 @@ def build_fun(raw, data, daily, logs, Z, seasons=None, cur_season=None):
             sides[to]["got"].append({"pid": pid, "name": pname(pid), "val": round(v, 1), "n": n,
                                      "rate": round(pv, 1) if pv is not None else None})
             sides[to]["val"] += v
-            sides[to]["now"] += (pv or 0) - repl
+            sides[to]["now"] += (pv - repl) if pv is not None else 0
         if len(sides) < 2:
             continue
         rows = list(sides.values())
