@@ -469,7 +469,7 @@
   }
  },
  "league": "Fantasy 26-27",
- "updated": "25 Kasım 2026, 20:34",
+ "updated": "25 Kasım 2026, 20:35",
  "weeks": [
   1,
   2,
@@ -694,7 +694,7 @@
    "id": 3,
    "name": "31 Chechkers",
    "abbrev": "31C",
-   "logo": "logos/3.svg",
+   "logo": "https://g.espncdn.com/lm-static/logo-packs/core/Mascots/mascots-9.svg",
    "cat": [
     28,
     16,
@@ -794,7 +794,7 @@
    "id": 4,
    "name": "Kerem’s Deluxe Team",
    "abbrev": "KDT",
-   "logo": "logos/4.svg",
+   "logo": "https://g.espncdn.com/lm-static/fba/images/default_logos/1.svg",
    "cat": [
     11,
     34,
@@ -894,7 +894,7 @@
    "id": 5,
    "name": "BEGE",
    "abbrev": "BEGE",
-   "logo": "logos/5.svg",
+   "logo": "https://g.espncdn.com/lm-static/fba/images/default_logos/9.svg",
    "cat": [
     25,
     19,
@@ -1194,7 +1194,7 @@
    "id": 9,
    "name": "Kalifornia Bulldogs",
    "abbrev": "BULL",
-   "logo": "logos/9.svg",
+   "logo": "https://g.espncdn.com/lm-static/logo-packs/core/CatsAndDogs/cats_dogs-2.svg",
    "cat": [
     23,
     22,
@@ -1494,7 +1494,7 @@
    "id": 13,
    "name": "Doggy dogs",
    "abbrev": "DDD",
-   "logo": "logos/13.svg",
+   "logo": "https://g.espncdn.com/lm-static/fba/images/default_logos/20.svg",
    "cat": [
     26,
     19,
