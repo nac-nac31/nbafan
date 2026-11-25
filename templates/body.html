@@ -10,7 +10,7 @@
     <a href="#takimim" data-v="takimim"><svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 21c1.5-4 4.5-6 8-6s6.5 2 8 6"/></svg>Takımım</a>
     <a href="#bu-hafta" data-v="bu-hafta"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>Bu hafta</a>
     <a href="#siralama" data-v="siralama"><svg viewBox="0 0 24 24"><path d="M4 20V10M10 20V4M16 20v-7M22 20H2"/></svg>Sıralama</a>
-    <a href="#sans" data-v="sans"><svg viewBox="0 0 24 24"><rect x="4" y="4" width="16" height="16" rx="3"/><circle cx="9" cy="9" r="1.2"/><circle cx="15" cy="15" r="1.2"/><circle cx="15" cy="9" r="1.2"/><circle cx="9" cy="15" r="1.2"/></svg>Şans</a>
+    <a href="#oyuncular" data-v="oyuncular"><svg viewBox="0 0 24 24"><path d="M4 6h16M4 12h10M4 18h6"/><circle cx="18" cy="16" r="3"/></svg>Oyuncular</a>
     <a href="#haftalar" data-v="haftalar"><svg viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4"/></svg>Haftalar</a>
     <a href="#takimlar" data-v="takimlar"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3v18M5.6 5.6c3.5 3.5 3.5 9.3 0 12.8M18.4 5.6c-3.5 3.5-3.5 9.3 0 12.8"/></svg>Takımlar</a>
   </div>
@@ -57,6 +57,27 @@ const sz=y=>(y-1)+'-'+String(y).slice(2);
 function tags(t){const o=OW[t.owner];if(!o)return '';
   return (multi&&o.nSeasons===1?'<span class="newb">İlk sezonu</span>':'')+(o.oldNames.length?`<span class="old">Eski adı: ${o.oldNames.map(esc).join(', ')}</span>`:'')}
 const V={};
+const PF={q:'',pos:'',av:'all',sort:'val',mode:'val'};
+function playerRows(){const q=PF.q.trim().toLocaleLowerCase('tr');
+  let L=P.filter(p=>(!q||p.name.toLocaleLowerCase('tr').includes(q))&&(!PF.pos||p.pos===PF.pos)&&(PF.av==='all'||(PF.av==='fa'?p.team===0:p.team!==0)));
+  const key=p=>PF.sort==='val'?(PF.mode==='valProj'?(p.valProj??-99):p[PF.mode]):p.z[PF.sort];
+  L.sort((a,b)=>key(b)-key(a));
+  const all=[...P].sort((a,b)=>b.val-a.val);const rk=new Map(all.map((p,i)=>[p.id,i+1]));
+  const zc=v=>{const a=Math.min(1,Math.abs(v)/2.5);return v>=0?mix(a*6,6,'accent'):mix(a*6,6,'cool')};
+  return L.slice(0,120).map(p=>{const t=p.team?byId[p.team]:null;const v=PF.mode==='valProj'?p.valProj:p[PF.mode];
+    return `<tr><td class="pnm"><div class="pnw"><span class="prk">${rk.get(p.id)}</span><div><b>${esc(p.name)}</b>${p.inj?` <span class="pill down">${p.inj}</span>`:''}${p.valProj!=null&&p.valProj-p.valNow>=4.5?' <span class="pill up">Toparlanma</span>':''}<small>${p.pos} · ${p.min} dk · ${t?esc(t.abbrev||t.name):'<span class="pos">Serbest</span>'}</small></div></div></td>
+     <td class="c val ${v>=0?'pos':'neg'}">${v==null?'–':zfmt(v)}</td>${DATA.cats.map(c=>`<td class="c" style="${zc(p.z[c])};${Math.abs(p.z[c])>=1.8?'color:#fff;':''}" title="${c}: ${fmt(c,p.s[c])} / maç">${zfmt(p.z[c])}</td>`).join('')}</tr>`}).join('')||`<tr><td colspan="11" class="hint" style="padding:14px">Bu filtreyle oyuncu yok.</td></tr>`}
+V.oyuncular=()=>`<section class="sec"><h2>Oyuncu sıralaması</h2>
+  <p class="hint">Fantezi değeri: oyuncunun 9 kategoride lig ortalamasına göre katkısının (z-skoru) toplamı. 0 ortalama oyuncu, +5 ve üstü çok değerli. Kategori hücreleri o kategorideki katkıyı gösterir; FG% ve FT%'de şut sayısı da hesaba katılır, TO'da az olan iyidir. Soldaki numara genel sıralama.</p>
+  <div class="filters">
+   <input id="pq" type="search" placeholder="Oyuncu ara" value="${esc(PF.q)}" aria-label="Oyuncu ara">
+   <select id="pav" aria-label="Durum"><option value="all">Tüm oyuncular</option><option value="fa">Sadece serbest</option><option value="own">Sadece kadrolu</option></select>
+   <select id="ppos" aria-label="Pozisyon"><option value="">Tüm pozisyonlar</option>${['PG','SG','SF','PF','C'].map(x=>`<option>${x}</option>`).join('')}</select>
+   <select id="pmode" aria-label="Dönem"><option value="val">Karma değer</option><option value="valNow">Şu anki form</option><option value="valProj">Sezon öncesi projeksiyon</option></select>
+   <select id="psort" aria-label="Sırala"><option value="val">Değere göre sırala</option>${DATA.cats.map(c=>`<option value="${c}">${c} katkısına göre</option>`).join('')}</select>
+  </div>
+  <div class="panel scroll"><table class="ptab"><thead><tr><th>Oyuncu</th><th>Değer</th>${DATA.cats.map(c=>`<th>${c}</th>`).join('')}</tr></thead><tbody id="ptb">${playerRows()}</tbody></table></div>
+  <p class="hint">En fazla 120 oyuncu listelenir. Kadrolar ve ESPN'de en çok sahiplenilen 200 serbest oyuncu dahil.</p></section>`;
 const MYK='nbafan.team';
 function getMy(){try{const v=localStorage.getItem(MYK);return v&&byId[+v]?+v:null}catch(e){return null}}
 function setMy(v){try{v==null?localStorage.removeItem(MYK):localStorage.setItem(MYK,String(v))}catch(e){}}
@@ -161,7 +182,7 @@ V.siralama=()=>{const top=power[0];
   <ol class="panel rank-list">${power.map((t,i)=>`<li><a class="trow" href="${link(t)}"><span class="n">${i+1}</span>${logo(t,40)}
    <div style="min-width:0"><div class="nm">${esc(t.name)}${tags(t)}</div><div class="sub"><span>${rec(t.mrec)}</span><span>${t.cat.join('-')}</span><span>AP %${pct(t.apPct)}</span></div></div>
    <div class="side">${movePill(t)}<span class="pbar"><i style="width:${(t.power/top.power*100).toFixed(0)}%"></i></span></div></a></li>`).join('')}</ol></section>
-  <section class="sec"><h2>Ödüller</h2><div class="awards">${awards()}</div></section>`};
+  <section class="sec"><h2>Ödüller</h2><div class="awards">${awards()}</div></section>${V.sans()}`};
 
 V.sans=()=>{const lk=[...T].sort((a,b)=>b.luck-a.luck),M=0.2;
   const ev=(x,lost)=>{const t=T.find(z=>z.name===x.team);return `<a class="ev" href="${link(t)}" style="text-decoration:none">${logo(t,36)}<div style="min-width:0"><div class="nm">${esc(x.team)}</div><small>H${x.w} · ${lost?'kaybetti':'yendi'}: ${esc(x.opp)} · ${x.beat}/11</small></div><span class="sc">${x.score}</span></a>`};
@@ -247,10 +268,14 @@ function profile(id){const t=byId[id];if(!t)return V.siralama();
 
 const app=document.getElementById('app');
 function render(){const h=(location.hash||'#bu-hafta').slice(1);
-  let v=h.startsWith('takim-')?'takimlar':(V[h]?h:'bu-hafta');
+  let v=h.startsWith('takim-')?'takimlar':h==='sans'?'siralama':(V[h]?h:'bu-hafta');
   app.innerHTML=`<div class="view">${h.startsWith('takim-')?profile(+h.slice(6)):V[v]()}</div>`;
   document.querySelectorAll('nav.tabs a').forEach(a=>{if(a.dataset.v===v)a.setAttribute('aria-current','page');else a.removeAttribute('aria-current')});
   app.querySelectorAll('.chips button').forEach(b=>b.onclick=()=>{selWeek=+b.dataset.w;render()});
+  const pq=document.getElementById('pq');
+  if(pq){const sel={pav:'av',ppos:'pos',pmode:'mode',psort:'sort'};
+    for(const [id,k] of Object.entries(sel)){const el=document.getElementById(id);el.value=PF[k];el.onchange=()=>{PF[k]=el.value;document.getElementById('ptb').innerHTML=playerRows()}}
+    pq.oninput=()=>{PF.q=pq.value;document.getElementById('ptb').innerHTML=playerRows()}}
   app.querySelectorAll('[data-pick]').forEach(b=>b.onclick=()=>{memMy=+b.dataset.pick;setMy(memMy);render();window.scrollTo(0,0)});
   app.querySelectorAll('[data-unpick]').forEach(b=>b.onclick=()=>{memMy=null;setMy(null);render()});
 }
