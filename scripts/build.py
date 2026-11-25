@@ -85,7 +85,7 @@ def compute(raw):
     done = sorted(weeks)
     teams = []
     for t in names:
-        cat, apc, mrec, weekly, games = [0, 0, 0], [0, 0, 0], [0, 0, 0], [], []
+        cat, apc, mrec, weekly, games, wk = [0, 0, 0], [0, 0, 0], [0, 0, 0], [], [], []
         for w in done:
             a, beat = weeks[w][t], 0
             for u, b in weeks[w].items():
@@ -100,11 +100,12 @@ def compute(raw):
             res = "G" if W > Lo else "M" if Lo > W else "B"
             mrec["GMB".index(res)] += 1
             weekly.append(beat)
+            wk.append({c: weeks[w][t][c] for c in CATS})
             games.append({"w": w, "opp": names[o], "oppId": o, "score": f"{W}-{Lo}" + (f"-{T}" if T else ""), "res": res, "beat": beat})
         tc = txc[t]
         teams.append({
             "id": t, "name": names[t], "abbrev": meta[t]["abbrev"], "logo": meta[t]["logo"], "cat": cat, "catPct": pct(cat), "apPct": pct(apc), "ap": apc,
-            "mrec": mrec, "weekly": weekly, "games": games,
+            "mrec": mrec, "weekly": weekly, "games": games, "_wk": wk,
             "avg": {CN[c]: sum(weeks[w][t][c] for w in done) / max(1, len(done)) for c in CATS},
             "adds": tc.get("acquisitions", 0), "moves": tc.get("moveToActive", 0), "trades": tc.get("trades", 0),
             "recent": sum(weekly[-2:]) / (11 * max(1, min(2, len(weekly)))),
@@ -333,6 +334,131 @@ def project_week(raw, data):
     cur["days"] = [start, start + length - 1]
 
 
+def simulate_season(raw, data, n_sims=10000):
+    """Kalan normal sezonu ve playoffları simüle eder: playoff, final ve şampiyonluk ihtimalleri."""
+    import math, random, statistics
+    L, M = raw["league"], raw["matchups"]
+    ss = L["settings"]["scheduleSettings"]
+    reg_weeks = ss.get("matchupPeriodCount", 0)
+    n_playoff = ss.get("playoffTeamCount", 0)
+    cur = data.get("current") or {}
+    cur_week = cur.get("week") or 0
+    teams = {t["id"]: t for t in data["teams"]}
+    if not reg_weeks or not n_playoff or not teams or not all(t["_wk"] for t in teams.values()):
+        return
+    ids = list(teams)
+    # 1) geçmiş haftalardan kategori ortalaması, kategoriye göre ortak sapma
+    hist, pooled = {}, {}
+    for c in CATS:
+        allv = [w[c] for t in teams.values() for w in t["_wk"]]
+        lg = statistics.mean(allv)
+        resid = []
+        for tid, t in teams.items():
+            vals = [w[c] for w in t["_wk"]]
+            m = statistics.mean(vals)
+            resid += [v - m for v in vals]
+            n = len(vals)
+            hist.setdefault(tid, {})[c] = (n * m + 3 * lg) / (n + 3)
+        pooled[c] = (statistics.pstdev(resid) or abs(lg) * 0.1 or 1) * 1.1
+    # 2) kadrodan haftalık beklenti (sakat/IR oyuncular yarım ağırlık), lig ortalamasına ölçekli
+    slots = {e["playerId"]: e.get("lineupSlotId") for t in raw.get("rosters", {}).get("teams", []) for e in t["roster"]["entries"]}
+    rost = {}
+    for tid in ids:
+        acc = {k: 0.0 for k in ("0", "6", "3", "2", "1", "17", "11", "13", "14", "15", "16")}
+        for p in data["players"]:
+            if p["team"] != tid or "g" not in p:
+                continue
+            wgt = 0.5 if (p["inj"] in ("Sakat", "IR") or slots.get(p["id"]) == 13) else 1.0
+            for k in acc:
+                acc[k] += p["g"].get(k, 0) * 3.3 * wgt
+        r = {c: acc[c] for c in ("0", "6", "3", "2", "1", "17", "11")}
+        r["19"] = acc["13"] / acc["14"] if acc["14"] else 0
+        r["20"] = acc["15"] / acc["16"] if acc["16"] else 0
+        rost[tid] = r
+    mu = {}
+    for c in CATS:
+        hm = statistics.mean(hist[t][c] for t in ids)
+        rm = statistics.mean(rost[t][c] for t in ids) or 1
+        for t in ids:
+            rv = rost[t][c] * (hm / rm) if rost[t][c] else hist[t][c]
+            mu.setdefault(t, {})[c] = 0.5 * hist[t][c] + 0.5 * rv
+
+    def pcat(a, b, c):
+        d = mu[a][c] - mu[b][c]
+        if c in LOWER_IS_BETTER:
+            d = -d
+        return phi(d / (pooled[c] * math.sqrt(2)))
+
+    # sezonun kalanında takım gücü de değişir (sakatlık, takas, waiver): her "dünya" için güçleri biraz kaydır
+    rnd = random.Random(42)
+    base_mu = {t: dict(mu[t]) for t in ids}
+    worlds = []
+    for _ in range(200):
+        for t in ids:
+            g = rnd.gauss(0, 1)
+            for c in CATS:
+                sh = pooled[c] * 0.35 * (0.6 * g + 0.8 * rnd.gauss(0, 1))
+                mu[t][c] = base_mu[t][c] + (-sh if c in LOWER_IS_BETTER else sh)
+        worlds.append({(a, b): [pcat(a, b, c) for c in CATS] for a in ids for b in ids if a != b})
+    mu = base_mu
+    cur_p = {}
+    for mt in cur.get("matchups", []):
+        if "proj" in mt:
+            ph = [mt["proj"]["pc"][CN[c]] for c in CATS]
+            cur_p[(mt["home"], mt["away"])] = ph
+    future = [(m["matchupPeriodId"], m["home"]["teamId"], m["away"]["teamId"]) for m in M["schedule"]
+              if "home" in m and "away" in m and m.get("playoffTierType", "NONE") == "NONE"
+              and cur_week < m["matchupPeriodId"] <= reg_weeks]
+    if cur_week and not cur_p:  # tahmin yoksa bu haftayı da modelle oyna
+        future += [(m["matchupPeriodId"], m["home"]["teamId"], m["away"]["teamId"]) for m in M["schedule"]
+                   if m.get("matchupPeriodId") == cur_week and "home" in m and "away" in m]
+    base = {t: list(teams[t]["cat"]) for t in ids}
+    rr = rnd.random
+    res = {t: {"po": 0, "final": 0, "champ": 0, "seed1": 0, "seedSum": 0, "w": 0.0, "l": 0.0} for t in ids}
+    bracket = [1, 8, 4, 5, 2, 7, 3, 6] if n_playoff == 8 else None
+
+    def play(a, b, probs):
+        wa = sum(1 for q in probs if rr() < q)
+        return wa, len(probs) - wa
+
+    for si in range(n_sims):
+        P = worlds[si % len(worlds)]
+        rec = {t: base[t][:] for t in ids}
+        for (h, a), probs in cur_p.items():
+            wh, wa = play(h, a, probs)
+            rec[h][0] += wh; rec[h][1] += wa; rec[a][0] += wa; rec[a][1] += wh
+        for _, h, a in future:
+            wh, wa = play(h, a, P[(h, a)])
+            rec[h][0] += wh; rec[h][1] += wa; rec[a][0] += wa; rec[a][1] += wh
+        order = sorted(ids, key=lambda t: (-(rec[t][0] + 0.5 * rec[t][2]) / max(1, sum(rec[t])), rr()))
+        for i, t in enumerate(order):
+            res[t]["w"] += rec[t][0]; res[t]["l"] += rec[t][1]
+            if i < n_playoff:
+                res[t]["po"] += 1
+                res[t]["seedSum"] += i + 1
+        res[order[0]]["seed1"] += 1
+        seeds = {i + 1: t for i, t in enumerate(order[:n_playoff])}
+        field = [seeds[s] for s in (bracket or range(1, n_playoff + 1))]
+        rank = {t: i for i, t in enumerate(order)}
+        while len(field) > 1:
+            nxt = []
+            for i in range(0, len(field), 2):
+                a, b = field[i], field[i + 1]
+                wa, wb = play(a, b, P[(a, b)])
+                nxt.append(a if (wa > wb or (wa == wb and rank[a] < rank[b])) else b)
+            if len(nxt) == 1:
+                res[field[0]]["final"] += 1; res[field[1]]["final"] += 1
+            field = nxt
+        res[field[0]]["champ"] += 1
+    out = {}
+    for t, r in res.items():
+        out[t] = {"po": round(r["po"] / n_sims, 4), "final": round(r["final"] / n_sims, 4), "champ": round(r["champ"] / n_sims, 4),
+                  "seed1": round(r["seed1"] / n_sims, 4), "seed": round(r["seedSum"] / r["po"], 2) if r["po"] else None,
+                  "w": round(r["w"] / n_sims, 1), "l": round(r["l"] / n_sims, 1)}
+    data["sim"] = {"teams": out, "playoffTeams": n_playoff, "regWeeks": reg_weeks, "sims": n_sims,
+                   "seedRule": ss.get("playoffSeedingRule")}
+
+
 def owner_key(team):
     import hashlib
     o = team.get("primaryOwner") or (team.get("owners") or [""])[0] or f"team-{team['id']}"
@@ -453,6 +579,11 @@ def main():
     data = compute(raw)
     data["players"] = build_players(raw, season)
     project_week(raw, data)
+    simulate_season(raw, data)
+    for t in data["teams"]:
+        t.pop("_wk", None)
+    for tid, r in sorted((data.get("sim") or {}).get("teams", {}).items(), key=lambda x: -x[1]["champ"]):
+        print(f"sim {tid}: playoff %{r['po']*100:.0f} şampiyon %{r['champ']*100:.1f} kat {r['w']}-{r['l']}")
     for mt in data.get("current", {}).get("matchups", []):
         if "proj" in mt:
             print(f"tahmin: {mt['home']} - {mt['away']}: %{mt['proj']['win']*100:.0f} ({mt['proj']['games']} maç)")

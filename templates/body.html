@@ -140,9 +140,15 @@ V.takimim=()=>{
   const fa=P.filter(p=>p.team===0&&p.gp>=3&&p.inj!=='Sakat'&&p.inj!=='IR').map(p=>({p,fit:DATA.cats.reduce((a,c)=>a+w[c]*p.z[c],0)})).sort((a,b)=>b.fit-a.fit).slice(0,8);
   const waiver=`<section class="sec"><h2>Serbest oyuncu önerileri</h2><p class="hint">${focus.length?`Odak kategorilerin: <b>${focus.join(', ')}</b> (zayıf olduğun ya da bu hafta kıl payı geride olduğun kategoriler). `:''}Sıralama bu kategorilere ekstra ağırlık veriyor.${drop?` Bırakma adayın <b>${esc(drop.name)}</b> (${zfmt(drop.val)}).`:''}</p>
    <div class="panel">${fa.map(({p,fit})=>prow(p,` · %${p.owned} sahiplik${drop&&p.val>drop.val?` · <b class="pos">${esc(drop.name)} yerine alınabilir</b>`:''}`)).join('')}</div></section>`;
-  return `<div class="phead">${logo(t,64)}<div><div class="nm">${esc(t.name)}</div><div class="sub">Güç sıralaması #${pRank(t)} · ${rec(t.mrec)} · <button type="button" class="linkbtn" data-unpick>Takımı değiştir</button></div></div></div>${week}${roster}${waiver}
+  return `<div class="phead">${logo(t,64)}<div><div class="nm">${esc(t.name)}</div><div class="sub">Güç sıralaması #${pRank(t)} · ${rec(t.mrec)} · <button type="button" class="linkbtn" data-unpick>Takımı değiştir</button></div></div></div>${week}${myOdds(t)}${roster}${waiver}
    <p class="hint">Öneriler ESPN verisine dayanan istatistiksel tahminlerdir; maç takvimi ve sakatlık haberlerini de kontrol et.</p>`};
 const CUR=DATA.current||{matchups:[],live:{}};
+function myOdds(t){const r=SIM&&SIM.teams[t.id];if(!r)return '';const cr=[...T].filter(x=>SIM.teams[x.id]).sort((a,b)=>SIM.teams[b.id].champ-SIM.teams[a.id].champ).findIndex(x=>x.id===t.id)+1;
+  return `<section class="sec"><div class="sec-h"><h2>Sezon tahmini</h2><a class="back" href="#siralama" style="color:var(--accent)">Tüm lig ›</a></div>
+  <div class="tiles"><div class="tile"><span class="k">Playoff</span><span class="v">%${op(r.po)}</span><span class="s">${r.seed?`Ortalama sıra ${r.seed.toFixed(1)}`:'İlk 8 dışında'}</span></div>
+  <div class="tile"><span class="k">Final</span><span class="v">%${op(r.final)}</span><span class="s">Lig ${SIM.playoffTeams} takımlı playoff</span></div>
+  <div class="tile"><span class="k">Şampiyonluk</span><span class="v">%${op(r.champ)}</span><span class="s">Ligde ${cr}. favori</span></div>
+  <div class="tile"><span class="k">Tahmini kategori</span><span class="v">${Math.round(r.w)}-${Math.round(r.l)}</span><span class="s">Normal sezon sonu</span></div></div></section>`}
 function liveRank(){return [...T].filter(t=>CUR.live[t.id]!=null).sort((a,b)=>CUR.live[b.id]-CUR.live[a.id])}
 function fmt(c,v){return c.includes('%')?v.toFixed(3).replace(/^0/,''):String(Math.round(v))}
 function winbar(m,flip){if(!m.proj)return '';const P=m.proj,p=flip?1-P.win:P.win,h=byId[flip?m.away:m.home],a=byId[flip?m.home:m.away];
@@ -191,7 +197,18 @@ V.siralama=()=>{const top=power[0];
   <ol class="panel rank-list">${power.map((t,i)=>`<li><a class="trow" href="${link(t)}"><span class="n">${i+1}</span>${logo(t,40)}
    <div style="min-width:0"><div class="nm">${esc(t.name)}${tags(t)}</div><div class="sub"><span>${rec(t.mrec)}</span><span>${t.cat.join('-')}</span><span>AP %${pct(t.apPct)}</span></div></div>
    <div class="side">${movePill(t)}<span class="pbar"><i style="width:${(t.power/top.power*100).toFixed(0)}%"></i></span></div></a></li>`).join('')}</ol></section>
+  ${V.playoff()}
   <section class="sec"><h2>Ödüller</h2><div class="awards">${awards()}</div></section>${V.sans()}`};
+const SIM=DATA.sim||null;
+const op=x=>x>=.995?'100':x<.005?(x>0?'<1':'0'):String(Math.round(x*100));
+const heat=(x,col)=>`background:color-mix(in srgb,var(--${col}) ${Math.round(Math.sqrt(x)*38)}%,transparent)`;
+V.playoff=()=>{if(!SIM)return '';const S=SIM.teams;
+  const rows=T.filter(t=>S[t.id]).sort((a,b)=>S[b.id].champ-S[a.id].champ||S[b.id].po-S[a.id].po);
+  return `<section class="sec" id="playoff"><div class="sec-h"><h2>Playoff ve şampiyonluk ihtimalleri</h2></div>
+  <p class="hint">Sezonun kalanı ve playofflar ${SIM.sims.toLocaleString('tr-TR')} kez simüle edildi. İlk ${SIM.playoffTeams} takım playoffa kalır, sıralama kategori galibiyetlerine göre yapılır, eşleşmeler 1-8, 4-5, 2-7, 3-6 ve her tur bir hafta. Takım gücü sezon boyu haftalık kategori ortalamaları ile şu anki kadronun projeksiyonunun karışımı. İsmin altında tahmini sezon sonu kategori skoru ve ortalama playoff sırası var.</p>
+  <div class="panel odds"><div class="orow oh"><span></span><span>Takım</span><span>Playoff</span><span>Final</span><span>Şamp.</span></div>
+  ${rows.map(t=>{const r=S[t.id];return `<a class="orow" href="${link(t)}">${logo(t,28)}<div style="min-width:0"><div class="nm">${esc(t.name)}</div><div class="sub">${Math.round(r.w)}-${Math.round(r.l)}${r.seed?` · sıra ${r.seed.toFixed(1)}`:''}</div></div>
+   <span class="ov" style="${heat(r.po,'accent')}">%${op(r.po)}</span><span class="ov" style="${heat(r.final,'accent')}">%${op(r.final)}</span><span class="ov b" style="${heat(r.champ,'accent')}">%${op(r.champ)}</span></a>`}).join('')}</div></section>`};
 
 V.sans=()=>{const lk=[...T].sort((a,b)=>b.luck-a.luck),M=0.2;
   const ev=(x,lost)=>{const t=T.find(z=>z.name===x.team);return `<a class="ev" href="${link(t)}" style="text-decoration:none">${logo(t,36)}<div style="min-width:0"><div class="nm">${esc(x.team)}</div><small>H${x.w} · ${lost?'kaybetti':'yendi'}: ${esc(x.opp)} · ${x.beat}/11</small></div><span class="sc">${x.score}</span></a>`};

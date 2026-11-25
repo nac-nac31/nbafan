@@ -292,4 +292,14 @@ button.tcard{font:inherit;color:inherit;cursor:pointer;width:100%}
 .lang:hover,.lang:focus-visible{background:rgba(255,255,255,.1);outline:none}
 footer .in{font-size:12px;color:var(--muted);padding-block:8px 0}
 @media (prefers-reduced-motion:no-preference){.view{animation:fade .18s ease-out}@keyframes fade{from{opacity:.4;transform:translateY(4px)}to{opacity:1;transform:none}}}
+.odds{padding:4px 0}
+.orow{display:grid;grid-template-columns:28px minmax(0,1fr) 44px 44px 48px;align-items:center;gap:6px;padding:9px 12px;text-decoration:none;border-top:1px solid var(--line)}
+.orow:first-child{border-top:0}
+a.orow:hover{background:var(--surface-2)}
+.orow .nm{font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;font-size:14px}
+.orow .sub{font-family:var(--f-data);font-size:11px;color:var(--muted);margin-top:1px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.orow.oh{font-family:var(--f-data);font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);padding-top:8px;padding-bottom:6px}
+.orow.oh span:nth-child(n+3){text-align:center}
+.ov{font-family:var(--f-data);font-size:12.5px;text-align:center;padding:5px 0;border-radius:6px;font-variant-numeric:tabular-nums}
+.ov.b{font-weight:700}
 </style>

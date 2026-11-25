@@ -26,6 +26,7 @@ python scripts/build.py
 - **All-play:** Takım her hafta diğer 11 takımın hepsiyle oynasaydı kazanacağı kategori oranı.
 - **Şans endeksi:** Gerçek kategori kazanma oranı eksi all-play oranı.
 - **Power ranking:** %60 sezon all-play + %40 son iki haftanın all-play maç galibiyet oranı.
+- **Playoff/şampiyonluk ihtimali:** `simulate_season` kalan normal sezonu ve playoffları 10.000 kez oynar. Takım gücü kategori başına %50 geçmiş haftalık ortalama (shrink) + %50 güncel kadro projeksiyonu; sezon içi değişim için 200 farklı "güç dünyası" çekilir. ESPN ayarından: 21 hafta, ilk 8 playoff, kategori rekoruna göre sıralama, 1-8/4-5/2-7/3-6, tek haftalık turlar.
 
 ## Takım logoları
 

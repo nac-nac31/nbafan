@@ -1,6 +1,20 @@
 """Türkçe şablon metinlerinin İngilizce karşılıkları. build.py en.html üretirken uzun olandan kısaya doğru uygular."""
 
 PAIRS = [
+    ('<span class="champ">Şampiyon</span>', '<span class="champ">Champion</span>'),
+    ("Playoff ve şampiyonluk ihtimalleri", "Playoff and title odds"),
+    ("Sezonun kalanı ve playofflar ${SIM.sims.toLocaleString('tr-TR')} kez simüle edildi. İlk ${SIM.playoffTeams} takım playoffa kalır, sıralama kategori galibiyetlerine göre yapılır, eşleşmeler 1-8, 4-5, 2-7, 3-6 ve her tur bir hafta. Takım gücü sezon boyu haftalık kategori ortalamaları ile şu anki kadronun projeksiyonunun karışımı. İsmin altında tahmini sezon sonu kategori skoru ve ortalama playoff sırası var.",
+     "The rest of the season and the playoffs were simulated ${SIM.sims.toLocaleString('en-US')} times. The top ${SIM.playoffTeams} teams make the playoffs, seeded by category wins, with 1-8, 4-5, 2-7, 3-6 matchups and one-week rounds. Team strength blends season-long weekly category averages with a projection of the current roster. Under each name: projected end-of-season category record and average playoff seed."),
+    ("<span>Takım</span><span>Playoff</span><span>Final</span><span>Şamp.</span>", "<span>Team</span><span>Playoff</span><span>Final</span><span>Title</span>"),
+    (" · sıra ${r.seed.toFixed(1)}", " · seed ${r.seed.toFixed(1)}"),
+    ("<h2>Sezon tahmini</h2>", "<h2>Season outlook</h2>"),
+    ("Tüm lig ›", "Whole league ›"),
+    ("`Ortalama sıra ${r.seed.toFixed(1)}`:'İlk 8 dışında'", "`Avg seed ${r.seed.toFixed(1)}`:'Outside the top 8'"),
+    ("Lig ${SIM.playoffTeams} takımlı playoff", "${SIM.playoffTeams}-team playoff"),
+    ("<span class=\"k\">Şampiyonluk</span>", "<span class=\"k\">Title</span>"),
+    ("Ligde ${cr}. favori", "No. ${cr} favorite"),
+    ("<span class=\"k\">Tahmini kategori</span>", "<span class=\"k\">Proj. categories</span>"),
+    ("Normal sezon sonu", "End of regular season"),
     ("DATA.current.week+'. hafta oynanıyor':NW+'. hafta sonrası'", "'Week '+DATA.current.week+' · live':'Week '+NW+' done'"),
     ("${CUR.week}. hafta · devam ediyor", "Week ${CUR.week} · in progress"),
     ("${best.g.w}. haftada 11/11", "11/11 in week ${best.g.w}"),
