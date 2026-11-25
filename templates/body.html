@@ -175,7 +175,7 @@ V['bu-hafta']=()=>{
   return `<div class="hero"><span class="live">${CUR.week}. hafta · devam ediyor</span><h2>Bu haftanın durumu</h2>
    <p class="hint">Skorlar ${esc(DATA.updated)} itibarıyla. Şerit kategorilerin şu anki durumunu, altındaki çubuk haftanın sonu için kazanma ihtimalini gösterir. Tahmin, oyuncuların bu hafta kalan NBA maçlarına ve ortalamalarına dayanır.</p></div>
   <div class="heads">${heads.map(([l,t,s])=>`<a class="panel head" href="${link(t)}">${logo(t,44)}<div><div class="lab">${l}</div><div class="t">${esc(t.name)}</div><div class="s">${s}</div></div></a>`).join('')}</div>
-  <section class="sec"><div class="sec-h"><h2>Maçlar</h2><div class="legend"><span><i style="background:var(--accent)"></i>Soldaki önde</span><span><i style="background:var(--cool)"></i>Sağdaki önde</span></div></div>
+  <section class="sec"><div class="sec-h"><h2>Maçlar</h2></div>
    <div class="panel">${ms.map(game).join('')}</div></section>
   <div class="two">
    <section class="sec"><h2>Haftanın all-play'i</h2><p class="hint">Bu haftaki kategorilerle kaç rakip yeniliyor.</p>
