@@ -44,6 +44,16 @@ def main():
         if "CERTIFICATE" in str(e.reason):
             print("Mac'te Python sertifikaları eksik. Finder > Uygulamalar > Python 3.x > 'Install Certificates.command' çift tıkla, sonra tekrar dene.")
         raise SystemExit(1)
+    try:  # anahtarın Fantasy iznini hemen dene
+        req = urllib.request.Request("https://fantasysports.yahooapis.com/fantasy/v2/game/nba?format=json",
+                                     headers={"Authorization": f"Bearer {tok['access_token']}"})
+        with urllib.request.urlopen(req, timeout=30) as r:
+            json.load(r)
+        print("\nFantasy erişimi: TAMAM")
+    except urllib.error.HTTPError as e:
+        print(f"\nFantasy erişimi: HATA (HTTP {e.code}). Yahoo uygulamasında Fantasy Sports > Read izni yok ya da henüz geçerli değil.")
+        print("Bu anahtarı GitHub'a eklemeye gerek yok; Claude'a bu satırı ilet.")
+        raise SystemExit(1)
     print("\nTamam. GitHub'a secret olarak ekle:\n")
     print("YAHOO_REFRESH_TOKEN =", tok["refresh_token"])
     print("\n(YAHOO_CLIENT_ID ve YAHOO_CLIENT_SECRET'ı da ekle.)")
