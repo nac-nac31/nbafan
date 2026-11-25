@@ -749,7 +749,7 @@
   ]
  },
  "league": "Fantasy 26-27",
- "updated": "25 Kasım 2026, 23:40",
+ "updated": "25 Kasım 2026, 23:49",
  "weeks": [
   1,
   2,
@@ -5168,7 +5168,7 @@
    "id": 3064440,
    "name": "Zach LaVine",
    "pos": "SG",
-   "inj": "",
+   "inj": "Belirsiz",
    "team": 4,
    "owned": 81.7,
    "gp": 6,
@@ -21741,7 +21741,54 @@
     "now": 1
    }
   ],
-  "trades": [],
+  "trades": [
+   {
+    "sp": 22,
+    "date": "2026-11-11",
+    "sides": [
+     {
+      "team": 10,
+      "got": [
+       {
+        "pid": 3992,
+        "name": "James Harden",
+        "val": 52.2,
+        "n": 6,
+        "rate": 5.3
+       }
+      ],
+      "val": 52.2,
+      "now": 6.1,
+      "net": 49.7,
+      "grade": "A+"
+     },
+     {
+      "team": 4,
+      "got": [
+       {
+        "pid": 4591725,
+        "name": "Ryan Rollins",
+        "val": -3.7,
+        "n": 3,
+        "rate": -2.6
+       },
+       {
+        "pid": 3064440,
+        "name": "Zach LaVine",
+        "val": 8.8,
+        "n": 5,
+        "rate": 1.7
+       }
+      ],
+      "val": 5.1,
+      "now": 0.8,
+      "net": -49.7,
+      "grade": "F"
+     }
+    ],
+    "gap": 49.7
+   }
+  ],
   "draft": {
    "teams": [
     {
@@ -22117,7 +22164,7 @@
        "BLK": 0.5,
        "3PM": 2.6
       },
-      "inj": ""
+      "inj": "Belirsiz"
      },
      "worst": {
       "pick": 15,
@@ -22360,7 +22407,7 @@
       "BLK": 0.5,
       "3PM": 2.6
      },
-     "inj": ""
+     "inj": "Belirsiz"
     }
    ],
    "busts": [
