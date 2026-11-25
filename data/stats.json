@@ -749,7 +749,7 @@
   ]
  },
  "league": "Fantasy 26-27",
- "updated": "25 Kasım 2026, 23:08",
+ "updated": "25 Kasım 2026, 23:39",
  "weeks": [
   1,
   2,
@@ -3170,7 +3170,7 @@
    "pos": "C",
    "inj": "Sakat",
    "team": 10,
-   "owned": 74.1,
+   "owned": 74.0,
    "gp": 3,
    "seasonGp": 3,
    "min": 30.0,
@@ -3845,7 +3845,7 @@
    "pos": "SF",
    "inj": "",
    "team": 13,
-   "owned": 78.3,
+   "owned": 78.4,
    "gp": 8,
    "seasonGp": 17,
    "min": 29.4,
@@ -4322,7 +4322,7 @@
    "pos": "SG",
    "inj": "",
    "team": 12,
-   "owned": 93.6,
+   "owned": 93.7,
    "gp": 7,
    "seasonGp": 17,
    "min": 31.6,
@@ -4481,7 +4481,7 @@
    "pos": "SG",
    "inj": "",
    "team": 12,
-   "owned": 44.6,
+   "owned": 44.8,
    "gp": 8,
    "seasonGp": 18,
    "min": 27.1,
@@ -4905,7 +4905,7 @@
    "pos": "PF",
    "inj": "Sakat",
    "team": 14,
-   "owned": 96.1,
+   "owned": 96.0,
    "gp": 12,
    "seasonGp": 12,
    "min": 32.1,
@@ -5541,7 +5541,7 @@
    "pos": "SG",
    "inj": "",
    "team": 0,
-   "owned": 31.7,
+   "owned": 32.3,
    "gp": 0,
    "seasonGp": 0,
    "min": 26.8,
@@ -5792,7 +5792,7 @@
    "pos": "C",
    "inj": "Sakat",
    "team": 0,
-   "owned": 5.4,
+   "owned": 5.3,
    "gp": 0,
    "seasonGp": 0,
    "min": 24.9,
@@ -6096,7 +6096,7 @@
    "pos": "SG",
    "inj": "",
    "team": 3,
-   "owned": 42.8,
+   "owned": 42.7,
    "gp": 5,
    "seasonGp": 16,
    "min": 35.8,
@@ -6361,7 +6361,7 @@
    "pos": "PG",
    "inj": "",
    "team": 6,
-   "owned": 57.2,
+   "owned": 57.3,
    "gp": 8,
    "seasonGp": 17,
    "min": 28.5,
@@ -6414,7 +6414,7 @@
    "pos": "SG",
    "inj": "",
    "team": 0,
-   "owned": 4.7,
+   "owned": 4.6,
    "gp": 7,
    "seasonGp": 14,
    "min": 26.7,
@@ -6453,7 +6453,7 @@
    "pos": "C",
    "inj": "",
    "team": 9,
-   "owned": 48.4,
+   "owned": 48.5,
    "gp": 6,
    "seasonGp": 16,
    "min": 26.0,
@@ -6665,7 +6665,7 @@
    "pos": "C",
    "inj": "",
    "team": 14,
-   "owned": 77.5,
+   "owned": 77.4,
    "gp": 8,
    "seasonGp": 18,
    "min": 27.4,
@@ -6824,7 +6824,7 @@
    "pos": "PF",
    "inj": "",
    "team": 13,
-   "owned": 52.5,
+   "owned": 52.6,
    "gp": 5,
    "seasonGp": 14,
    "min": 32.2,
@@ -6930,7 +6930,7 @@
    "pos": "SG",
    "inj": "",
    "team": 5,
-   "owned": 39.4,
+   "owned": 39.5,
    "gp": 5,
    "seasonGp": 15,
    "min": 23.6,
@@ -6983,7 +6983,7 @@
    "pos": "PG",
    "inj": "",
    "team": 5,
-   "owned": 39.5,
+   "owned": 39.4,
    "gp": 7,
    "seasonGp": 17,
    "min": 37.6,
@@ -7089,7 +7089,7 @@
    "pos": "PG",
    "inj": "",
    "team": 10,
-   "owned": 89.7,
+   "owned": 89.6,
    "gp": 8,
    "seasonGp": 18,
    "min": 34.2,
@@ -7142,7 +7142,7 @@
    "pos": "SF",
    "inj": "",
    "team": 1,
-   "owned": 20.1,
+   "owned": 20.2,
    "gp": 6,
    "seasonGp": 15,
    "min": 37.8,
@@ -7234,7 +7234,7 @@
    "pos": "C",
    "inj": "",
    "team": 14,
-   "owned": 63.6,
+   "owned": 63.7,
    "gp": 8,
    "seasonGp": 18,
    "min": 26.8,
@@ -7326,7 +7326,7 @@
    "pos": "SF",
    "inj": "",
    "team": 3,
-   "owned": 51.5,
+   "owned": 51.4,
    "gp": 8,
    "seasonGp": 19,
    "min": 36.1,
@@ -7379,7 +7379,7 @@
    "pos": "SG",
    "inj": "Sakat",
    "team": 14,
-   "owned": 18.2,
+   "owned": 18.1,
    "gp": 13,
    "seasonGp": 13,
    "min": 27.2,
@@ -7736,7 +7736,7 @@
    "pos": "SG",
    "inj": "",
    "team": 7,
-   "owned": 41.5,
+   "owned": 41.6,
    "gp": 6,
    "seasonGp": 16,
    "min": 30.5,
@@ -7842,7 +7842,7 @@
    "pos": "SF",
    "inj": "",
    "team": 9,
-   "owned": 65.2,
+   "owned": 65.1,
    "gp": 9,
    "seasonGp": 19,
    "min": 30.1,
@@ -7895,7 +7895,7 @@
    "pos": "SG",
    "inj": "",
    "team": 2,
-   "owned": 92.4,
+   "owned": 92.3,
    "gp": 7,
    "seasonGp": 17,
    "min": 30.3,
@@ -8079,7 +8079,7 @@
    "pos": "PG",
    "inj": "",
    "team": 12,
-   "owned": 34.6,
+   "owned": 34.7,
    "gp": 7,
    "seasonGp": 16,
    "min": 25.3,
@@ -8330,7 +8330,7 @@
    "pos": "C",
    "inj": "Sakat",
    "team": 4,
-   "owned": 55.4,
+   "owned": 55.3,
    "gp": 4,
    "seasonGp": 4,
    "min": 26.0,
@@ -8581,7 +8581,7 @@
    "pos": "C",
    "inj": "",
    "team": 6,
-   "owned": 39.6,
+   "owned": 39.5,
    "gp": 7,
    "seasonGp": 17,
    "min": 26.0,
@@ -8634,7 +8634,7 @@
    "pos": "SF",
    "inj": "",
    "team": 9,
-   "owned": 15.2,
+   "owned": 15.1,
    "gp": 7,
    "seasonGp": 13,
    "min": 30.4,
@@ -8687,7 +8687,7 @@
    "pos": "PG",
    "inj": "",
    "team": 9,
-   "owned": 69.2,
+   "owned": 69.1,
    "gp": 8,
    "seasonGp": 14,
    "min": 34.9,
@@ -8740,7 +8740,7 @@
    "pos": "SF",
    "inj": "",
    "team": 13,
-   "owned": 42.2,
+   "owned": 42.3,
    "gp": 7,
    "seasonGp": 18,
    "min": 28.0,
@@ -8793,7 +8793,7 @@
    "pos": "PF",
    "inj": "",
    "team": 3,
-   "owned": 56.9,
+   "owned": 56.8,
    "gp": 7,
    "seasonGp": 17,
    "min": 24.6,
@@ -8846,7 +8846,7 @@
    "pos": "C",
    "inj": "Sakat",
    "team": 13,
-   "owned": 30.4,
+   "owned": 30.2,
    "gp": 6,
    "seasonGp": 16,
    "min": 26.8,
@@ -9030,7 +9030,7 @@
    "pos": "SG",
    "inj": "",
    "team": 0,
-   "owned": 4.2,
+   "owned": 4.1,
    "gp": 4,
    "seasonGp": 7,
    "min": 22.5,
@@ -9214,7 +9214,7 @@
    "pos": "C",
    "inj": "",
    "team": 14,
-   "owned": 39.3,
+   "owned": 39.2,
    "gp": 7,
    "seasonGp": 18,
    "min": 23.1,
@@ -9412,7 +9412,7 @@
    "pos": "PF",
    "inj": "",
    "team": 10,
-   "owned": 29.4,
+   "owned": 29.3,
    "gp": 8,
    "seasonGp": 17,
    "min": 33.0,
@@ -9596,7 +9596,7 @@
    "pos": "SF",
    "inj": "Sakat",
    "team": 3,
-   "owned": 76.7,
+   "owned": 76.6,
    "gp": 4,
    "seasonGp": 14,
    "min": 36.0,
@@ -9780,7 +9780,7 @@
    "pos": "C",
    "inj": "",
    "team": 2,
-   "owned": 26.7,
+   "owned": 26.6,
    "gp": 7,
    "seasonGp": 17,
    "min": 25.7,
@@ -9886,7 +9886,7 @@
    "pos": "PG",
    "inj": "Belirsiz",
    "team": 9,
-   "owned": 91.8,
+   "owned": 91.7,
    "gp": 5,
    "seasonGp": 16,
    "min": 28.0,
@@ -10031,7 +10031,7 @@
    "pos": "PF",
    "inj": "",
    "team": 9,
-   "owned": 21.9,
+   "owned": 22.0,
    "gp": 7,
    "seasonGp": 14,
    "min": 27.7,
@@ -10254,7 +10254,7 @@
    "pos": "PG",
    "inj": "",
    "team": 1,
-   "owned": 69.5,
+   "owned": 69.4,
    "gp": 8,
    "seasonGp": 18,
    "min": 29.0,
@@ -10307,7 +10307,7 @@
    "pos": "SG",
    "inj": "",
    "team": 2,
-   "owned": 24.1,
+   "owned": 24.3,
    "gp": 8,
    "seasonGp": 18,
    "min": 25.6,
@@ -10714,7 +10714,7 @@
    "pos": "PG",
    "inj": "",
    "team": 7,
-   "owned": 94.0,
+   "owned": 94.1,
    "gp": 8,
    "seasonGp": 17,
    "min": 28.5,
@@ -10912,7 +10912,7 @@
    "pos": "SF",
    "inj": "",
    "team": 2,
-   "owned": 10.0,
+   "owned": 9.9,
    "gp": 6,
    "seasonGp": 15,
    "min": 28.8,
@@ -10965,7 +10965,7 @@
    "pos": "SG",
    "inj": "",
    "team": 0,
-   "owned": 4.3,
+   "owned": 4.4,
    "gp": 8,
    "seasonGp": 17,
    "min": 28.8,
@@ -11149,7 +11149,7 @@
    "pos": "SF",
    "inj": "",
    "team": 14,
-   "owned": 86.4,
+   "owned": 86.3,
    "gp": 8,
    "seasonGp": 15,
    "min": 36.1,
@@ -11308,7 +11308,7 @@
    "pos": "SF",
    "inj": "",
    "team": 0,
-   "owned": 10.7,
+   "owned": 10.6,
    "gp": 7,
    "seasonGp": 15,
    "min": 23.4,
@@ -11464,7 +11464,7 @@
    "pos": "PG",
    "inj": "",
    "team": 0,
-   "owned": 0.5,
+   "owned": 0.6,
    "gp": 5,
    "seasonGp": 15,
    "min": 19.2,
@@ -11620,7 +11620,7 @@
    "pos": "SF",
    "inj": "",
    "team": 9,
-   "owned": 38.6,
+   "owned": 38.7,
    "gp": 5,
    "seasonGp": 14,
    "min": 28.0,
@@ -11857,7 +11857,7 @@
    "pos": "SG",
    "inj": "",
    "team": 0,
-   "owned": 9.5,
+   "owned": 9.4,
    "gp": 7,
    "seasonGp": 17,
    "min": 33.1,
@@ -11935,7 +11935,7 @@
    "pos": "PF",
    "inj": "",
    "team": 10,
-   "owned": 5.2,
+   "owned": 5.3,
    "gp": 6,
    "seasonGp": 11,
    "min": 23.7,
@@ -12119,7 +12119,7 @@
    "pos": "C",
    "inj": "Belirsiz",
    "team": 10,
-   "owned": 9.7,
+   "owned": 9.6,
    "gp": 6,
    "seasonGp": 15,
    "min": 20.8,
@@ -12211,7 +12211,7 @@
    "pos": "PF",
    "inj": "",
    "team": 5,
-   "owned": 43.5,
+   "owned": 43.4,
    "gp": 7,
    "seasonGp": 16,
    "min": 29.0,
@@ -12657,7 +12657,7 @@
    "pos": "C",
    "inj": "",
    "team": 0,
-   "owned": 6.1,
+   "owned": 6.2,
    "gp": 6,
    "seasonGp": 15,
    "min": 20.3,
@@ -12696,7 +12696,7 @@
    "pos": "C",
    "inj": "",
    "team": 10,
-   "owned": 17.3,
+   "owned": 17.2,
    "gp": 6,
    "seasonGp": 8,
    "min": 23.7,
@@ -12749,7 +12749,7 @@
    "pos": "SF",
    "inj": "",
    "team": 0,
-   "owned": 4.5,
+   "owned": 4.4,
    "gp": 9,
    "seasonGp": 19,
    "min": 22.6,
@@ -13900,7 +13900,7 @@
    "pos": "PG",
    "inj": "",
    "team": 3,
-   "owned": 20.2,
+   "owned": 20.1,
    "gp": 6,
    "seasonGp": 9,
    "min": 27.0,
@@ -15073,7 +15073,7 @@
    "pos": "PF",
    "inj": "",
    "team": 0,
-   "owned": 13.8,
+   "owned": 13.9,
    "gp": 7,
    "seasonGp": 17,
    "min": 28.3,
@@ -15151,7 +15151,7 @@
    "pos": "PG",
    "inj": "",
    "team": 0,
-   "owned": 9.0,
+   "owned": 9.1,
    "gp": 5,
    "seasonGp": 12,
    "min": 23.6,
@@ -15580,7 +15580,7 @@
    "pos": "SG",
    "inj": "",
    "team": 0,
-   "owned": 2.3,
+   "owned": 2.2,
    "gp": 7,
    "seasonGp": 17,
    "min": 20.7,
@@ -16452,7 +16452,7 @@
    "pos": "SF",
    "inj": "",
    "team": 0,
-   "owned": 51.3,
+   "owned": 51.2,
    "gp": 7,
    "seasonGp": 15,
    "min": 20.0,
@@ -17505,7 +17505,7 @@
    "pos": "C",
    "inj": "",
    "team": 0,
-   "owned": 8.0,
+   "owned": 7.9,
    "gp": 8,
    "seasonGp": 19,
    "min": 8.2,
@@ -17856,7 +17856,7 @@
    "pos": "SF",
    "inj": "Sakat",
    "team": 3,
-   "owned": 76.8,
+   "owned": 76.7,
    "gp": 1,
    "seasonGp": 1,
    "min": 6.0,
@@ -20869,5 +20869,2638 @@
     "best": 13
    }
   ]
+ },
+ "fun": {
+  "repl": -0.84,
+  "bench": [
+   {
+    "team": 10,
+    "gain": 65.5,
+    "pts": 88,
+    "games": 8,
+    "lost": [],
+    "worst": {
+     "team": 10,
+     "pid": 4711272,
+     "name": "Reed Sheppard",
+     "sp": 16,
+     "date": "2026-11-05",
+     "w": 3,
+     "val": 5.5,
+     "line": {
+      "PTS": 14.0,
+      "REB": 2.0,
+      "AST": 2.0,
+      "STL": 3.0,
+      "BLK": 0.0,
+      "3PM": 3.0,
+      "TO": 0.0,
+      "FGM": 5.0,
+      "FGA": 12.0,
+      "FTM": 1.0,
+      "FTA": 1.0,
+      "MIN": 21.0
+     }
+    }
+   },
+   {
+    "team": 14,
+    "gain": 64.4,
+    "pts": 96,
+    "games": 5,
+    "lost": [],
+    "worst": {
+     "team": 14,
+     "pid": 4277847,
+     "name": "Wendell Carter Jr.",
+     "sp": 17,
+     "date": "2026-11-06",
+     "w": 3,
+     "val": 11.5,
+     "line": {
+      "PTS": 27.0,
+      "REB": 13.0,
+      "AST": 2.0,
+      "STL": 1.0,
+      "BLK": 1.0,
+      "3PM": 2.0,
+      "TO": 3.0,
+      "FGM": 10.0,
+      "FGA": 12.0,
+      "FTM": 5.0,
+      "FTA": 6.0,
+      "MIN": 34.0
+     }
+    }
+   },
+   {
+    "team": 1,
+    "gain": 56.2,
+    "pts": 65,
+    "games": 5,
+    "lost": [
+     {
+      "w": 1,
+      "opp": 7,
+      "score": "4-5",
+      "opt": "5-3"
+     }
+    ],
+    "worst": {
+     "team": 1,
+     "pid": 5041955,
+     "name": "Darryn Peterson",
+     "sp": 14,
+     "date": "2026-11-03",
+     "w": 3,
+     "val": 12.2,
+     "line": {
+      "PTS": 14.0,
+      "REB": 4.0,
+      "AST": 6.0,
+      "STL": 3.0,
+      "BLK": 3.0,
+      "3PM": 2.0,
+      "TO": 1.0,
+      "FGM": 5.0,
+      "FGA": 13.0,
+      "FTM": 2.0,
+      "FTA": 2.0,
+      "MIN": 33.0
+     }
+    }
+   },
+   {
+    "team": 13,
+    "gain": 52.0,
+    "pts": 74,
+    "games": 5,
+    "lost": [],
+    "worst": {
+     "team": 13,
+     "pid": 4709138,
+     "name": "Brandin Podziemski",
+     "sp": 4,
+     "date": "2026-10-23",
+     "w": 1,
+     "val": 2.8,
+     "line": {
+      "PTS": 18.0,
+      "REB": 2.0,
+      "AST": 3.0,
+      "STL": 3.0,
+      "BLK": 1.0,
+      "3PM": 2.0,
+      "TO": 4.0,
+      "FGM": 7.0,
+      "FGA": 17.0,
+      "FTM": 2.0,
+      "FTA": 2.0,
+      "MIN": 33.0
+     }
+    }
+   },
+   {
+    "team": 12,
+    "gain": 46.9,
+    "pts": 186,
+    "games": 16,
+    "lost": [
+     {
+      "w": 4,
+      "opp": 7,
+      "score": "4-5",
+      "opt": "5-4"
+     }
+    ],
+    "worst": {
+     "team": 12,
+     "pid": 4433249,
+     "name": "Moussa Diabate",
+     "sp": 2,
+     "date": "2026-10-22",
+     "w": 1,
+     "val": 10.8,
+     "line": {
+      "PTS": 17.0,
+      "REB": 8.0,
+      "AST": 3.0,
+      "STL": 5.0,
+      "BLK": 0.0,
+      "3PM": 0.0,
+      "TO": 4.0,
+      "FGM": 7.0,
+      "FGA": 11.0,
+      "FTM": 3.0,
+      "FTA": 3.0,
+      "MIN": 34.0
+     }
+    }
+   },
+   {
+    "team": 9,
+    "gain": 36.0,
+    "pts": 91,
+    "games": 7,
+    "lost": [],
+    "worst": {
+     "team": 9,
+     "pid": 4712849,
+     "name": "Anthony Black",
+     "sp": 28,
+     "date": "2026-11-17",
+     "w": 5,
+     "val": 7.1,
+     "line": {
+      "PTS": 20.0,
+      "REB": 2.0,
+      "AST": 7.0,
+      "STL": 3.0,
+      "BLK": 1.0,
+      "3PM": 3.0,
+      "TO": 4.0,
+      "FGM": 7.0,
+      "FGA": 13.0,
+      "FTM": 3.0,
+      "FTA": 4.0,
+      "MIN": 33.0
+     }
+    }
+   },
+   {
+    "team": 3,
+    "gain": 35.0,
+    "pts": 113,
+    "games": 6,
+    "lost": [],
+    "worst": {
+     "team": 3,
+     "pid": 3157465,
+     "name": "Duncan Robinson",
+     "sp": 14,
+     "date": "2026-11-03",
+     "w": 3,
+     "val": 15.5,
+     "line": {
+      "PTS": 24.0,
+      "REB": 2.0,
+      "AST": 3.0,
+      "STL": 3.0,
+      "BLK": 0.0,
+      "3PM": 6.0,
+      "TO": 1.0,
+      "FGM": 8.0,
+      "FGA": 11.0,
+      "FTM": 2.0,
+      "FTA": 2.0,
+      "MIN": 32.0
+     }
+    }
+   },
+   {
+    "team": 7,
+    "gain": 34.2,
+    "pts": 195,
+    "games": 13,
+    "lost": [
+     {
+      "w": 2,
+      "opp": 3,
+      "score": "4-5",
+      "opt": "7-2"
+     }
+    ],
+    "worst": {
+     "team": 7,
+     "pid": 5175737,
+     "name": "Yaxel Lendeborg",
+     "sp": 13,
+     "date": "2026-11-01",
+     "w": 2,
+     "val": 14.8,
+     "line": {
+      "PTS": 37.0,
+      "REB": 4.0,
+      "AST": 6.0,
+      "STL": 1.0,
+      "BLK": 0.0,
+      "3PM": 6.0,
+      "TO": 2.0,
+      "FGM": 13.0,
+      "FGA": 19.0,
+      "FTM": 5.0,
+      "FTA": 6.0,
+      "MIN": 34.0
+     }
+    }
+   },
+   {
+    "team": 2,
+    "gain": 26.2,
+    "pts": 25,
+    "games": 5,
+    "lost": [],
+    "worst": {
+     "team": 2,
+     "pid": 4351852,
+     "name": "Mitchell Robinson",
+     "sp": 4,
+     "date": "2026-10-23",
+     "w": 1,
+     "val": -4.2,
+     "line": {
+      "PTS": 4.0,
+      "REB": 4.0,
+      "AST": 2.0,
+      "STL": 0.0,
+      "BLK": 1.0,
+      "3PM": 0.0,
+      "TO": 0.0,
+      "FGM": 2.0,
+      "FGA": 4.0,
+      "FTM": 0.0,
+      "FTA": 0.0,
+      "MIN": 22.0
+     }
+    }
+   },
+   {
+    "team": 4,
+    "gain": 10.4,
+    "pts": 162,
+    "games": 13,
+    "lost": [],
+    "worst": {
+     "team": 4,
+     "pid": 3064440,
+     "name": "Zach LaVine",
+     "sp": 22,
+     "date": "2026-11-11",
+     "w": 4,
+     "val": 10.4,
+     "line": {
+      "PTS": 31.0,
+      "REB": 3.0,
+      "AST": 2.0,
+      "STL": 2.0,
+      "BLK": 0.0,
+      "3PM": 6.0,
+      "TO": 5.0,
+      "FGM": 10.0,
+      "FGA": 16.0,
+      "FTM": 5.0,
+      "FTA": 5.0,
+      "MIN": 33.0
+     }
+    }
+   },
+   {
+    "team": 6,
+    "gain": 7.7,
+    "pts": 19,
+    "games": 2,
+    "lost": [],
+    "worst": {
+     "team": 6,
+     "pid": 3448,
+     "name": "Brook Lopez",
+     "sp": 14,
+     "date": "2026-11-03",
+     "w": 3,
+     "val": -0.4,
+     "line": {
+      "PTS": 12.0,
+      "REB": 6.0,
+      "AST": 1.0,
+      "STL": 1.0,
+      "BLK": 1.0,
+      "3PM": 1.0,
+      "TO": 0.0,
+      "FGM": 5.0,
+      "FGA": 10.0,
+      "FTM": 1.0,
+      "FTA": 2.0,
+      "MIN": 22.0
+     }
+    }
+   },
+   {
+    "team": 5,
+    "gain": 7.6,
+    "pts": 101,
+    "games": 7,
+    "lost": [],
+    "worst": {
+     "team": 5,
+     "pid": 3202,
+     "name": "Kevin Durant",
+     "sp": 35,
+     "date": "2026-11-24",
+     "w": 6,
+     "val": 12.6,
+     "line": {
+      "PTS": 32.0,
+      "REB": 9.0,
+      "AST": 4.0,
+      "STL": 0.0,
+      "BLK": 1.0,
+      "3PM": 4.0,
+      "TO": 2.0,
+      "FGM": 11.0,
+      "FGA": 19.0,
+      "FTM": 6.0,
+      "FTA": 6.0,
+      "MIN": 33.0
+     }
+    }
+   }
+  ],
+  "benchWorst": [
+   {
+    "team": 3,
+    "pid": 3157465,
+    "name": "Duncan Robinson",
+    "sp": 14,
+    "date": "2026-11-03",
+    "w": 3,
+    "val": 15.5,
+    "line": {
+     "PTS": 24.0,
+     "REB": 2.0,
+     "AST": 3.0,
+     "STL": 3.0,
+     "BLK": 0.0,
+     "3PM": 6.0,
+     "TO": 1.0,
+     "FGM": 8.0,
+     "FGA": 11.0,
+     "FTM": 2.0,
+     "FTA": 2.0,
+     "MIN": 32.0
+    }
+   },
+   {
+    "team": 7,
+    "pid": 5175737,
+    "name": "Yaxel Lendeborg",
+    "sp": 13,
+    "date": "2026-11-01",
+    "w": 2,
+    "val": 14.8,
+    "line": {
+     "PTS": 37.0,
+     "REB": 4.0,
+     "AST": 6.0,
+     "STL": 1.0,
+     "BLK": 0.0,
+     "3PM": 6.0,
+     "TO": 2.0,
+     "FGM": 13.0,
+     "FGA": 19.0,
+     "FTM": 5.0,
+     "FTA": 6.0,
+     "MIN": 34.0
+    }
+   },
+   {
+    "team": 5,
+    "pid": 3202,
+    "name": "Kevin Durant",
+    "sp": 35,
+    "date": "2026-11-24",
+    "w": 6,
+    "val": 12.6,
+    "line": {
+     "PTS": 32.0,
+     "REB": 9.0,
+     "AST": 4.0,
+     "STL": 0.0,
+     "BLK": 1.0,
+     "3PM": 4.0,
+     "TO": 2.0,
+     "FGM": 11.0,
+     "FGA": 19.0,
+     "FTM": 6.0,
+     "FTA": 6.0,
+     "MIN": 33.0
+    }
+   },
+   {
+    "team": 1,
+    "pid": 5041955,
+    "name": "Darryn Peterson",
+    "sp": 14,
+    "date": "2026-11-03",
+    "w": 3,
+    "val": 12.2,
+    "line": {
+     "PTS": 14.0,
+     "REB": 4.0,
+     "AST": 6.0,
+     "STL": 3.0,
+     "BLK": 3.0,
+     "3PM": 2.0,
+     "TO": 1.0,
+     "FGM": 5.0,
+     "FGA": 13.0,
+     "FTM": 2.0,
+     "FTA": 2.0,
+     "MIN": 33.0
+    }
+   },
+   {
+    "team": 14,
+    "pid": 4277847,
+    "name": "Wendell Carter Jr.",
+    "sp": 17,
+    "date": "2026-11-06",
+    "w": 3,
+    "val": 11.5,
+    "line": {
+     "PTS": 27.0,
+     "REB": 13.0,
+     "AST": 2.0,
+     "STL": 1.0,
+     "BLK": 1.0,
+     "3PM": 2.0,
+     "TO": 3.0,
+     "FGM": 10.0,
+     "FGA": 12.0,
+     "FTM": 5.0,
+     "FTA": 6.0,
+     "MIN": 34.0
+    }
+   }
+  ],
+  "waiver": {
+   "top": [
+    {
+     "team": 13,
+     "pid": 4278053,
+     "name": "Davion Mitchell",
+     "sp": 4,
+     "date": "2026-10-23",
+     "val": 69.5,
+     "n": 15,
+     "pg": {
+      "PTS": 17.4,
+      "REB": 2.7,
+      "AST": 8.5,
+      "STL": 1.4,
+      "BLK": 0.6,
+      "3PM": 2.5
+     },
+     "kept": true
+    },
+    {
+     "team": 2,
+     "pid": 4431767,
+     "name": "Christian Braun",
+     "sp": 10,
+     "date": "2026-10-30",
+     "val": 64.5,
+     "n": 12,
+     "pg": {
+      "PTS": 14.6,
+      "REB": 4.4,
+      "AST": 2.7,
+      "STL": 2.1,
+      "BLK": 0.4,
+      "3PM": 2.0
+     },
+     "kept": true
+    },
+    {
+     "team": 10,
+     "pid": 4397189,
+     "name": "Jalen Smith",
+     "sp": 11,
+     "date": "2026-10-31",
+     "val": 50.1,
+     "n": 9,
+     "pg": {
+      "PTS": 15.4,
+      "REB": 6.7,
+      "AST": 2.6,
+      "STL": 0.9,
+      "BLK": 1.0,
+      "3PM": 2.4
+     },
+     "kept": true
+    },
+    {
+     "team": 5,
+     "pid": 5107199,
+     "name": "Daniss Jenkins",
+     "sp": 8,
+     "date": "2026-10-28",
+     "val": 37.4,
+     "n": 12,
+     "pg": {
+      "PTS": 16.4,
+      "REB": 3.9,
+      "AST": 4.6,
+      "STL": 1.4,
+      "BLK": 0.0,
+      "3PM": 2.4
+     },
+     "kept": true
+    },
+    {
+     "team": 5,
+     "pid": 6475,
+     "name": "Klay Thompson",
+     "sp": 14,
+     "date": "2026-11-03",
+     "val": 34.1,
+     "n": 9,
+     "pg": {
+      "PTS": 17.7,
+      "REB": 1.9,
+      "AST": 2.7,
+      "STL": 0.2,
+      "BLK": 1.2,
+      "3PM": 4.6
+     },
+     "kept": true
+    },
+    {
+     "team": 3,
+     "pid": 3157465,
+     "name": "Duncan Robinson",
+     "sp": 6,
+     "date": "2026-10-26",
+     "val": 15.9,
+     "n": 9,
+     "pg": {
+      "PTS": 16.3,
+      "REB": 1.9,
+      "AST": 2.0,
+      "STL": 1.1,
+      "BLK": 0.2,
+      "3PM": 3.4
+     },
+     "kept": true
+    },
+    {
+     "team": 12,
+     "pid": 4433083,
+     "name": "Cam Spencer",
+     "sp": 30,
+     "date": "2026-11-19",
+     "val": 15.8,
+     "n": 3,
+     "pg": {
+      "PTS": 14.0,
+      "REB": 2.7,
+      "AST": 7.0,
+      "STL": 1.0,
+      "BLK": 0.0,
+      "3PM": 1.3
+     },
+     "kept": true
+    },
+    {
+     "team": 6,
+     "pid": 4278562,
+     "name": "Paul Reed",
+     "sp": 6,
+     "date": "2026-10-26",
+     "val": 13.0,
+     "n": 14,
+     "pg": {
+      "PTS": 11.6,
+      "REB": 7.1,
+      "AST": 2.1,
+      "STL": 1.4,
+      "BLK": 0.9,
+      "3PM": 0.2
+     },
+     "kept": true
+    }
+   ],
+   "teams": [
+    {
+     "team": 13,
+     "val": 107.0,
+     "n": 72,
+     "adds": 16
+    },
+    {
+     "team": 5,
+     "val": 92.8,
+     "n": 73,
+     "adds": 11
+    },
+    {
+     "team": 2,
+     "val": 90.8,
+     "n": 81,
+     "adds": 28
+    },
+    {
+     "team": 10,
+     "val": 61.0,
+     "n": 44,
+     "adds": 11
+    },
+    {
+     "team": 14,
+     "val": 39.1,
+     "n": 38,
+     "adds": 7
+    },
+    {
+     "team": 6,
+     "val": 35.7,
+     "n": 43,
+     "adds": 18
+    },
+    {
+     "team": 3,
+     "val": 28.2,
+     "n": 18,
+     "adds": 3
+    },
+    {
+     "team": 9,
+     "val": 16.5,
+     "n": 27,
+     "adds": 13
+    },
+    {
+     "team": 12,
+     "val": 15.8,
+     "n": 36,
+     "adds": 7
+    },
+    {
+     "team": 1,
+     "val": 6.6,
+     "n": 20,
+     "adds": 7
+    },
+    {
+     "team": 7,
+     "val": 0.0,
+     "n": 12,
+     "adds": 1
+    },
+    {
+     "team": 4,
+     "val": 0.0,
+     "n": 0,
+     "adds": 0
+    }
+   ],
+   "count": 144
+  },
+  "regrets": [
+   {
+    "team": 3,
+    "pid": 4431767,
+    "name": "Christian Braun",
+    "sp": 6,
+    "date": "2026-10-26",
+    "val": 71.0,
+    "n": 14,
+    "pg": {
+     "PTS": 14.2,
+     "REB": 4.1,
+     "AST": 2.7,
+     "STL": 2.2,
+     "BLK": 0.4,
+     "3PM": 2.0
+    },
+    "now": 2
+   },
+   {
+    "team": 9,
+    "pid": 4397189,
+    "name": "Jalen Smith",
+    "sp": 8,
+    "date": "2026-10-28",
+    "val": 58.6,
+    "n": 11,
+    "pg": {
+     "PTS": 14.6,
+     "REB": 7.5,
+     "AST": 2.6,
+     "STL": 0.7,
+     "BLK": 1.3,
+     "3PM": 2.3
+    },
+    "now": 10
+   },
+   {
+    "team": 10,
+    "pid": 3907498,
+    "name": "Matisse Thybulle",
+    "sp": 26,
+    "date": "2026-11-15",
+    "val": 26.8,
+    "n": 5,
+    "pg": {
+     "PTS": 9.8,
+     "REB": 3.8,
+     "AST": 0.8,
+     "STL": 2.6,
+     "BLK": 1.4,
+     "3PM": 2.0
+    },
+    "now": 6
+   },
+   {
+    "team": 14,
+    "pid": 4433083,
+    "name": "Cam Spencer",
+    "sp": 27,
+    "date": "2026-11-15",
+    "val": 26.7,
+    "n": 5,
+    "pg": {
+     "PTS": 16.0,
+     "REB": 3.0,
+     "AST": 7.4,
+     "STL": 0.6,
+     "BLK": 0.2,
+     "3PM": 2.0
+    },
+    "now": 12
+   },
+   {
+    "team": 1,
+    "pid": 4065732,
+    "name": "De'Andre Hunter",
+    "sp": 24,
+    "date": "2026-11-13",
+    "val": 22.4,
+    "n": 5,
+    "pg": {
+     "PTS": 19.2,
+     "REB": 5.0,
+     "AST": 3.6,
+     "STL": 0.8,
+     "BLK": 0.4,
+     "3PM": 2.2
+    },
+    "now": 1
+   },
+   {
+    "team": 13,
+    "pid": 5082206,
+    "name": "Brayden Burries",
+    "sp": 26,
+    "date": "2026-11-15",
+    "val": 18.7,
+    "n": 5,
+    "pg": {
+     "PTS": 17.4,
+     "REB": 7.2,
+     "AST": 3.2,
+     "STL": 1.8,
+     "BLK": 0.4,
+     "3PM": 2.0
+    },
+    "now": 2
+   },
+   {
+    "team": 13,
+    "pid": 4432194,
+    "name": "Day'Ron Sharpe",
+    "sp": 22,
+    "date": "2026-11-11",
+    "val": 15.3,
+    "n": 6,
+    "pg": {
+     "PTS": 11.0,
+     "REB": 7.5,
+     "AST": 4.2,
+     "STL": 1.0,
+     "BLK": 1.0,
+     "3PM": 0.3
+    },
+    "now": 1
+   },
+   {
+    "team": 13,
+    "pid": 4065732,
+    "name": "De'Andre Hunter",
+    "sp": 27,
+    "date": "2026-11-15",
+    "val": 13.7,
+    "n": 4,
+    "pg": {
+     "PTS": 18.0,
+     "REB": 5.0,
+     "AST": 4.0,
+     "STL": 0.5,
+     "BLK": 0.5,
+     "3PM": 2.2
+    },
+    "now": 1
+   }
+  ],
+  "trades": [],
+  "draft": {
+   "teams": [
+    {
+     "team": 1,
+     "diff": 121.7,
+     "val": 373.2,
+     "best": {
+      "pick": 101,
+      "round": 9,
+      "team": 1,
+      "pid": 4397002,
+      "name": "Ayo Dosunmu",
+      "val": 53.7,
+      "n": 18,
+      "rank": 31,
+      "pg": {
+       "PTS": 18.2,
+       "REB": 4.3,
+       "AST": 3.5,
+       "STL": 1.3,
+       "BLK": 0.3,
+       "3PM": 2.2
+      },
+      "inj": ""
+     },
+     "worst": {
+      "pick": 53,
+      "round": 5,
+      "team": 1,
+      "pid": 4396907,
+      "name": "Darius Garland",
+      "val": 2.2,
+      "n": 16,
+      "rank": 96,
+      "pg": {
+       "PTS": 21.2,
+       "REB": 2.1,
+       "AST": 6.6,
+       "STL": 0.6,
+       "BLK": 0.3,
+       "3PM": 2.6
+      },
+      "inj": ""
+     },
+     "grade": "A"
+    },
+    {
+     "team": 12,
+     "diff": 99.6,
+     "val": 324.3,
+     "best": {
+      "pick": 153,
+      "round": 13,
+      "team": 12,
+      "pid": 4433249,
+      "name": "Moussa Diabate",
+      "val": 28.2,
+      "n": 14,
+      "rank": 55,
+      "pg": {
+       "PTS": 9.6,
+       "REB": 10.6,
+       "AST": 2.1,
+       "STL": 1.2,
+       "BLK": 1.1,
+       "3PM": 0.0
+      },
+      "inj": ""
+     },
+     "worst": {
+      "pick": 40,
+      "round": 4,
+      "team": 12,
+      "pid": 4593803,
+      "name": "Jalen Williams",
+      "val": -2.9,
+      "n": 3,
+      "rank": 106,
+      "pg": {
+       "PTS": 13.7,
+       "REB": 4.7,
+       "AST": 3.3,
+       "STL": 1.0,
+       "BLK": 0.7,
+       "3PM": 1.0
+      },
+      "inj": "Sakat"
+     },
+     "grade": "A"
+    },
+    {
+     "team": 13,
+     "diff": 83.5,
+     "val": 284.4,
+     "best": {
+      "pick": 132,
+      "round": 11,
+      "team": 13,
+      "pid": 4903027,
+      "name": "Cedric Coward",
+      "val": 73.5,
+      "n": 17,
+      "rank": 19,
+      "pg": {
+       "PTS": 15.4,
+       "REB": 8.1,
+       "AST": 3.4,
+       "STL": 1.6,
+       "BLK": 0.4,
+       "3PM": 2.5
+      },
+      "inj": ""
+     },
+     "worst": {
+      "pick": 60,
+      "round": 5,
+      "team": 13,
+      "pid": 5105623,
+      "name": "Kel'el Ware",
+      "val": -30.0,
+      "n": 18,
+      "rank": 136,
+      "pg": {
+       "PTS": 8.7,
+       "REB": 6.3,
+       "AST": 0.9,
+       "STL": 0.6,
+       "BLK": 1.2,
+       "3PM": 0.7
+      },
+      "inj": ""
+     },
+     "grade": "A-"
+    },
+    {
+     "team": 6,
+     "diff": 80.9,
+     "val": 385.1,
+     "best": {
+      "pick": 147,
+      "round": 13,
+      "team": 6,
+      "pid": 3995,
+      "name": "Jrue Holiday",
+      "val": 34.1,
+      "n": 17,
+      "rank": 47,
+      "pg": {
+       "PTS": 14.1,
+       "REB": 3.7,
+       "AST": 4.5,
+       "STL": 1.3,
+       "BLK": 0.2,
+       "3PM": 2.5
+      },
+      "inj": ""
+     },
+     "worst": {
+      "pick": 46,
+      "round": 4,
+      "team": 6,
+      "pid": 3147657,
+      "name": "Mikal Bridges",
+      "val": -43.8,
+      "n": 17,
+      "rank": 149,
+      "pg": {
+       "PTS": 7.8,
+       "REB": 3.4,
+       "AST": 2.2,
+       "STL": 1.1,
+       "BLK": 0.5,
+       "3PM": 1.1
+      },
+      "inj": ""
+     },
+     "grade": "A-"
+    },
+    {
+     "team": 9,
+     "diff": 54.8,
+     "val": 370.2,
+     "best": {
+      "pick": 143,
+      "round": 12,
+      "team": 9,
+      "pid": 4712849,
+      "name": "Anthony Black",
+      "val": 15.6,
+      "n": 14,
+      "rank": 77,
+      "pg": {
+       "PTS": 15.3,
+       "REB": 5.0,
+       "AST": 5.1,
+       "STL": 1.8,
+       "BLK": 0.9,
+       "3PM": 1.9
+      },
+      "inj": ""
+     },
+     "worst": {
+      "pick": 71,
+      "round": 6,
+      "team": 9,
+      "pid": 4066259,
+      "name": "De'Aaron Fox",
+      "val": 7.5,
+      "n": 16,
+      "rank": 87,
+      "pg": {
+       "PTS": 12.4,
+       "REB": 3.9,
+       "AST": 5.8,
+       "STL": 1.2,
+       "BLK": 0.4,
+       "3PM": 0.8
+      },
+      "inj": "Belirsiz"
+     },
+     "grade": "B+"
+    },
+    {
+     "team": 4,
+     "diff": 13.0,
+     "val": 227.6,
+     "best": {
+      "pick": 107,
+      "round": 9,
+      "team": 4,
+      "pid": 2991230,
+      "name": "Fred VanVleet",
+      "val": 29.6,
+      "n": 15,
+      "rank": 53,
+      "pg": {
+       "PTS": 13.9,
+       "REB": 2.9,
+       "AST": 5.6,
+       "STL": 1.1,
+       "BLK": 0.3,
+       "3PM": 2.8
+      },
+      "inj": ""
+     },
+     "worst": {
+      "pick": 35,
+      "round": 3,
+      "team": 4,
+      "pid": 4396971,
+      "name": "Naz Reid",
+      "val": -23.1,
+      "n": 16,
+      "rank": 127,
+      "pg": {
+       "PTS": 17.7,
+       "REB": 8.3,
+       "AST": 2.4,
+       "STL": 0.9,
+       "BLK": 0.5,
+       "3PM": 2.5
+      },
+      "inj": ""
+     },
+     "grade": "B"
+    },
+    {
+     "team": 2,
+     "diff": -19.4,
+     "val": 224.8,
+     "best": {
+      "pick": 78,
+      "round": 7,
+      "team": 2,
+      "pid": 4431671,
+      "name": "Jaden McDaniels",
+      "val": 88.3,
+      "n": 18,
+      "rank": 12,
+      "pg": {
+       "PTS": 18.4,
+       "REB": 6.2,
+       "AST": 3.7,
+       "STL": 1.2,
+       "BLK": 0.9,
+       "3PM": 1.6
+      },
+      "inj": ""
+     },
+     "worst": {
+      "pick": 30,
+      "round": 3,
+      "team": 2,
+      "pid": 3078576,
+      "name": "Derrick White",
+      "val": 12.3,
+      "n": 17,
+      "rank": 81,
+      "pg": {
+       "PTS": 12.4,
+       "REB": 3.2,
+       "AST": 5.0,
+       "STL": 1.1,
+       "BLK": 0.6,
+       "3PM": 1.8
+      },
+      "inj": ""
+     },
+     "grade": "B-"
+    },
+    {
+     "team": 14,
+     "diff": -23.6,
+     "val": 254.0,
+     "best": {
+      "pick": 93,
+      "round": 8,
+      "team": 14,
+      "pid": 4432639,
+      "name": "Jabari Smith Jr.",
+      "val": 50.1,
+      "n": 18,
+      "rank": 36,
+      "pg": {
+       "PTS": 15.5,
+       "REB": 6.2,
+       "AST": 2.2,
+       "STL": 0.6,
+       "BLK": 0.9,
+       "3PM": 2.3
+      },
+      "inj": ""
+     },
+     "worst": {
+      "pick": 52,
+      "round": 5,
+      "team": 14,
+      "pid": 4433287,
+      "name": "Brandon Miller",
+      "val": -4.0,
+      "n": 14,
+      "rank": 108,
+      "pg": {
+       "PTS": 19.9,
+       "REB": 4.6,
+       "AST": 2.7,
+       "STL": 0.9,
+       "BLK": 0.8,
+       "3PM": 3.0
+      },
+      "inj": ""
+     },
+     "grade": "B-"
+    },
+    {
+     "team": 10,
+     "diff": -30.6,
+     "val": 187.7,
+     "best": {
+      "pick": 135,
+      "round": 12,
+      "team": 10,
+      "pid": 3064440,
+      "name": "Zach LaVine",
+      "val": 33.4,
+      "n": 16,
+      "rank": 49,
+      "pg": {
+       "PTS": 20.3,
+       "REB": 3.8,
+       "AST": 2.6,
+       "STL": 1.0,
+       "BLK": 0.5,
+       "3PM": 2.6
+      },
+      "inj": ""
+     },
+     "worst": {
+      "pick": 15,
+      "round": 2,
+      "team": 10,
+      "pid": 4432816,
+      "name": "LaMelo Ball",
+      "val": 23.6,
+      "n": 18,
+      "rank": 64,
+      "pg": {
+       "PTS": 17.2,
+       "REB": 4.2,
+       "AST": 5.6,
+       "STL": 1.7,
+       "BLK": 0.2,
+       "3PM": 3.2
+      },
+      "inj": ""
+     },
+     "grade": "C+"
+    },
+    {
+     "team": 3,
+     "diff": -46.2,
+     "val": 179.0,
+     "best": {
+      "pick": 137,
+      "round": 12,
+      "team": 3,
+      "pid": 5144091,
+      "name": "Jeremiah Fears",
+      "val": -3.6,
+      "n": 19,
+      "rank": 107,
+      "pg": {
+       "PTS": 16.2,
+       "REB": 5.1,
+       "AST": 5.6,
+       "STL": 1.2,
+       "BLK": 0.4,
+       "3PM": 1.2
+      },
+      "inj": ""
+     },
+     "worst": {
+      "pick": 56,
+      "round": 5,
+      "team": 3,
+      "pid": 4017837,
+      "name": "Ivica Zubac",
+      "val": -23.8,
+      "n": 13,
+      "rank": 129,
+      "pg": {
+       "PTS": 11.0,
+       "REB": 9.1,
+       "AST": 1.8,
+       "STL": 0.0,
+       "BLK": 0.8,
+       "3PM": 0.0
+      },
+      "inj": ""
+     },
+     "grade": "C+"
+    },
+    {
+     "team": 5,
+     "diff": -94.4,
+     "val": 318.6,
+     "best": {
+      "pick": 144,
+      "round": 12,
+      "team": 5,
+      "pid": 3907822,
+      "name": "Malik Beasley",
+      "val": 0.0,
+      "n": 0,
+      "rank": 103,
+      "pg": {},
+      "inj": ""
+     },
+     "worst": {
+      "pick": 72,
+      "round": 6,
+      "team": 5,
+      "pid": 4437244,
+      "name": "Jalen Green",
+      "val": -49.4,
+      "n": 16,
+      "rank": 151,
+      "pg": {
+       "PTS": 13.2,
+       "REB": 3.6,
+       "AST": 3.0,
+       "STL": 0.9,
+       "BLK": 0.4,
+       "3PM": 1.3
+      },
+      "inj": ""
+     },
+     "grade": "C"
+    },
+    {
+     "team": 7,
+     "diff": -239.3,
+     "val": 1.6,
+     "best": {
+      "pick": 127,
+      "round": 11,
+      "team": 7,
+      "pid": 4395630,
+      "name": "Devin Vassell",
+      "val": 26.3,
+      "n": 16,
+      "rank": 60,
+      "pg": {
+       "PTS": 11.6,
+       "REB": 4.0,
+       "AST": 2.9,
+       "STL": 1.6,
+       "BLK": 0.4,
+       "3PM": 1.6
+      },
+      "inj": ""
+     },
+     "worst": {
+      "pick": 18,
+      "round": 2,
+      "team": 7,
+      "pid": 4871145,
+      "name": "Josh Giddey",
+      "val": -34.1,
+      "n": 17,
+      "rank": 142,
+      "pg": {
+       "PTS": 10.4,
+       "REB": 6.1,
+       "AST": 9.4,
+       "STL": 0.4,
+       "BLK": 0.6,
+       "3PM": 1.1
+      },
+      "inj": ""
+     },
+     "grade": "F"
+    }
+   ],
+   "steals": [
+    {
+     "pick": 132,
+     "round": 11,
+     "team": 13,
+     "pid": 4903027,
+     "name": "Cedric Coward",
+     "val": 73.5,
+     "n": 17,
+     "rank": 19,
+     "pg": {
+      "PTS": 15.4,
+      "REB": 8.1,
+      "AST": 3.4,
+      "STL": 1.6,
+      "BLK": 0.4,
+      "3PM": 2.5
+     },
+     "inj": ""
+    },
+    {
+     "pick": 147,
+     "round": 13,
+     "team": 6,
+     "pid": 3995,
+     "name": "Jrue Holiday",
+     "val": 34.1,
+     "n": 17,
+     "rank": 47,
+     "pg": {
+      "PTS": 14.1,
+      "REB": 3.7,
+      "AST": 4.5,
+      "STL": 1.3,
+      "BLK": 0.2,
+      "3PM": 2.5
+     },
+     "inj": ""
+    },
+    {
+     "pick": 153,
+     "round": 13,
+     "team": 12,
+     "pid": 4433249,
+     "name": "Moussa Diabate",
+     "val": 28.2,
+     "n": 14,
+     "rank": 55,
+     "pg": {
+      "PTS": 9.6,
+      "REB": 10.6,
+      "AST": 2.1,
+      "STL": 1.2,
+      "BLK": 1.1,
+      "3PM": 0.0
+     },
+     "inj": ""
+    },
+    {
+     "pick": 136,
+     "round": 12,
+     "team": 12,
+     "pid": 5174563,
+     "name": "Kyshawn George",
+     "val": 38.6,
+     "n": 19,
+     "rank": 43,
+     "pg": {
+      "PTS": 18.1,
+      "REB": 4.6,
+      "AST": 4.4,
+      "STL": 0.7,
+      "BLK": 1.2,
+      "3PM": 2.6
+     },
+     "inj": ""
+    },
+    {
+     "pick": 135,
+     "round": 12,
+     "team": 10,
+     "pid": 3064440,
+     "name": "Zach LaVine",
+     "val": 33.4,
+     "n": 16,
+     "rank": 49,
+     "pg": {
+      "PTS": 20.3,
+      "REB": 3.8,
+      "AST": 2.6,
+      "STL": 1.0,
+      "BLK": 0.5,
+      "3PM": 2.6
+     },
+     "inj": ""
+    }
+   ],
+   "busts": [
+    {
+     "pick": 18,
+     "round": 2,
+     "team": 7,
+     "pid": 4871145,
+     "name": "Josh Giddey",
+     "val": -34.1,
+     "n": 17,
+     "rank": 142,
+     "pg": {
+      "PTS": 10.4,
+      "REB": 6.1,
+      "AST": 9.4,
+      "STL": 0.4,
+      "BLK": 0.6,
+      "3PM": 1.1
+     },
+     "inj": ""
+    },
+    {
+     "pick": 46,
+     "round": 4,
+     "team": 6,
+     "pid": 3147657,
+     "name": "Mikal Bridges",
+     "val": -43.8,
+     "n": 17,
+     "rank": 149,
+     "pg": {
+      "PTS": 7.8,
+      "REB": 3.4,
+      "AST": 2.2,
+      "STL": 1.1,
+      "BLK": 0.5,
+      "3PM": 1.1
+     },
+     "inj": ""
+    },
+    {
+     "pick": 35,
+     "round": 3,
+     "team": 4,
+     "pid": 4396971,
+     "name": "Naz Reid",
+     "val": -23.1,
+     "n": 16,
+     "rank": 127,
+     "pg": {
+      "PTS": 17.7,
+      "REB": 8.3,
+      "AST": 2.4,
+      "STL": 0.9,
+      "BLK": 0.5,
+      "3PM": 2.5
+     },
+     "inj": ""
+    },
+    {
+     "pick": 24,
+     "round": 2,
+     "team": 5,
+     "pid": 4433621,
+     "name": "Jalen Duren",
+     "val": 6.2,
+     "n": 2,
+     "rank": 91,
+     "pg": {
+      "PTS": 13.0,
+      "REB": 7.5,
+      "AST": 2.0,
+      "STL": 1.0,
+      "BLK": 1.0,
+      "3PM": 0.0
+     },
+     "inj": "Sakat"
+    },
+    {
+     "pick": 40,
+     "round": 4,
+     "team": 12,
+     "pid": 4593803,
+     "name": "Jalen Williams",
+     "val": -2.9,
+     "n": 3,
+     "rank": 106,
+     "pg": {
+      "PTS": 13.7,
+      "REB": 4.7,
+      "AST": 3.3,
+      "STL": 1.0,
+      "BLK": 0.7,
+      "3PM": 1.0
+     },
+     "inj": "Sakat"
+    }
+   ],
+   "order": {
+    "5": 1,
+    "9": 2,
+    "6": 3,
+    "14": 4,
+    "1": 5,
+    "2": 6,
+    "7": 7,
+    "3": 8,
+    "12": 9,
+    "10": 10,
+    "4": 11,
+    "13": 12
+   },
+   "rounds": 13
+  },
+  "injury": [
+   {
+    "team": 12,
+    "games": 37,
+    "val": 195.0,
+    "who": [
+     {
+      "name": "Anthony Edwards",
+      "n": 14
+     },
+     {
+      "name": "Dejounte Murray",
+      "n": 10
+     },
+     {
+      "name": "Stephen Curry",
+      "n": 7
+     }
+    ]
+   },
+   {
+    "team": 13,
+    "games": 32,
+    "val": 188.6,
+    "who": [
+     {
+      "name": "Tyrese Haliburton",
+      "n": 14
+     },
+     {
+      "name": "Ty Jerome",
+      "n": 5
+     },
+     {
+      "name": "Scottie Barnes",
+      "n": 5
+     }
+    ]
+   },
+   {
+    "team": 14,
+    "games": 31,
+    "val": 164.2,
+    "who": [
+     {
+      "name": "Kawhi Leonard",
+      "n": 15
+     },
+     {
+      "name": "Evan Mobley",
+      "n": 6
+     },
+     {
+      "name": "Grayson Allen",
+      "n": 3
+     }
+    ]
+   },
+   {
+    "team": 10,
+    "games": 30,
+    "val": 132.6,
+    "who": [
+     {
+      "name": "Chet Holmgren",
+      "n": 15
+     },
+     {
+      "name": "Trey Murphy III",
+      "n": 8
+     },
+     {
+      "name": "Immanuel Quickley",
+      "n": 2
+     }
+    ]
+   },
+   {
+    "team": 4,
+    "games": 53,
+    "val": 127.3,
+    "who": [
+     {
+      "name": "Jaren Jackson Jr.",
+      "n": 15
+     },
+     {
+      "name": "Kristaps Porzingis",
+      "n": 14
+     },
+     {
+      "name": "Ja Morant",
+      "n": 13
+     }
+    ]
+   },
+   {
+    "team": 5,
+    "games": 42,
+    "val": 120.1,
+    "who": [
+     {
+      "name": "Tobias Harris",
+      "n": 18
+     },
+     {
+      "name": "Jalen Duren",
+      "n": 12
+     },
+     {
+      "name": "Kyrie Irving",
+      "n": 3
+     }
+    ]
+   },
+   {
+    "team": 2,
+    "games": 29,
+    "val": 105.8,
+    "who": [
+     {
+      "name": "Jimmy Butler III",
+      "n": 17
+     },
+     {
+      "name": "Norman Powell",
+      "n": 4
+     },
+     {
+      "name": "Zach Edey",
+      "n": 3
+     }
+    ]
+   },
+   {
+    "team": 6,
+    "games": 13,
+    "val": 69.5,
+    "who": [
+     {
+      "name": "Austin Reaves",
+      "n": 6
+     },
+     {
+      "name": "Anthony Davis",
+      "n": 2
+     },
+     {
+      "name": "Cameron Boozer",
+      "n": 2
+     }
+    ]
+   },
+   {
+    "team": 3,
+    "games": 26,
+    "val": 64.7,
+    "who": [
+     {
+      "name": "Lauri Markkanen",
+      "n": 11
+     },
+     {
+      "name": "Ivica Zubac",
+      "n": 5
+     },
+     {
+      "name": "Duncan Robinson",
+      "n": 5
+     }
+    ]
+   },
+   {
+    "team": 7,
+    "games": 24,
+    "val": 64.0,
+    "who": [
+     {
+      "name": "Paolo Banchero",
+      "n": 15
+     },
+     {
+      "name": "Joel Embiid",
+      "n": 4
+     },
+     {
+      "name": "Devin Vassell",
+      "n": 2
+     }
+    ]
+   },
+   {
+    "team": 1,
+    "games": 13,
+    "val": 39.0,
+    "who": [
+     {
+      "name": "Caleb Wilson",
+      "n": 7
+     },
+     {
+      "name": "Jayson Tatum",
+      "n": 2
+     },
+     {
+      "name": "Ausar Thompson",
+      "n": 1
+     }
+    ]
+   },
+   {
+    "team": 9,
+    "games": 15,
+    "val": 24.0,
+    "who": [
+     {
+      "name": "LeBron James",
+      "n": 4
+     },
+     {
+      "name": "Anthony Black",
+      "n": 3
+     },
+     {
+      "name": "Cameron Johnson",
+      "n": 3
+     }
+    ]
+   }
+  ],
+  "records": {
+   "week": {
+    "PTS": {
+     "best": {
+      "v": 942,
+      "y": 2026,
+      "w": 17,
+      "name": "Soprano's",
+      "team": null,
+      "cur": false
+     },
+     "worst": {
+      "v": 189,
+      "y": 2026,
+      "w": 8,
+      "name": "Eczakent Thugs",
+      "team": null,
+      "cur": false
+     }
+    },
+    "REB": {
+     "best": {
+      "v": 339,
+      "y": 2026,
+      "w": 17,
+      "name": "Soprano's",
+      "team": null,
+      "cur": false
+     },
+     "worst": {
+      "v": 66,
+      "y": 2026,
+      "w": 8,
+      "name": "Eczakent Thugs",
+      "team": null,
+      "cur": false
+     }
+    },
+    "AST": {
+     "best": {
+      "v": 206,
+      "y": 2026,
+      "w": 17,
+      "name": "Doggy dogs",
+      "team": null,
+      "cur": false
+     },
+     "worst": {
+      "v": 49,
+      "y": 2026,
+      "w": 8,
+      "name": "Adana Heybeliler Tekstil",
+      "team": null,
+      "cur": false
+     }
+    },
+    "STL": {
+     "best": {
+      "v": 62,
+      "y": 2027,
+      "w": 1,
+      "name": "CHADELITES",
+      "team": 2,
+      "cur": true
+     },
+     "worst": {
+      "v": 10,
+      "y": 2026,
+      "w": 8,
+      "name": "AcetXsMax",
+      "team": null,
+      "cur": false
+     }
+    },
+    "BLK": {
+     "best": {
+      "v": 47,
+      "y": 2026,
+      "w": 17,
+      "name": "Soprano's",
+      "team": null,
+      "cur": false
+     },
+     "worst": {
+      "v": 2,
+      "y": 2026,
+      "w": 16,
+      "name": "Doggy dogs",
+      "team": null,
+      "cur": false
+     }
+    },
+    "3PM": {
+     "best": {
+      "v": 98,
+      "y": 2027,
+      "w": 2,
+      "name": "Tooney Tunes",
+      "team": 14,
+      "cur": true
+     },
+     "worst": {
+      "v": 14,
+      "y": 2026,
+      "w": 5,
+      "name": "Limanreis Test",
+      "team": null,
+      "cur": false
+     }
+    },
+    "FG%": {
+     "best": {
+      "v": 0.5605,
+      "y": 2026,
+      "w": 8,
+      "name": "Tooney Tunes",
+      "team": null,
+      "cur": false
+     },
+     "worst": {
+      "v": 0.3974,
+      "y": 2026,
+      "w": 19,
+      "name": "31 Chechkers",
+      "team": null,
+      "cur": false
+     }
+    },
+    "FT%": {
+     "best": {
+      "v": 0.9038,
+      "y": 2027,
+      "w": 4,
+      "name": "Adana Heybeliler Tekstil",
+      "team": 10,
+      "cur": true
+     },
+     "worst": {
+      "v": 0.6636,
+      "y": 2026,
+      "w": 9,
+      "name": "Soprano's",
+      "team": null,
+      "cur": false
+     }
+    },
+    "TO": {
+     "best": {
+      "v": 16,
+      "y": 2026,
+      "w": 8,
+      "name": "Eczakent Thugs",
+      "team": null,
+      "cur": false
+     },
+     "worst": {
+      "v": 120,
+      "y": 2026,
+      "w": 17,
+      "name": "Doggy dogs",
+      "team": null,
+      "cur": false
+     }
+    }
+   },
+   "game": {
+    "PTS": {
+     "v": 53.0,
+     "pid": 3945274,
+     "name": "Luka Doncic",
+     "team": 14,
+     "sp": 18,
+     "date": "2026-11-07",
+     "line": {
+      "PTS": 53.0,
+      "REB": 5.0,
+      "AST": 5.0,
+      "STL": 1.0,
+      "BLK": 0.0,
+      "3PM": 5.0,
+      "TO": 3.0,
+      "FGM": 17.0,
+      "FGA": 33.0,
+      "FTM": 14.0,
+      "FTA": 18.0,
+      "MIN": 38.0
+     }
+    },
+    "REB": {
+     "v": 24.0,
+     "pid": 5104157,
+     "name": "Victor Wembanyama",
+     "team": 5,
+     "sp": 16,
+     "date": "2026-11-05",
+     "line": {
+      "PTS": 52.0,
+      "REB": 24.0,
+      "AST": 2.0,
+      "STL": 2.0,
+      "BLK": 8.0,
+      "3PM": 1.0,
+      "TO": 1.0,
+      "FGM": 16.0,
+      "FGA": 28.0,
+      "FTM": 19.0,
+      "FTA": 23.0,
+      "MIN": 34.0
+     }
+    },
+    "AST": {
+     "v": 22.0,
+     "pid": 4871145,
+     "name": "Josh Giddey",
+     "team": 7,
+     "sp": 34,
+     "date": "2026-11-22",
+     "line": {
+      "PTS": 23.0,
+      "REB": 14.0,
+      "AST": 22.0,
+      "STL": 0.0,
+      "BLK": 1.0,
+      "3PM": 2.0,
+      "TO": 5.0,
+      "FGM": 10.0,
+      "FGA": 17.0,
+      "FTM": 1.0,
+      "FTA": 2.0,
+      "MIN": 41.0
+     }
+    },
+    "STL": {
+     "v": 7.0,
+     "pid": 4869342,
+     "name": "Dyson Daniels",
+     "team": 2,
+     "sp": 4,
+     "date": "2026-10-23",
+     "line": {
+      "PTS": 11.0,
+      "REB": 9.0,
+      "AST": 5.0,
+      "STL": 7.0,
+      "BLK": 1.0,
+      "3PM": 0.0,
+      "TO": 0.0,
+      "FGM": 5.0,
+      "FGA": 10.0,
+      "FTM": 1.0,
+      "FTA": 3.0,
+      "MIN": 23.0
+     }
+    },
+    "BLK": {
+     "v": 8.0,
+     "pid": 5104157,
+     "name": "Victor Wembanyama",
+     "team": 5,
+     "sp": 16,
+     "date": "2026-11-05",
+     "line": {
+      "PTS": 52.0,
+      "REB": 24.0,
+      "AST": 2.0,
+      "STL": 2.0,
+      "BLK": 8.0,
+      "3PM": 1.0,
+      "TO": 1.0,
+      "FGM": 16.0,
+      "FGA": 28.0,
+      "FTM": 19.0,
+      "FTA": 23.0,
+      "MIN": 34.0
+     }
+    },
+    "3PM": {
+     "v": 10.0,
+     "pid": 4397014,
+     "name": "Quentin Grimes",
+     "team": 3,
+     "sp": 29,
+     "date": "2026-11-18",
+     "line": {
+      "PTS": 47.0,
+      "REB": 6.0,
+      "AST": 3.0,
+      "STL": 1.0,
+      "BLK": 0.0,
+      "3PM": 10.0,
+      "TO": 3.0,
+      "FGM": 16.0,
+      "FGA": 24.0,
+      "FTM": 5.0,
+      "FTA": 6.0,
+      "MIN": 42.0
+     }
+    }
+   },
+   "day": {
+    "v": 230,
+    "team": 6,
+    "sp": 14,
+    "date": "2026-11-03"
+   },
+   "bestGame": {
+    "val": 39.3,
+    "pid": 5104157,
+    "name": "Victor Wembanyama",
+    "team": 5,
+    "sp": 33,
+    "date": "2026-11-21",
+    "line": {
+     "PTS": 50.0,
+     "REB": 18.0,
+     "AST": 1.0,
+     "STL": 4.0,
+     "BLK": 5.0,
+     "3PM": 5.0,
+     "TO": 3.0,
+     "FGM": 20.0,
+     "FGA": 29.0,
+     "FTM": 5.0,
+     "FTA": 6.0,
+     "MIN": 32.0
+    }
+   }
+  },
+  "blowouts": [
+   {
+    "y": 2026,
+    "w": 2,
+    "a": "f07d908ab6",
+    "b": "cdfe88a48c",
+    "an": "AcetXsMax",
+    "bn": "Lebronspor",
+    "s": [
+     9,
+     0
+    ],
+    "ta": null,
+    "tb": null
+   },
+   {
+    "y": 2026,
+    "w": 12,
+    "a": "f07d908ab6",
+    "b": "104a39878a",
+    "an": "AcetXsMax",
+    "bn": "Kalifornia Bulldogs",
+    "s": [
+     0,
+     9
+    ],
+    "ta": null,
+    "tb": null
+   },
+   {
+    "y": 2027,
+    "w": 3,
+    "a": "f14701da76",
+    "b": "961506dda6",
+    "an": "Children of Planet Earth",
+    "bn": "Kerem’s Deluxe Team",
+    "s": [
+     8,
+     1
+    ],
+    "ta": 1,
+    "tb": 4
+   },
+   {
+    "y": 2027,
+    "w": 2,
+    "a": "ee511c73e8",
+    "b": "47fffeafbf",
+    "an": "BEGE",
+    "bn": "Adana Heybeliler Tekstil",
+    "s": [
+     8,
+     1
+    ],
+    "ta": 5,
+    "tb": 10
+   },
+   {
+    "y": 2027,
+    "w": 5,
+    "a": "174f89b3ac",
+    "b": "47fffeafbf",
+    "an": "BATH CANARIES",
+    "bn": "Adana Heybeliler Tekstil",
+    "s": [
+     1,
+     8
+    ],
+    "ta": 7,
+    "tb": 10
+   },
+   {
+    "y": 2026,
+    "w": 4,
+    "a": "f14701da76",
+    "b": "961506dda6",
+    "an": "Rossonero Spurs",
+    "bn": "Eczakent Thugs",
+    "s": [
+     8,
+     1
+    ],
+    "ta": null,
+    "tb": null
+   }
+  ],
+  "closeCount": 44,
+  "nGames": 163,
+  "rivals": [
+   {
+    "a": "104a39878a",
+    "b": "47fffeafbf",
+    "w": [
+     2,
+     0,
+     1
+    ],
+    "cats": [
+     14,
+     12
+    ],
+    "n": 3,
+    "close": 3
+   },
+   {
+    "a": "287e8ede40",
+    "b": "cd31f49737",
+    "w": [
+     2,
+     1,
+     0
+    ],
+    "cats": [
+     16,
+     11
+    ],
+    "n": 3,
+    "close": 0
+   },
+   {
+    "a": "287e8ede40",
+    "b": "fedcd29c32",
+    "w": [
+     2,
+     1,
+     0
+    ],
+    "cats": [
+     17,
+     10
+    ],
+    "n": 3,
+    "close": 1
+   },
+   {
+    "a": "961506dda6",
+    "b": "fedcd29c32",
+    "w": [
+     0,
+     3,
+     0
+    ],
+    "cats": [
+     8,
+     18
+    ],
+    "n": 3,
+    "close": 1
+   },
+   {
+    "a": "f14701da76",
+    "b": "fedcd29c32",
+    "w": [
+     1,
+     2,
+     0
+    ],
+    "cats": [
+     8,
+     19
+    ],
+    "n": 3,
+    "close": 1
+   },
+   {
+    "a": "961506dda6",
+    "b": "f14701da76",
+    "w": [
+     1,
+     2,
+     0
+    ],
+    "cats": [
+     7,
+     20
+    ],
+    "n": 3,
+    "close": 1
+   },
+   {
+    "a": "56d5622a52",
+    "b": "fedcd29c32",
+    "w": [
+     1,
+     1,
+     0
+    ],
+    "cats": [
+     9,
+     9
+    ],
+    "n": 2,
+    "close": 2
+   },
+   {
+    "a": "c4071ffe1e",
+    "b": "fedcd29c32",
+    "w": [
+     1,
+     1,
+     0
+    ],
+    "cats": [
+     9,
+     9
+    ],
+    "n": 2,
+    "close": 2
+   }
+  ],
+  "owned": [
+   {
+    "a": "961506dda6",
+    "b": "fedcd29c32",
+    "w": [
+     0,
+     3,
+     0
+    ],
+    "cats": [
+     8,
+     18
+    ],
+    "n": 3,
+    "close": 1
+   },
+   {
+    "a": "104a39878a",
+    "b": "47fffeafbf",
+    "w": [
+     2,
+     0,
+     1
+    ],
+    "cats": [
+     14,
+     12
+    ],
+    "n": 3,
+    "close": 3
+   },
+   {
+    "a": "56d5622a52",
+    "b": "961506dda6",
+    "w": [
+     2,
+     0,
+     0
+    ],
+    "cats": [
+     15,
+     3
+    ],
+    "n": 2,
+    "close": 0
+   },
+   {
+    "a": "287e8ede40",
+    "b": "f07d908ab6",
+    "w": [
+     2,
+     0,
+     0
+    ],
+    "cats": [
+     15,
+     3
+    ],
+    "n": 2,
+    "close": 0
+   },
+   {
+    "a": "56d5622a52",
+    "b": "9f0928847b",
+    "w": [
+     2,
+     0,
+     0
+    ],
+    "cats": [
+     15,
+     3
+    ],
+    "n": 2,
+    "close": 0
+   }
+  ],
+  "personality": {
+   "1": {
+    "labels": [
+     "puntto",
+     "line"
+    ],
+    "best": [
+     "FT%",
+     "PTS",
+     "3PM"
+    ],
+    "worst": [
+     "TO",
+     "FG%"
+    ]
+   },
+   "2": {
+    "labels": [
+     "puntft",
+     "grinder"
+    ],
+    "best": [
+     "REB",
+     "STL",
+     "BLK"
+    ],
+    "worst": [
+     "FT%",
+     "3PM"
+    ]
+   },
+   "3": {
+    "labels": [
+     "loyal"
+    ],
+    "best": [
+     "PTS",
+     "AST",
+     "3PM"
+    ],
+    "worst": [
+     "STL",
+     "BLK"
+    ]
+   },
+   "4": {
+    "labels": [
+     "careful",
+     "rebuild"
+    ],
+    "best": [
+     "TO",
+     "FT%",
+     "AST"
+    ],
+    "worst": [
+     "PTS",
+     "REB"
+    ]
+   },
+   "5": {
+    "labels": [
+     "grinder",
+     "careful"
+    ],
+    "best": [
+     "BLK",
+     "TO",
+     "FT%"
+    ],
+    "worst": [
+     "AST",
+     "REB"
+    ]
+   },
+   "6": {
+    "labels": [
+     "rain",
+     "puntto"
+    ],
+    "best": [
+     "PTS",
+     "AST",
+     "3PM"
+    ],
+    "worst": [
+     "TO",
+     "FG%"
+    ]
+   },
+   "7": {
+    "labels": [
+     "loyal",
+     "rebuild"
+    ],
+    "best": [
+     "AST",
+     "REB",
+     "STL"
+    ],
+    "worst": [
+     "FG%",
+     "BLK"
+    ]
+   },
+   "9": {
+    "labels": [
+     "dime",
+     "thief"
+    ],
+    "best": [
+     "AST",
+     "STL",
+     "PTS"
+    ],
+    "worst": [
+     "FG%",
+     "FT%"
+    ]
+   },
+   "10": {
+    "labels": [
+     "line",
+     "rain"
+    ],
+    "best": [
+     "3PM",
+     "FT%",
+     "STL"
+    ],
+    "worst": [
+     "REB",
+     "PTS"
+    ]
+   },
+   "12": {
+    "labels": [
+     "careful"
+    ],
+    "best": [
+     "FG%",
+     "TO",
+     "FT%"
+    ],
+    "worst": [
+     "3PM",
+     "PTS"
+    ]
+   },
+   "13": {
+    "labels": [
+     "paint",
+     "puntft"
+    ],
+    "best": [
+     "FG%",
+     "REB",
+     "STL"
+    ],
+    "worst": [
+     "FT%",
+     "3PM"
+    ]
+   },
+   "14": {
+    "labels": [
+     "balanced"
+    ],
+    "best": [
+     "BLK",
+     "REB",
+     "3PM"
+    ],
+    "worst": [
+     "AST",
+     "FG%"
+    ]
+   }
+  },
+  "latest": 37,
+  "days": 37
  }
 }
