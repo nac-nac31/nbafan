@@ -7,7 +7,10 @@ VIEWS = {
     "league": ["mSettings", "mTeam", "mStatus"],
     "matchups": ["mMatchupScore", "mMatchup"],
     "transactions": ["mTransactions2"],
+    "rosters": ["mRoster"],
 }
+FA_FILTER = {"players": {"filterStatus": {"value": ["FREEAGENT", "WAIVERS"]}, "limit": 200,
+                         "sortPercOwned": {"sortPriority": 1, "sortAsc": False}}}
 
 
 def current_season(today=None):
@@ -15,9 +18,9 @@ def current_season(today=None):
     return today.year + 1 if today.month >= 7 else today.year
 
 
-def get(season, views):
-    url = BASE.format(season=season, league=LEAGUE_ID) + "?" + "&".join(f"view={v}" for v in views)
-    req = urllib.request.Request(url, headers={"User-Agent": "nbafan-stats"})
+def get(season, views, extra_headers=None, query=""):
+    url = BASE.format(season=season, league=LEAGUE_ID) + "?" + "&".join(f"view={v}" for v in views) + query
+    req = urllib.request.Request(url, headers={"User-Agent": "nbafan-stats", **(extra_headers or {})})
     cookies = {k: os.environ.get(k.upper()) for k in ("espn_s2", "swid")}
     if all(cookies.values()):
         req.add_header("Cookie", f"espn_s2={cookies['espn_s2']}; SWID={cookies['swid']}")
@@ -32,7 +35,12 @@ def main():
     for name, views in VIEWS.items():
         (out / f"{name}.json").write_text(json.dumps(get(season, views), ensure_ascii=False))
         print(f"{season} {name} ok")
-    fetch_history(json.loads((out / "league.json").read_text()))
+    league = json.loads((out / "league.json").read_text())
+    sp = league.get("scoringPeriodId") or league.get("status", {}).get("latestScoringPeriod", 1)
+    fa = get(season, ["kona_player_info"], {"x-fantasy-filter": json.dumps(FA_FILTER)}, f"&scoringPeriodId={sp}")
+    (out / "freeagents.json").write_text(json.dumps(fa, ensure_ascii=False))
+    print(f"{season} serbest oyuncular ok: {len(fa.get('players', []))}")
+    fetch_history(league)
 
 
 def fetch_history(league):

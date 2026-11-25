@@ -7,6 +7,7 @@
 
 <nav class="tabs" aria-label="Bölümler">
   <div class="row">
+    <a href="#takimim" data-v="takimim"><svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 21c1.5-4 4.5-6 8-6s6.5 2 8 6"/></svg>Takımım</a>
     <a href="#bu-hafta" data-v="bu-hafta"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>Bu hafta</a>
     <a href="#siralama" data-v="siralama"><svg viewBox="0 0 24 24"><path d="M4 20V10M10 20V4M16 20v-7M22 20H2"/></svg>Sıralama</a>
     <a href="#sans" data-v="sans"><svg viewBox="0 0 24 24"><rect x="4" y="4" width="16" height="16" rx="3"/><circle cx="9" cy="9" r="1.2"/><circle cx="15" cy="15" r="1.2"/><circle cx="15" cy="9" r="1.2"/><circle cx="9" cy="15" r="1.2"/></svg>Şans</a>
@@ -56,6 +57,64 @@ const sz=y=>(y-1)+'-'+String(y).slice(2);
 function tags(t){const o=OW[t.owner];if(!o)return '';
   return (multi&&o.nSeasons===1?'<span class="newb">İlk sezonu</span>':'')+(o.oldNames.length?`<span class="old">Eski adı: ${o.oldNames.map(esc).join(', ')}</span>`:'')}
 const V={};
+const MYK='nbafan.team';
+function getMy(){try{const v=localStorage.getItem(MYK);return v&&byId[+v]?+v:null}catch(e){return null}}
+function setMy(v){try{v==null?localStorage.removeItem(MYK):localStorage.setItem(MYK,String(v))}catch(e){}}
+let memMy=null;
+const P=DATA.players||[];
+const zfmt=v=>(v>=0?'+':'')+v.toFixed(1);
+V.takimim=()=>{
+  const my=getMy()??memMy;
+  if(my==null){
+    return `<div class="hero"><span class="live" style="--x:0">Kişisel öneriler</span><h2>Takımını seç</h2>
+     <p class="hint">Takımını bir kez seç, bu cihaz hatırlasın. Haftalık maçın, kadron ve serbest oyuncu önerilerin burada görünecek. Giriş özelliği ileride gelecek.</p></div>
+     <div class="tgrid">${[...T].sort((a,b)=>a.name.localeCompare(b.name,'tr')).map(t=>`<button type="button" class="tcard" data-pick="${t.id}">${logo(t,56)}<div class="nm">${esc(t.name)}</div><div class="sub">${rec(t.mrec)}</div></button>`).join('')}</div>`;
+  }
+  const t=byId[my];
+  // this week
+  const m=CUR.matchups.find(x=>x.home===my||x.away===my);
+  let week='',chase=new Set(),protect=new Set();
+  if(m){const home=m.home===my,o=byId[home?m.away:m.home];
+    const rows=m.cats.map(k=>{const mine=home?k.h:k.a,their=home?k.a:k.h;
+      const st=k.r==='T'?'tie':((k.r==='H')===home?'win':'loss');
+      const lab=st==='win'?(k.close?'Koru':'Güvende'):st==='loss'?(k.close?'Kovala':'Zor'):'Berabere';
+      if(lab==='Kovala'||lab==='Berabere')chase.add(k.c); if(lab==='Koru')protect.add(k.c);
+      const cls=lab==='Güvende'?'up':lab==='Koru'?'flat':lab==='Zor'?'down':'chase';
+      return `<tr><td class="${st==='win'?'win':'lose'}">${fmt(k.c,mine)}</td><td class="mid">${k.c}</td><td class="${st==='loss'?'win':'lose'}">${fmt(k.c,their)}</td><td><span class="pill ${cls}">${lab}</span></td></tr>`}).join('');
+    const [w,l]=home?[m.score[0],m.score[1]]:[m.score[1],m.score[0]];
+    const tips=[];
+    if(chase.size)tips.push(`Kıl payı geride olduğun kategoriler: <b>${[...chase].join(', ')}</b>. Waiver ve kadro kararlarını bunlara göre ver.`);
+    if(protect.size)tips.push(`Kıl payı önde olduğun kategoriler: <b>${[...protect].join(', ')}</b>. Bunları kaybettirecek hamlelerden kaçın.`);
+    if(protect.has('FG%')||protect.has('FT%'))tips.push('Yüzdelerde öndesin. Kötü şut yüzdeli oyuncuları yedekte tutmak yüzdeyi korur.');
+    if(!tips.length)tips.push('Kıl payı kategori yok. Maç büyük ölçüde belli; gelecek haftayı düşünerek hamle yapabilirsin.');
+    week=`<section class="sec"><div class="sec-h"><h2>Bu haftaki maçın</h2></div>
+     <div class="panel"><div class="mu" style="padding:14px"><a class="side${l>w?' loser':''}" href="${link(t)}">${logo(t,40)}<div><div class="nm">${esc(t.name)}</div><div class="ap">${CUR.live[t.id]}/11 yeniyor</div></div></a>
+      <div class="sc"><span class="${w>l?'w':''}">${w}</span>–<span class="${l>w?'w':''}">${l}</span></div>
+      <a class="side r${w>l?' loser':''}" href="${link(o)}">${logo(o,40)}<div><div class="nm">${esc(o.name)}</div><div class="ap">${CUR.live[o.id]}/11 yeniyor</div></div></a></div>
+      <table class="cats-t my"><tbody>${rows}</tbody></table>
+      <div class="tips">${tips.map(x=>`<p>${x}</p>`).join('')}</div></div></section>`;
+  }
+  // roster
+  const mine=P.filter(p=>p.team===my).sort((a,b)=>b.val-a.val);
+  const healthy=mine.filter(p=>p.inj!=='Sakat'&&p.inj!=='IR'&&p.slot!=='IR');
+  const drop=healthy[healthy.length-1];
+  const topz=p=>Object.entries(p.z).sort((a,b)=>b[1]-a[1]);
+  const maxV=Math.max(1,...P.map(p=>Math.abs(p.val)));
+  const prow=(p,extra)=>{const z=topz(p),best=z.slice(0,2),worst=z[z.length-1];
+    return `<div class="pl"><div class="pn"><div class="nm">${esc(p.name)}${p.inj?` <span class="pill down">${p.inj}</span>`:''}${p===drop?' <span class="pill flat">Bırakma adayı</span>':''}</div>
+     <small>${p.pos}${p.slot?' · '+p.slot:''} · ${p.min} dk · ${p.src}${extra||''}</small>
+     <small>Güçlü: ${best.map(([c,v])=>`${c} ${zfmt(v)}`).join(', ')} · Zayıf: ${worst[0]} ${zfmt(worst[1])}</small></div>
+     <div class="pv"><span class="${p.val>=0?'pos':'neg'}">${zfmt(p.val)}</span><span class="vbar"><i style="${p.val>=0?'left:50%':'right:50%'};width:${Math.min(50,Math.abs(p.val)/maxV*50)}%"></i></span></div></div>`};
+  const roster=`<section class="sec"><h2>Kadron</h2><p class="hint">Değer: oyuncunun son 15 gündeki 9 kategorideki katkısının toplamı (ligdeki oyunculara göre z-skoru). 0 ortalama oyuncu demek.</p>
+   <div class="panel">${mine.map(p=>prow(p)).join('')||'<p class="hint" style="padding:14px">Kadro verisi yok.</p>'}</div></section>`;
+  // waiver
+  const w={};DATA.cats.forEach(c=>{let x=1;const r=t.rank[c];if(r>=8)x+=.5;if(chase.has(c))x+=.75;if(r===12&&!chase.has(c))x=.4;w[c]=x});
+  const focus=DATA.cats.filter(c=>w[c]>1.2);
+  const fa=P.filter(p=>p.team===0&&p.gp>=3&&p.inj!=='Sakat'&&p.inj!=='IR').map(p=>({p,fit:DATA.cats.reduce((a,c)=>a+w[c]*p.z[c],0)})).sort((a,b)=>b.fit-a.fit).slice(0,8);
+  const waiver=`<section class="sec"><h2>Serbest oyuncu önerileri</h2><p class="hint">${focus.length?`Odak kategorilerin: <b>${focus.join(', ')}</b> (zayıf olduğun ya da bu hafta kıl payı geride olduğun kategoriler). `:''}Sıralama bu kategorilere ekstra ağırlık veriyor.${drop?` Bırakma adayın <b>${esc(drop.name)}</b> (${zfmt(drop.val)}).`:''}</p>
+   <div class="panel">${fa.map(({p,fit})=>prow(p,` · %${p.owned} sahiplik${drop&&p.val>drop.val?` · <b class="pos">${esc(drop.name)} yerine alınabilir</b>`:''}`)).join('')}</div></section>`;
+  return `<div class="phead">${logo(t,64)}<div><div class="nm">${esc(t.name)}</div><div class="sub">Güç sıralaması #${pRank(t)} · ${rec(t.mrec)} · <button type="button" class="linkbtn" data-unpick>Takımı değiştir</button></div></div></div>${week}${roster}${waiver}
+   <p class="hint">Öneriler ESPN verisine dayanan istatistiksel tahminlerdir; maç takvimi ve sakatlık haberlerini de kontrol et.</p>`};
 const CUR=DATA.current||{matchups:[],live:{}};
 function liveRank(){return [...T].filter(t=>CUR.live[t.id]!=null).sort((a,b)=>CUR.live[b.id]-CUR.live[a.id])}
 function fmt(c,v){return c.includes('%')?v.toFixed(3).replace(/^0/,''):String(Math.round(v))}
@@ -191,6 +250,8 @@ function render(){const h=(location.hash||'#bu-hafta').slice(1);
   app.innerHTML=`<div class="view">${h.startsWith('takim-')?profile(+h.slice(6)):V[v]()}</div>`;
   document.querySelectorAll('nav.tabs a').forEach(a=>{if(a.dataset.v===v)a.setAttribute('aria-current','page');else a.removeAttribute('aria-current')});
   app.querySelectorAll('.chips button').forEach(b=>b.onclick=()=>{selWeek=+b.dataset.w;render()});
+  app.querySelectorAll('[data-pick]').forEach(b=>b.onclick=()=>{memMy=+b.dataset.pick;setMy(memMy);render();window.scrollTo(0,0)});
+  app.querySelectorAll('[data-unpick]').forEach(b=>b.onclick=()=>{memMy=null;setMy(null);render()});
 }
 let lastHash=location.hash;
 window.addEventListener('hashchange',()=>{render();if(!location.hash.startsWith('#takim-')||lastHash!==location.hash)window.scrollTo(0,0);lastHash=location.hash});

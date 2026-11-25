@@ -136,6 +136,74 @@ def compute(raw):
     }
 
 
+POS = {1: "PG", 2: "SG", 3: "SF", 4: "PF", 5: "C"}
+INJ = {"OUT": "Sakat", "DAY_TO_DAY": "Belirsiz", "INJURY_RESERVE": "IR", "SUSPENSION": "Ceza"}
+
+
+def player_row(pl, season, on_team):
+    stats = {s["id"]: s for s in pl.get("stats", [])}
+    pick = None
+    for sid in (f"02{season}", f"00{season}"):  # son 15 gün, yoksa sezon ortalaması
+        a = (stats.get(sid) or {}).get("averageStats") or {}
+        if a.get("42", 0) >= 3 or (sid.startswith("00") and a):
+            pick = (sid, a)
+            break
+    if not pick:
+        return None
+    sid, a = pick
+    season_avg = (stats.get(f"00{season}") or {}).get("averageStats") or {}
+    return {
+        "id": pl["id"], "name": pl["fullName"], "pos": POS.get(pl.get("defaultPositionId"), ""),
+        "inj": INJ.get(pl.get("injuryStatus") or "", ""), "team": on_team,
+        "owned": round((pl.get("ownership") or {}).get("percentOwned", 0), 1),
+        "gp": int(a.get("42", 0)), "seasonGp": int(season_avg.get("42", 0)), "min": round(a.get("40", 0) / max(1, a.get("42", 1)), 1) if a.get("40", 0) > 60 else round(a.get("40", 0), 1),
+        "src": "son 15 gün" if sid.startswith("02") else "sezon",
+        "s": {CN[c]: a.get(c, 0) for c in CATS}, "fga": a.get("14", 0), "fta": a.get("16", 0),
+    }
+
+
+def build_players(raw, season):
+    """Kadrolar + serbest oyuncular, 9-cat z-skoru ile."""
+    import statistics
+    rows = []
+    for t in raw.get("rosters", {}).get("teams", []):
+        for e in t.get("roster", {}).get("entries", []):
+            r = player_row(e["playerPoolEntry"]["player"], season, t["id"])
+            if r:
+                r["slot"] = "Yedek" if e.get("lineupSlotId") == 12 else "IR" if e.get("lineupSlotId") == 13 else ""
+                rows.append(r)
+    for p in raw.get("freeagents", {}).get("players", []):
+        r = player_row(p["player"], season, 0)
+        if r:
+            r["fa"] = p.get("status", "FREEAGENT")
+            rows.append(r)
+    pool = [r for r in rows if r["gp"] >= 3] or rows
+    pool = sorted(pool, key=lambda r: -r["s"]["PTS"])[:220]
+    mean = {c: statistics.mean(r["s"][c] for r in pool) for c in CN.values()}
+    sd = {c: statistics.pstdev(r["s"][c] for r in pool) or 1 for c in CN.values()}
+    fga = statistics.mean(r["fga"] for r in pool) or 1
+    fta = statistics.mean(r["fta"] for r in pool) or 1
+    imp_fg = [(r["s"]["FG%"] - mean["FG%"]) * r["fga"] / fga for r in pool]
+    imp_ft = [(r["s"]["FT%"] - mean["FT%"]) * r["fta"] / fta for r in pool]
+    sd_fg, sd_ft = statistics.pstdev(imp_fg) or 1, statistics.pstdev(imp_ft) or 1
+    for r in rows:
+        z = {}
+        for c in CN.values():
+            if c == "FG%":
+                z[c] = (r["s"][c] - mean[c]) * r["fga"] / fga / sd_fg
+            elif c == "FT%":
+                z[c] = (r["s"][c] - mean[c]) * r["fta"] / fta / sd_ft
+            elif c == "TO":
+                z[c] = -(r["s"][c] - mean[c]) / sd[c]
+            else:
+                z[c] = (r["s"][c] - mean[c]) / sd[c]
+        r["z"] = {c: round(v, 2) for c, v in z.items()}
+        r["val"] = round(sum(z.values()), 2)
+        r["s"] = {c: (round(v, 3) if "%" in c else round(v, 1)) for c, v in r["s"].items()}
+        del r["fga"], r["fta"]
+    return sorted(rows, key=lambda r: -r["val"])
+
+
 def owner_key(team):
     import hashlib
     o = team.get("primaryOwner") or (team.get("owners") or [""])[0] or f"team-{team['id']}"
@@ -221,7 +289,13 @@ def main():
     season = int(os.environ.get("SEASON") or current_season())
     raw_dir = pathlib.Path("data/raw") / str(season)
     raw = {n: json.loads((raw_dir / f"{n}.json").read_text()) for n in ("league", "matchups")}
+    for n in ("rosters", "freeagents"):
+        f = raw_dir / f"{n}.json"
+        if f.exists():
+            raw[n] = json.loads(f.read_text())
     data = compute(raw)
+    data["players"] = build_players(raw, season)
+    print(f"oyuncular: {len(data['players'])} ({sum(1 for p in data['players'] if p['team'] == 0)} serbest)")
     seasons = {season: (raw["league"], data)}
     for y in raw["league"].get("status", {}).get("previousSeasons", []):
         d = pathlib.Path("data/raw") / str(y)
