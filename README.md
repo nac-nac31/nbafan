@@ -21,6 +21,10 @@ python scripts/build.py
 - `SEASON`: sezon (ESPN'de 2026-27 sezonu `2027`). Boş bırakılırsa tarihten hesaplanır.
 - `ESPN_S2` ve `SWID`: sadece özel lig ya da geçmiş sezonlar için gerekir. Repo ayarlarında Secrets olarak eklenir, koda yazılmaz.
 
+## Başka lig ekleme (hazırlık)
+
+`python scripts/check_league.py <lig_id>` bir ESPN liginin siteye eklenip eklenemeyeceğini söyler: lig açık mı, özel mi, bulunamadı mı ve ayarları (puanlama türü, kategoriler, kadro slotları, playoff) şu anki motorla uyumlu mu. Çıktı JSON'dur; ileride lig ekleme formu da aynı `inspect()` fonksiyonunu kullanacak.
+
 ## İstatistiklerin tanımları
 
 - **All-play:** Takım her hafta diğer 11 takımın hepsiyle oynasaydı kazanacağı kategori oranı.
