@@ -25,7 +25,7 @@ python scripts/build.py
 
 `python scripts/check_league.py <lig_id>` bir ESPN liginin siteye eklenip eklenemeyeceğini söyler: lig açık mı, özel mi, bulunamadı mı ve ayarları (puanlama türü, kategoriler, kadro slotları, playoff) şu anki motorla uyumlu mu. Çıktı JSON'dur; ileride lig ekleme formu da aynı `inspect()` fonksiyonunu kullanacak.
 
-Motor kategorileri, ters kategorileri (TO), puanlama türünü, takım sayısını, aktif kadro slotlarını ve playoff takım sayısını ligin ESPN ayarlarından okur (`build.py` içindeki `configure`). Desteklenenler: H2H kategori ve H2H most categories, 8-cat / 9-cat / 11-cat gibi farklı kategori setleri, 2'nin kuvveti olmayan playoff boyutları (üst sıralar bay geçer). Puanlı ve roto ligler henüz yok. Eğlence sayfası günlük verideki 9 kategoriyle sınırlı; ligde DD, 3P% gibi başka kategori varsa orada sayılmaz.
+Motor kategorileri, ters kategorileri (TO), puanlama türünü, takım sayısını, aktif kadro slotlarını ve playoff takım sayısını ligin ESPN ayarlarından okur (`build.py` içindeki `configure`). Desteklenenler: H2H kategori, H2H most categories ve H2H puan (haftalık toplam puan tek kategori FPTS sayılır; kategori profili gizlenir), 8-cat / 9-cat / 11-cat gibi farklı kategori setleri, 2'nin kuvveti olmayan playoff boyutları (üst sıralar bay geçer). Roto ligler henüz yok. Puanlı liglerde eğlence sayfası puanı günlük veriden yaklaşık hesaplar (DD, TD gibi bonuslar yok). Eğlence sayfası günlük verideki 9 kategoriyle sınırlı; ligde DD, 3P% gibi başka kategori varsa orada sayılmaz.
 
 Başka bir ligi denemek için: `ESPN_LEAGUE_ID=<id> python scripts/fetch.py && ESPN_LEAGUE_ID=<id> python scripts/build.py` (ayrı bir klasörde, `data/` bizim ligin verisini tutuyor).
 

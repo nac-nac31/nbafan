@@ -18,19 +18,33 @@ LOWER_N = {"TO"}
 SCORING = "H2H_CATEGORY"  # ya da H2H_MOST_CATEGORIES (hafta tek galibiyet sayılır)
 ACTIVE_SLOTS = 10  # ilk beş + yedek ve IR dışındaki slotlar
 G_KEYS = ("0", "6", "3", "2", "1", "17", "11", "13", "14", "15", "16")  # oyuncu maç başı tutulan istatistikler
-SUPPORTED_SCORING = ("H2H_CATEGORY", "H2H_MOST_CATEGORIES")
+SUPPORTED_SCORING = ("H2H_CATEGORY", "H2H_MOST_CATEGORIES", "H2H_POINTS")
+POINTS = {}  # puanlı lig: istatistik ID -> puan. Doluysa tek "kategori" FP (fantezi puanı) olur.
+Z_SCALE = 1  # puanlı ligde tek z-skoru 9-cat toplamına benzer ölçeğe çekilir
+
+
+def fp_of(a):
+    """Bir istatistik sözlüğünün (ESPN ID anahtarlı) fantezi puanı."""
+    return sum(v * (a.get(k) or 0) for k, v in POINTS.items())
+
+
+def team_pts(side):
+    return side.get("totalPointsLive") if side.get("totalPointsLive") is not None else side.get("totalPoints", 0)
 
 
 def configure(league):
     """Lig ayarlarından kategorileri, puanlama türünü ve kadro büyüklüğünü okur."""
-    global CATS, CN, LOWER_IS_BETTER, LOWER_N, SCORING, ACTIVE_SLOTS, G_KEYS
+    global CATS, CN, LOWER_IS_BETTER, LOWER_N, SCORING, ACTIVE_SLOTS, G_KEYS, POINTS, Z_SCALE
     st = league.get("settings") or {}
     sc = st.get("scoringSettings") or {}
     items = {str(i["statId"]): i for i in sc.get("scoringItems", [])}
     SCORING = sc.get("scoringType") or "H2H_CATEGORY"
     if SCORING not in SUPPORTED_SCORING:
         sys.exit(f"Bu puanlama türü henüz desteklenmiyor: {SCORING}")
-    if items:
+    if SCORING == "H2H_POINTS":
+        POINTS = {c: float(i.get("points") or 0) for c, i in items.items() if i.get("points")}
+        CATS, CN, LOWER_IS_BETTER, LOWER_N, Z_SCALE = ["FP"], {"FP": "FPTS"}, set(), set(), 3
+    elif items:
         CATS = [c for c in ORDER if c in items] + sorted((c for c in items if c not in ORDER), key=int)
         CN = {c: STAT.get(c, c) for c in CATS}
         LOWER_IS_BETTER = {c for c in CATS if items[c].get("isReverseItem")}
@@ -38,11 +52,13 @@ def configure(league):
     slots = (st.get("rosterSettings") or {}).get("lineupSlotCounts") or {}
     if slots:
         ACTIVE_SLOTS = sum(v for k, v in slots.items() if k not in ("12", "13")) or ACTIVE_SLOTS
-    keys = [c for c in CATS if c not in PCT] + [x for c in CATS if c in PCT for x in PCT[c]]
-    G_KEYS = tuple(dict.fromkeys(list(G_KEYS) + keys))
+    keys = [c for c in CATS if c not in PCT] + [x for c in CATS if c in PCT for x in PCT[c]] + list(POINTS)
+    G_KEYS = tuple(dict.fromkeys(list(G_KEYS) + keys + (["FP"] if POINTS else [])))
 
 
 def scoring_label():
+    if POINTS:
+        return "H2H Points"
     return f"{len(CATS)}-cat " + ("H2H" if SCORING == "H2H_CATEGORY" else "Most Cats")
 ZREF = None  # build_players oyuncu z-skoru referansı (tek maç değeri için)
 AYLAR = ["Ocak", "Şubat", "Mart", "Nisan", "Mayıs", "Haziran", "Temmuz", "Ağustos", "Eylül", "Ekim", "Kasım", "Aralık"]
@@ -82,8 +98,11 @@ def current_week(M, L, names):
         as_ = (a.get("cumulativeScore") or {}).get("scoreByStat") or {}
         if not hs or not as_:
             continue
-        hv = {c: (hs.get(c) or {}).get("score", 0) for c in CATS}
-        av = {c: (as_.get(c) or {}).get("score", 0) for c in CATS}
+        if POINTS:
+            hv, av = {"FP": team_pts(h)}, {"FP": team_pts(a)}
+        else:
+            hv = {c: (hs.get(c) or {}).get("score", 0) for c in CATS}
+            av = {c: (as_.get(c) or {}).get("score", 0) for c in CATS}
         vals[h["teamId"]], vals[a["teamId"]] = hv, av
         W, Lo, T = cmp(hv, av)
         cats = []
@@ -92,7 +111,7 @@ def current_week(M, L, names):
             better = (x < y) if c in LOWER_IS_BETTER else (x > y)
             worse = (x > y) if c in LOWER_IS_BETTER else (x < y)
             cats.append({"c": CN[c], "h": x, "a": y, "r": "H" if better else "A" if worse else "T", "close": is_close(c, x, y)})
-        rows.append({"home": h["teamId"], "away": a["teamId"], "score": [W, Lo, T], "cats": cats,
+        rows.append({"home": h["teamId"], "away": a["teamId"], "score": [round(hv["FP"], 1), round(av["FP"], 1), 0] if POINTS else [W, Lo, T], "cats": cats,
                      "closeCount": sum(k["close"] for k in cats)})
     live = {}
     for t, a in vals.items():
@@ -117,7 +136,8 @@ def compute(raw):
         w = m["matchupPeriodId"]
         for s, o in (("home", "away"), ("away", "home")):
             sc = m[s]["cumulativeScore"]["scoreByStat"]
-            weeks[w][m[s]["teamId"]] = {c: (sc.get(c) or {}).get("score", 0) for c in CATS}
+            weeks[w][m[s]["teamId"]] = ({"FP": m[s].get("totalPoints", 0)} if POINTS else
+                                         {c: (sc.get(c) or {}).get("score", 0) for c in CATS})
             opp[w][m[s]["teamId"]] = m[o]["teamId"]
     done = sorted(weeks)
     n_opp = max(1, len(names) - 1)
@@ -139,7 +159,8 @@ def compute(raw):
             mrec["GMB".index(res)] += 1
             weekly.append(beat)
             wk.append({c: weeks[w][t][c] for c in CATS})
-            games.append({"w": w, "opp": names[o], "oppId": o, "score": f"{W}-{Lo}" + (f"-{T}" if T else ""), "res": res, "beat": beat})
+            score = f"{a['FP']:g}-{weeks[w][o]['FP']:g}" if POINTS else f"{W}-{Lo}" + (f"-{T}" if T else "")
+            games.append({"w": w, "opp": names[o], "oppId": o, "score": score, "res": res, "beat": beat})
         tc = txc[t]
         teams.append({
             "id": t, "name": names[t], "abbrev": meta[t]["abbrev"], "logo": meta[t]["logo"], "cat": cat, "catPct": pct(cat), "apPct": pct(apc), "ap": apc,
@@ -206,7 +227,7 @@ def player_row(pl, season, on_team):
     src = " + ".join(n for n, ok in (("son 15 gün", l15.get("42", 0) >= 3), ("sezon", sea.get("42", 0) >= 1), ("projeksiyon", bool(proj))) if ok)
 
     def pack(a):
-        return {"s": {CN[c]: a.get(c, 0) for c in CATS}, "fga": a.get("14", 0), "fta": a.get("16", 0),
+        return {"s": {CN[c]: (fp_of(a) if c == "FP" else a.get(c, 0)) for c in CATS}, "fga": a.get("14", 0), "fta": a.get("16", 0),
                 "att": {CN[c]: a.get(PCT[c][1], 0) for c in CATS if c in PCT}}
 
     gp_now = int((l15 if l15.get("42", 0) >= 3 else sea).get("42", 0))
@@ -218,7 +239,7 @@ def player_row(pl, season, on_team):
         "gp": gp_now, "seasonGp": int(sea.get("42", 0)), "min": round(mins, 1), "src": src,
         "_mix": pack(mix), "_now": pack(cur), "_proj": pack(proj) if proj else None,
         "pro": pl.get("proTeamId"),
-        "g": {k: round(mix.get(k, 0), 3) for k in G_KEYS},
+        "g": {k: round(fp_of(mix) if k == "FP" else mix.get(k, 0), 3) for k in G_KEYS},
     }
 
 
@@ -238,7 +259,8 @@ def build_players(raw, season):
             r["fa"] = p.get("status", "FREEAGENT")
             rows.append(r)
     pool = [r for r in rows if r["gp"] >= 3] or rows
-    pool = sorted(pool, key=lambda r: -r["_mix"]["s"]["PTS"])[:220]
+    lead = "PTS" if "PTS" in CN.values() else list(CN.values())[0]
+    pool = sorted(pool, key=lambda r: -r["_mix"]["s"][lead])[:220]
     P = [r["_mix"] for r in pool]
     mean = {c: statistics.mean(x["s"][c] for x in P) for c in CN.values()}
     sd = {c: statistics.pstdev(x["s"][c] for x in P) or 1 for c in CN.values()}
@@ -248,6 +270,7 @@ def build_players(raw, season):
 
     global ZREF
     ZREF = {"mean": mean, "sd": sd, "att": att, "sd_pct": sd_p, "cats": list(CN.values()), "lower": sorted(LOWER_N),
+            "points": POINTS, "scale": Z_SCALE,
             "fga": att.get("FG%", 1), "fta": att.get("FT%", 1), "sd_fg": sd_p.get("FG%", 1), "sd_ft": sd_p.get("FT%", 1)}
 
     def zs(x):
@@ -258,7 +281,7 @@ def build_players(raw, season):
             elif c in LOWER_N:
                 z[c] = -(x["s"][c] - mean[c]) / sd[c]
             else:
-                z[c] = (x["s"][c] - mean[c]) / sd[c]
+                z[c] = (x["s"][c] - mean[c]) / sd[c] * Z_SCALE
         return z
 
     for r in rows:
@@ -314,6 +337,8 @@ def project_week(raw, data):
             for side in ("home", "away"):
                 sc = (m[side].get("cumulativeScore") or {}).get("scoreByStat") or {}
                 mvals[m[side]["teamId"]] = {k: v["score"] for k, v in sc.items()}
+                if POINTS:
+                    mvals[m[side]["teamId"]]["FP"] = team_pts(m[side])
     proj = {}
     for tid, base in mvals.items():
         rem = {k: 0.0 for k in G_KEYS}
@@ -357,7 +382,8 @@ def project_week(raw, data):
             dist = [(dist[i] if i < len(dist) else 0) * (1 - q) + (dist[i - 1] * q if i >= 1 else 0) for i in range(len(dist) + 1)]
         mt["proj"] = {
             "win": round(sum(dist[len(CATS) // 2 + 1:]), 3), "pc": {k: round(v, 3) for k, v in pc.items()},
-            "score": [sum(1 for v in pc.values() if v > 0.5), sum(1 for v in pc.values() if v < 0.5)],
+            "score": ([round(h["mu"]["FP"]), round(a["mu"]["FP"])] if POINTS else
+                      [sum(1 for v in pc.values() if v > 0.5), sum(1 for v in pc.values() if v < 0.5)]),
             "games": [h["games"], a["games"]],
             "mu": [{CN[c]: round(h["mu"][c], 3) for c in CATS}, {CN[c]: round(a["mu"][c], 3) for c in CATS}],
         }

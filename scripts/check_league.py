@@ -18,7 +18,7 @@ STAT_NAMES = {"0": "PTS", "1": "BLK", "2": "STL", "3": "AST", "6": "REB", "11": 
 SLOT_NAMES = {"0": "PG", "1": "SG", "2": "SF", "3": "PF", "4": "C", "5": "G", "6": "F", "7": "SG/SF",
               "8": "G/F", "9": "PF/C", "10": "F/C", "11": "UTIL", "12": "BE", "13": "IR"}
 # Motorun (build.py, fun.py) desteklediği ayarlar.
-ENGINE_SCORING = ("H2H_CATEGORY", "H2H_MOST_CATEGORIES")
+ENGINE_SCORING = ("H2H_CATEGORY", "H2H_MOST_CATEGORIES", "H2H_POINTS")
 ENGINE_CATS = {"0", "1", "2", "3", "4", "5", "6", "11", "13", "14", "15", "16", "17", "18", "19", "20", "21", "37", "38"}
 FUN_CATS = {"0", "1", "2", "3", "6", "11", "17", "19", "20"}  # eğlence sayfasının günlük verisinde olanlar
 
@@ -64,7 +64,12 @@ def support(cfg):
     """(destekleniyor mu, engel listesi, uyarılar)"""
     issues, notes = [], []
     if cfg["scoringType"] not in ENGINE_SCORING:
-        issues.append(f"puanlama türü {cfg['scoringType']} (şimdilik H2H kategori ve most categories)")
+        issues.append(f"puanlama türü {cfg['scoringType']} (şimdilik H2H kategori, most categories ve H2H puan)")
+    if cfg["scoringType"] == "H2H_POINTS":
+        miss = [STAT_NAMES.get(c, c) for c in cfg["cats"] if c not in FUN_CATS and c not in ("4", "5", "13", "14", "15", "16")]
+        if miss:
+            notes.append("eğlence sayfası puanı yaklaşık hesaplar, şunlar sayılmaz: " + ", ".join(miss))
+        return not issues, issues, notes
     bad = [STAT_NAMES.get(c, c) for c in cfg["cats"] if c not in ENGINE_CATS]
     if bad:
         issues.append("desteklenmeyen kategoriler: " + ", ".join(bad))

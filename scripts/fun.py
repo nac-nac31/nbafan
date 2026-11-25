@@ -13,14 +13,22 @@ FUN_CATS = ["PTS", "REB", "AST", "STL", "BLK", "3PM", "FG%", "FT%", "TO"]
 PCT_LINE = {"FG%": ("FGM", "FGA"), "FT%": ("FTM", "FTA")}
 CATS = list(FUN_CATS)  # configure() ligin kategorileriyle kesiştirir
 LOWER = {"TO"}
-SID = {"PTS": "0", "REB": "6", "AST": "3", "STL": "2", "BLK": "1", "3PM": "17", "FG%": "19", "FT%": "20", "TO": "11"}
+PW = {}  # puanlı lig: günlük önbellekteki istatistik adı -> puan (DD, TD gibi önbellekte olmayanlar dışarıda)
+SID = {"FPTS": "FP", "PTS": "0", "REB": "6", "AST": "3", "STL": "2", "BLK": "1", "3PM": "17", "FG%": "19", "FT%": "20", "TO": "11"}
 SLOTS = {0: 1, 1: 1, 2: 1, 3: 1, 4: 1, 5: 1, 6: 1, 11: 3}  # PG SG SF PF C G F UTIL×3 (ligden okunur)
 
 
 def configure(league, Z):
     """Kategorileri ve kadro slotlarını ligin ayarlarından alır."""
-    global CATS, LOWER, SLOTS
-    if Z and Z.get("cats"):
+    global CATS, LOWER, SLOTS, PW
+    pts = (Z or {}).get("points") or {}
+    if pts:
+        name = {v: k for k, v in SID.items()}
+        PW = {name[k]: v for k, v in pts.items() if name.get(k) in I}
+        if "REB" not in PW and ("4" in pts or "5" in pts):  # hücum/savunma ribaundu: önbellekte sadece toplam var
+            PW["REB"] = 0.25 * pts.get("4", 0) + 0.75 * pts.get("5", 0)
+        CATS, LOWER = ["FPTS"], set()
+    elif Z and Z.get("cats"):
         CATS = [c for c in FUN_CATS if c in Z["cats"]]
         LOWER = set(Z.get("lower") or []) & set(CATS)
     counts = ((league.get("settings") or {}).get("rosterSettings") or {}).get("lineupSlotCounts") or {}
@@ -35,6 +43,8 @@ def gz(line, Z):
     if not line:
         return 0.0
     m, sd = Z["mean"], Z["sd"]
+    if PW:
+        return (sum(w * line[I[k]] for k, w in PW.items()) - m["FPTS"]) / sd["FPTS"] * Z.get("scale", 1)
     z = 0.0
     for c in CATS:
         if c in PCT_LINE:
@@ -56,6 +66,8 @@ def cats_of(tot):
     out = {c: tot.get(c, 0) for c in COUNT}
     out["FG%"] = tot["FGM"] / tot["FGA"] if tot.get("FGA") else 0
     out["FT%"] = tot["FTM"] / tot["FTA"] if tot.get("FTA") else 0
+    if PW:
+        out["FPTS"] = sum(w * tot.get(k, 0) for k, w in PW.items())
     return out
 
 
@@ -212,8 +224,14 @@ def build_fun(raw, data, daily, logs, Z, seasons=None, cur_season=None):
             opp = cats_of(wk_act[(g["oppId"], w)])
             aw, al = cat_score(me_a, opp)
             ow, ol = cat_score(me_o, opp)
-            if g["res"] != "G" and ow > ol and (aw, al) == tuple(int(x) for x in g["score"].split("-")[:2]):
-                bench[t]["lost"].append({"w": w, "opp": g["oppId"], "score": g["score"], "opt": f"{ow}-{ol}"})
+            real = tuple(float(x) for x in g["score"].split("-")[:2])
+            if PW:  # puanlı lig: yeniden kurulan puan gerçeğe yakınsa (önbellekte bonuslar yok)
+                ok = abs(me_a["FPTS"] - real[0]) <= 0.03 * max(1, real[0])
+                opt = f"{me_o['FPTS']:.0f}-{opp['FPTS']:.0f}"
+            else:
+                ok, opt = (aw, al) == real, f"{ow}-{ol}"
+            if g["res"] != "G" and ow > ol and ok:
+                bench[t]["lost"].append({"w": w, "opp": g["oppId"], "score": g["score"], "opt": opt})
     out["bench"] = sorted(({"team": t, "gain": round(b["gain"], 1), "pts": int(b["pts"]), "games": b["games"],
                             "lost": b["lost"], "worst": b["worst"]} for t, b in bench.items()), key=lambda x: -x["gain"])
     out["benchWorst"] = sorted(worst_all, key=lambda x: -x["val"])[:5]
@@ -484,7 +502,7 @@ def build_fun(raw, data, daily, logs, Z, seasons=None, cur_season=None):
         for t in dy["teams"]:
             for g in t["games"]:
                 if t["id"] < g["oppId"]:
-                    a, b = (int(x) for x in g["score"].split("-")[:2])
+                    a, b = (float(x) for x in g["score"].split("-")[:2])
                     games_all.append({"y": y, "w": g["w"], "a": ok.get(t["id"]), "b": ok.get(g["oppId"]),
                                       "an": nm[t["id"]], "bn": nm[g["oppId"]], "s": [a, b],
                                       "ta": t["id"] if y in (cur_season, "cur") else None,
@@ -511,7 +529,7 @@ def build_fun(raw, data, daily, logs, Z, seasons=None, cur_season=None):
     out["owned"] = sorted(lopsided, key=lambda p: (-p["n"], -abs(p["cats"][0] - p["cats"][1])))[:5]
 
     # ---------- 9) Takım kişilikleri ----------
-    out["personality"] = personalities(data["teams"])
+    out["personality"] = {} if PW else personalities(data["teams"])  # kişilikler kategori profiline dayanır
     out["latest"] = latest
     out["days"] = len(days)
     return out
