@@ -141,7 +141,8 @@ function allTime(){if(!H.owners.length)return '';
   return `<section class="sec"><h2>Tüm zamanlar</h2><p class="hint">${multi?`${H.seasons.map(sz).join(' ve ')} sezonları, kullanıcıya göre birleştirildi. İsmi değişen takımların eski adları küçük yazıyla görünür.`:'Şimdilik sadece bu sezon var. Geçmiş sezonlar yüklenince burada birleşecek.'} Sıralama kategori kazanma oranına göre; derece sadece tamamlanan sezonlardan.</p>
   <div class="panel scroll"><table class="hist"><thead><tr><th>Menajer</th><th>Sezon</th><th>Maç</th><th>Kat. %</th><th>All-play</th><th>En iyi</th></tr></thead><tbody>${rows}</tbody></table></div></section>`}
 V.takimlar=()=>{const hw=[...T].sort((a,b)=>pRank(a)-pRank(b));
-  return `${allTime()}<section class="sec"><h2>Takımlar</h2><div class="tgrid">${hw.map(t=>`<a class="tcard" href="${link(t)}">${logo(t,56)}<div class="nm">${esc(t.name)}${tags(t)}</div><div class="sub">${rec(t.mrec)} · ${t.cat.join('-')}</div></a>`).join('')}</div></section>
+  return `<section class="sec"><h2>Bu sezonun takımları</h2><div class="tgrid">${hw.map(t=>`<a class="tcard" href="${link(t)}">${logo(t,56)}<div class="nm">${esc(t.name)}${tags(t)}</div><div class="sub">${rec(t.mrec)} · ${t.cat.join('-')}</div></a>`).join('')}</div></section>
+  ${allTime()}
   <section class="sec"><h2>Kategori profili</h2><p class="hint">Her kategoride lig sırası (1 en iyi; TO'da en az olan 1). Turuncu güçlü, mavi zayıf. Punt edilen kategoriler buradan görünür.</p>
   <div class="panel scroll"><table><thead><tr><th>Takım</th>${DATA.cats.map(c=>`<th>${c}</th>`).join('')}</tr></thead><tbody>
   ${hw.map(t=>`<tr><td class="tn">${esc(t.name)}</td>${DATA.cats.map(c=>{const r=t.rank[c];return `<td class="c" style="${r<=6?mix(7-r,6,'accent'):mix(r-6,6,'cool')};${(r<=2||r>=11)?'color:#fff;font-weight:600':''}">${r}</td>`}).join('')}</tr>`).join('')}
