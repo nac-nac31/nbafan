@@ -8,7 +8,7 @@ Client ID ve Client Secret'ı sorar (ekrana yazılmaz), tarayıcıda Yahoo giri�
 Sonunda çıkan YAHOO_REFRESH_TOKEN'ı GitHub'da Settings → Secrets and variables → Actions'a ekle
 (YAHOO_CLIENT_ID ve YAHOO_CLIENT_SECRET ile birlikte). Bu değerleri sohbete veya koda yazma.
 """
-import base64, getpass, json, os, urllib.parse, urllib.request, webbrowser
+import base64, getpass, json, os, urllib.error, urllib.parse, urllib.request, webbrowser
 
 AUTH = "https://api.login.yahoo.com/oauth2/request_auth"
 TOKEN = "https://api.login.yahoo.com/oauth2/get_token"
@@ -32,7 +32,18 @@ def main():
     webbrowser.open(url)
     got = input("Yönlendirilen sayfanın adresini ya da sadece code değerini yapıştır: ").strip()
     code = urllib.parse.parse_qs(urllib.parse.urlparse(got).query).get("code", [got])[0]
-    tok = token_request(cid, secret, grant_type="authorization_code", code=code)
+    try:
+        tok = token_request(cid, secret, grant_type="authorization_code", code=code)
+    except urllib.error.HTTPError as e:
+        print(f"\nYahoo hata verdi (HTTP {e.code}): {e.read().decode(errors='replace')[:300]}")
+        print("Kod tek kullanımlık ve birkaç dakikada geçersiz olur: betiği yeniden çalıştırıp yeni kodu hemen yapıştır.")
+        print("Redirect URI Yahoo uygulamasındakiyle birebir aynı olmalı: " + REDIRECT)
+        raise SystemExit(1)
+    except urllib.error.URLError as e:
+        print(f"\nBağlantı hatası: {e.reason}")
+        if "CERTIFICATE" in str(e.reason):
+            print("Mac'te Python sertifikaları eksik. Finder > Uygulamalar > Python 3.x > 'Install Certificates.command' çift tıkla, sonra tekrar dene.")
+        raise SystemExit(1)
     print("\nTamam. GitHub'a secret olarak ekle:\n")
     print("YAHOO_REFRESH_TOKEN =", tok["refresh_token"])
     print("\n(YAHOO_CLIENT_ID ve YAHOO_CLIENT_SECRET'ı da ekle.)")
