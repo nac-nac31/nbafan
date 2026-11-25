@@ -6,7 +6,7 @@ ESPN Fantasy Basketball ligi (9-cat H2H) için otomatik istatistik sitesi: power
 
 - `scripts/fetch.py` ESPN'in API'sinden ligin ham verisini `data/raw/<sezon>/` altına çeker.
 - `scripts/build.py` istatistikleri hesaplar, `data/stats.json` ve `site/index.html` üretir.
-- `.github/workflows/update.yml` bunu her gün 06:00 UTC'de çalıştırır ve siteyi GitHub Pages'e yayınlar.
+- `.github/workflows/update.yml` bunu günde dört kez (TSİ 09:00, 15:00, 21:00, 01:00) çalıştırır ve siteyi GitHub Pages'e yayınlar.
 
 Yerelde çalıştırmak için (Python 3.10+, ek paket gerekmez):
 

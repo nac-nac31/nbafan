@@ -2,7 +2,7 @@ name: Günlük güncelleme
 
 on:
   schedule:
-    - cron: "0 6 * * *"   # her gün 06:00 UTC (Türkiye 09:00)
+    - cron: "0 6,12,18,22 * * *"   # günde 4 kez: TSİ 09:00, 15:00, 21:00, 01:00
   workflow_dispatch:
   push:
     branches: [main]

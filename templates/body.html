@@ -7,6 +7,7 @@
 
 <nav class="tabs" aria-label="Bölümler">
   <div class="row">
+    <a href="#bu-hafta" data-v="bu-hafta"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>Bu hafta</a>
     <a href="#siralama" data-v="siralama"><svg viewBox="0 0 24 24"><path d="M4 20V10M10 20V4M16 20v-7M22 20H2"/></svg>Sıralama</a>
     <a href="#sans" data-v="sans"><svg viewBox="0 0 24 24"><rect x="4" y="4" width="16" height="16" rx="3"/><circle cx="9" cy="9" r="1.2"/><circle cx="15" cy="15" r="1.2"/><circle cx="15" cy="9" r="1.2"/><circle cx="9" cy="15" r="1.2"/></svg>Şans</a>
     <a href="#haftalar" data-v="haftalar"><svg viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4"/></svg>Haftalar</a>
@@ -27,7 +28,7 @@ const rec=r=>r[0]+'-'+r[1]+(r[2]?'-'+r[2]:'');
 const link=t=>'#takim-'+t.id;
 function logo(t,s){const ab=esc((t.abbrev||t.name).slice(0,3)).replace(/'/g,'');
   return `<span class="logo" style="width:${s}px;height:${s}px;font-size:${Math.round(s*.36)}px">${t.logo?`<img src="${esc(t.logo)}" alt="" loading="lazy" referrerpolicy="no-referrer" onerror="this.parentNode.textContent='${ab}'">`:ab}</span>`}
-document.getElementById('meta').innerHTML=`<b>${NW}. hafta sonrası</b><br>${esc(DATA.updated)}`;
+document.getElementById('meta').innerHTML=`<b>${DATA.current&&DATA.current.matchups.length?DATA.current.week+'. hafta oynanıyor':NW+'. hafta sonrası'}</b><br>${esc(DATA.updated)}`;
 
 const power=[...T].sort((a,b)=>b.power-a.power);
 const league=[...T].sort((a,b)=>b.catPct-a.catPct);
@@ -49,6 +50,44 @@ function awards(){
 }
 
 const V={};
+const CUR=DATA.current||{matchups:[],live:{}};
+function liveRank(){return [...T].filter(t=>CUR.live[t.id]!=null).sort((a,b)=>CUR.live[b.id]-CUR.live[a.id])}
+function fmt(c,v){return c.includes('%')?v.toFixed(3).replace(/^0/,''):String(Math.round(v))}
+V['bu-hafta']=()=>{
+  const ms=CUR.matchups; if(!ms.length) return V.siralama();
+  const lr=liveRank(), top=lr[0], low=lr[lr.length-1];
+  const closest=ms[0], blow=[...ms].sort((a,b)=>Math.abs(b.score[0]-b.score[1])-Math.abs(a.score[0]-a.score[1]))[0];
+  const nm=id=>esc(byId[id].name);
+  const sc=m=>m.score[0]+'-'+m.score[1]+(m.score[2]?'-'+m.score[2]:'');
+  const leaderOf=m=>m.score[0]>m.score[1]?m.home:m.score[1]>m.score[0]?m.away:null;
+  const heads=[
+    ["Haftanın formda takımı",top,`${CUR.live[top.id]}/11 rakibi yeniyor`],
+    ["En yakın maç",byId[closest.home],`${nm(closest.home)} ${sc(closest)} ${nm(closest.away)}`],
+    ["Ezici üstünlük",byId[leaderOf(blow)||blow.home],`${nm(blow.home)} ${sc(blow)} ${nm(blow.away)}`],
+    ["Zor hafta",low,`Şu an sadece ${CUR.live[low.id]}/11 rakibi yenebiliyor`]];
+  const game=m=>{const h=byId[m.home],a=byId[m.away],[w,l]=m.score;
+    const flips=m.cats.filter(k=>k.close).map(k=>k.c);
+    return `<details class="game"><summary>
+     <div class="mu"><a class="side${l>w?' loser':''}" href="${link(h)}">${logo(h,40)}<div><div class="nm">${esc(h.name)}</div><div class="ap">${CUR.live[h.id]}/11 yeniyor</div></div></a>
+     <div class="sc"><span class="${w>l?'w':''}">${w}</span>–<span class="${l>w?'w':''}">${l}</span></div>
+     <a class="side r${w>l?' loser':''}" href="${link(a)}">${logo(a,40)}<div><div class="nm">${esc(a.name)}</div><div class="ap">${CUR.live[a.id]}/11 yeniyor</div></div></a></div>
+     <div class="strip" aria-label="Kategori durumu">${m.cats.map(k=>`<span class="${k.r}${k.close?' cl':''}" title="${k.c}: ${fmt(k.c,k.h)} – ${fmt(k.c,k.a)}">${k.c}</span>`).join('')}</div>
+     <div class="gmeta"><span>${flips.length?`Kıl payı: ${flips.join(', ')}`:'Kıl payı kategori yok'}</span><span class="more">Detay</span></div>
+    </summary>
+    <table class="cats-t"><tbody>${m.cats.map(k=>`<tr><td class="${k.r==='H'?'win':'lose'}">${fmt(k.c,k.h)}</td><td class="mid">${k.c}${k.close?' <span class="cl">● yakın</span>':''}</td><td class="${k.r==='A'?'win':'lose'}">${fmt(k.c,k.a)}</td></tr>`).join('')}</tbody></table>
+    </details>`};
+  return `<div class="hero"><span class="live">${CUR.week}. hafta · devam ediyor</span><h2>Bu haftanın durumu</h2>
+   <p class="hint">Skorlar ${esc(DATA.updated)} itibarıyla. Her maçın altındaki şerit kategorileri gösterir; kesik çizgili olanlar her an dönebilecek kıl payı kategoriler.</p></div>
+  <div class="heads">${heads.map(([l,t,s])=>`<a class="panel head" href="${link(t)}">${logo(t,44)}<div><div class="lab">${l}</div><div class="t">${esc(t.name)}</div><div class="s">${s}</div></div></a>`).join('')}</div>
+  <section class="sec"><div class="sec-h"><h2>Maçlar</h2><div class="legend"><span><i style="background:var(--accent)"></i>Soldaki önde</span><span><i style="background:var(--cool)"></i>Sağdaki önde</span></div></div>
+   <div class="panel">${ms.map(game).join('')}</div></section>
+  <div class="two">
+   <section class="sec"><h2>Haftanın all-play'i</h2><p class="hint">Bu haftaki kategorilerle kaç rakip yeniliyor.</p>
+    <ol class="panel mini">${lr.map((t,i)=>`<li><a href="${link(t)}"><span class="n">${i+1}</span>${logo(t,32)}<span class="nm">${esc(t.name)}</span><span class="v">${CUR.live[t.id]}/11</span></a></li>`).join('')}</ol></section>
+   <section class="sec"><h2>Sezon özeti</h2><p class="hint">Güç sıralamasının ilk beşi. Tamamı Sıralama sekmesinde.</p>
+    <ol class="panel mini">${power.slice(0,5).map((t,i)=>`<li><a href="${link(t)}"><span class="n">${i+1}</span>${logo(t,32)}<span class="nm">${esc(t.name)}</span><span class="v">${rec(t.mrec)}</span></a></li>`).join('')}</ol>
+    <a class="back" href="#siralama" style="color:var(--accent)">Tüm sıralama ›</a></section>
+  </div>`};
 V.siralama=()=>{const top=power[0];
   return `<a class="panel leader" href="${link(top)}">${logo(top,64)}<div><div class="lab">Güç sıralaması lideri</div><div class="big">${esc(top.name)}</div><div class="why">All-play %${pct(top.apPct)} · ${NW} haftada ${top.weekly.reduce((a,b)=>a+b,0)} rakip yendi</div></div></a>
   <section class="sec"><div class="sec-h"><h2>Güç sıralaması</h2></div>
@@ -129,8 +168,8 @@ function profile(id){const t=byId[id];if(!t)return V.siralama();
   </div>`}
 
 const app=document.getElementById('app');
-function render(){const h=(location.hash||'#siralama').slice(1);
-  let v=h.startsWith('takim-')?'takimlar':(V[h]?h:'siralama');
+function render(){const h=(location.hash||'#bu-hafta').slice(1);
+  let v=h.startsWith('takim-')?'takimlar':(V[h]?h:'bu-hafta');
   app.innerHTML=`<div class="view">${h.startsWith('takim-')?profile(+h.slice(6)):V[v]()}</div>`;
   document.querySelectorAll('nav.tabs a').forEach(a=>{if(a.dataset.v===v)a.setAttribute('aria-current','page');else a.removeAttribute('aria-current')});
   app.querySelectorAll('.chips button').forEach(b=>b.onclick=()=>{selWeek=+b.dataset.w;render()});

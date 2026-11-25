@@ -1,5 +1,6 @@
 """Ham ESPN verisinden istatistikleri hesaplar ve site/index.html üretir."""
 import collections, datetime, json, os, pathlib, sys
+from zoneinfo import ZoneInfo
 
 sys.path.insert(0, str(pathlib.Path(__file__).parent))
 from fetch import current_season  # noqa: E402
@@ -24,6 +25,43 @@ def cmp(a, b):
 
 def pct(r):
     return (r[0] + 0.5 * r[2]) / max(1, sum(r))
+
+
+def is_close(c, x, y):
+    if c in ("19", "20"):
+        return abs(x - y) < 0.01
+    return abs(x - y) <= max(2, 0.05 * max(x, y))
+
+
+def current_week(M, L, names):
+    """Devam eden haftanın maçları: kategori kategori anlık durum."""
+    week = L["status"].get("currentMatchupPeriod")
+    rows, vals = [], {}
+    for m in M["schedule"]:
+        if m.get("matchupPeriodId") != week or "home" not in m or "away" not in m:
+            continue
+        h, a = m["home"], m["away"]
+        hs = (h.get("cumulativeScore") or {}).get("scoreByStat") or {}
+        as_ = (a.get("cumulativeScore") or {}).get("scoreByStat") or {}
+        if not hs or not as_:
+            continue
+        hv = {c: hs[c]["score"] for c in CATS}
+        av = {c: as_[c]["score"] for c in CATS}
+        vals[h["teamId"]], vals[a["teamId"]] = hv, av
+        W, Lo, T = cmp(hv, av)
+        cats = []
+        for c in CATS:
+            x, y = hv[c], av[c]
+            better = (x < y) if c in LOWER_IS_BETTER else (x > y)
+            worse = (x > y) if c in LOWER_IS_BETTER else (x < y)
+            cats.append({"c": CN[c], "h": x, "a": y, "r": "H" if better else "A" if worse else "T", "close": is_close(c, x, y)})
+        rows.append({"home": h["teamId"], "away": a["teamId"], "score": [W, Lo, T], "cats": cats,
+                     "closeCount": sum(k["close"] for k in cats)})
+    live = {}
+    for t, a in vals.items():
+        live[t] = sum(cmp(a, b)[0] > cmp(a, b)[1] for u, b in vals.items() if u != t)
+    rows.sort(key=lambda r: (abs(r["score"][0] - r["score"][1]), -r["closeCount"]))
+    return {"week": week, "matchups": rows, "live": live}
 
 
 def compute(raw):
@@ -86,9 +124,11 @@ def compute(raw):
                 steals.append(ev)
     beats.sort(key=lambda x: (-x["beat"], x["w"]))
     steals.sort(key=lambda x: (x["beat"], x["w"]))
-    today = datetime.date.today()
+    current = current_week(M, L, names)
+    now = datetime.datetime.now(ZoneInfo("Europe/Istanbul"))
     return {
-        "league": L["settings"]["name"], "updated": f"{today.day} {AYLAR[today.month - 1]} {today.year}",
+        "current": current,
+        "league": L["settings"]["name"], "updated": f"{now.day} {AYLAR[now.month - 1]} {now.year}, {now:%H:%M}",
         "weeks": done, "currentWeek": L["status"].get("currentMatchupPeriod"), "cats": list(CN.values()),
         "teams": teams, "beats": beats, "steals": steals,
     }
