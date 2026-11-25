@@ -749,7 +749,7 @@
   ]
  },
  "league": "Fantasy 26-27",
- "updated": "25 Kasım 2026, 23:49",
+ "updated": "25 Kasım 2026, 23:57",
  "weeks": [
   1,
   2,
@@ -20872,6 +20872,56 @@
  },
  "fun": {
   "repl": -0.84,
+  "teams": {
+   "1": [
+    "Children of Planet Earth",
+    "f14701da76"
+   ],
+   "2": [
+    "CHADELITES",
+    "bacd1954d9"
+   ],
+   "3": [
+    "31 Chechkers",
+    "56d5622a52"
+   ],
+   "4": [
+    "Kerem’s Deluxe Team",
+    "961506dda6"
+   ],
+   "5": [
+    "BEGE",
+    "ee511c73e8"
+   ],
+   "6": [
+    "Acibadem Elephants",
+    "cd31f49737"
+   ],
+   "7": [
+    "BATH CANARIES",
+    "174f89b3ac"
+   ],
+   "9": [
+    "Kalifornia Bulldogs",
+    "104a39878a"
+   ],
+   "10": [
+    "Adana Heybeliler Tekstil",
+    "47fffeafbf"
+   ],
+   "12": [
+    "Soprano's",
+    "287e8ede40"
+   ],
+   "13": [
+    "Doggy dogs",
+    "c4071ffe1e"
+   ],
+   "14": [
+    "Tooney Tunes",
+    "fedcd29c32"
+   ]
+  },
   "bench": [
    {
     "team": 10,
@@ -21684,7 +21734,7 @@
      "BLK": 0.4,
      "3PM": 2.2
     },
-    "now": 1
+    "now": 13
    },
    {
     "team": 13,
@@ -21738,7 +21788,7 @@
      "BLK": 0.5,
      "3PM": 2.2
     },
-    "now": 1
+    "now": 13
    }
   ],
   "trades": [
@@ -23566,6 +23616,2782 @@
    }
   },
   "latest": 37,
-  "days": 37
+  "days": 37,
+  "past": {
+   "2026": {
+    "repl": -1.25,
+    "teams": {
+     "1": [
+      "Rossonero Spurs",
+      "f14701da76"
+     ],
+     "2": [
+      "AcetXsMax",
+      "f07d908ab6"
+     ],
+     "3": [
+      "31 Chechkers",
+      "56d5622a52"
+     ],
+     "4": [
+      "Madrid Bulls",
+      "97da4ab10b"
+     ],
+     "5": [
+      "LEBRON GLAZER 61",
+      "13151ac3ef"
+     ],
+     "6": [
+      "Acibadem Elephants",
+      "cd31f49737"
+     ],
+     "7": [
+      "Limanreis Test",
+      "9f0928847b"
+     ],
+     "8": [
+      "Eczakent Thugs",
+      "961506dda6"
+     ],
+     "9": [
+      "Kalifornia Bulldogs",
+      "104a39878a"
+     ],
+     "10": [
+      "Adana Heybeliler Tekstil",
+      "47fffeafbf"
+     ],
+     "11": [
+      "Lebronspor",
+      "cdfe88a48c"
+     ],
+     "12": [
+      "Soprano's",
+      "287e8ede40"
+     ],
+     "13": [
+      "Doggy dogs",
+      "c4071ffe1e"
+     ],
+     "14": [
+      "Tooney Tunes",
+      "fedcd29c32"
+     ]
+    },
+    "bench": [
+     {
+      "team": 2,
+      "gain": 505.7,
+      "pts": 2710,
+      "games": 119,
+      "lost": [
+       {
+        "w": 10,
+        "opp": 13,
+        "score": "3-5-1",
+        "opt": "5-3"
+       }
+      ],
+      "worst": {
+       "team": 2,
+       "pid": 5041939,
+       "name": "Cooper Flagg",
+       "sp": 165,
+       "date": "2026-04-04",
+       "w": null,
+       "val": 30.2,
+       "line": {
+        "PTS": 51.0,
+        "REB": 6.0,
+        "AST": 3.0,
+        "STL": 3.0,
+        "BLK": 1.0,
+        "3PM": 6.0,
+        "TO": 1.0,
+        "FGM": 19.0,
+        "FGA": 30.0,
+        "FTM": 7.0,
+        "FTA": 7.0,
+        "MIN": 34.0
+       }
+      }
+     },
+     {
+      "team": 7,
+      "gain": 341.4,
+      "pts": 2636,
+      "games": 197,
+      "lost": [
+       {
+        "w": 14,
+        "opp": 10,
+        "score": "2-7",
+        "opt": "6-3"
+       },
+       {
+        "w": 16,
+        "opp": 9,
+        "score": "4-5",
+        "opt": "7-2"
+       },
+       {
+        "w": 19,
+        "opp": 8,
+        "score": "2-7",
+        "opt": "6-3"
+       }
+      ],
+      "worst": {
+       "team": 7,
+       "pid": 4278129,
+       "name": "Deandre Ayton",
+       "sp": 102,
+       "date": "2026-01-31",
+       "w": 15,
+       "val": 20.0,
+       "line": {
+        "PTS": 28.0,
+        "REB": 13.0,
+        "AST": 3.0,
+        "STL": 1.0,
+        "BLK": 3.0,
+        "3PM": 0.0,
+        "TO": 1.0,
+        "FGM": 12.0,
+        "FGA": 14.0,
+        "FTM": 4.0,
+        "FTA": 4.0,
+        "MIN": 29.0
+       }
+      }
+     },
+     {
+      "team": 5,
+      "gain": 305.0,
+      "pts": 2368,
+      "games": 169,
+      "lost": [
+       {
+        "w": 1,
+        "opp": 2,
+        "score": "4-5",
+        "opt": "6-3"
+       },
+       {
+        "w": 7,
+        "opp": 7,
+        "score": "4-5",
+        "opt": "5-4"
+       },
+       {
+        "w": 9,
+        "opp": 12,
+        "score": "2-7",
+        "opt": "6-2"
+       },
+       {
+        "w": 18,
+        "opp": 9,
+        "score": "4-5",
+        "opt": "6-3"
+       }
+      ],
+      "worst": {
+       "team": 5,
+       "pid": 3149673,
+       "name": "Pascal Siakam",
+       "sp": 154,
+       "date": "2026-03-24",
+       "w": null,
+       "val": 15.9,
+       "line": {
+        "PTS": 37.0,
+        "REB": 6.0,
+        "AST": 1.0,
+        "STL": 2.0,
+        "BLK": 2.0,
+        "3PM": 2.0,
+        "TO": 2.0,
+        "FGM": 13.0,
+        "FGA": 26.0,
+        "FTM": 9.0,
+        "FTA": 9.0,
+        "MIN": 34.0
+       }
+      }
+     },
+     {
+      "team": 8,
+      "gain": 294.3,
+      "pts": 2345,
+      "games": 156,
+      "lost": [
+       {
+        "w": 3,
+        "opp": 4,
+        "score": "3-6",
+        "opt": "5-4"
+       },
+       {
+        "w": 6,
+        "opp": 7,
+        "score": "4-5",
+        "opt": "7-2"
+       },
+       {
+        "w": 8,
+        "opp": 6,
+        "score": "4-5",
+        "opt": "6-2"
+       },
+       {
+        "w": 11,
+        "opp": 9,
+        "score": "3-6",
+        "opt": "5-4"
+       }
+      ],
+      "worst": {
+       "team": 8,
+       "pid": 4432165,
+       "name": "Jalen Suggs",
+       "sp": 108,
+       "date": "2026-02-06",
+       "w": 16,
+       "val": 21.3,
+       "line": {
+        "PTS": 15.0,
+        "REB": 11.0,
+        "AST": 11.0,
+        "STL": 3.0,
+        "BLK": 4.0,
+        "3PM": 3.0,
+        "TO": 3.0,
+        "FGM": 6.0,
+        "FGA": 9.0,
+        "FTM": 0.0,
+        "FTA": 0.0,
+        "MIN": 29.0
+       }
+      }
+     },
+     {
+      "team": 3,
+      "gain": 152.9,
+      "pts": 468,
+      "games": 31,
+      "lost": [
+       {
+        "w": 1,
+        "opp": 6,
+        "score": "4-5",
+        "opt": "5-4"
+       }
+      ],
+      "worst": {
+       "team": 3,
+       "pid": 4432810,
+       "name": "Isaiah Stewart",
+       "sp": 79,
+       "date": "2026-01-08",
+       "w": 12,
+       "val": 13.0,
+       "line": {
+        "PTS": 31.0,
+        "REB": 3.0,
+        "AST": 1.0,
+        "STL": 1.0,
+        "BLK": 2.0,
+        "3PM": 2.0,
+        "TO": 0.0,
+        "FGM": 14.0,
+        "FGA": 17.0,
+        "FTM": 1.0,
+        "FTA": 2.0,
+        "MIN": 30.0
+       }
+      }
+     },
+     {
+      "team": 14,
+      "gain": 125.7,
+      "pts": 379,
+      "games": 24,
+      "lost": [],
+      "worst": {
+       "team": 14,
+       "pid": 4251,
+       "name": "Paul George",
+       "sp": 163,
+       "date": "2026-04-02",
+       "w": null,
+       "val": 22.8,
+       "line": {
+        "PTS": 39.0,
+        "REB": 5.0,
+        "AST": 6.0,
+        "STL": 3.0,
+        "BLK": 0.0,
+        "3PM": 6.0,
+        "TO": 0.0,
+        "FGM": 15.0,
+        "FGA": 22.0,
+        "FTM": 3.0,
+        "FTA": 4.0,
+        "MIN": 30.0
+       }
+      }
+     },
+     {
+      "team": 4,
+      "gain": 107.7,
+      "pts": 623,
+      "games": 51,
+      "lost": [
+       {
+        "w": 1,
+        "opp": 1,
+        "score": "3-5-1",
+        "opt": "5-4"
+       }
+      ],
+      "worst": {
+       "team": 4,
+       "pid": 4431678,
+       "name": "Tyrese Maxey",
+       "sp": 94,
+       "date": "2026-01-23",
+       "w": 14,
+       "val": 14.2,
+       "line": {
+        "PTS": 36.0,
+        "REB": 2.0,
+        "AST": 10.0,
+        "STL": 3.0,
+        "BLK": 0.0,
+        "3PM": 2.0,
+        "TO": 3.0,
+        "FGM": 15.0,
+        "FGA": 28.0,
+        "FTM": 4.0,
+        "FTA": 4.0,
+        "MIN": 43.0
+       }
+      }
+     },
+     {
+      "team": 12,
+      "gain": 86.1,
+      "pts": 304,
+      "games": 20,
+      "lost": [],
+      "worst": {
+       "team": 12,
+       "pid": 3908809,
+       "name": "Donovan Mitchell",
+       "sp": 155,
+       "date": "2026-03-25",
+       "w": null,
+       "val": 13.4,
+       "line": {
+        "PTS": 42.0,
+        "REB": 2.0,
+        "AST": 3.0,
+        "STL": 0.0,
+        "BLK": 0.0,
+        "3PM": 3.0,
+        "TO": 2.0,
+        "FGM": 14.0,
+        "FGA": 22.0,
+        "FTM": 11.0,
+        "FTA": 11.0,
+        "MIN": 35.0
+       }
+      }
+     },
+     {
+      "team": 11,
+      "gain": 83.0,
+      "pts": 794,
+      "games": 61,
+      "lost": [
+       {
+        "w": 11,
+        "opp": 4,
+        "score": "4-5",
+        "opt": "5-4"
+       },
+       {
+        "w": 18,
+        "opp": 10,
+        "score": "4-5",
+        "opt": "6-3"
+       }
+      ],
+      "worst": {
+       "team": 11,
+       "pid": 4395628,
+       "name": "Zion Williamson",
+       "sp": 70,
+       "date": "2025-12-30",
+       "w": 11,
+       "val": 12.4,
+       "line": {
+        "PTS": 32.0,
+        "REB": 5.0,
+        "AST": 2.0,
+        "STL": 2.0,
+        "BLK": 2.0,
+        "3PM": 0.0,
+        "TO": 2.0,
+        "FGM": 11.0,
+        "FGA": 16.0,
+        "FTM": 10.0,
+        "FTA": 12.0,
+        "MIN": 29.0
+       }
+      }
+     },
+     {
+      "team": 10,
+      "gain": 71.5,
+      "pts": 284,
+      "games": 27,
+      "lost": [],
+      "worst": {
+       "team": 10,
+       "pid": 3157465,
+       "name": "Duncan Robinson",
+       "sp": 4,
+       "date": "2025-10-25",
+       "w": 1,
+       "val": 9.2,
+       "line": {
+        "PTS": 17.0,
+        "REB": 3.0,
+        "AST": 2.0,
+        "STL": 0.0,
+        "BLK": 3.0,
+        "3PM": 4.0,
+        "TO": 0.0,
+        "FGM": 5.0,
+        "FGA": 9.0,
+        "FTM": 3.0,
+        "FTA": 3.0,
+        "MIN": 38.0
+       }
+      }
+     },
+     {
+      "team": 9,
+      "gain": 61.7,
+      "pts": 771,
+      "games": 61,
+      "lost": [
+       {
+        "w": 2,
+        "opp": 10,
+        "score": "4-4-1",
+        "opt": "5-4"
+       }
+      ],
+      "worst": {
+       "team": 9,
+       "pid": 3468,
+       "name": "Russell Westbrook",
+       "sp": 49,
+       "date": "2025-12-09",
+       "w": 8,
+       "val": 12.2,
+       "line": {
+        "PTS": 24.0,
+        "REB": 12.0,
+        "AST": 14.0,
+        "STL": 2.0,
+        "BLK": 1.0,
+        "3PM": 2.0,
+        "TO": 3.0,
+        "FGM": 10.0,
+        "FGA": 16.0,
+        "FTM": 2.0,
+        "FTA": 4.0,
+        "MIN": 40.0
+       }
+      }
+     },
+     {
+      "team": 1,
+      "gain": 55.1,
+      "pts": 187,
+      "games": 11,
+      "lost": [
+       {
+        "w": 7,
+        "opp": 13,
+        "score": "3-6",
+        "opt": "5-4"
+       }
+      ],
+      "worst": {
+       "team": 1,
+       "pid": 3157465,
+       "name": "Duncan Robinson",
+       "sp": 23,
+       "date": "2025-11-13",
+       "w": 4,
+       "val": 7.4,
+       "line": {
+        "PTS": 23.0,
+        "REB": 2.0,
+        "AST": 1.0,
+        "STL": 1.0,
+        "BLK": 0.0,
+        "3PM": 7.0,
+        "TO": 1.0,
+        "FGM": 8.0,
+        "FGA": 13.0,
+        "FTM": 0.0,
+        "FTA": 0.0,
+        "MIN": 28.0
+       }
+      }
+     },
+     {
+      "team": 13,
+      "gain": 27.5,
+      "pts": 343,
+      "games": 32,
+      "lost": [],
+      "worst": {
+       "team": 13,
+       "pid": 4066261,
+       "name": "Bam Adebayo",
+       "sp": 13,
+       "date": "2025-11-02",
+       "w": 2,
+       "val": 14.1,
+       "line": {
+        "PTS": 17.0,
+        "REB": 8.0,
+        "AST": 5.0,
+        "STL": 3.0,
+        "BLK": 1.0,
+        "3PM": 1.0,
+        "TO": 0.0,
+        "FGM": 6.0,
+        "FGA": 11.0,
+        "FTM": 4.0,
+        "FTA": 4.0,
+        "MIN": 36.0
+       }
+      }
+     },
+     {
+      "team": 6,
+      "gain": 8.7,
+      "pts": 72,
+      "games": 6,
+      "lost": [],
+      "worst": {
+       "team": 6,
+       "pid": 4431785,
+       "name": "Scotty Pippen Jr.",
+       "sp": 109,
+       "date": "2026-02-07",
+       "w": 16,
+       "val": 1.1,
+       "line": {
+        "PTS": 13.0,
+        "REB": 3.0,
+        "AST": 6.0,
+        "STL": 1.0,
+        "BLK": 0.0,
+        "3PM": 1.0,
+        "TO": 2.0,
+        "FGM": 4.0,
+        "FGA": 8.0,
+        "FTM": 4.0,
+        "FTA": 4.0,
+        "MIN": 22.0
+       }
+      }
+     }
+    ],
+    "benchWorst": [
+     {
+      "team": 2,
+      "pid": 5041939,
+      "name": "Cooper Flagg",
+      "sp": 165,
+      "date": "2026-04-04",
+      "w": null,
+      "val": 30.2,
+      "line": {
+       "PTS": 51.0,
+       "REB": 6.0,
+       "AST": 3.0,
+       "STL": 3.0,
+       "BLK": 1.0,
+       "3PM": 6.0,
+       "TO": 1.0,
+       "FGM": 19.0,
+       "FGA": 30.0,
+       "FTM": 7.0,
+       "FTA": 7.0,
+       "MIN": 34.0
+      }
+     },
+     {
+      "team": 14,
+      "pid": 4251,
+      "name": "Paul George",
+      "sp": 163,
+      "date": "2026-04-02",
+      "w": null,
+      "val": 22.8,
+      "line": {
+       "PTS": 39.0,
+       "REB": 5.0,
+       "AST": 6.0,
+       "STL": 3.0,
+       "BLK": 0.0,
+       "3PM": 6.0,
+       "TO": 0.0,
+       "FGM": 15.0,
+       "FGA": 22.0,
+       "FTM": 3.0,
+       "FTA": 4.0,
+       "MIN": 30.0
+      }
+     },
+     {
+      "team": 8,
+      "pid": 4432165,
+      "name": "Jalen Suggs",
+      "sp": 108,
+      "date": "2026-02-06",
+      "w": 16,
+      "val": 21.3,
+      "line": {
+       "PTS": 15.0,
+       "REB": 11.0,
+       "AST": 11.0,
+       "STL": 3.0,
+       "BLK": 4.0,
+       "3PM": 3.0,
+       "TO": 3.0,
+       "FGM": 6.0,
+       "FGA": 9.0,
+       "FTM": 0.0,
+       "FTA": 0.0,
+       "MIN": 29.0
+      }
+     },
+     {
+      "team": 2,
+      "pid": 3945274,
+      "name": "Luka Doncic",
+      "sp": 92,
+      "date": "2026-01-21",
+      "w": 14,
+      "val": 20.2,
+      "line": {
+       "PTS": 38.0,
+       "REB": 13.0,
+       "AST": 10.0,
+       "STL": 2.0,
+       "BLK": 0.0,
+       "3PM": 3.0,
+       "TO": 3.0,
+       "FGM": 12.0,
+       "FGA": 21.0,
+       "FTM": 11.0,
+       "FTA": 12.0,
+       "MIN": 36.0
+      }
+     },
+     {
+      "team": 2,
+      "pid": 4396907,
+      "name": "Darius Garland",
+      "sp": 152,
+      "date": "2026-03-22",
+      "w": null,
+      "val": 20.2,
+      "line": {
+       "PTS": 41.0,
+       "REB": 3.0,
+       "AST": 11.0,
+       "STL": 1.0,
+       "BLK": 1.0,
+       "3PM": 8.0,
+       "TO": 4.0,
+       "FGM": 15.0,
+       "FGA": 24.0,
+       "FTM": 3.0,
+       "FTA": 3.0,
+       "MIN": 39.0
+      }
+     }
+    ],
+    "waiver": {
+     "top": [
+      {
+       "team": 1,
+       "pid": 5061575,
+       "name": "Kon Knueppel",
+       "sp": 7,
+       "date": "2025-10-28",
+       "val": 244.5,
+       "n": 74,
+       "pg": {
+        "PTS": 18.9,
+        "REB": 5.4,
+        "AST": 3.4,
+        "STL": 0.7,
+        "BLK": 0.2,
+        "3PM": 3.4
+       },
+       "kept": true
+      },
+      {
+       "team": 2,
+       "pid": 4591725,
+       "name": "Ryan Rollins",
+       "sp": 7,
+       "date": "2025-10-28",
+       "val": 195.1,
+       "n": 58,
+       "pg": {
+        "PTS": 16.9,
+        "REB": 4.7,
+        "AST": 5.5,
+        "STL": 1.5,
+        "BLK": 0.4,
+        "3PM": 2.5
+       },
+       "kept": true
+      },
+      {
+       "team": 9,
+       "pid": 4278585,
+       "name": "Collin Gillespie",
+       "sp": 11,
+       "date": "2025-11-01",
+       "val": 173.4,
+       "n": 72,
+       "pg": {
+        "PTS": 13.0,
+        "REB": 4.1,
+        "AST": 4.7,
+        "STL": 1.2,
+        "BLK": 0.2,
+        "3PM": 3.0
+       },
+       "kept": true
+      },
+      {
+       "team": 6,
+       "pid": 4431671,
+       "name": "Jaden McDaniels",
+       "sp": 28,
+       "date": "2025-11-18",
+       "val": 131.4,
+       "n": 58,
+       "pg": {
+        "PTS": 14.1,
+        "REB": 4.2,
+        "AST": 2.8,
+        "STL": 1.2,
+        "BLK": 0.9,
+        "3PM": 1.4
+       },
+       "kept": true
+      },
+      {
+       "team": 4,
+       "pid": 3135045,
+       "name": "Grayson Allen",
+       "sp": 6,
+       "date": "2025-10-26",
+       "val": 117.9,
+       "n": 40,
+       "pg": {
+        "PTS": 17.4,
+        "REB": 3.0,
+        "AST": 4.0,
+        "STL": 1.4,
+        "BLK": 0.3,
+        "3PM": 3.3
+       },
+       "kept": true
+      },
+      {
+       "team": 11,
+       "pid": 4592479,
+       "name": "Julian Champagnie",
+       "sp": 10,
+       "date": "2025-10-31",
+       "val": 85.8,
+       "n": 74,
+       "pg": {
+        "PTS": 11.4,
+        "REB": 5.7,
+        "AST": 1.5,
+        "STL": 0.8,
+        "BLK": 0.4,
+        "3PM": 2.5
+       },
+       "kept": true
+      },
+      {
+       "team": 5,
+       "pid": 4709138,
+       "name": "Brandin Podziemski",
+       "sp": 7,
+       "date": "2025-10-28",
+       "val": 84.4,
+       "n": 75,
+       "pg": {
+        "PTS": 13.7,
+        "REB": 5.3,
+        "AST": 3.9,
+        "STL": 1.1,
+        "BLK": 0.2,
+        "3PM": 1.9
+       },
+       "kept": true
+      },
+      {
+       "team": 3,
+       "pid": 4712849,
+       "name": "Anthony Black",
+       "sp": 28,
+       "date": "2025-11-18",
+       "val": 84.1,
+       "n": 43,
+       "pg": {
+        "PTS": 16.9,
+        "REB": 4.2,
+        "AST": 4.2,
+        "STL": 1.4,
+        "BLK": 0.7,
+        "3PM": 1.8
+       },
+       "kept": false
+      }
+     ],
+     "teams": [
+      {
+       "team": 1,
+       "val": 410.4,
+       "n": 290,
+       "adds": 43
+      },
+      {
+       "team": 13,
+       "val": 392.2,
+       "n": 438,
+       "adds": 38
+      },
+      {
+       "team": 6,
+       "val": 372.5,
+       "n": 354,
+       "adds": 48
+      },
+      {
+       "team": 14,
+       "val": 361.7,
+       "n": 408,
+       "adds": 56
+      },
+      {
+       "team": 3,
+       "val": 348.7,
+       "n": 312,
+       "adds": 68
+      },
+      {
+       "team": 12,
+       "val": 302.3,
+       "n": 276,
+       "adds": 42
+      },
+      {
+       "team": 9,
+       "val": 301.6,
+       "n": 344,
+       "adds": 33
+      },
+      {
+       "team": 4,
+       "val": 275.2,
+       "n": 284,
+       "adds": 34
+      },
+      {
+       "team": 2,
+       "val": 195.1,
+       "n": 91,
+       "adds": 2
+      },
+      {
+       "team": 11,
+       "val": 126.6,
+       "n": 160,
+       "adds": 7
+      },
+      {
+       "team": 5,
+       "val": 103.3,
+       "n": 186,
+       "adds": 4
+      },
+      {
+       "team": 10,
+       "val": 100.4,
+       "n": 349,
+       "adds": 24
+      },
+      {
+       "team": 7,
+       "val": 40.5,
+       "n": 144,
+       "adds": 6
+      },
+      {
+       "team": 8,
+       "val": 0.0,
+       "n": 176,
+       "adds": 4
+      }
+     ],
+     "count": 455
+    },
+    "regrets": [
+     {
+      "team": 6,
+      "pid": 5061575,
+      "name": "Kon Knueppel",
+      "sp": 4,
+      "date": "2025-10-25",
+      "val": 241.4,
+      "n": 80,
+      "pg": {
+       "PTS": 18.6,
+       "REB": 5.3,
+       "AST": 3.4,
+       "STL": 0.7,
+       "BLK": 0.2,
+       "3PM": 3.4
+      },
+      "now": 1
+     },
+     {
+      "team": 3,
+      "pid": 4397136,
+      "name": "Saddiq Bey",
+      "sp": 12,
+      "date": "2025-11-02",
+      "val": 174.8,
+      "n": 67,
+      "pg": {
+       "PTS": 18.3,
+       "REB": 5.7,
+       "AST": 2.6,
+       "STL": 0.9,
+       "BLK": 0.1,
+       "3PM": 2.1
+      },
+      "now": 7
+     },
+     {
+      "team": 9,
+      "pid": 4431671,
+      "name": "Jaden McDaniels",
+      "sp": 26,
+      "date": "2025-11-16",
+      "val": 132.9,
+      "n": 60,
+      "pg": {
+       "PTS": 14.2,
+       "REB": 4.2,
+       "AST": 2.8,
+       "STL": 1.1,
+       "BLK": 0.9,
+       "3PM": 1.4
+      },
+      "now": 6
+     },
+     {
+      "team": 14,
+      "pid": 4395626,
+      "name": "Tre Jones",
+      "sp": 5,
+      "date": "2025-10-26",
+      "val": 120.3,
+      "n": 63,
+      "pg": {
+       "PTS": 14.1,
+       "REB": 3.1,
+       "AST": 5.3,
+       "STL": 1.1,
+       "BLK": 0.2,
+       "3PM": 0.6
+      },
+      "now": 14
+     },
+     {
+      "team": 4,
+      "pid": 4065731,
+      "name": "Jay Huff",
+      "sp": 41,
+      "date": "2025-11-30",
+      "val": 118.8,
+      "n": 62,
+      "pg": {
+       "PTS": 10.2,
+       "REB": 4.0,
+       "AST": 1.6,
+       "STL": 0.6,
+       "BLK": 1.8,
+       "3PM": 1.5
+      },
+      "now": 4
+     },
+     {
+      "team": 12,
+      "pid": 4684793,
+      "name": "Kyle Filipowski",
+      "sp": 87,
+      "date": "2026-01-15",
+      "val": 102.6,
+      "n": 37,
+      "pg": {
+       "PTS": 13.8,
+       "REB": 8.4,
+       "AST": 3.2,
+       "STL": 1.3,
+       "BLK": 0.5,
+       "3PM": 1.1
+      },
+      "now": 12
+     },
+     {
+      "team": 3,
+      "pid": 4684793,
+      "name": "Kyle Filipowski",
+      "sp": 115,
+      "date": "2026-02-13",
+      "val": 86.9,
+      "n": 22,
+      "pg": {
+       "PTS": 15.7,
+       "REB": 8.5,
+       "AST": 3.9,
+       "STL": 1.2,
+       "BLK": 0.8,
+       "3PM": 1.3
+      },
+      "now": 13
+     },
+     {
+      "team": 3,
+      "pid": 4712849,
+      "name": "Anthony Black",
+      "sp": 22,
+      "date": "2025-11-12",
+      "val": 77.0,
+      "n": 53,
+      "pg": {
+       "PTS": 15.9,
+       "REB": 3.9,
+       "AST": 4.0,
+       "STL": 1.5,
+       "BLK": 0.7,
+       "3PM": 1.7
+      },
+      "now": 3
+     }
+    ],
+    "trades": [
+     {
+      "sp": 57,
+      "date": "",
+      "sides": [
+       {
+        "team": 3,
+        "got": [
+         {
+          "pid": 3059318,
+          "name": "Joel Embiid",
+          "val": 158.9,
+          "n": 22,
+          "rate": null
+         }
+        ],
+        "val": 158.9,
+        "now": 1.3,
+        "net": 106.7,
+        "grade": "A+"
+       },
+       {
+        "team": 4,
+        "got": [
+         {
+          "pid": 4017837,
+          "name": "Ivica Zubac",
+          "val": -18.9,
+          "n": 21,
+          "rate": null
+         }
+        ],
+        "val": -18.9,
+        "now": 1.3,
+        "net": -106.7,
+        "grade": "F"
+       }
+      ],
+      "gap": 106.7
+     },
+     {
+      "sp": 8,
+      "date": "2025-10-29",
+      "sides": [
+       {
+        "team": 12,
+        "got": [
+         {
+          "pid": 4711294,
+          "name": "Matas Buzelis",
+          "val": 183.4,
+          "n": 72,
+          "rate": null
+         }
+        ],
+        "val": 183.4,
+        "now": 1.3,
+        "net": 56.6,
+        "grade": "A-"
+       },
+       {
+        "team": 5,
+        "got": [
+         {
+          "pid": 4395626,
+          "name": "Tre Jones",
+          "val": 89.1,
+          "n": 58,
+          "rate": null
+         }
+        ],
+        "val": 89.1,
+        "now": 1.3,
+        "net": -56.6,
+        "grade": "C"
+       }
+      ],
+      "gap": 56.6
+     },
+     {
+      "sp": 80,
+      "date": "2026-01-09",
+      "sides": [
+       {
+        "team": 12,
+        "got": [
+         {
+          "pid": 3032977,
+          "name": "Giannis Antetokounmpo",
+          "val": 0.3,
+          "n": 12,
+          "rate": null
+         },
+         {
+          "pid": 4066328,
+          "name": "Jarrett Allen",
+          "val": 80.8,
+          "n": 27,
+          "rate": null
+         },
+         {
+          "pid": 4873138,
+          "name": "Ace Bailey",
+          "val": 65.1,
+          "n": 38,
+          "rate": null
+         }
+        ],
+        "val": 146.2,
+        "now": 3.8,
+        "net": 20.1,
+        "grade": "B"
+       },
+       {
+        "team": 7,
+        "got": [
+         {
+          "pid": 4066259,
+          "name": "De'Aaron Fox",
+          "val": 0.0,
+          "n": 0,
+          "rate": null
+         },
+         {
+          "pid": 6589,
+          "name": "Draymond Green",
+          "val": -20.6,
+          "n": 34,
+          "rate": null
+         },
+         {
+          "pid": 4684742,
+          "name": "Ausar Thompson",
+          "val": 116.6,
+          "n": 36,
+          "rate": null
+         },
+         {
+          "pid": 4576060,
+          "name": "Ryan Kalkbrenner",
+          "val": 0.0,
+          "n": 0,
+          "rate": null
+         },
+         {
+          "pid": 4278129,
+          "name": "Deandre Ayton",
+          "val": 0.0,
+          "n": 0,
+          "rate": null
+         }
+        ],
+        "val": 96.0,
+        "now": 6.3,
+        "net": -20.1,
+        "grade": "B-"
+       }
+      ],
+      "gap": 20.1
+     },
+     {
+      "sp": 93,
+      "date": "2026-01-22",
+      "sides": [
+       {
+        "team": 6,
+        "got": [
+         {
+          "pid": 4277847,
+          "name": "Wendell Carter Jr.",
+          "val": 29.7,
+          "n": 34,
+          "rate": null
+         }
+        ],
+        "val": 29.7,
+        "now": 1.3,
+        "net": 15.2,
+        "grade": "A-"
+       },
+       {
+        "team": 3,
+        "got": [
+         {
+          "pid": 4277905,
+          "name": "Trae Young",
+          "val": 4.3,
+          "n": 3,
+          "rate": null
+         }
+        ],
+        "val": 4.3,
+        "now": 1.3,
+        "net": -15.2,
+        "grade": "C"
+       }
+      ],
+      "gap": 15.2
+     }
+    ],
+    "draft": {
+     "teams": [
+      {
+       "team": 4,
+       "diff": 818.6,
+       "val": 2283.2,
+       "best": {
+        "pick": 162,
+        "round": 12,
+        "team": 4,
+        "pid": 4709138,
+        "name": "Brandin Podziemski",
+        "val": 81.6,
+        "n": 82,
+        "rank": 88,
+        "pg": {
+         "PTS": 13.8,
+         "REB": 5.1,
+         "AST": 3.7,
+         "STL": 1.1,
+         "BLK": 0.2,
+         "3PM": 1.9
+        },
+        "inj": ""
+       },
+       "worst": {
+        "pick": 50,
+        "round": 4,
+        "team": 4,
+        "pid": 4279888,
+        "name": "Ja Morant",
+        "val": 18.4,
+        "n": 20,
+        "rank": 121,
+        "pg": {
+         "PTS": 19.4,
+         "REB": 3.2,
+         "AST": 8.1,
+         "STL": 1.0,
+         "BLK": 0.3,
+         "3PM": 1.0
+        },
+        "inj": ""
+       },
+       "grade": "A"
+      },
+      {
+       "team": 2,
+       "diff": 611.5,
+       "val": 2239.0,
+       "best": {
+        "pick": 172,
+        "round": 13,
+        "team": 2,
+        "pid": 4278039,
+        "name": "Nickeil Alexander-Walker",
+        "val": 396.6,
+        "n": 78,
+        "rank": 15,
+        "pg": {
+         "PTS": 20.8,
+         "REB": 3.4,
+         "AST": 3.7,
+         "STL": 1.3,
+         "BLK": 0.5,
+         "3PM": 3.2
+        },
+        "inj": ""
+       },
+       "worst": {
+        "pick": 81,
+        "round": 6,
+        "team": 2,
+        "pid": 4222252,
+        "name": "Isaiah Hartenstein",
+        "val": 42.9,
+        "n": 47,
+        "rank": 109,
+        "pg": {
+         "PTS": 9.2,
+         "REB": 9.4,
+         "AST": 3.5,
+         "STL": 1.0,
+         "BLK": 0.8,
+         "3PM": 0.0
+        },
+        "inj": ""
+       },
+       "grade": "A"
+      },
+      {
+       "team": 10,
+       "diff": 603.6,
+       "val": 2045.1,
+       "best": {
+        "pick": 64,
+        "round": 5,
+        "team": 10,
+        "pid": 6450,
+        "name": "Kawhi Leonard",
+        "val": 651.3,
+        "n": 65,
+        "rank": 5,
+        "pg": {
+         "PTS": 27.9,
+         "REB": 6.4,
+         "AST": 3.6,
+         "STL": 1.9,
+         "BLK": 0.4,
+         "3PM": 2.6
+        },
+        "inj": ""
+       },
+       "worst": {
+        "pick": 8,
+        "round": 1,
+        "team": 10,
+        "pid": 6583,
+        "name": "Anthony Davis",
+        "val": 106.3,
+        "n": 20,
+        "rank": 77,
+        "pg": {
+         "PTS": 20.4,
+         "REB": 11.1,
+         "AST": 2.8,
+         "STL": 1.1,
+         "BLK": 1.6,
+         "3PM": 0.5
+        },
+        "inj": ""
+       },
+       "grade": "A"
+      },
+      {
+       "team": 3,
+       "diff": 395.1,
+       "val": 1582.2,
+       "best": {
+        "pick": 182,
+        "round": 13,
+        "team": 3,
+        "pid": 4277847,
+        "name": "Wendell Carter Jr.",
+        "val": 65.0,
+        "n": 78,
+        "rank": 99,
+        "pg": {
+         "PTS": 11.8,
+         "REB": 7.4,
+         "AST": 2.0,
+         "STL": 0.8,
+         "BLK": 0.6,
+         "3PM": 0.9
+        },
+        "inj": ""
+       },
+       "worst": {
+        "pick": 71,
+        "round": 6,
+        "team": 3,
+        "pid": 4017837,
+        "name": "Ivica Zubac",
+        "val": 45.5,
+        "n": 48,
+        "rank": 107,
+        "pg": {
+         "PTS": 14.1,
+         "REB": 10.6,
+         "AST": 2.2,
+         "STL": 0.4,
+         "BLK": 0.8,
+         "3PM": 0.0
+        },
+        "inj": ""
+       },
+       "grade": "A-"
+      },
+      {
+       "team": 14,
+       "diff": 162.6,
+       "val": 1935.8,
+       "best": {
+        "pick": 169,
+        "round": 13,
+        "team": 14,
+        "pid": 5124612,
+        "name": "VJ Edgecombe",
+        "val": 229.7,
+        "n": 75,
+        "rank": 40,
+        "pg": {
+         "PTS": 16.0,
+         "REB": 5.6,
+         "AST": 4.2,
+         "STL": 1.4,
+         "BLK": 0.5,
+         "3PM": 2.0
+        },
+        "inj": ""
+       },
+       "worst": {
+        "pick": 84,
+        "round": 6,
+        "team": 14,
+        "pid": 4066262,
+        "name": "Malik Monk",
+        "val": -78.8,
+        "n": 62,
+        "rank": 162,
+        "pg": {
+         "PTS": 12.5,
+         "REB": 1.9,
+         "AST": 3.0,
+         "STL": 0.6,
+         "BLK": 0.4,
+         "3PM": 2.0
+        },
+        "inj": ""
+       },
+       "grade": "B"
+      },
+      {
+       "team": 12,
+       "diff": 159.8,
+       "val": 1535.8,
+       "best": {
+        "pick": 95,
+        "round": 7,
+        "team": 12,
+        "pid": 5105565,
+        "name": "Donovan Clingan",
+        "val": 291.2,
+        "n": 77,
+        "rank": 28,
+        "pg": {
+         "PTS": 12.1,
+         "REB": 11.6,
+         "AST": 2.1,
+         "STL": 0.6,
+         "BLK": 1.7,
+         "3PM": 1.1
+        },
+        "inj": ""
+       },
+       "worst": {
+        "pick": 67,
+        "round": 5,
+        "team": 12,
+        "pid": 6589,
+        "name": "Draymond Green",
+        "val": -60.4,
+        "n": 68,
+        "rank": 155,
+        "pg": {
+         "PTS": 8.4,
+         "REB": 5.5,
+         "AST": 5.5,
+         "STL": 0.9,
+         "BLK": 0.6,
+         "3PM": 1.5
+        },
+        "inj": ""
+       },
+       "grade": "B"
+      },
+      {
+       "team": 8,
+       "diff": 56.7,
+       "val": 1471.0,
+       "best": {
+        "pick": 178,
+        "round": 13,
+        "team": 8,
+        "pid": 4684793,
+        "name": "Kyle Filipowski",
+        "val": 15.9,
+        "n": 77,
+        "rank": 126,
+        "pg": {
+         "PTS": 11.4,
+         "REB": 7.2,
+         "AST": 2.6,
+         "STL": 0.9,
+         "BLK": 0.5,
+         "3PM": 1.0
+        },
+        "inj": ""
+       },
+       "worst": {
+        "pick": 38,
+        "round": 3,
+        "team": 8,
+        "pid": 4395651,
+        "name": "Coby White",
+        "val": -59.5,
+        "n": 50,
+        "rank": 153,
+        "pg": {
+         "PTS": 17.4,
+         "REB": 3.4,
+         "AST": 4.0,
+         "STL": 0.5,
+         "BLK": 0.1,
+         "3PM": 2.3
+        },
+        "inj": ""
+       },
+       "grade": "B"
+      },
+      {
+       "team": 13,
+       "diff": 37.3,
+       "val": 1594.4,
+       "best": {
+        "pick": 108,
+        "round": 8,
+        "team": 13,
+        "pid": 4433627,
+        "name": "Keyonte George",
+        "val": 243.6,
+        "n": 54,
+        "rank": 36,
+        "pg": {
+         "PTS": 23.6,
+         "REB": 3.7,
+         "AST": 6.1,
+         "STL": 1.1,
+         "BLK": 0.3,
+         "3PM": 2.5
+        },
+        "inj": ""
+       },
+       "worst": {
+        "pick": 52,
+        "round": 4,
+        "team": 13,
+        "pid": 3064440,
+        "name": "Zach LaVine",
+        "val": 47.0,
+        "n": 39,
+        "rank": 106,
+        "pg": {
+         "PTS": 19.2,
+         "REB": 2.8,
+         "AST": 2.3,
+         "STL": 0.7,
+         "BLK": 0.3,
+         "3PM": 2.5
+        },
+        "inj": ""
+       },
+       "grade": "B"
+      },
+      {
+       "team": 1,
+       "diff": -19.8,
+       "val": 1679.6,
+       "best": {
+        "pick": 171,
+        "round": 13,
+        "team": 1,
+        "pid": 4065648,
+        "name": "Jayson Tatum",
+        "val": 85.4,
+        "n": 16,
+        "rank": 86,
+        "pg": {
+         "PTS": 21.8,
+         "REB": 10.0,
+         "AST": 5.3,
+         "STL": 1.4,
+         "BLK": 0.2,
+         "3PM": 2.9
+        },
+        "inj": ""
+       },
+       "worst": {
+        "pick": 26,
+        "round": 2,
+        "team": 1,
+        "pid": 4871145,
+        "name": "Josh Giddey",
+        "val": 165.9,
+        "n": 54,
+        "rank": 62,
+        "pg": {
+         "PTS": 17.0,
+         "REB": 8.3,
+         "AST": 9.1,
+         "STL": 1.0,
+         "BLK": 0.5,
+         "3PM": 1.9
+        },
+        "inj": ""
+       },
+       "grade": "B-"
+      },
+      {
+       "team": 9,
+       "diff": -54.6,
+       "val": 1291.9,
+       "best": {
+        "pick": 180,
+        "round": 13,
+        "team": 9,
+        "pid": 4903027,
+        "name": "Cedric Coward",
+        "val": 17.6,
+        "n": 62,
+        "rank": 124,
+        "pg": {
+         "PTS": 13.6,
+         "REB": 5.9,
+         "AST": 2.8,
+         "STL": 0.6,
+         "BLK": 0.4,
+         "3PM": 1.5
+        },
+        "inj": ""
+       },
+       "worst": {
+        "pick": 40,
+        "round": 3,
+        "team": 9,
+        "pid": 4566434,
+        "name": "Franz Wagner",
+        "val": 79.3,
+        "n": 34,
+        "rank": 89,
+        "pg": {
+         "PTS": 20.6,
+         "REB": 5.2,
+         "AST": 3.3,
+         "STL": 0.9,
+         "BLK": 0.3,
+         "3PM": 1.4
+        },
+        "inj": ""
+       },
+       "grade": "B-"
+      },
+      {
+       "team": 6,
+       "diff": -93.7,
+       "val": 1191.8,
+       "best": {
+        "pick": 181,
+        "round": 13,
+        "team": 6,
+        "pid": 4277811,
+        "name": "Collin Sexton",
+        "val": 18.5,
+        "n": 68,
+        "rank": 120,
+        "pg": {
+         "PTS": 15.4,
+         "REB": 2.3,
+         "AST": 3.3,
+         "STL": 1.1,
+         "BLK": 0.1,
+         "3PM": 1.6
+        },
+        "inj": ""
+       },
+       "worst": {
+        "pick": 13,
+        "round": 1,
+        "team": 6,
+        "pid": 4277905,
+        "name": "Trae Young",
+        "val": 20.6,
+        "n": 15,
+        "rank": 119,
+        "pg": {
+         "PTS": 17.9,
+         "REB": 2.0,
+         "AST": 8.0,
+         "STL": 0.9,
+         "BLK": 0.1,
+         "3PM": 1.8
+        },
+        "inj": ""
+       },
+       "grade": "B-"
+      },
+      {
+       "team": 11,
+       "diff": -469.6,
+       "val": 927.0,
+       "best": {
+        "pick": 177,
+        "round": 13,
+        "team": 11,
+        "pid": 2991139,
+        "name": "Kris Dunn",
+        "val": -10.9,
+        "n": 82,
+        "rank": 140,
+        "pg": {
+         "PTS": 7.3,
+         "REB": 3.3,
+         "AST": 3.6,
+         "STL": 1.6,
+         "BLK": 0.2,
+         "3PM": 1.0
+        },
+        "inj": ""
+       },
+       "worst": {
+        "pick": 48,
+        "round": 4,
+        "team": 11,
+        "pid": 4351851,
+        "name": "Anfernee Simons",
+        "val": -45.4,
+        "n": 55,
+        "rank": 150,
+        "pg": {
+         "PTS": 14.3,
+         "REB": 2.5,
+         "AST": 2.4,
+         "STL": 0.5,
+         "BLK": 0.1,
+         "3PM": 2.7
+        },
+        "inj": ""
+       },
+       "grade": "C"
+      },
+      {
+       "team": 5,
+       "diff": -714.2,
+       "val": 992.0,
+       "best": {
+        "pick": 114,
+        "round": 9,
+        "team": 5,
+        "pid": 4711294,
+        "name": "Matas Buzelis",
+        "val": 186.1,
+        "n": 77,
+        "rank": 55,
+        "pg": {
+         "PTS": 16.3,
+         "REB": 5.8,
+         "AST": 2.1,
+         "STL": 0.7,
+         "BLK": 1.5,
+         "3PM": 2.2
+        },
+        "inj": ""
+       },
+       "worst": {
+        "pick": 58,
+        "round": 5,
+        "team": 5,
+        "pid": 4277956,
+        "name": "Jordan Poole",
+        "val": -76.6,
+        "n": 39,
+        "rank": 160,
+        "pg": {
+         "PTS": 13.4,
+         "REB": 2.0,
+         "AST": 3.1,
+         "STL": 0.6,
+         "BLK": 0.4,
+         "3PM": 2.5
+        },
+        "inj": ""
+       },
+       "grade": "D"
+      },
+      {
+       "team": 7,
+       "diff": -1493.3,
+       "val": 36.1,
+       "best": {
+        "pick": 146,
+        "round": 11,
+        "team": 7,
+        "pid": 3995,
+        "name": "Jrue Holiday",
+        "val": 86.5,
+        "n": 53,
+        "rank": 84,
+        "pg": {
+         "PTS": 16.3,
+         "REB": 4.6,
+         "AST": 6.1,
+         "STL": 1.0,
+         "BLK": 0.1,
+         "3PM": 2.6
+        },
+        "inj": ""
+       },
+       "worst": {
+        "pick": 62,
+        "round": 5,
+        "team": 7,
+        "pid": 4432174,
+        "name": "Cam Thomas",
+        "val": -206.6,
+        "n": 42,
+        "rank": 180,
+        "pg": {
+         "PTS": 13.5,
+         "REB": 1.7,
+         "AST": 2.6,
+         "STL": 0.2,
+         "BLK": 0.1,
+         "3PM": 1.2
+        },
+        "inj": ""
+       },
+       "grade": "F"
+      }
+     ],
+     "steals": [
+      {
+       "pick": 172,
+       "round": 13,
+       "team": 2,
+       "pid": 4278039,
+       "name": "Nickeil Alexander-Walker",
+       "val": 396.6,
+       "n": 78,
+       "rank": 15,
+       "pg": {
+        "PTS": 20.8,
+        "REB": 3.4,
+        "AST": 3.7,
+        "STL": 1.3,
+        "BLK": 0.5,
+        "3PM": 3.2
+       },
+       "inj": ""
+      },
+      {
+       "pick": 169,
+       "round": 13,
+       "team": 14,
+       "pid": 5124612,
+       "name": "VJ Edgecombe",
+       "val": 229.7,
+       "n": 75,
+       "rank": 40,
+       "pg": {
+        "PTS": 16.0,
+        "REB": 5.6,
+        "AST": 4.2,
+        "STL": 1.4,
+        "BLK": 0.5,
+        "3PM": 2.0
+       },
+       "inj": ""
+      },
+      {
+       "pick": 112,
+       "round": 8,
+       "team": 14,
+       "pid": 4395724,
+       "name": "Immanuel Quickley",
+       "val": 242.5,
+       "n": 70,
+       "rank": 37,
+       "pg": {
+        "PTS": 16.4,
+        "REB": 4.0,
+        "AST": 5.9,
+        "STL": 1.3,
+        "BLK": 0.1,
+        "3PM": 2.5
+       },
+       "inj": ""
+      },
+      {
+       "pick": 108,
+       "round": 8,
+       "team": 13,
+       "pid": 4433627,
+       "name": "Keyonte George",
+       "val": 243.6,
+       "n": 54,
+       "rank": 36,
+       "pg": {
+        "PTS": 23.6,
+        "REB": 3.7,
+        "AST": 6.1,
+        "STL": 1.1,
+        "BLK": 0.3,
+        "3PM": 2.5
+       },
+       "inj": ""
+      },
+      {
+       "pick": 95,
+       "round": 7,
+       "team": 12,
+       "pid": 5105565,
+       "name": "Donovan Clingan",
+       "val": 291.2,
+       "n": 77,
+       "rank": 28,
+       "pg": {
+        "PTS": 12.1,
+        "REB": 11.6,
+        "AST": 2.1,
+        "STL": 0.6,
+        "BLK": 1.7,
+        "3PM": 1.1
+       },
+       "inj": ""
+      }
+     ],
+     "busts": [
+      {
+       "pick": 38,
+       "round": 3,
+       "team": 8,
+       "pid": 4395651,
+       "name": "Coby White",
+       "val": -59.5,
+       "n": 50,
+       "rank": 153,
+       "pg": {
+        "PTS": 17.4,
+        "REB": 3.4,
+        "AST": 4.0,
+        "STL": 0.5,
+        "BLK": 0.1,
+        "3PM": 2.3
+       },
+       "inj": ""
+      },
+      {
+       "pick": 13,
+       "round": 1,
+       "team": 6,
+       "pid": 4277905,
+       "name": "Trae Young",
+       "val": 20.6,
+       "n": 15,
+       "rank": 119,
+       "pg": {
+        "PTS": 17.9,
+        "REB": 2.0,
+        "AST": 8.0,
+        "STL": 0.9,
+        "BLK": 0.1,
+        "3PM": 1.8
+       },
+       "inj": ""
+      },
+      {
+       "pick": 16,
+       "round": 2,
+       "team": 6,
+       "pid": 3155942,
+       "name": "Domantas Sabonis",
+       "val": 24.0,
+       "n": 19,
+       "rank": 118,
+       "pg": {
+        "PTS": 15.8,
+        "REB": 11.4,
+        "AST": 4.1,
+        "STL": 0.9,
+        "BLK": 0.2,
+        "3PM": 0.3
+       },
+       "inj": ""
+      },
+      {
+       "pick": 48,
+       "round": 4,
+       "team": 11,
+       "pid": 4351851,
+       "name": "Anfernee Simons",
+       "val": -45.4,
+       "n": 55,
+       "rank": 150,
+       "pg": {
+        "PTS": 14.3,
+        "REB": 2.5,
+        "AST": 2.4,
+        "STL": 0.5,
+        "BLK": 0.1,
+        "3PM": 2.7
+       },
+       "inj": ""
+      },
+      {
+       "pick": 6,
+       "round": 1,
+       "team": 7,
+       "pid": 3032977,
+       "name": "Giannis Antetokounmpo",
+       "val": 90.8,
+       "n": 36,
+       "rank": 82,
+       "pg": {
+        "PTS": 27.6,
+        "REB": 9.8,
+        "AST": 5.4,
+        "STL": 0.9,
+        "BLK": 0.7,
+        "3PM": 0.4
+       },
+       "inj": ""
+      }
+     ],
+     "order": {
+      "14": 1,
+      "5": 2,
+      "1": 3,
+      "2": 4,
+      "13": 5,
+      "7": 6,
+      "4": 7,
+      "10": 8,
+      "11": 9,
+      "8": 10,
+      "12": 11,
+      "9": 12,
+      "6": 13,
+      "3": 14
+     },
+     "rounds": 13
+    },
+    "injury": [
+     {
+      "team": 2,
+      "games": 364,
+      "val": 1082.6,
+      "who": [
+       {
+        "name": "Zach Edey",
+        "n": 67
+       },
+       {
+        "name": "Keegan Murray",
+        "n": 55
+       },
+       {
+        "name": "Darius Garland",
+        "n": 53
+       }
+      ]
+     },
+     {
+      "team": 4,
+      "games": 279,
+      "val": 871.6,
+      "who": [
+       {
+        "name": "Ja Morant",
+        "n": 43
+       },
+       {
+        "name": "Kevin Porter Jr.",
+        "n": 40
+       },
+       {
+        "name": "Ivica Zubac",
+        "n": 39
+       }
+      ]
+     },
+     {
+      "team": 9,
+      "games": 201,
+      "val": 716.6,
+      "who": [
+       {
+        "name": "Stephen Curry",
+        "n": 39
+       },
+       {
+        "name": "Franz Wagner",
+        "n": 38
+       },
+       {
+        "name": "Jaren Jackson Jr.",
+        "n": 27
+       }
+      ]
+     },
+     {
+      "team": 13,
+      "games": 184,
+      "val": 666.5,
+      "who": [
+       {
+        "name": "Tyler Herro",
+        "n": 49
+       },
+       {
+        "name": "James Harden",
+        "n": 33
+       },
+       {
+        "name": "Keyonte George",
+        "n": 24
+       }
+      ]
+     },
+     {
+      "team": 10,
+      "games": 145,
+      "val": 597.9,
+      "who": [
+       {
+        "name": "Anthony Davis",
+        "n": 39
+       },
+       {
+        "name": "Austin Reaves",
+        "n": 26
+       },
+       {
+        "name": "Cedric Coward",
+        "n": 18
+       }
+      ]
+     },
+     {
+      "team": 3,
+      "games": 209,
+      "val": 522.3,
+      "who": [
+       {
+        "name": "Nikola Vucevic",
+        "n": 41
+       },
+       {
+        "name": "Ayo Dosunmu",
+        "n": 30
+       },
+       {
+        "name": "Trae Young",
+        "n": 30
+       }
+      ]
+     },
+     {
+      "team": 6,
+      "games": 187,
+      "val": 436.0,
+      "who": [
+       {
+        "name": "Domantas Sabonis",
+        "n": 37
+       },
+       {
+        "name": "Trae Young",
+        "n": 36
+       },
+       {
+        "name": "Collin Sexton",
+        "n": 27
+       }
+      ]
+     },
+     {
+      "team": 1,
+      "games": 116,
+      "val": 430.5,
+      "who": [
+       {
+        "name": "Alex Sarr",
+        "n": 29
+       },
+       {
+        "name": "Josh Giddey",
+        "n": 24
+       },
+       {
+        "name": "Josh Hart",
+        "n": 15
+       }
+      ]
+     },
+     {
+      "team": 14,
+      "games": 97,
+      "val": 422.2,
+      "who": [
+       {
+        "name": "Cameron Johnson",
+        "n": 17
+       },
+       {
+        "name": "Nikola Jokic",
+        "n": 17
+       },
+       {
+        "name": "OG Anunoby",
+        "n": 14
+       }
+      ]
+     },
+     {
+      "team": 12,
+      "games": 133,
+      "val": 421.2,
+      "who": [
+       {
+        "name": "Giannis Antetokounmpo",
+        "n": 28
+       },
+       {
+        "name": "Brandon Miller",
+        "n": 17
+       },
+       {
+        "name": "Deni Avdija",
+        "n": 16
+       }
+      ]
+     },
+     {
+      "team": 8,
+      "games": 173,
+      "val": 368.2,
+      "who": [
+       {
+        "name": "Kristaps Porzingis",
+        "n": 58
+       },
+       {
+        "name": "Bennedict Mathurin",
+        "n": 45
+       },
+       {
+        "name": "Jalen Suggs",
+        "n": 25
+       }
+      ]
+     },
+     {
+      "team": 5,
+      "games": 142,
+      "val": 340.0,
+      "who": [
+       {
+        "name": "Shaedon Sharpe",
+        "n": 30
+       },
+       {
+        "name": "Kyshawn George",
+        "n": 29
+       },
+       {
+        "name": "Bilal Coulibaly",
+        "n": 19
+       }
+      ]
+     },
+     {
+      "team": 11,
+      "games": 198,
+      "val": 281.2,
+      "who": [
+       {
+        "name": "Aaron Gordon",
+        "n": 45
+       },
+       {
+        "name": "Jusuf Nurkic",
+        "n": 27
+       },
+       {
+        "name": "Norman Powell",
+        "n": 24
+       }
+      ]
+     },
+     {
+      "team": 7,
+      "games": 150,
+      "val": 269.6,
+      "who": [
+       {
+        "name": "Jalen Williams",
+        "n": 46
+       },
+       {
+        "name": "Jrue Holiday",
+        "n": 26
+       },
+       {
+        "name": "Giannis Antetokounmpo",
+        "n": 14
+       }
+      ]
+     }
+    ],
+    "records": {
+     "game": {
+      "PTS": {
+       "v": 83.0,
+       "pid": 4066261,
+       "name": "Bam Adebayo",
+       "team": 13,
+       "sp": 141,
+       "date": "2026-03-11",
+       "line": {
+        "PTS": 83.0,
+        "REB": 9.0,
+        "AST": 3.0,
+        "STL": 2.0,
+        "BLK": 2.0,
+        "3PM": 7.0,
+        "TO": 5.0,
+        "FGM": 20.0,
+        "FGA": 43.0,
+        "FTM": 36.0,
+        "FTA": 43.0,
+        "MIN": 42.0
+       }
+      },
+      "REB": {
+       "v": 25.0,
+       "pid": 4433134,
+       "name": "Scottie Barnes",
+       "team": 4,
+       "sp": 69,
+       "date": "2025-12-28",
+       "line": {
+        "PTS": 23.0,
+        "REB": 25.0,
+        "AST": 10.0,
+        "STL": 3.0,
+        "BLK": 1.0,
+        "3PM": 0.0,
+        "TO": 3.0,
+        "FGM": 11.0,
+        "FGA": 17.0,
+        "FTM": 1.0,
+        "FTA": 1.0,
+        "MIN": 42.0
+       }
+      },
+      "AST": {
+       "v": 22.0,
+       "pid": 4683766,
+       "name": "Isaiah Collier",
+       "team": 13,
+       "sp": 106,
+       "date": "2026-02-04",
+       "line": {
+        "PTS": 17.0,
+        "REB": 5.0,
+        "AST": 22.0,
+        "STL": 3.0,
+        "BLK": 0.0,
+        "3PM": 0.0,
+        "TO": 2.0,
+        "FGM": 6.0,
+        "FGA": 16.0,
+        "FTM": 5.0,
+        "FTA": 8.0,
+        "MIN": 48.0
+       }
+      },
+      "STL": {
+       "v": 8.0,
+       "pid": 4277813,
+       "name": "Herbert Jones",
+       "team": 14,
+       "sp": 59,
+       "date": "2025-12-19",
+       "line": {
+        "PTS": 18.0,
+        "REB": 3.0,
+        "AST": 3.0,
+        "STL": 8.0,
+        "BLK": 1.0,
+        "3PM": 2.0,
+        "TO": 1.0,
+        "FGM": 7.0,
+        "FGA": 14.0,
+        "FTM": 2.0,
+        "FTA": 2.0,
+        "MIN": 38.0
+       }
+      },
+      "BLK": {
+       "v": 9.0,
+       "pid": 5104157,
+       "name": "Victor Wembanyama",
+       "team": 5,
+       "sp": 4,
+       "date": "2025-10-25",
+       "line": {
+        "PTS": 29.0,
+        "REB": 11.0,
+        "AST": 2.0,
+        "STL": 1.0,
+        "BLK": 9.0,
+        "3PM": 0.0,
+        "TO": 0.0,
+        "FGM": 13.0,
+        "FGA": 23.0,
+        "FTM": 3.0,
+        "FTA": 4.0,
+        "MIN": 32.0
+       }
+      },
+      "3PM": {
+       "v": 12.0,
+       "pid": 3975,
+       "name": "Stephen Curry",
+       "team": 9,
+       "sp": 55,
+       "date": "2025-12-14",
+       "line": {
+        "PTS": 48.0,
+        "REB": 3.0,
+        "AST": 2.0,
+        "STL": 3.0,
+        "BLK": 1.0,
+        "3PM": 12.0,
+        "TO": 3.0,
+        "FGM": 16.0,
+        "FGA": 26.0,
+        "FTM": 4.0,
+        "FTA": 4.0,
+        "MIN": 35.0
+       }
+      }
+     },
+     "day": {
+      "v": 215,
+      "team": 7,
+      "sp": 6,
+      "date": "2025-10-26"
+     },
+     "bestGame": {
+      "val": 41.6,
+      "pid": 6450,
+      "name": "Kawhi Leonard",
+      "team": 10,
+      "sp": 69,
+      "date": "2025-12-28",
+      "line": {
+       "PTS": 55.0,
+       "REB": 11.0,
+       "AST": 2.0,
+       "STL": 5.0,
+       "BLK": 3.0,
+       "3PM": 5.0,
+       "TO": 3.0,
+       "FGM": 17.0,
+       "FGA": 26.0,
+       "FTM": 16.0,
+       "FTA": 17.0,
+       "MIN": 39.0
+      }
+     }
+    },
+    "personality": {
+     "1": {
+      "labels": [
+       "rain",
+       "balanced"
+      ],
+      "best": [
+       "BLK",
+       "PTS",
+       "3PM"
+      ],
+      "worst": [
+       "STL",
+       "FG%"
+      ]
+     },
+     "2": {
+      "labels": [
+       "loyal",
+       "rebuild"
+      ],
+      "best": [
+       "TO",
+       "FG%",
+       "FT%"
+      ],
+      "worst": [
+       "AST",
+       "STL"
+      ]
+     },
+     "3": {
+      "labels": [
+       "rain",
+       "puntto"
+      ],
+      "best": [
+       "3PM",
+       "PTS",
+       "AST"
+      ],
+      "worst": [
+       "FG%",
+       "TO"
+      ]
+     },
+     "4": {
+      "labels": [
+       "thief",
+       "line"
+      ],
+      "best": [
+       "STL",
+       "FT%",
+       "BLK"
+      ],
+      "worst": [
+       "FG%",
+       "AST"
+      ]
+     },
+     "5": {
+      "labels": [
+       "puntft",
+       "rebuild"
+      ],
+      "best": [
+       "TO",
+       "BLK",
+       "REB"
+      ],
+      "worst": [
+       "AST",
+       "FG%"
+      ]
+     },
+     "6": {
+      "labels": [
+       "balanced",
+       "grinder"
+      ],
+      "best": [
+       "3PM",
+       "FT%",
+       "STL"
+      ],
+      "worst": [
+       "BLK",
+       "TO"
+      ]
+     },
+     "7": {
+      "labels": [
+       "rebuild",
+       "puntft"
+      ],
+      "best": [
+       "TO",
+       "FG%",
+       "AST"
+      ],
+      "worst": [
+       "REB",
+       "STL"
+      ]
+     },
+     "8": {
+      "labels": [
+       "careful",
+       "rebuild"
+      ],
+      "best": [
+       "TO",
+       "FT%",
+       "BLK"
+      ],
+      "worst": [
+       "PTS",
+       "REB"
+      ]
+     },
+     "9": {
+      "labels": [
+       "rain"
+      ],
+      "best": [
+       "3PM",
+       "STL",
+       "PTS"
+      ],
+      "worst": [
+       "FG%",
+       "TO"
+      ]
+     },
+     "10": {
+      "labels": [
+       "paint",
+       "thief"
+      ],
+      "best": [
+       "STL",
+       "FG%",
+       "REB"
+      ],
+      "worst": [
+       "3PM",
+       "FT%"
+      ]
+     },
+     "11": {
+      "labels": [
+       "puntft",
+       "loyal"
+      ],
+      "best": [
+       "FG%",
+       "TO",
+       "AST"
+      ],
+      "worst": [
+       "BLK",
+       "FT%"
+      ]
+     },
+     "12": {
+      "labels": [
+       "puntto",
+       "paint"
+      ],
+      "best": [
+       "PTS",
+       "REB",
+       "BLK"
+      ],
+      "worst": [
+       "TO",
+       "FT%"
+      ]
+     },
+     "13": {
+      "labels": [
+       "line",
+       "puntto"
+      ],
+      "best": [
+       "FT%",
+       "AST",
+       "PTS"
+      ],
+      "worst": [
+       "TO",
+       "BLK"
+      ]
+     },
+     "14": {
+      "labels": [
+       "dime",
+       "puntto"
+      ],
+      "best": [
+       "AST",
+       "REB",
+       "STL"
+      ],
+      "worst": [
+       "TO",
+       "3PM"
+      ]
+     }
+    },
+    "latest": 167,
+    "days": 167
+   }
+  }
  }
 }
