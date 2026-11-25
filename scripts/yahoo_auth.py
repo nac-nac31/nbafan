@@ -27,7 +27,7 @@ def token_request(cid, secret, **fields):
 def main():
     cid = os.environ.get("YAHOO_CLIENT_ID") or input("Client ID: ").strip()
     secret = os.environ.get("YAHOO_CLIENT_SECRET") or getpass.getpass("Client Secret (ekrana yazılmaz): ").strip()
-    url = AUTH + "?" + urllib.parse.urlencode({"client_id": cid, "redirect_uri": REDIRECT, "response_type": "code"})
+    url = AUTH + "?" + urllib.parse.urlencode({"client_id": cid, "redirect_uri": REDIRECT, "response_type": "code", "scope": "fspt-r"})
     print("\nTarayıcıda açılıyor (açılmazsa bu adresi kopyala):\n" + url + "\n")
     webbrowser.open(url)
     got = input("Yönlendirilen sayfanın adresini ya da sadece code değerini yapıştır: ").strip()
