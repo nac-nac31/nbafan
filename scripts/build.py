@@ -134,11 +134,38 @@ def compute(raw):
     }
 
 
+def localize_logos(teams, out):
+    """Logoları siteye kopyalar; ESPN'in özel yüklenen resimleri başka sitelerden doğrudan açılmıyor."""
+    import urllib.request
+    d = out / "logos"
+    d.mkdir(parents=True, exist_ok=True)
+    for t in teams:
+        url = t.get("logo")
+        if not url:
+            continue
+        try:
+            req = urllib.request.Request(url, headers={"User-Agent": "Mozilla/5.0", "Referer": "https://fantasy.espn.com/"})
+            with urllib.request.urlopen(req, timeout=30) as r:
+                body, ctype = r.read(), r.headers.get("Content-Type", "")
+            ext = "svg" if "svg" in ctype or url.endswith(".svg") else "png" if "png" in ctype else "gif" if "gif" in ctype else "webp" if "webp" in ctype else "jpg"
+            if len(body) < 50:
+                raise ValueError("boş yanıt")
+            (d / f"{t['id']}.{ext}").write_bytes(body)
+            t["logo"] = f"logos/{t['id']}.{ext}"
+            print(f"logo ok: {t['name']} ({ctype}, {len(body)} bayt)")
+        except Exception as e:  # logo yoksa kısaltma gösterilir
+            print(f"logo alınamadı: {t['name']}: {e}")
+
+
 def main():
     season = int(os.environ.get("SEASON") or current_season())
     raw_dir = pathlib.Path("data/raw") / str(season)
     raw = {n: json.loads((raw_dir / f"{n}.json").read_text()) for n in ("league", "matchups")}
     data = compute(raw)
+    out = pathlib.Path("site")
+    out.mkdir(exist_ok=True)
+    if os.environ.get("SKIP_LOGOS") != "1":
+        localize_logos(data["teams"], out)
     pathlib.Path("data/stats.json").write_text(json.dumps(data, ensure_ascii=False, indent=1))
     tpl = pathlib.Path("templates")
     page = (
@@ -150,8 +177,6 @@ def main():
         + "</body></html>\n"
     )
     page = page.replace("<h1 id=\"lg\">Fantasy 26-27</h1>", f"<h1 id=\"lg\">{data['league']}</h1>")
-    out = pathlib.Path("site")
-    out.mkdir(exist_ok=True)
     (out / "index.html").write_text(page)
     print(f"site/index.html yazıldı: {len(data['weeks'])} hafta, {len(data['teams'])} takım")
 
