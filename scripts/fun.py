@@ -389,13 +389,14 @@ def build_fun(raw, data, daily, logs, Z, seasons=None, cur_season=None):
     rec = {"week": {}, "game": {}, "day": None}
     allw = []  # (season, w, team-name, owner, cats)
     for y, (Ly, dy) in (seasons or {}).items():
+        okk = {t["id"]: owner_key_of(t) for t in Ly["teams"]}
         for t in dy["teams"]:
             for i, wk in enumerate(t.get("_wk") or []):
-                allw.append((y, t["games"][i]["w"], t["name"], t["id"] if y == cur_season else None, wk))
+                allw.append((y, t["games"][i]["w"], t["name"], t["id"] if y == cur_season else None, wk, okk.get(t["id"])))
     if not allw:
         for t in data["teams"]:
             for i, wk in enumerate(t.get("_wk") or []):
-                allw.append((None, t["games"][i]["w"], t["name"], t["id"], wk))
+                allw.append((None, t["games"][i]["w"], t["name"], t["id"], wk, None))
     cur_y = cur_season
     for c in CATS:
         s = SID[c]
@@ -480,9 +481,10 @@ def owner_key_of(team):
 
 
 def wrec(a, s, cur_y):
-    y, w, name, tid, wk = a
+    y, w, name, tid, wk, ok = a
     v = wk[s]
-    return {"v": round(v, 4) if s in ("19", "20") else round(v), "y": y, "w": w, "name": name, "team": tid, "cur": y == cur_y}
+    return {"v": round(v, 4) if s in ("19", "20") else round(v), "y": y, "w": w, "name": name, "team": tid, "owner": ok,
+            "cur": y == cur_y}
 
 
 def slim(d):

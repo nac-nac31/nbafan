@@ -90,14 +90,14 @@ function fxRivals(){const rv=FN.rivals||[],bl=FN.blowouts||[];
   const side=(k)=>{const t=byOwner[k];return t?`<a class="vs-t" href="${link(t)}">${logo(t,32)}<span>${esc(t.name)}</span></a>`:`<span class="vs-t"><span class="logo" style="width:32px;height:32px"></span><span>${esc(ownName(k))}</span></span>`};
   const rows=rv.map(p=>{const tot=p.cats[0]+p.cats[1]||1;return `<div class="vs">${side(p.a)}<div class="vs-m"><div class="vs-r"><span class="${p.w[0]>p.w[1]?'lead':''}">${p.w[0]}</span>–<span class="${p.w[1]>p.w[0]?'lead r':''}">${p.w[1]}</span>${p.w[2]?`<small>–${p.w[2]}</small>`:''}</div>
    <div class="vs-b"><i style="width:${(p.cats[0]/tot*100).toFixed(0)}%"></i></div><small>${p.cats[0]}–${p.cats[1]} ${FX.rival.cats} · ${FX.rival.games(p.n)}</small></div>${side(p.b)}</div>`}).join('');
-  const nm=(g,s)=>g[s==='a'?'ta':'tb']&&byId[g[s==='a'?'ta':'tb']]?esc(byId[g[s==='a'?'ta':'tb']].name):esc(g[s==='a'?'an':'bn']);
+  const nm=(g,s)=>{const t=byOwner[g[s]];return t?esc(t.name):esc(g[s+'n'])};
   const blow=bl.map(g=>{const aw=g.s[0]>g.s[1];return `<div class="blow"><span class="bs">${Math.max(...g.s)}–${Math.min(...g.s)}</span><div class="fm"><b>${aw?nm(g,'a'):nm(g,'b')}</b><small>${EN?'over ':''}${aw?nm(g,'b'):nm(g,'a')}${EN?'':' karşısında'} · ${FX.w(g.w)}${g.y&&g.y!==DATA.history.seasons.slice(-1)[0]?` · ${g.y-1}-${String(g.y).slice(2)}`:''}</small></div></div>`}).join('');
   const own=(FN.owned||[]).map(p=>{const a=p.w[0]>p.w[1];return `<div class="frow"><div class="fm"><b>${esc(ownName(a?p.a:p.b))}</b><small>${esc(ownName(a?p.b:p.a))} · ${Math.max(p.w[0],p.w[1])}–${Math.min(p.w[0],p.w[1])}</small></div></div>`}).join('');
   return fsec('rival',FX.rival.h,FX.rival.hint,`<div class="panel">${rows}</div><h3 class="fh3">${FX.rival.blow}</h3><div class="blows">${blow}</div><p class="hint">${FX.rival.close(FN.closeCount,FN.nGames)}</p>${own?`<h3 class="fh3">${FX.rival.owned}</h3><div class="panel">${own}</div>`:''}`)}
 
 function fxRecords(){const R=FN.records||{},W=R.week||{};
   const fv=(c,v)=>c.includes('%')?v.toFixed(3).replace(/^0/,''):Math.round(v);
-  const who=r=>`${r.team&&byId[r.team]?esc(byId[r.team].name):esc(r.name)} · ${FX.w(r.w)}${r.cur?'':` · ${r.y-1}-${String(r.y).slice(2)}`}`;
+  const who=r=>`${r.team&&byId[r.team]?esc(byId[r.team].name):byOwner[r.owner]?esc(byOwner[r.owner].name):esc(r.name)} · ${FX.w(r.w)}${r.cur?'':` · ${r.y-1}-${String(r.y).slice(2)}`}`;
   const tiles=DATA.cats.filter(c=>W[c]).map(c=>`<div class="rtile"><span class="k">${c}</span><span class="v">${fv(c,W[c].best.v)}</span><span class="s">${who(W[c].best)}</span><span class="lo">${FX.rec.low}: ${fv(c,W[c].worst.v)} · ${who(W[c].worst)}</span></div>`).join('');
   const G=R.game||{};
   const gt=['PTS','REB','AST','3PM','STL','BLK'].filter(c=>G[c]).map(c=>`<div class="rtile g"><span class="k">${FX.sl[c]}</span><span class="v">${Math.round(G[c].v)}</span><span class="s"><b>${esc(G[c].name)}</b></span><span class="lo">${tnm(G[c].team)} · ${dstr(G[c].date)}</span></div>`).join('');
