@@ -32,6 +32,21 @@ def main():
     for name, views in VIEWS.items():
         (out / f"{name}.json").write_text(json.dumps(get(season, views), ensure_ascii=False))
         print(f"{season} {name} ok")
+    fetch_history(json.loads((out / "league.json").read_text()))
+
+
+def fetch_history(league):
+    """Geçmiş sezonlar: ESPN çerezleri (ESPN_S2, SWID) gerekir."""
+    for y in league.get("status", {}).get("previousSeasons", []):
+        out = pathlib.Path("data/raw") / str(y)
+        out.mkdir(parents=True, exist_ok=True)
+        try:
+            for name, views in (("league", VIEWS["league"]), ("matchups", VIEWS["matchups"])):
+                d = get(y, views)
+                (out / f"{name}.json").write_text(json.dumps(d, ensure_ascii=False))
+            print(f"{y} geçmiş sezon ok: {len(d.get('schedule', []))} maç")
+        except Exception as e:  # çerez yoksa ya da ESPN izin vermezse
+            print(f"{y} geçmiş sezon alınamadı: {e}")
 
 
 if __name__ == "__main__":

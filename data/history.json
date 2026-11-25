@@ -1,0 +1,883 @@
+{
+ "seasons": [
+  2027
+ ],
+ "owners": [
+  {
+   "key": "56d5622a52",
+   "seasons": [
+    {
+     "y": 2027,
+     "name": "31 Chechkers",
+     "teamId": 3,
+     "final": null,
+     "mrec": [
+      4,
+      1,
+      0
+     ],
+     "cat": [
+      28,
+      16,
+      1
+     ],
+     "apPct": 0.4686868686868687
+    }
+   ],
+   "mrec": [
+    4,
+    1,
+    0
+   ],
+   "cat": [
+    28,
+    16,
+    1
+   ],
+   "ap": [
+    227,
+    258,
+    10
+   ],
+   "titles": 0,
+   "h2h": {
+    "bacd1954d9": [
+     1,
+     0,
+     0
+    ],
+    "174f89b3ac": [
+     1,
+     0,
+     0
+    ],
+    "fedcd29c32": [
+     0,
+     1,
+     0
+    ],
+    "961506dda6": [
+     1,
+     0,
+     0
+    ],
+    "f14701da76": [
+     1,
+     0,
+     0
+    ]
+   },
+   "active": true,
+   "name": "31 Chechkers",
+   "teamId": 3,
+   "oldNames": [],
+   "nSeasons": 1,
+   "apPct": 0.4686868686868687,
+   "catPct": 0.6333333333333333,
+   "best": null
+  },
+  {
+   "key": "cd31f49737",
+   "seasons": [
+    {
+     "y": 2027,
+     "name": "Acibadem Elephants",
+     "teamId": 6,
+     "final": null,
+     "mrec": [
+      4,
+      1,
+      0
+     ],
+     "cat": [
+      27,
+      18,
+      0
+     ],
+     "apPct": 0.6323232323232323
+    }
+   ],
+   "mrec": [
+    4,
+    1,
+    0
+   ],
+   "cat": [
+    27,
+    18,
+    0
+   ],
+   "ap": [
+    310,
+    179,
+    6
+   ],
+   "titles": 0,
+   "h2h": {
+    "c4071ffe1e": [
+     0,
+     1,
+     0
+    ],
+    "287e8ede40": [
+     1,
+     0,
+     0
+    ],
+    "47fffeafbf": [
+     1,
+     0,
+     0
+    ],
+    "ee511c73e8": [
+     1,
+     0,
+     0
+    ],
+    "104a39878a": [
+     1,
+     0,
+     0
+    ]
+   },
+   "active": true,
+   "name": "Acibadem Elephants",
+   "teamId": 6,
+   "oldNames": [],
+   "nSeasons": 1,
+   "apPct": 0.6323232323232323,
+   "catPct": 0.6,
+   "best": null
+  },
+  {
+   "key": "c4071ffe1e",
+   "seasons": [
+    {
+     "y": 2027,
+     "name": "Doggy dogs",
+     "teamId": 13,
+     "final": null,
+     "mrec": [
+      3,
+      2,
+      0
+     ],
+     "cat": [
+      26,
+      19,
+      0
+     ],
+     "apPct": 0.5555555555555556
+    }
+   ],
+   "mrec": [
+    3,
+    2,
+    0
+   ],
+   "cat": [
+    26,
+    19,
+    0
+   ],
+   "ap": [
+    272,
+    217,
+    6
+   ],
+   "titles": 0,
+   "h2h": {
+    "cd31f49737": [
+     1,
+     0,
+     0
+    ],
+    "bacd1954d9": [
+     0,
+     1,
+     0
+    ],
+    "174f89b3ac": [
+     0,
+     1,
+     0
+    ],
+    "fedcd29c32": [
+     1,
+     0,
+     0
+    ],
+    "961506dda6": [
+     1,
+     0,
+     0
+    ]
+   },
+   "active": true,
+   "name": "Doggy dogs",
+   "teamId": 13,
+   "oldNames": [],
+   "nSeasons": 1,
+   "apPct": 0.5555555555555556,
+   "catPct": 0.5777777777777777,
+   "best": null
+  },
+  {
+   "key": "ee511c73e8",
+   "seasons": [
+    {
+     "y": 2027,
+     "name": "BEGE",
+     "teamId": 5,
+     "final": null,
+     "mrec": [
+      2,
+      3,
+      0
+     ],
+     "cat": [
+      25,
+      19,
+      1
+     ],
+     "apPct": 0.5323232323232323
+    }
+   ],
+   "mrec": [
+    2,
+    3,
+    0
+   ],
+   "cat": [
+    25,
+    19,
+    1
+   ],
+   "ap": [
+    260,
+    228,
+    7
+   ],
+   "titles": 0,
+   "h2h": {
+    "287e8ede40": [
+     0,
+     1,
+     0
+    ],
+    "47fffeafbf": [
+     1,
+     0,
+     0
+    ],
+    "104a39878a": [
+     1,
+     0,
+     0
+    ],
+    "cd31f49737": [
+     0,
+     1,
+     0
+    ],
+    "bacd1954d9": [
+     0,
+     1,
+     0
+    ]
+   },
+   "active": true,
+   "name": "BEGE",
+   "teamId": 5,
+   "oldNames": [],
+   "nSeasons": 1,
+   "apPct": 0.5323232323232323,
+   "catPct": 0.5666666666666667,
+   "best": null
+  },
+  {
+   "key": "bacd1954d9",
+   "seasons": [
+    {
+     "y": 2027,
+     "name": "CHADELITES",
+     "teamId": 2,
+     "final": null,
+     "mrec": [
+      4,
+      1,
+      0
+     ],
+     "cat": [
+      24,
+      20,
+      1
+     ],
+     "apPct": 0.5515151515151515
+    }
+   ],
+   "mrec": [
+    4,
+    1,
+    0
+   ],
+   "cat": [
+    24,
+    20,
+    1
+   ],
+   "ap": [
+    268,
+    217,
+    10
+   ],
+   "titles": 0,
+   "h2h": {
+    "56d5622a52": [
+     0,
+     1,
+     0
+    ],
+    "c4071ffe1e": [
+     1,
+     0,
+     0
+    ],
+    "287e8ede40": [
+     1,
+     0,
+     0
+    ],
+    "47fffeafbf": [
+     1,
+     0,
+     0
+    ],
+    "ee511c73e8": [
+     1,
+     0,
+     0
+    ]
+   },
+   "active": true,
+   "name": "CHADELITES",
+   "teamId": 2,
+   "oldNames": [],
+   "nSeasons": 1,
+   "apPct": 0.5515151515151515,
+   "catPct": 0.5444444444444444,
+   "best": null
+  },
+  {
+   "key": "104a39878a",
+   "seasons": [
+    {
+     "y": 2027,
+     "name": "Kalifornia Bulldogs",
+     "teamId": 9,
+     "final": null,
+     "mrec": [
+      3,
+      2,
+      0
+     ],
+     "cat": [
+      23,
+      22,
+      0
+     ],
+     "apPct": 0.5878787878787879
+    }
+   ],
+   "mrec": [
+    3,
+    2,
+    0
+   ],
+   "cat": [
+    23,
+    22,
+    0
+   ],
+   "ap": [
+    287,
+    200,
+    8
+   ],
+   "titles": 0,
+   "h2h": {
+    "47fffeafbf": [
+     1,
+     0,
+     0
+    ],
+    "961506dda6": [
+     1,
+     0,
+     0
+    ],
+    "ee511c73e8": [
+     0,
+     1,
+     0
+    ],
+    "f14701da76": [
+     1,
+     0,
+     0
+    ],
+    "cd31f49737": [
+     0,
+     1,
+     0
+    ]
+   },
+   "active": true,
+   "name": "Kalifornia Bulldogs",
+   "teamId": 9,
+   "oldNames": [],
+   "nSeasons": 1,
+   "apPct": 0.5878787878787879,
+   "catPct": 0.5111111111111111,
+   "best": null
+  },
+  {
+   "key": "287e8ede40",
+   "seasons": [
+    {
+     "y": 2027,
+     "name": "Soprano's",
+     "teamId": 12,
+     "final": null,
+     "mrec": [
+      2,
+      3,
+      0
+     ],
+     "cat": [
+      23,
+      22,
+      0
+     ],
+     "apPct": 0.4121212121212121
+    }
+   ],
+   "mrec": [
+    2,
+    3,
+    0
+   ],
+   "cat": [
+    23,
+    22,
+    0
+   ],
+   "ap": [
+    200,
+    287,
+    8
+   ],
+   "titles": 0,
+   "h2h": {
+    "ee511c73e8": [
+     1,
+     0,
+     0
+    ],
+    "cd31f49737": [
+     0,
+     1,
+     0
+    ],
+    "bacd1954d9": [
+     0,
+     1,
+     0
+    ],
+    "174f89b3ac": [
+     0,
+     1,
+     0
+    ],
+    "fedcd29c32": [
+     1,
+     0,
+     0
+    ]
+   },
+   "active": true,
+   "name": "Soprano's",
+   "teamId": 12,
+   "oldNames": [],
+   "nSeasons": 1,
+   "apPct": 0.4121212121212121,
+   "catPct": 0.5111111111111111,
+   "best": null
+  },
+  {
+   "key": "fedcd29c32",
+   "seasons": [
+    {
+     "y": 2027,
+     "name": "Tooney Tunes",
+     "teamId": 14,
+     "final": null,
+     "mrec": [
+      3,
+      2,
+      0
+     ],
+     "cat": [
+      23,
+      22,
+      0
+     ],
+     "apPct": 0.5252525252525253
+    }
+   ],
+   "mrec": [
+    3,
+    2,
+    0
+   ],
+   "cat": [
+    23,
+    22,
+    0
+   ],
+   "ap": [
+    255,
+    230,
+    10
+   ],
+   "titles": 0,
+   "h2h": {
+    "961506dda6": [
+     1,
+     0,
+     0
+    ],
+    "f14701da76": [
+     1,
+     0,
+     0
+    ],
+    "56d5622a52": [
+     1,
+     0,
+     0
+    ],
+    "c4071ffe1e": [
+     0,
+     1,
+     0
+    ],
+    "287e8ede40": [
+     0,
+     1,
+     0
+    ]
+   },
+   "active": true,
+   "name": "Tooney Tunes",
+   "teamId": 14,
+   "oldNames": [],
+   "nSeasons": 1,
+   "apPct": 0.5252525252525253,
+   "catPct": 0.5111111111111111,
+   "best": null
+  },
+  {
+   "key": "174f89b3ac",
+   "seasons": [
+    {
+     "y": 2027,
+     "name": "BATH CANARIES",
+     "teamId": 7,
+     "final": null,
+     "mrec": [
+      3,
+      2,
+      0
+     ],
+     "cat": [
+      20,
+      25,
+      0
+     ],
+     "apPct": 0.3505050505050505
+    }
+   ],
+   "mrec": [
+    3,
+    2,
+    0
+   ],
+   "cat": [
+    20,
+    25,
+    0
+   ],
+   "ap": [
+    169,
+    317,
+    9
+   ],
+   "titles": 0,
+   "h2h": {
+    "f14701da76": [
+     1,
+     0,
+     0
+    ],
+    "56d5622a52": [
+     0,
+     1,
+     0
+    ],
+    "c4071ffe1e": [
+     1,
+     0,
+     0
+    ],
+    "287e8ede40": [
+     1,
+     0,
+     0
+    ],
+    "47fffeafbf": [
+     0,
+     1,
+     0
+    ]
+   },
+   "active": true,
+   "name": "BATH CANARIES",
+   "teamId": 7,
+   "oldNames": [],
+   "nSeasons": 1,
+   "apPct": 0.3505050505050505,
+   "catPct": 0.4444444444444444,
+   "best": null
+  },
+  {
+   "key": "f14701da76",
+   "seasons": [
+    {
+     "y": 2027,
+     "name": "Children of Planet Earth",
+     "teamId": 1,
+     "final": null,
+     "mrec": [
+      1,
+      4,
+      0
+     ],
+     "cat": [
+      19,
+      25,
+      1
+     ],
+     "apPct": 0.5595959595959596
+    }
+   ],
+   "mrec": [
+    1,
+    4,
+    0
+   ],
+   "cat": [
+    19,
+    25,
+    1
+   ],
+   "ap": [
+    271,
+    212,
+    12
+   ],
+   "titles": 0,
+   "h2h": {
+    "174f89b3ac": [
+     0,
+     1,
+     0
+    ],
+    "fedcd29c32": [
+     0,
+     1,
+     0
+    ],
+    "961506dda6": [
+     1,
+     0,
+     0
+    ],
+    "104a39878a": [
+     0,
+     1,
+     0
+    ],
+    "56d5622a52": [
+     0,
+     1,
+     0
+    ]
+   },
+   "active": true,
+   "name": "Children of Planet Earth",
+   "teamId": 1,
+   "oldNames": [],
+   "nSeasons": 1,
+   "apPct": 0.5595959595959596,
+   "catPct": 0.43333333333333335,
+   "best": null
+  },
+  {
+   "key": "47fffeafbf",
+   "seasons": [
+    {
+     "y": 2027,
+     "name": "Adana Heybeliler Tekstil",
+     "teamId": 10,
+     "final": null,
+     "mrec": [
+      1,
+      4,
+      0
+     ],
+     "cat": [
+      19,
+      26,
+      0
+     ],
+     "apPct": 0.5393939393939394
+    }
+   ],
+   "mrec": [
+    1,
+    4,
+    0
+   ],
+   "cat": [
+    19,
+    26,
+    0
+   ],
+   "ap": [
+    261,
+    222,
+    12
+   ],
+   "titles": 0,
+   "h2h": {
+    "104a39878a": [
+     0,
+     1,
+     0
+    ],
+    "ee511c73e8": [
+     0,
+     1,
+     0
+    ],
+    "cd31f49737": [
+     0,
+     1,
+     0
+    ],
+    "bacd1954d9": [
+     0,
+     1,
+     0
+    ],
+    "174f89b3ac": [
+     1,
+     0,
+     0
+    ]
+   },
+   "active": true,
+   "name": "Adana Heybeliler Tekstil",
+   "teamId": 10,
+   "oldNames": [],
+   "nSeasons": 1,
+   "apPct": 0.5393939393939394,
+   "catPct": 0.4222222222222222,
+   "best": null
+  },
+  {
+   "key": "961506dda6",
+   "seasons": [
+    {
+     "y": 2027,
+     "name": "Kerem’s Deluxe Team",
+     "teamId": 4,
+     "final": null,
+     "mrec": [
+      0,
+      5,
+      0
+     ],
+     "cat": [
+      11,
+      34,
+      0
+     ],
+     "apPct": 0.28484848484848485
+    }
+   ],
+   "mrec": [
+    0,
+    5,
+    0
+   ],
+   "cat": [
+    11,
+    34,
+    0
+   ],
+   "ap": [
+    138,
+    351,
+    6
+   ],
+   "titles": 0,
+   "h2h": {
+    "fedcd29c32": [
+     0,
+     1,
+     0
+    ],
+    "104a39878a": [
+     0,
+     1,
+     0
+    ],
+    "f14701da76": [
+     0,
+     1,
+     0
+    ],
+    "56d5622a52": [
+     0,
+     1,
+     0
+    ],
+    "c4071ffe1e": [
+     0,
+     1,
+     0
+    ]
+   },
+   "active": true,
+   "name": "Kerem’s Deluxe Team",
+   "teamId": 4,
+   "oldNames": [],
+   "nSeasons": 1,
+   "apPct": 0.28484848484848485,
+   "catPct": 0.24444444444444444,
+   "best": null
+  }
+ ]
+}

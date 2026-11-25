@@ -73,6 +73,8 @@ def compute(raw):
     for m in M["schedule"]:
         if "home" not in m or "away" not in m or m.get("winner") == "UNDECIDED":
             continue
+        if m.get("playoffTierType", "NONE") != "NONE":
+            continue
         if not m["home"].get("cumulativeScore", {}).get("scoreByStat"):
             continue
         w = m["matchupPeriodId"]
@@ -134,6 +136,49 @@ def compute(raw):
     }
 
 
+def owner_key(team):
+    import hashlib
+    o = team.get("primaryOwner") or (team.get("owners") or [""])[0] or f"team-{team['id']}"
+    return hashlib.sha1(o.encode()).hexdigest()[:10]
+
+
+def build_history(current_season_id, seasons):
+    """seasons: {yıl: (ham lig verisi, compute çıktısı)}. Takımları kullanıcıya göre birleştirir."""
+    owners = {}
+    for y in sorted(seasons):
+        L, data = seasons[y]
+        okey = {t["id"]: owner_key(t) for t in L["teams"]}
+        final = {t["id"]: t.get("rankCalculatedFinal") or 0 for t in L["teams"]}
+        done = y != current_season_id
+        for t in data["teams"]:
+            k = okey[t["id"]]
+            o = owners.setdefault(k, {"key": k, "seasons": [], "mrec": [0, 0, 0], "cat": [0, 0, 0], "ap": [0, 0, 0],
+                                      "titles": 0, "h2h": {}})
+            o["seasons"].append({"y": y, "name": t["name"], "teamId": t["id"], "final": final[t["id"]] if done else None,
+                                 "mrec": t["mrec"], "cat": t["cat"], "apPct": t["apPct"]})
+            for f in ("mrec", "cat", "ap"):
+                o[f] = [a + b for a, b in zip(o[f], t[f])]
+            if done and final[t["id"]] == 1:
+                o["titles"] += 1
+            for g in t["games"]:
+                ok = okey[g["oppId"]]
+                h = o["h2h"].setdefault(ok, [0, 0, 0])
+                h["GMB".index(g["res"])] += 1
+    for o in owners.values():
+        o["seasons"].sort(key=lambda s: -s["y"])
+        cur = o["seasons"][0]
+        o["active"] = cur["y"] == current_season_id
+        o["name"] = cur["name"]
+        o["teamId"] = cur["teamId"] if o["active"] else None
+        o["oldNames"] = sorted({s["name"] for s in o["seasons"][1:]} - {cur["name"]})
+        o["nSeasons"] = len(o["seasons"])
+        o["apPct"] = pct(o["ap"])
+        o["catPct"] = pct(o["cat"])
+        finals = [s["final"] for s in o["seasons"] if s["final"]]
+        o["best"] = min(finals) if finals else None
+    return {"seasons": sorted(seasons), "owners": sorted(owners.values(), key=lambda o: (-o["catPct"]))}
+
+
 def localize_logos(teams, out):
     """Logoları siteye kopyalar; ESPN'in özel yüklenen resimleri başka sitelerden doğrudan açılmıyor."""
     import urllib.request
@@ -177,6 +222,24 @@ def main():
     raw_dir = pathlib.Path("data/raw") / str(season)
     raw = {n: json.loads((raw_dir / f"{n}.json").read_text()) for n in ("league", "matchups")}
     data = compute(raw)
+    seasons = {season: (raw["league"], data)}
+    for y in raw["league"].get("status", {}).get("previousSeasons", []):
+        d = pathlib.Path("data/raw") / str(y)
+        try:
+            r = {n: json.loads((d / f"{n}.json").read_text()) for n in ("league", "matchups")}
+            seasons[y] = (r["league"], compute(r))
+            print(f"{y}: {len(seasons[y][1]['teams'])} takım, {len(seasons[y][1]['weeks'])} hafta")
+        except Exception as e:
+            print(f"{y} işlenemedi: {e}")
+    hist = build_history(season, seasons)
+    okey = {t["id"]: owner_key(t) for t in raw["league"]["teams"]}
+    for t in data["teams"]:
+        t["owner"] = okey[t["id"]]
+    data["history"] = hist
+    pathlib.Path("data/history.json").write_text(json.dumps(hist, ensure_ascii=False, indent=1))
+    print("geçmiş:", len(hist["seasons"]), "sezon,", len(hist["owners"]), "menajer;",
+          sum(1 for o in hist["owners"] if o["oldNames"]), "isim değiştirmiş;",
+          sum(1 for o in hist["owners"] if o["nSeasons"] == 1 and o["active"]), "ilk sezonunda")
     out = pathlib.Path("site")
     out.mkdir(exist_ok=True)
     if os.environ.get("SKIP_LOGOS") != "1":

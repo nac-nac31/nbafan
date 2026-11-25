@@ -49,6 +49,12 @@ function awards(){
    .map(([l,t,w])=>`<a class="aw" href="${link(t)}">${logo(t,36)}<div><div class="lab">${l}</div><div class="who">${esc(t.name)}</div><div class="why">${esc(w)}</div></div></a>`).join('');
 }
 
+const H=DATA.history||{seasons:[],owners:[]};
+const OW=Object.fromEntries(H.owners.map(o=>[o.key,o]));
+const multi=H.seasons.length>1;
+const sz=y=>(y-1)+'-'+String(y).slice(2);
+function tags(t){const o=OW[t.owner];if(!o)return '';
+  return (multi&&o.nSeasons===1?'<span class="newb">İlk sezonu</span>':'')+(o.oldNames.length?`<span class="old">Eski adı: ${o.oldNames.map(esc).join(', ')}</span>`:'')}
 const V={};
 const CUR=DATA.current||{matchups:[],live:{}};
 function liveRank(){return [...T].filter(t=>CUR.live[t.id]!=null).sort((a,b)=>CUR.live[b.id]-CUR.live[a.id])}
@@ -93,7 +99,7 @@ V.siralama=()=>{const top=power[0];
   <section class="sec"><div class="sec-h"><h2>Güç sıralaması</h2></div>
   <p class="hint">%60 sezon boyu all-play gücü, %40 son iki haftanın formu. Sağdaki ok, takımın gerçek lig sırasına göre farkını gösterir.</p>
   <ol class="panel rank-list">${power.map((t,i)=>`<li><a class="trow" href="${link(t)}"><span class="n">${i+1}</span>${logo(t,40)}
-   <div style="min-width:0"><div class="nm">${esc(t.name)}</div><div class="sub"><span>${rec(t.mrec)}</span><span>${t.cat.join('-')}</span><span>AP %${pct(t.apPct)}</span></div></div>
+   <div style="min-width:0"><div class="nm">${esc(t.name)}${tags(t)}</div><div class="sub"><span>${rec(t.mrec)}</span><span>${t.cat.join('-')}</span><span>AP %${pct(t.apPct)}</span></div></div>
    <div class="side">${movePill(t)}<span class="pbar"><i style="width:${(t.power/top.power*100).toFixed(0)}%"></i></span></div></a></li>`).join('')}</ol></section>
   <section class="sec"><h2>Ödüller</h2><div class="awards">${awards()}</div></section>`};
 
@@ -128,8 +134,14 @@ V.haftalar=()=>{
   ${hw.map(t=>`<tr><td class="tn">${esc(t.name)}</td>${t.games.map(g=>`<td class="c" style="${mix(g.beat,11,'accent')};${g.beat>6?'color:#fff;':''}${g.res==='M'?'box-shadow:inset 0 0 0 2px var(--ink)':''}" title="${esc(g.opp)} ${g.score}">${g.beat}</td>`).join('')}<td class="c">${t.weekly.reduce((a,b)=>a+b,0)}</td></tr>`).join('')}
   </tbody></table></div></section>`};
 
+function allTime(){if(!H.owners.length)return '';
+  const rows=H.owners.map(o=>{const t=o.teamId!=null?byId[o.teamId]:null;
+    const nm=`<b>${esc(o.name)}</b>${multi&&o.active&&o.nSeasons===1?'<span class="newb">İlk sezonu</span>':''}${o.oldNames.length?`<span class="old">Eski adı: ${o.oldNames.map(esc).join(', ')}</span>`:''}${!o.active?'<span class="old">Artık ligde değil</span>':''}`;
+    return `<tr class="${o.active?'':'gone'}"><td>${t?`<a href="${link(t)}" style="text-decoration:none">${nm}</a>`:nm}</td><td>${o.nSeasons}</td><td>${rec(o.mrec)}</td><td>%${pct(o.catPct)}</td><td>%${pct(o.apPct)}</td><td>${o.titles?`<span class="champ">${o.titles}× şampiyon</span>`:o.best?o.best+'.':'–'}</td></tr>`}).join('');
+  return `<section class="sec"><h2>Tüm zamanlar</h2><p class="hint">${multi?`${H.seasons.map(sz).join(' ve ')} sezonları, kullanıcıya göre birleştirildi. İsmi değişen takımların eski adları küçük yazıyla görünür.`:'Şimdilik sadece bu sezon var. Geçmiş sezonlar yüklenince burada birleşecek.'} Sıralama kategori kazanma oranına göre; derece sadece tamamlanan sezonlardan.</p>
+  <div class="panel scroll"><table class="hist"><thead><tr><th>Menajer</th><th>Sezon</th><th>Maç</th><th>Kat. %</th><th>All-play</th><th>En iyi</th></tr></thead><tbody>${rows}</tbody></table></div></section>`}
 V.takimlar=()=>{const hw=[...T].sort((a,b)=>pRank(a)-pRank(b));
-  return `<section class="sec"><h2>Takımlar</h2><div class="tgrid">${hw.map(t=>`<a class="tcard" href="${link(t)}">${logo(t,56)}<div class="nm">${esc(t.name)}</div><div class="sub">${rec(t.mrec)} · ${t.cat.join('-')}</div></a>`).join('')}</div></section>
+  return `${allTime()}<section class="sec"><h2>Takımlar</h2><div class="tgrid">${hw.map(t=>`<a class="tcard" href="${link(t)}">${logo(t,56)}<div class="nm">${esc(t.name)}${tags(t)}</div><div class="sub">${rec(t.mrec)} · ${t.cat.join('-')}</div></a>`).join('')}</div></section>
   <section class="sec"><h2>Kategori profili</h2><p class="hint">Her kategoride lig sırası (1 en iyi; TO'da en az olan 1). Turuncu güçlü, mavi zayıf. Punt edilen kategoriler buradan görünür.</p>
   <div class="panel scroll"><table><thead><tr><th>Takım</th>${DATA.cats.map(c=>`<th>${c}</th>`).join('')}</tr></thead><tbody>
   ${hw.map(t=>`<tr><td class="tn">${esc(t.name)}</td>${DATA.cats.map(c=>{const r=t.rank[c];return `<td class="c" style="${r<=6?mix(7-r,6,'accent'):mix(r-6,6,'cool')};${(r<=2||r>=11)?'color:#fff;font-weight:600':''}">${r}</td>`}).join('')}</tr>`).join('')}
@@ -148,7 +160,7 @@ function radar(t){const C=DATA.cats,n=C.length,cx=170,cy=150,R=105;
 function profile(id){const t=byId[id];if(!t)return V.siralama();
   const strong=DATA.cats.filter(c=>t.rank[c]<=3),weak=DATA.cats.filter(c=>t.rank[c]>=10);
   return `<a class="back" href="#takimlar">‹ Takımlar</a>
-  <div class="phead">${logo(t,72)}<div><div class="nm">${esc(t.name)}</div><div class="sub">Güç sıralaması #${pRank(t)} · Lig sırası #${lRank(t)}</div></div></div>
+  <div class="phead">${logo(t,72)}<div><div class="nm">${esc(t.name)}</div>${tags(t)}<div class="sub">Güç sıralaması #${pRank(t)} · Lig sırası #${lRank(t)}</div></div></div>
   <div class="tiles">
    <div class="tile"><span class="k">Maç</span><span class="v">${rec(t.mrec)}</span><span class="s">haftalık galibiyet</span></div>
    <div class="tile"><span class="k">Kategori</span><span class="v">${t.cat.join('-')}</span><span class="s">%${pct(t.catPct)}</span></div>
@@ -160,6 +172,11 @@ function profile(id){const t=byId[id];if(!t)return V.siralama();
    <div class="panel radar">${radar(t)}</div></section>
   <section class="sec"><h2>Haftalar</h2><div class="panel">${t.games.map(g=>{const o=byId[g.oppId];
    return `<a class="res" href="${link(o)}"><span class="wk">H${g.w}</span>${logo(o,32)}<div style="min-width:0"><div class="nm">${esc(o.name)}</div><small>${g.beat}/11 rakibi yenerdi</small></div><span class="sc">${g.score}<span class="gm ${g.res}">${g.res}</span></span></a>`}).join('')}</div></section>
+  ${(()=>{const o=OW[t.owner];if(!o)return '';
+    const opp=Object.entries(o.h2h).map(([k,r])=>[OW[k],r]).filter(x=>x[0]).sort((a,b)=>(b[1][0]-b[1][1])-(a[1][0]-a[1][1]));
+    const seasons=multi?`<section class="sec"><h2>Sezonlar</h2><div class="panel">${o.seasons.map(se=>`<div class="res" style="grid-template-columns:64px minmax(0,1fr) auto"><span class="wk">${sz(se.y)}</span><div style="min-width:0"><div class="nm">${esc(se.name)}</div><small>Kategori ${se.cat.join('-')} · all-play %${pct(se.apPct)}</small></div><span class="sc">${se.final?(se.final===1?'<span class="champ">Şampiyon</span>':se.final+'.'):'devam'}<span class="gm B">${rec(se.mrec)}</span></span></div>`).join('')}</div></section>`:'';
+    return seasons+`<section class="sec"><h2>Rakip geçmişi</h2><p class="hint">${multi?'Tüm sezonlarda':'Bu sezon'} bu rakiplerle oynanan maçlar.</p><div class="panel">${opp.map(([r,x])=>{const rt=r.teamId!=null?byId[r.teamId]:null;
+      return `<div class="res" style="grid-template-columns:32px minmax(0,1fr) auto">${rt?logo(rt,32):'<span></span>'}<div style="min-width:0"><div class="nm">${esc(r.name)}</div>${r.oldNames.length?`<span class="old">Eski adı: ${r.oldNames.map(esc).join(', ')}</span>`:''}</div><span class="sc">${x[0]}-${x[1]}${x[2]?'-'+x[2]:''}<span class="gm ${x[0]>x[1]?'G':x[1]>x[0]?'M':'B'}">${x[0]>x[1]?'G':x[1]>x[0]?'M':'B'}</span></span></div>`}).join('')}</div></section>`})()}
   <div class="tiles">
    <div class="tile"><span class="k">Oyuncu alımı</span><span class="v">${t.adds}</span></div>
    <div class="tile"><span class="k">Kadro hamlesi</span><span class="v">${t.moves}</span></div>
