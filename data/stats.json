@@ -749,7 +749,7 @@
   ]
  },
  "league": "Fantasy 26-27",
- "updated": "25 Kasım 2026, 23:39",
+ "updated": "25 Kasım 2026, 23:40",
  "weeks": [
   1,
   2,
@@ -22715,6 +22715,7 @@
       "w": 17,
       "name": "Soprano's",
       "team": null,
+      "owner": "287e8ede40",
       "cur": false
      },
      "worst": {
@@ -22723,6 +22724,7 @@
       "w": 8,
       "name": "Eczakent Thugs",
       "team": null,
+      "owner": "961506dda6",
       "cur": false
      }
     },
@@ -22733,6 +22735,7 @@
       "w": 17,
       "name": "Soprano's",
       "team": null,
+      "owner": "287e8ede40",
       "cur": false
      },
      "worst": {
@@ -22741,6 +22744,7 @@
       "w": 8,
       "name": "Eczakent Thugs",
       "team": null,
+      "owner": "961506dda6",
       "cur": false
      }
     },
@@ -22751,6 +22755,7 @@
       "w": 17,
       "name": "Doggy dogs",
       "team": null,
+      "owner": "c4071ffe1e",
       "cur": false
      },
      "worst": {
@@ -22759,6 +22764,7 @@
       "w": 8,
       "name": "Adana Heybeliler Tekstil",
       "team": null,
+      "owner": "47fffeafbf",
       "cur": false
      }
     },
@@ -22769,6 +22775,7 @@
       "w": 1,
       "name": "CHADELITES",
       "team": 2,
+      "owner": "bacd1954d9",
       "cur": true
      },
      "worst": {
@@ -22777,6 +22784,7 @@
       "w": 8,
       "name": "AcetXsMax",
       "team": null,
+      "owner": "f07d908ab6",
       "cur": false
      }
     },
@@ -22787,6 +22795,7 @@
       "w": 17,
       "name": "Soprano's",
       "team": null,
+      "owner": "287e8ede40",
       "cur": false
      },
      "worst": {
@@ -22795,6 +22804,7 @@
       "w": 16,
       "name": "Doggy dogs",
       "team": null,
+      "owner": "c4071ffe1e",
       "cur": false
      }
     },
@@ -22805,6 +22815,7 @@
       "w": 2,
       "name": "Tooney Tunes",
       "team": 14,
+      "owner": "fedcd29c32",
       "cur": true
      },
      "worst": {
@@ -22813,6 +22824,7 @@
       "w": 5,
       "name": "Limanreis Test",
       "team": null,
+      "owner": "9f0928847b",
       "cur": false
      }
     },
@@ -22823,6 +22835,7 @@
       "w": 8,
       "name": "Tooney Tunes",
       "team": null,
+      "owner": "fedcd29c32",
       "cur": false
      },
      "worst": {
@@ -22831,6 +22844,7 @@
       "w": 19,
       "name": "31 Chechkers",
       "team": null,
+      "owner": "56d5622a52",
       "cur": false
      }
     },
@@ -22841,6 +22855,7 @@
       "w": 4,
       "name": "Adana Heybeliler Tekstil",
       "team": 10,
+      "owner": "47fffeafbf",
       "cur": true
      },
      "worst": {
@@ -22849,6 +22864,7 @@
       "w": 9,
       "name": "Soprano's",
       "team": null,
+      "owner": "287e8ede40",
       "cur": false
      }
     },
@@ -22859,6 +22875,7 @@
       "w": 8,
       "name": "Eczakent Thugs",
       "team": null,
+      "owner": "961506dda6",
       "cur": false
      },
      "worst": {
@@ -22867,6 +22884,7 @@
       "w": 17,
       "name": "Doggy dogs",
       "team": null,
+      "owner": "c4071ffe1e",
       "cur": false
      }
     }
