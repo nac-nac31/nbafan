@@ -24,6 +24,8 @@
   {
    "id": 1,
    "name": "Children of Planet Earth",
+   "abbrev": "CPE",
+   "logo": "https://mystique-api.fantasy.espn.com/apis/v1/domains/lm/images/d5c27d50-c991-11f1-bcc1-f7d73be225cd",
    "cat": [
     19,
     25,
@@ -52,6 +54,7 @@
     {
      "w": 1,
      "opp": "BATH CANARIES",
+     "oppId": 7,
      "score": "4-5",
      "res": "M",
      "beat": 1
@@ -59,6 +62,7 @@
     {
      "w": 2,
      "opp": "Tooney Tunes",
+     "oppId": 14,
      "score": "2-7",
      "res": "M",
      "beat": 7
@@ -66,6 +70,7 @@
     {
      "w": 3,
      "opp": "Kerem’s Deluxe Team",
+     "oppId": 4,
      "score": "8-1",
      "res": "G",
      "beat": 8
@@ -73,6 +78,7 @@
     {
      "w": 4,
      "opp": "Kalifornia Bulldogs",
+     "oppId": 9,
      "score": "3-6",
      "res": "M",
      "beat": 9
@@ -80,6 +86,7 @@
     {
      "w": 5,
      "opp": "31 Chechkers",
+     "oppId": 3,
      "score": "2-6-1",
      "res": "M",
      "beat": 6
@@ -117,6 +124,8 @@
   {
    "id": 2,
    "name": "CHADELITES",
+   "abbrev": "PSL",
+   "logo": "https://mystique-api.fantasy.espn.com/apis/v1/domains/lm/images/da3e7a80-c8cb-11f1-91e2-3915bbb7cba0",
    "cat": [
     24,
     20,
@@ -145,6 +154,7 @@
     {
      "w": 1,
      "opp": "31 Chechkers",
+     "oppId": 3,
      "score": "3-6",
      "res": "M",
      "beat": 6
@@ -152,6 +162,7 @@
     {
      "w": 2,
      "opp": "Doggy dogs",
+     "oppId": 13,
      "score": "5-4",
      "res": "G",
      "beat": 11
@@ -159,6 +170,7 @@
     {
      "w": 3,
      "opp": "Soprano's",
+     "oppId": 12,
      "score": "5-4",
      "res": "G",
      "beat": 4
@@ -166,6 +178,7 @@
     {
      "w": 4,
      "opp": "Adana Heybeliler Tekstil",
+     "oppId": 10,
      "score": "6-3",
      "res": "G",
      "beat": 5
@@ -173,6 +186,7 @@
     {
      "w": 5,
      "opp": "BEGE",
+     "oppId": 5,
      "score": "5-3-1",
      "res": "G",
      "beat": 6
@@ -210,6 +224,8 @@
   {
    "id": 3,
    "name": "31 Chechkers",
+   "abbrev": "31C",
+   "logo": "https://g.espncdn.com/lm-static/logo-packs/core/Mascots/mascots-9.svg",
    "cat": [
     28,
     16,
@@ -238,6 +254,7 @@
     {
      "w": 1,
      "opp": "CHADELITES",
+     "oppId": 2,
      "score": "6-3",
      "res": "G",
      "beat": 8
@@ -245,6 +262,7 @@
     {
      "w": 2,
      "opp": "BATH CANARIES",
+     "oppId": 7,
      "score": "5-4",
      "res": "G",
      "beat": 2
@@ -252,6 +270,7 @@
     {
      "w": 3,
      "opp": "Tooney Tunes",
+     "oppId": 14,
      "score": "4-5",
      "res": "M",
      "beat": 1
@@ -259,6 +278,7 @@
     {
      "w": 4,
      "opp": "Kerem’s Deluxe Team",
+     "oppId": 4,
      "score": "7-2",
      "res": "G",
      "beat": 4
@@ -266,6 +286,7 @@
     {
      "w": 5,
      "opp": "Children of Planet Earth",
+     "oppId": 1,
      "score": "6-2-1",
      "res": "G",
      "beat": 9
@@ -303,6 +324,8 @@
   {
    "id": 4,
    "name": "Kerem’s Deluxe Team",
+   "abbrev": "KDT",
+   "logo": "https://g.espncdn.com/lm-static/fba/images/default_logos/1.svg",
    "cat": [
     11,
     34,
@@ -331,6 +354,7 @@
     {
      "w": 1,
      "opp": "Tooney Tunes",
+     "oppId": 14,
      "score": "4-5",
      "res": "M",
      "beat": 2
@@ -338,6 +362,7 @@
     {
      "w": 2,
      "opp": "Kalifornia Bulldogs",
+     "oppId": 9,
      "score": "2-7",
      "res": "M",
      "beat": 2
@@ -345,6 +370,7 @@
     {
      "w": 3,
      "opp": "Children of Planet Earth",
+     "oppId": 1,
      "score": "1-8",
      "res": "M",
      "beat": 0
@@ -352,6 +378,7 @@
     {
      "w": 4,
      "opp": "31 Chechkers",
+     "oppId": 3,
      "score": "2-7",
      "res": "M",
      "beat": 2
@@ -359,6 +386,7 @@
     {
      "w": 5,
      "opp": "Doggy dogs",
+     "oppId": 13,
      "score": "2-7",
      "res": "M",
      "beat": 0
@@ -396,6 +424,8 @@
   {
    "id": 5,
    "name": "BEGE",
+   "abbrev": "BEGE",
+   "logo": "https://g.espncdn.com/lm-static/fba/images/default_logos/9.svg",
    "cat": [
     25,
     19,
@@ -424,6 +454,7 @@
     {
      "w": 1,
      "opp": "Soprano's",
+     "oppId": 12,
      "score": "4-5",
      "res": "M",
      "beat": 2
@@ -431,6 +462,7 @@
     {
      "w": 2,
      "opp": "Adana Heybeliler Tekstil",
+     "oppId": 10,
      "score": "8-1",
      "res": "G",
      "beat": 7
@@ -438,6 +470,7 @@
     {
      "w": 3,
      "opp": "Kalifornia Bulldogs",
+     "oppId": 9,
      "score": "6-3",
      "res": "G",
      "beat": 9
@@ -445,6 +478,7 @@
     {
      "w": 4,
      "opp": "Acibadem Elephants",
+     "oppId": 6,
      "score": "4-5",
      "res": "M",
      "beat": 6
@@ -452,6 +486,7 @@
     {
      "w": 5,
      "opp": "CHADELITES",
+     "oppId": 2,
      "score": "3-5-1",
      "res": "M",
      "beat": 4
@@ -489,6 +524,8 @@
   {
    "id": 6,
    "name": "Acibadem Elephants",
+   "abbrev": "FIL",
+   "logo": "https://mystique-api.fantasy.espn.com/apis/v1/domains/lm/images/6a745f20-b18a-11f0-afb5-e14f006a2a34",
    "cat": [
     27,
     18,
@@ -517,6 +554,7 @@
     {
      "w": 1,
      "opp": "Doggy dogs",
+     "oppId": 13,
      "score": "3-6",
      "res": "M",
      "beat": 6
@@ -524,6 +562,7 @@
     {
      "w": 2,
      "opp": "Soprano's",
+     "oppId": 12,
      "score": "6-3",
      "res": "G",
      "beat": 6
@@ -531,6 +570,7 @@
     {
      "w": 3,
      "opp": "Adana Heybeliler Tekstil",
+     "oppId": 10,
      "score": "6-3",
      "res": "G",
      "beat": 10
@@ -538,6 +578,7 @@
     {
      "w": 4,
      "opp": "BEGE",
+     "oppId": 5,
      "score": "5-4",
      "res": "G",
      "beat": 6
@@ -545,6 +586,7 @@
     {
      "w": 5,
      "opp": "Kalifornia Bulldogs",
+     "oppId": 9,
      "score": "7-2",
      "res": "G",
      "beat": 11
@@ -582,6 +624,8 @@
   {
    "id": 7,
    "name": "BATH CANARIES",
+   "abbrev": "AAG",
+   "logo": "https://mystique-api.fantasy.espn.com/apis/v1/domains/lm/images/7851d360-c8aa-11f1-b18d-9d663e1fd952",
    "cat": [
     20,
     25,
@@ -610,6 +654,7 @@
     {
      "w": 1,
      "opp": "Children of Planet Earth",
+     "oppId": 1,
      "score": "5-4",
      "res": "G",
      "beat": 1
@@ -617,6 +662,7 @@
     {
      "w": 2,
      "opp": "31 Chechkers",
+     "oppId": 3,
      "score": "4-5",
      "res": "M",
      "beat": 0
@@ -624,6 +670,7 @@
     {
      "w": 3,
      "opp": "Doggy dogs",
+     "oppId": 13,
      "score": "5-4",
      "res": "G",
      "beat": 5
@@ -631,6 +678,7 @@
     {
      "w": 4,
      "opp": "Soprano's",
+     "oppId": 12,
      "score": "5-4",
      "res": "G",
      "beat": 1
@@ -638,6 +686,7 @@
     {
      "w": 5,
      "opp": "Adana Heybeliler Tekstil",
+     "oppId": 10,
      "score": "1-8",
      "res": "M",
      "beat": 4
@@ -675,6 +724,8 @@
   {
    "id": 9,
    "name": "Kalifornia Bulldogs",
+   "abbrev": "BULL",
+   "logo": "https://g.espncdn.com/lm-static/logo-packs/core/CatsAndDogs/cats_dogs-2.svg",
    "cat": [
     23,
     22,
@@ -703,6 +754,7 @@
     {
      "w": 1,
      "opp": "Adana Heybeliler Tekstil",
+     "oppId": 10,
      "score": "5-4",
      "res": "G",
      "beat": 6
@@ -710,6 +762,7 @@
     {
      "w": 2,
      "opp": "Kerem’s Deluxe Team",
+     "oppId": 4,
      "score": "7-2",
      "res": "G",
      "beat": 6
@@ -717,6 +770,7 @@
     {
      "w": 3,
      "opp": "BEGE",
+     "oppId": 5,
      "score": "3-6",
      "res": "M",
      "beat": 9
@@ -724,6 +778,7 @@
     {
      "w": 4,
      "opp": "Children of Planet Earth",
+     "oppId": 1,
      "score": "6-3",
      "res": "G",
      "beat": 10
@@ -731,6 +786,7 @@
     {
      "w": 5,
      "opp": "Acibadem Elephants",
+     "oppId": 6,
      "score": "2-7",
      "res": "M",
      "beat": 8
@@ -768,6 +824,8 @@
   {
    "id": 10,
    "name": "Adana Heybeliler Tekstil",
+   "abbrev": "HEY",
+   "logo": "https://mystique-api.fantasy.espn.com/apis/v1/domains/lm/images/0390e590-ac89-11f0-b1c3-bf61c28fbeb9",
    "cat": [
     19,
     26,
@@ -796,6 +854,7 @@
     {
      "w": 1,
      "opp": "Kalifornia Bulldogs",
+     "oppId": 9,
      "score": "4-5",
      "res": "M",
      "beat": 10
@@ -803,6 +862,7 @@
     {
      "w": 2,
      "opp": "BEGE",
+     "oppId": 5,
      "score": "1-8",
      "res": "M",
      "beat": 2
@@ -810,6 +870,7 @@
     {
      "w": 3,
      "opp": "Acibadem Elephants",
+     "oppId": 6,
      "score": "3-6",
      "res": "M",
      "beat": 5
@@ -817,6 +878,7 @@
     {
      "w": 4,
      "opp": "CHADELITES",
+     "oppId": 2,
      "score": "3-6",
      "res": "M",
      "beat": 4
@@ -824,6 +886,7 @@
     {
      "w": 5,
      "opp": "BATH CANARIES",
+     "oppId": 7,
      "score": "8-1",
      "res": "G",
      "beat": 10
@@ -861,6 +924,8 @@
   {
    "id": 12,
    "name": "Soprano's",
+   "abbrev": "SOP",
+   "logo": "https://mystique-api.fantasy.espn.com/apis/v1/domains/lm/images/68033480-ac5a-11f0-90f7-112fa0f42e74",
    "cat": [
     23,
     22,
@@ -889,6 +954,7 @@
     {
      "w": 1,
      "opp": "BEGE",
+     "oppId": 5,
      "score": "5-4",
      "res": "G",
      "beat": 8
@@ -896,6 +962,7 @@
     {
      "w": 2,
      "opp": "Acibadem Elephants",
+     "oppId": 6,
      "score": "3-6",
      "res": "M",
      "beat": 4
@@ -903,6 +970,7 @@
     {
      "w": 3,
      "opp": "CHADELITES",
+     "oppId": 2,
      "score": "4-5",
      "res": "M",
      "beat": 2
@@ -910,6 +978,7 @@
     {
      "w": 4,
      "opp": "BATH CANARIES",
+     "oppId": 7,
      "score": "4-5",
      "res": "M",
      "beat": 0
@@ -917,6 +986,7 @@
     {
      "w": 5,
      "opp": "Tooney Tunes",
+     "oppId": 14,
      "score": "7-2",
      "res": "G",
      "beat": 2
@@ -954,6 +1024,8 @@
   {
    "id": 13,
    "name": "Doggy dogs",
+   "abbrev": "DDD",
+   "logo": "https://g.espncdn.com/lm-static/fba/images/default_logos/20.svg",
    "cat": [
     26,
     19,
@@ -982,6 +1054,7 @@
     {
      "w": 1,
      "opp": "Acibadem Elephants",
+     "oppId": 6,
      "score": "6-3",
      "res": "G",
      "beat": 8
@@ -989,6 +1062,7 @@
     {
      "w": 2,
      "opp": "CHADELITES",
+     "oppId": 2,
      "score": "4-5",
      "res": "M",
      "beat": 10
@@ -996,6 +1070,7 @@
     {
      "w": 3,
      "opp": "BATH CANARIES",
+     "oppId": 7,
      "score": "4-5",
      "res": "M",
      "beat": 5
@@ -1003,6 +1078,7 @@
     {
      "w": 4,
      "opp": "Tooney Tunes",
+     "oppId": 14,
      "score": "5-4",
      "res": "G",
      "beat": 10
@@ -1010,6 +1086,7 @@
     {
      "w": 5,
      "opp": "Kerem’s Deluxe Team",
+     "oppId": 4,
      "score": "7-2",
      "res": "G",
      "beat": 4
@@ -1047,6 +1124,8 @@
   {
    "id": 14,
    "name": "Tooney Tunes",
+   "abbrev": "AT",
+   "logo": "https://mystique-api.fantasy.espn.com/apis/v1/domains/lm/images/06eda6b0-aced-11f0-afb5-e14f006a2a34",
    "cat": [
     23,
     22,
@@ -1075,6 +1154,7 @@
     {
      "w": 1,
      "opp": "Kerem’s Deluxe Team",
+     "oppId": 4,
      "score": "5-4",
      "res": "G",
      "beat": 6
@@ -1082,6 +1162,7 @@
     {
      "w": 2,
      "opp": "Children of Planet Earth",
+     "oppId": 1,
      "score": "7-2",
      "res": "G",
      "beat": 9
@@ -1089,6 +1170,7 @@
     {
      "w": 3,
      "opp": "31 Chechkers",
+     "oppId": 3,
      "score": "5-4",
      "res": "G",
      "beat": 5
@@ -1096,6 +1178,7 @@
     {
      "w": 4,
      "opp": "Doggy dogs",
+     "oppId": 13,
      "score": "4-5",
      "res": "M",
      "beat": 7
@@ -1103,6 +1186,7 @@
     {
      "w": 5,
      "opp": "Soprano's",
+     "oppId": 12,
      "score": "2-7",
      "res": "M",
      "beat": 1

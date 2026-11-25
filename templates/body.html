@@ -1,95 +1,141 @@
-<div class="wrap">
-<header>
-  <div><div class="eyebrow">ESPN · 12 takım · 9-cat H2H</div><h1 id="lg">Fantasy 26-27</h1></div>
-  <div class="meta" id="meta"></div>
+<header class="top">
+  <div class="in">
+    <div><div class="brand">ESPN · 9-cat H2H</div><h1 id="lg">Fantasy 26-27</h1></div>
+    <div class="chip" id="meta"></div>
+  </div>
 </header>
 
-<section>
-  <div><h2>Power rankings</h2><p class="lede">Sezon boyu all-play gücü (%60) ve son iki haftanın formu (%40). Gerçek sıralamadan bağımsız, takımın ne kadar iyi oynadığını gösterir.</p></div>
-  <div class="scroll"><table id="pr"></table></div>
-</section>
-
-<section>
-  <div><h2>Şans endeksi</h2><p class="lede">Gerçek kategori kazanma oranı eksi all-play oranı. All-play: takım her hafta 11 rakibin hepsiyle oynasaydı kazanacağı kategori oranı. Sağdakiler fikstürden kazançlı çıktı, soldakiler kazandığından fazlasını hak etti.</p></div>
-  <div class="luck" id="luck"></div>
-</section>
-
-<section>
-  <div><h2>Haftalık all-play</h2><p class="lede">Her hafta 11 rakibin kaçını yenecek kadar iyi oynandı. Çerçeveli hücreler gerçek maçın kaybedildiği haftalar.</p></div>
-  <div class="scroll"><table class="heat" id="heat"></table></div>
-</section>
-
-<section>
-  <div><h2>Kötü talih ve soygunlar</h2></div>
-  <div class="cards">
-    <div class="card"><h3>Kötü talih</h3><p class="lede" style="margin:0">Ligin çoğunu yenecek kadar iyi oynayıp yine de kaybedilen maçlar.</p><div id="beats"></div></div>
-    <div class="card"><h3>Soygun</h3><p class="lede" style="margin:0">O hafta ligin en zayıflarındanken kazanılan maçlar.</p><div id="steals"></div></div>
+<nav class="tabs" aria-label="Bölümler">
+  <div class="row">
+    <a href="#siralama" data-v="siralama"><svg viewBox="0 0 24 24"><path d="M4 20V10M10 20V4M16 20v-7M22 20H2"/></svg>Sıralama</a>
+    <a href="#sans" data-v="sans"><svg viewBox="0 0 24 24"><rect x="4" y="4" width="16" height="16" rx="3"/><circle cx="9" cy="9" r="1.2"/><circle cx="15" cy="15" r="1.2"/><circle cx="15" cy="9" r="1.2"/><circle cx="9" cy="15" r="1.2"/></svg>Şans</a>
+    <a href="#haftalar" data-v="haftalar"><svg viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4"/></svg>Haftalar</a>
+    <a href="#takimlar" data-v="takimlar"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3v18M5.6 5.6c3.5 3.5 3.5 9.3 0 12.8M18.4 5.6c-3.5 3.5-3.5 9.3 0 12.8"/></svg>Takımlar</a>
   </div>
-</section>
+</nav>
 
-<section>
-  <div><h2>Kategori profili</h2><p class="lede">Haftalık ortalamalara göre her kategoride lig sıralaması (1 en iyi; TO'da en az olan 1). Turuncu güçlü, mavi zayıf; punt edilen kategoriler buradan görünür.</p></div>
-  <div class="scroll"><table class="heat" id="cats"></table></div>
-</section>
+<main><div class="in" id="app"></div></main>
+<footer><div class="in">Veri ESPN Fantasy'den, tamamlanan haftalar üzerinden her sabah otomatik hesaplanır. Devam eden hafta dahil değil.</div></footer>
 
-<section>
-  <div><h2>Menajer ödülleri</h2></div>
-  <div class="awards" id="awards"></div>
-  <div class="scroll"><table id="act"></table></div>
-</section>
-
-<footer>Veri ESPN Fantasy'den, tamamlanan haftalar üzerinden hesaplandı. Devam eden hafta dahil değil. Geçmiş sezonlar ve takas analizi sonraki sürümde.</footer>
-</div>
 <script>
 const DATA=__DATA__;
-const $=id=>document.getElementById(id);
-const pct=x=>(x*100).toFixed(1);
+const T=DATA.teams, byId=Object.fromEntries(T.map(t=>[t.id,t]));
+const W=DATA.weeks, NW=W.length;
 const esc=s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
-const T=DATA.teams;
-$('meta').innerHTML=`${DATA.weeks.length} hafta tamamlandı<br>Güncelleme: ${esc(DATA.updated)}`;
-// power
-const pr=[...T].sort((a,b)=>b.power-a.power);
-const realRank=[...T].sort((a,b)=>b.catPct-a.catPct).map(t=>t.id);
-const maxP=pr[0].power;
-$('pr').innerHTML=`<tr><th>#</th><th>Takım</th><th>Güç</th><th class="num">Maç</th><th class="num">Kategori</th><th class="num">All-play</th><th class="num">Lig sırası</th></tr>`+
-pr.map((t,i)=>{const rr=realRank.indexOf(t.id)+1;const d=rr-(i+1);
- const pill=d>0?`<span class="pill up">▲${d}</span>`:d<0?`<span class="pill down">▼${-d}</span>`:`<span class="pill flat">=</span>`;
- return `<tr><td class="rk">${i+1}</td><td class="team">${esc(t.name)}</td><td><div class="bar"><i style="width:${(t.power/maxP*100).toFixed(0)}%"></i></div></td>
- <td class="num">${t.mrec[0]}-${t.mrec[1]}${t.mrec[2]?'-'+t.mrec[2]:''}</td><td class="num">${t.cat.join('-')}</td><td class="num">%${pct(t.apPct)}</td><td class="num">${rr}. ${pill}</td></tr>`}).join('');
-// luck
-const lk=[...T].sort((a,b)=>b.luck-a.luck);const M=0.2;
-$('luck').innerHTML=lk.map(t=>{const v=t.luck,w=Math.min(Math.abs(v)/M,1)*50;
- const st=v>=0?`left:50%;width:${w}%;background:var(--good)`:`left:${50-w}%;width:${w}%;background:var(--bad)`;
- return `<div class="lrow"><span class="nm">${esc(t.name)}</span><div class="ltrack"><i style="${st}"></i></div><span class="v">${v>=0?'+':''}${pct(v)}</span></div>`}).join('')+
- `<div class="axis"><span></span><div><span>−20 puan</span><span>0</span><span>+20 puan</span></div><span></span></div>`;
-// heat weekly
-function mix(v,max,col){const p=Math.round(v/max*85);return `background:color-mix(in srgb,var(--${col}) ${p}%,var(--surface))`}
-const hw=[...T].sort((a,b)=>b.apPct-a.apPct);
-$('heat').innerHTML=`<tr><th>Takım</th>${DATA.weeks.map(w=>`<th class="num" style="text-align:center">H${w}</th>`).join('')}<th class="num">Toplam</th></tr>`+
-hw.map(t=>`<tr><td class="team">${esc(t.name)}</td>${t.games.map(g=>{const lost=g.res==='M';const txt=g.beat>6?'color:#fff':'';
- return `<td class="c" style="${mix(g.beat,11,'accent')};${txt};${lost?'outline:2px solid var(--ink);outline-offset:-3px':''}" title="${esc(g.opp)} ${g.score}">${g.beat}</td>`}).join('')}
- <td class="num">${t.weekly.reduce((a,b)=>a+b,0)}/${11*DATA.weeks.length}</td></tr>`).join('');
-// beats/steals
-const ev=(x,lost)=>`<div class="ev"><span class="wk">H${x.w}</span><span class="tx"><b>${esc(x.team)}</b><small>${lost?'kaybetti':'yendi'}: ${esc(x.opp)} · ${x.beat}/11 rakibi yenerdi</small></span><span class="sc">${x.score}</span></div>`;
-$('beats').innerHTML=DATA.beats.map(x=>ev(x,1)).join('');
-$('steals').innerHTML=DATA.steals.map(x=>ev(x,0)).join('');
-// cats
-$('cats').innerHTML=`<tr><th>Takım</th>${DATA.cats.map(c=>`<th class="num" style="text-align:center">${c}</th>`).join('')}</tr>`+
-hw.map(t=>`<tr><td class="team">${esc(t.name)}</td>${DATA.cats.map(c=>{const r=t.rank[c];const s=r<=6?mix(7-r,6,'accent'):mix(r-6,6,'cool');
- const strong=(r<=2||r>=11)?'color:#fff;font-weight:600':'';
- const v=c.includes('%')?t.avg[c].toFixed(3).slice(1):t.avg[c].toFixed(0);
- return `<td class="c" style="${s};${strong}" title="Haftalık ort. ${v}">${r}</td>`}).join('')}</tr>`).join('');
-// awards
-const by=(k,dir=-1)=>[...T].sort((a,b)=>dir*(a[k]-b[k]))[0];
-const unl=by('luck',1),lucky=by('luck'),busy=by('adds'),sleepy=by('moves',1);
-const best=[...T].flatMap(t=>t.games.map(g=>({t,g}))).sort((a,b)=>b.g.beat-a.g.beat||a.g.w-b.g.w)[0];
-const A=[["En şanssız",unl.name,`${unl.mrec[0]}-${unl.mrec[1]} gidiyor, all-play'de %${pct(unl.apPct)}`],
-["En şanslı",lucky.name,`Kategori oranı all-play'in ${pct(lucky.luck)} puan üstünde`],
-["Waiver bağımlısı",busy.name,`${busy.adds} oyuncu aldı`],
-["Kusursuz hafta",best.t.name,`${best.g.w}. haftada 11 rakibin hepsini yenerdi`],
-["Uyuyan menajer",sleepy.name,`Sezon boyu ${sleepy.moves} kadro hamlesi, ligin en azı`]];
-$('awards').innerHTML=A.map(a=>`<div class="aw"><span class="lab">${a[0]}</span><span class="who">${esc(a[1])}</span><span class="why">${esc(a[2])}</span></div>`).join('');
-const ac=[...T].sort((a,b)=>b.adds-a.adds);
-$('act').innerHTML=`<tr><th>Takım</th><th class="num">Oyuncu alımı</th><th class="num">Kadro hamlesi</th><th class="num">Takas</th></tr>`+
-ac.map(t=>`<tr><td class="team">${esc(t.name)}</td><td class="num">${t.adds}</td><td class="num">${t.moves}</td><td class="num">${t.trades}</td></tr>`).join('');
+const pct=x=>(x*100).toFixed(1);
+const rec=r=>r[0]+'-'+r[1]+(r[2]?'-'+r[2]:'');
+const link=t=>'#takim-'+t.id;
+function logo(t,s){const ab=esc((t.abbrev||t.name).slice(0,3)).replace(/'/g,'');
+  return `<span class="logo" style="width:${s}px;height:${s}px;font-size:${Math.round(s*.36)}px">${t.logo?`<img src="${esc(t.logo)}" alt="" loading="lazy" referrerpolicy="no-referrer" onerror="this.parentNode.textContent='${ab}'">`:ab}</span>`}
+document.getElementById('meta').innerHTML=`<b>${NW}. hafta sonrası</b><br>${esc(DATA.updated)}`;
+
+const power=[...T].sort((a,b)=>b.power-a.power);
+const league=[...T].sort((a,b)=>b.catPct-a.catPct);
+const pRank=t=>power.indexOf(t)+1, lRank=t=>league.indexOf(t)+1;
+function movePill(t){const d=lRank(t)-pRank(t);
+  return d>0?`<span class="pill up" title="Lig sırası ${lRank(t)}">▲${d}</span>`:d<0?`<span class="pill down" title="Lig sırası ${lRank(t)}">▼${-d}</span>`:`<span class="pill flat">=</span>`}
+function mix(v,max,col){return `background:color-mix(in srgb,var(--${col}) ${Math.round(v/max*85)}%,var(--surface))`}
+
+function awards(){
+  const by=(k,dir=-1)=>[...T].sort((a,b)=>dir*(a[k]-b[k]))[0];
+  const unl=by('luck',1),lucky=by('luck'),busy=by('adds'),sleepy=by('moves',1);
+  const best=T.flatMap(t=>t.games.map(g=>({t,g}))).sort((a,b)=>b.g.beat-a.g.beat||a.g.w-b.g.w)[0];
+  return [["En şanssız",unl,`${rec(unl.mrec)} ama all-play %${pct(unl.apPct)}`],
+   ["En şanslı",lucky,`All-play'in ${pct(lucky.luck)} puan üstünde`],
+   ["Kusursuz hafta",best.t,`${best.g.w}. haftada 11/11`],
+   ["Transfer bağımlısı",busy,`${busy.adds} oyuncu aldı`],
+   ["Uyuyan menajer",sleepy,`Sadece ${sleepy.moves} kadro hamlesi`]]
+   .map(([l,t,w])=>`<a class="aw" href="${link(t)}">${logo(t,36)}<div><div class="lab">${l}</div><div class="who">${esc(t.name)}</div><div class="why">${esc(w)}</div></div></a>`).join('');
+}
+
+const V={};
+V.siralama=()=>{const top=power[0];
+  return `<a class="panel leader" href="${link(top)}">${logo(top,64)}<div><div class="lab">Güç sıralaması lideri</div><div class="big">${esc(top.name)}</div><div class="why">All-play %${pct(top.apPct)} · ${NW} haftada ${top.weekly.reduce((a,b)=>a+b,0)} rakip yendi</div></div></a>
+  <section class="sec"><div class="sec-h"><h2>Güç sıralaması</h2></div>
+  <p class="hint">%60 sezon boyu all-play gücü, %40 son iki haftanın formu. Sağdaki ok, takımın gerçek lig sırasına göre farkını gösterir.</p>
+  <ol class="panel rank-list">${power.map((t,i)=>`<li><a class="trow" href="${link(t)}"><span class="n">${i+1}</span>${logo(t,40)}
+   <div style="min-width:0"><div class="nm">${esc(t.name)}</div><div class="sub"><span>${rec(t.mrec)}</span><span>${t.cat.join('-')}</span><span>AP %${pct(t.apPct)}</span></div></div>
+   <div class="side">${movePill(t)}<span class="pbar"><i style="width:${(t.power/top.power*100).toFixed(0)}%"></i></span></div></a></li>`).join('')}</ol></section>
+  <section class="sec"><h2>Ödüller</h2><div class="awards">${awards()}</div></section>`};
+
+V.sans=()=>{const lk=[...T].sort((a,b)=>b.luck-a.luck),M=0.2;
+  const ev=(x,lost)=>{const t=T.find(z=>z.name===x.team);return `<a class="ev" href="${link(t)}" style="text-decoration:none">${logo(t,36)}<div style="min-width:0"><div class="nm">${esc(x.team)}</div><small>H${x.w} · ${lost?'kaybetti':'yendi'}: ${esc(x.opp)} · ${x.beat}/11</small></div><span class="sc">${x.score}</span></a>`};
+  return `<section class="sec"><h2>Şans endeksi</h2>
+  <p class="hint">Gerçek kategori oranı eksi all-play oranı. All-play: takım her hafta 11 rakibin hepsiyle oynasaydı kazanacağı kategori oranı. Yeşil fikstürden kazançlı çıktı, kırmızı hak ettiğini alamadı.</p>
+  <div class="panel luck">${lk.map(t=>{const v=t.luck,w=Math.min(Math.abs(v)/M,1)*50;
+    const st=v>=0?`left:50%;width:${w}%;background:var(--good)`:`left:${50-w}%;width:${w}%;background:var(--bad)`;
+    return `<a class="lrow" href="${link(t)}">${logo(t,28)}<span class="nm">${esc(t.name)}</span><span class="v">${v>=0?'+':''}${pct(v)}</span><span class="bar"><i style="${st}"></i></span></a>`}).join('')}
+   <div class="axis"><span>−20 puan</span><span>0</span><span>+20 puan</span></div></div></section>
+  <section class="sec"><h2>Kötü talih</h2><p class="hint">Ligin çoğunu yenecek kadar iyi oynayıp yine de kaybedilen maçlar.</p>
+   <div class="panel">${DATA.beats.map(x=>ev(x,1)).join('')||'<p class="hint" style="padding:14px">Henüz yok.</p>'}</div></section>
+  <section class="sec"><h2>Soygunlar</h2><p class="hint">O hafta ligin en zayıflarındanken kazanılan maçlar.</p>
+   <div class="panel">${DATA.steals.map(x=>ev(x,0)).join('')||'<p class="hint" style="padding:14px">Henüz yok.</p>'}</div></section>`};
+
+let selWeek=W[NW-1];
+V.haftalar=()=>{
+  const seen=new Set(),mus=[];
+  T.forEach(t=>t.games.filter(g=>g.w===selWeek).forEach(g=>{const k=[t.id,g.oppId].sort().join('-');if(seen.has(k))return;seen.add(k);mus.push([t,g])}));
+  mus.sort((a,b)=>(b[1].beat+byId[b[1].oppId].weekly[selWeek-1])-(a[1].beat+byId[a[1].oppId].weekly[selWeek-1]));
+  const hw=[...T].sort((a,b)=>b.apPct-a.apPct);
+  return `<section class="sec"><h2>Maçlar</h2>
+  <div class="chips" role="group" aria-label="Hafta seç">${W.map(w=>`<button type="button" data-w="${w}" aria-pressed="${w===selWeek}">${w}. hafta</button>`).join('')}</div>
+  <div class="panel">${mus.map(([t,g])=>{const o=byId[g.oppId],[a,b]=g.score.split('-').map(Number),win=g.res==='G',loss=g.res==='M';
+    return `<div class="mu"><a class="side${loss?' loser':''}" href="${link(t)}">${logo(t,36)}<div><div class="nm">${esc(t.name)}</div><div class="ap">${g.beat}/11 yenerdi</div></div></a>
+    <div class="sc"><span class="${win?'w':''}">${a}</span>–<span class="${loss?'w':''}">${b}</span></div>
+    <a class="side r${win?' loser':''}" href="${link(o)}">${logo(o,36)}<div><div class="nm">${esc(o.name)}</div><div class="ap">${o.weekly[selWeek-1]}/11 yenerdi</div></div></a></div>`}).join('')}</div>
+  <p class="hint">"x/11 yenerdi": takımın o haftaki kategorileriyle 11 rakibin kaçını yeneceği.</p></section>
+  <section class="sec"><h2>Haftalık all-play</h2><p class="hint">Her hafta yenilecek rakip sayısı. Çerçeveli hücre gerçek maçın kaybedildiği hafta.</p>
+  <div class="panel scroll"><table><thead><tr><th>Takım</th>${W.map(w=>`<th>H${w}</th>`).join('')}<th>Top.</th></tr></thead><tbody>
+  ${hw.map(t=>`<tr><td class="tn">${esc(t.name)}</td>${t.games.map(g=>`<td class="c" style="${mix(g.beat,11,'accent')};${g.beat>6?'color:#fff;':''}${g.res==='M'?'box-shadow:inset 0 0 0 2px var(--ink)':''}" title="${esc(g.opp)} ${g.score}">${g.beat}</td>`).join('')}<td class="c">${t.weekly.reduce((a,b)=>a+b,0)}</td></tr>`).join('')}
+  </tbody></table></div></section>`};
+
+V.takimlar=()=>{const hw=[...T].sort((a,b)=>pRank(a)-pRank(b));
+  return `<section class="sec"><h2>Takımlar</h2><div class="tgrid">${hw.map(t=>`<a class="tcard" href="${link(t)}">${logo(t,56)}<div class="nm">${esc(t.name)}</div><div class="sub">${rec(t.mrec)} · ${t.cat.join('-')}</div></a>`).join('')}</div></section>
+  <section class="sec"><h2>Kategori profili</h2><p class="hint">Her kategoride lig sırası (1 en iyi; TO'da en az olan 1). Turuncu güçlü, mavi zayıf. Punt edilen kategoriler buradan görünür.</p>
+  <div class="panel scroll"><table><thead><tr><th>Takım</th>${DATA.cats.map(c=>`<th>${c}</th>`).join('')}</tr></thead><tbody>
+  ${hw.map(t=>`<tr><td class="tn">${esc(t.name)}</td>${DATA.cats.map(c=>{const r=t.rank[c];return `<td class="c" style="${r<=6?mix(7-r,6,'accent'):mix(r-6,6,'cool')};${(r<=2||r>=11)?'color:#fff;font-weight:600':''}">${r}</td>`}).join('')}</tr>`).join('')}
+  </tbody></table></div></section>`};
+
+function radar(t){const C=DATA.cats,n=C.length,cx=170,cy=150,R=105;
+  const pt=(i,r)=>{const a=-Math.PI/2+i*2*Math.PI/n;return [cx+r*Math.cos(a),cy+r*Math.sin(a)]};
+  const rings=[.25,.5,.75,1].map(f=>`<polygon points="${C.map((_,i)=>pt(i,R*f).join(',')).join(' ')}" fill="none" stroke="var(--line)"/>`).join('');
+  const spokes=C.map((_,i)=>`<line x1="${cx}" y1="${cy}" x2="${pt(i,R)[0]}" y2="${pt(i,R)[1]}" stroke="var(--line)"/>`).join('');
+  const val=c=>(13-t.rank[c])/12;
+  const poly=C.map((c,i)=>pt(i,R*val(c)).join(',')).join(' ');
+  const dots=C.map((c,i)=>{const [x,y]=pt(i,R*val(c));return `<circle cx="${x}" cy="${y}" r="3.5" fill="var(--accent)"/>`}).join('');
+  const labels=C.map((c,i)=>{const [x,y]=pt(i,R+24);const r=t.rank[c];return `<text x="${x}" y="${y}" text-anchor="middle" dominant-baseline="middle" class="${r<=3?'lbl-strong':''}">${c} ${r}.</text>`}).join('');
+  return `<svg viewBox="0 0 340 300" role="img" aria-label="Kategori sıraları">${rings}${spokes}<polygon points="${poly}" fill="color-mix(in srgb,var(--accent) 25%,transparent)" stroke="var(--accent)" stroke-width="2"/>${dots}${labels}</svg>`}
+
+function profile(id){const t=byId[id];if(!t)return V.siralama();
+  const strong=DATA.cats.filter(c=>t.rank[c]<=3),weak=DATA.cats.filter(c=>t.rank[c]>=10);
+  return `<a class="back" href="#takimlar">‹ Takımlar</a>
+  <div class="phead">${logo(t,72)}<div><div class="nm">${esc(t.name)}</div><div class="sub">Güç sıralaması #${pRank(t)} · Lig sırası #${lRank(t)}</div></div></div>
+  <div class="tiles">
+   <div class="tile"><span class="k">Maç</span><span class="v">${rec(t.mrec)}</span><span class="s">haftalık galibiyet</span></div>
+   <div class="tile"><span class="k">Kategori</span><span class="v">${t.cat.join('-')}</span><span class="s">%${pct(t.catPct)}</span></div>
+   <div class="tile"><span class="k">All-play</span><span class="v">%${pct(t.apPct)}</span><span class="s">${t.ap.join('-')}</span></div>
+   <div class="tile"><span class="k">Şans</span><span class="v" style="color:var(--${t.luck>=0?'good':'bad'})">${t.luck>=0?'+':''}${pct(t.luck)}</span><span class="s">puan</span></div>
+  </div>
+  <section class="sec"><h2>Kategori profili</h2>
+   <p class="hint">${strong.length?`Güçlü: ${strong.join(', ')}.`:''} ${weak.length?`Zayıf: ${weak.join(', ')}.`:''} Dışa doğru gittikçe ligde daha iyi.</p>
+   <div class="panel radar">${radar(t)}</div></section>
+  <section class="sec"><h2>Haftalar</h2><div class="panel">${t.games.map(g=>{const o=byId[g.oppId];
+   return `<a class="res" href="${link(o)}"><span class="wk">H${g.w}</span>${logo(o,32)}<div style="min-width:0"><div class="nm">${esc(o.name)}</div><small>${g.beat}/11 rakibi yenerdi</small></div><span class="sc">${g.score}<span class="gm ${g.res}">${g.res}</span></span></a>`}).join('')}</div></section>
+  <div class="tiles">
+   <div class="tile"><span class="k">Oyuncu alımı</span><span class="v">${t.adds}</span></div>
+   <div class="tile"><span class="k">Kadro hamlesi</span><span class="v">${t.moves}</span></div>
+   <div class="tile"><span class="k">Takas</span><span class="v">${t.trades}</span></div>
+   <div class="tile"><span class="k">En iyi hafta</span><span class="v">${Math.max(...t.weekly)}/11</span></div>
+  </div>`}
+
+const app=document.getElementById('app');
+function render(){const h=(location.hash||'#siralama').slice(1);
+  let v=h.startsWith('takim-')?'takimlar':(V[h]?h:'siralama');
+  app.innerHTML=`<div class="view">${h.startsWith('takim-')?profile(+h.slice(6)):V[v]()}</div>`;
+  document.querySelectorAll('nav.tabs a').forEach(a=>{if(a.dataset.v===v)a.setAttribute('aria-current','page');else a.removeAttribute('aria-current')});
+  app.querySelectorAll('.chips button').forEach(b=>b.onclick=()=>{selWeek=+b.dataset.w;render()});
+}
+let lastHash=location.hash;
+window.addEventListener('hashchange',()=>{render();if(!location.hash.startsWith('#takim-')||lastHash!==location.hash)window.scrollTo(0,0);lastHash=location.hash});
+render();
 </script>

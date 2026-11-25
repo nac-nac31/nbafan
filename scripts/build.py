@@ -29,6 +29,7 @@ def pct(r):
 def compute(raw):
     L, M = raw["league"], raw["matchups"]
     names = {t["id"]: t["name"].strip() for t in L["teams"]}
+    meta = {t["id"]: {"abbrev": t.get("abbrev", ""), "logo": t.get("logo", "")} for t in L["teams"]}
     txc = {t["id"]: t.get("transactionCounter", {}) for t in L["teams"]}
     weeks, opp = collections.defaultdict(dict), collections.defaultdict(dict)
     for m in M["schedule"]:
@@ -59,10 +60,10 @@ def compute(raw):
             res = "G" if W > Lo else "M" if Lo > W else "B"
             mrec["GMB".index(res)] += 1
             weekly.append(beat)
-            games.append({"w": w, "opp": names[o], "score": f"{W}-{Lo}" + (f"-{T}" if T else ""), "res": res, "beat": beat})
+            games.append({"w": w, "opp": names[o], "oppId": o, "score": f"{W}-{Lo}" + (f"-{T}" if T else ""), "res": res, "beat": beat})
         tc = txc[t]
         teams.append({
-            "id": t, "name": names[t], "cat": cat, "catPct": pct(cat), "apPct": pct(apc), "ap": apc,
+            "id": t, "name": names[t], "abbrev": meta[t]["abbrev"], "logo": meta[t]["logo"], "cat": cat, "catPct": pct(cat), "apPct": pct(apc), "ap": apc,
             "mrec": mrec, "weekly": weekly, "games": games,
             "avg": {CN[c]: sum(weeks[w][t][c] for w in done) / max(1, len(done)) for c in CATS},
             "adds": tc.get("acquisitions", 0), "moves": tc.get("moveToActive", 0), "trades": tc.get("trades", 0),
