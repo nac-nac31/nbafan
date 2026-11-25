@@ -494,7 +494,7 @@
    "id": 1,
    "name": "Children of Planet Earth",
    "abbrev": "CPE",
-   "logo": "https://mystique-api.fantasy.espn.com/apis/v1/domains/lm/images/d5c27d50-c991-11f1-bcc1-f7d73be225cd",
+   "logo": "",
    "cat": [
     19,
     25,
@@ -594,7 +594,7 @@
    "id": 2,
    "name": "CHADELITES",
    "abbrev": "PSL",
-   "logo": "https://mystique-api.fantasy.espn.com/apis/v1/domains/lm/images/da3e7a80-c8cb-11f1-91e2-3915bbb7cba0",
+   "logo": "",
    "cat": [
     24,
     20,
@@ -994,7 +994,7 @@
    "id": 6,
    "name": "Acibadem Elephants",
    "abbrev": "FIL",
-   "logo": "https://mystique-api.fantasy.espn.com/apis/v1/domains/lm/images/6a745f20-b18a-11f0-afb5-e14f006a2a34",
+   "logo": "",
    "cat": [
     27,
     18,
@@ -1094,7 +1094,7 @@
    "id": 7,
    "name": "BATH CANARIES",
    "abbrev": "AAG",
-   "logo": "https://mystique-api.fantasy.espn.com/apis/v1/domains/lm/images/7851d360-c8aa-11f1-b18d-9d663e1fd952",
+   "logo": "",
    "cat": [
     20,
     25,
@@ -1294,7 +1294,7 @@
    "id": 10,
    "name": "Adana Heybeliler Tekstil",
    "abbrev": "HEY",
-   "logo": "https://mystique-api.fantasy.espn.com/apis/v1/domains/lm/images/0390e590-ac89-11f0-b1c3-bf61c28fbeb9",
+   "logo": "",
    "cat": [
     19,
     26,
@@ -1394,7 +1394,7 @@
    "id": 12,
    "name": "Soprano's",
    "abbrev": "SOP",
-   "logo": "https://mystique-api.fantasy.espn.com/apis/v1/domains/lm/images/68033480-ac5a-11f0-90f7-112fa0f42e74",
+   "logo": "",
    "cat": [
     23,
     22,
@@ -1594,7 +1594,7 @@
    "id": 14,
    "name": "Tooney Tunes",
    "abbrev": "AT",
-   "logo": "https://mystique-api.fantasy.espn.com/apis/v1/domains/lm/images/06eda6b0-aced-11f0-afb5-e14f006a2a34",
+   "logo": "",
    "cat": [
     23,
     22,
