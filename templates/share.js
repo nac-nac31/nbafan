@@ -98,7 +98,7 @@ async function drawImage(){
     x.font=`600 32px ${B}`;x.fillStyle=aw?ink:mut;x.textAlign='left';x.fillText(clip(nm(r.a),300,`600 32px ${B}`),152,y+rh/2+11);
     x.fillStyle=bw?ink:mut;x.textAlign='right';x.fillText(clip(nm(r.b),300,`600 32px ${B}`),W-152,y+rh/2+11);
     x.textAlign='center';x.font=`800 72px ${F}`;
-    const sa=String(r.s[0]),sb=String(r.s[1]),mid=W/2;
+    const fs=v=>Number.isInteger(v)?String(v):v.toFixed(1),sa=fs(r.s[0]),sb=fs(r.s[1]),mid=W/2;if(ST.points)x.font=`800 56px ${F}`;
     x.fillStyle=aw?acc:mut;x.textAlign='right';x.fillText(sa,mid-18,y+rh/2+26);
     x.fillStyle=mut;x.textAlign='center';x.fillText('–',mid,y+rh/2+22);
     x.fillStyle=bw?cool:mut;x.textAlign='left';x.fillText(sb,mid+18,y+rh/2+26);x.textAlign='left';
@@ -106,7 +106,7 @@ async function drawImage(){
   let y=y0+rows.length*rh+40;
   const hl=[];
   if(ST.pw)hl.push([S.potw,`${ST.pw.name}`,`${nm(ST.pw.team)} · ${ST.pw.pg.PTS} ${EN?'ppg':'sayı'} · ${ST.pw.n} ${EN?'g':'maç'}`]);
-  if(ST.king!=null)hl.push([S.king,nm(ST.king),`${ST.kingBeat}/11`]);
+  if(ST.king!=null)hl.push([S.king,nm(ST.king),`${ST.kingBeat}/${ST.nOpp||DATA.nOpp||11}`]);
   hl.slice(0,2).forEach((h,i)=>{const bx=64+i*488,bw2=464;x.fillStyle=head;roundRect(x,bx,y,bw2,150,22);x.fill();
     x.fillStyle=i?cool:acc;x.font=`500 22px ${M}`;x.fillText(h[0].toLocaleUpperCase(EN?'en':'tr'),bx+28,y+44);
     x.fillStyle=ink;x.font=`700 40px ${B}`;x.fillText(clip(h[1],bw2-56,`700 40px ${B}`),bx+28,y+94);

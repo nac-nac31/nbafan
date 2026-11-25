@@ -61,6 +61,19 @@ def week_players(raw, daily, week, Z):
     return pw, best
 
 
+def num(x):
+    v = float(x)
+    return int(v) if v.is_integer() else v
+
+
+def fmt(v):
+    return f"{v:g}" if isinstance(v, int) or float(v).is_integer() else f"{v:.1f}"
+
+
+def rec(r):
+    return "-".join(str(x) for x in (r if len(r) < 3 or r[2] else r[:2]))
+
+
 def streak(games):
     if not games:
         return "", 0
@@ -84,6 +97,8 @@ def build_story(data, raw, daily, Z):
     if not W:
         return None
     T = {t["id"]: t for t in data["teams"]}
+    pts = data.get("scoring") == "H2H_POINTS"
+    nopp = data.get("nOpp") or len(T) - 1
     nm = lambda i: T[i]["name"]
     power = sorted(T.values(), key=lambda t: -t["power"])
     prank = {t["id"]: i + 1 for i, t in enumerate(power)}
@@ -91,13 +106,14 @@ def build_story(data, raw, daily, Z):
     for t in T.values():
         g = next((g for g in t["games"] if g["w"] == W), None)
         if g and t["id"] < g["oppId"]:
-            a, b = (int(x) for x in g["score"].split("-")[:2])
+            a, b = (num(x) for x in g["score"].split("-")[:2])
             og = next(x for x in T[g["oppId"]]["games"] if x["w"] == W)
             res.append({"a": t["id"], "b": g["oppId"], "s": [a, b], "beat": [g["beat"], og["beat"]]})
     res.sort(key=lambda r: -abs(r["s"][0] - r["s"][1]))
     win = lambda r: (r["a"], r["b"]) if r["s"][0] > r["s"][1] else (r["b"], r["a"]) if r["s"][1] > r["s"][0] else (None, None)
     blow = res[0] if res and res[0]["s"][0] != res[0]["s"][1] else None
-    close = [r for r in res if abs(r["s"][0] - r["s"][1]) <= 1]
+    # kıl payı: kategori liginde en fazla 1 kategori, puan liginde kazananın %3'ü kadar fark
+    close = [r for r in res if abs(r["s"][0] - r["s"][1]) <= (0.03 * max(r["s"]) if pts else 1)]
     beats = {t: next(g["beat"] for g in T[t]["games"] if g["w"] == W) for t in T}
     king = max(beats, key=beats.get)
     losers = [(beats[l], l, w) for r in res for w, l in [win(r)] if l]
@@ -106,6 +122,8 @@ def build_story(data, raw, daily, Z):
     upset = max(upsets) if upsets else None
     pw, bg = week_players(raw, daily, W, Z)
     leader = max(T.values(), key=lambda t: (t["catPct"], t["apPct"]))
+    if pts:
+        leader = max(T.values(), key=lambda t: ((t["mrec"][0] + .5 * t["mrec"][2]) / max(1, sum(t["mrec"])), t["apPct"]))
     streaks = sorted(((n, t, r) for t in T for r, n in [streak(T[t]["games"])] if n >= 3 and r in "GM"), reverse=True)
     cur = data.get("current") or {}
     nxt = None
@@ -115,7 +133,7 @@ def build_story(data, raw, daily, Z):
         nxt = {"a": m["home"], "b": m["away"], "p": round(m["proj"]["win"] * 100)}
 
     def sc(r, w):
-        return f"{max(r['s'])}-{min(r['s'])}"
+        return f"{fmt(max(r['s']))}-{fmt(min(r['s']))}"
 
     out = {"tr": [], "en": []}
 
@@ -128,8 +146,8 @@ def build_story(data, raw, daily, Z):
         add(f"{W}. haftanın en sert sonucu {nm(w)} imzalı: {nm(l)} karşısında {sc(blow, w)}.",
             f"The statement win of week {W} belongs to {nm(w)}: {sc(blow, w)} over {nm(l)}.")
     if close:
-        parts_tr = [f"{nm(win(r)[0])} {sc(r, 0)} {nm(win(r)[1])}" if win(r)[0] else f"{nm(r['a'])} ile {nm(r['b'])} {r['s'][0]}-{r['s'][1]} berabere" for r in close]
-        parts_en = [f"{nm(win(r)[0])} edged {nm(win(r)[1])} {sc(r, 0)}" if win(r)[0] else f"{nm(r['a'])} and {nm(r['b'])} tied {r['s'][0]}-{r['s'][1]}" for r in close]
+        parts_tr = [f"{nm(win(r)[0])} {sc(r, 0)} {nm(win(r)[1])}" if win(r)[0] else f"{nm(r['a'])} ile {nm(r['b'])} {fmt(r['s'][0])}-{fmt(r['s'][1])} berabere" for r in close]
+        parts_en = [f"{nm(win(r)[0])} edged {nm(win(r)[1])} {sc(r, 0)}" if win(r)[0] else f"{nm(r['a'])} and {nm(r['b'])} tied {fmt(r['s'][0])}-{fmt(r['s'][1])}" for r in close]
         add(f"Kıl payı biten {'maç' if len(close) == 1 else str(len(close)) + ' maç'}: " + "; ".join(parts_tr) + ".",
             f"{'One' if len(close) == 1 else len(close)} went down to the wire: " + "; ".join(parts_en) + ".")
     if upset:
@@ -137,8 +155,8 @@ def build_story(data, raw, daily, Z):
         add(f"Haftanın sürprizi: güç sıralamasında {prank[w]}. olan {nm(w)}, {prank[l]}. sıradaki {nm(l)} takımını {sc(r, w)} yendi.",
             f"Upset of the week: {nm(w)} (No. {prank[w]} in the power rankings) beat No. {prank[l]} {nm(l)} {sc(r, w)}.")
     add(f"All-play şampiyonu {nm(king)}: bu haftaki istatistikleriyle ligdeki {beats[king]} rakibi yenerdi.",
-        f"All-play champ: {nm(king)}, whose numbers would have beaten {beats[king]} of 11 teams.")
-    if unlucky and unlucky[0] >= 6:
+        f"All-play champ: {nm(king)}, whose numbers would have beaten {beats[king]} of {nopp} teams.")
+    if unlucky and unlucky[0] >= max(2, round(nopp * .55)):
         b, l, w = unlucky
         add(f"Şanssızlar köşesi: {nm(l)} ligin {b} takımını yenecek istatistik yaptı ama tam da {nm(w)} ile eşleşti.",
             f"Hard-luck loser: {nm(l)} put up numbers good enough to beat {b} teams, and still ran into {nm(w)}.")
@@ -152,12 +170,15 @@ def build_story(data, raw, daily, Z):
         n, t, r = streaks[0]
         add(f"{nm(t)} üst üste {n} maçtır {'kazanıyor' if r == 'G' else 'kaybediyor'}.",
             f"{nm(t)} {'has won' if r == 'G' else 'has lost'} {n} straight.")
-    add(f"Zirvede {nm(leader['id'])} var: kategori rekoru {'-'.join(map(str, leader['cat']))}.",
-        f"{nm(leader['id'])} sits on top with a {'-'.join(map(str, leader['cat']))} category record.")
+    if pts:
+        add(f"Zirvede {nm(leader['id'])} var: {rec(leader['mrec'])}.", f"{nm(leader['id'])} sits on top at {rec(leader['mrec'])}.")
+    else:
+        add(f"Zirvede {nm(leader['id'])} var: kategori rekoru {rec(leader['cat'])}.",
+            f"{nm(leader['id'])} sits on top with a {rec(leader['cat'])} category record.")
     if nxt:
         add(f"Bu haftanın maçı {nm(nxt['a'])} – {nm(nxt['b'])}: model kazanma ihtimalini %{nxt['p']} – %{100 - nxt['p']} görüyor.",
             f"Game of the week: {nm(nxt['a'])} vs {nm(nxt['b'])}, which the model has at {nxt['p']}% – {100 - nxt['p']}%.")
-    return {"week": W, "results": res, "tr": out["tr"], "en": out["en"],
+    return {"week": W, "results": res, "tr": out["tr"], "en": out["en"], "nOpp": nopp, "points": pts,
             "pw": pw, "best": bg, "blow": blow, "king": king, "kingBeat": beats[king], "next": nxt,
             "title": {"tr": f"{W}. hafta özeti", "en": f"Week {W} recap"}}
 
@@ -216,8 +237,12 @@ def main():
     raw = load_raw(season)
     Z = None
     if raw.get("rosters"):
+        if hasattr(build, "configure"):  # lig ayarları (kategoriler / puan) — motorun yeni sürümü
+            build.configure(raw["league"])
         build.build_players(raw, season)
         Z = build.ZREF
+        if hasattr(fun, "configure"):
+            fun.configure(raw["league"], Z)
     dpath = ROOT / "data" / "daily" / f"{season}.json"
     daily = json.loads(dpath.read_text()) if dpath.exists() else None
     data["story"] = build_story(data, raw, daily, Z)

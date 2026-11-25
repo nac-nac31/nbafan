@@ -76,7 +76,8 @@ def run(data, raw, daily=None):
             lead = (s[0] > s[1]) - (s[0] < s[1])
             plead = (ps[0] > ps[1]) - (ps[0] < ps[1])
             fav, pfav = m.get("fav"), o.get("fav")
-            sc = f"{s[0]}-{s[1]}" + (f"-{s[2]}" if len(s) > 2 and s[2] else "")
+            fm = lambda v: f"{v:g}" if float(v).is_integer() else f"{v:.1f}"
+            sc = f"{fm(s[0])}-{fm(s[1])}" + (f"-{fm(s[2])}" if len(s) > 2 and s[2] else "")
             link = SITE + "#bu-hafta"
             if lead != plead and lead != 0:
                 w, l = (h, a) if lead > 0 else (a, h)
