@@ -34,6 +34,10 @@ jobs:
           ESPN_S2: ${{ secrets.ESPN_S2 }}
           SWID: ${{ secrets.SWID }}
         run: python scripts/build.py
+      - name: Haftanın hikayesi, uygulama dosyaları ve bildirimler
+        env:
+          NTFY_ENABLED: "1"
+        run: python scripts/extras.py
       - name: Veriyi kaydet
         run: |
           git config user.name "github-actions[bot]"

@@ -37,6 +37,14 @@ python scripts/build.py
 - **Draft karnesi:** her seçim, o sıradan beklenen değerle (draft edilenler arasında n. en iyi oyuncu) karşılaştırılır.
 - **Rekorlar, rekabetler, kişilikler, sakatlık endeksi.**
 
+## Paylaşım, bildirimler ve uygulama
+
+`scripts/extras.py`, `build.py`'den sonra çalışır (motoru değiştirmez):
+
+- **Haftanın hikayesi:** biten haftadan otomatik yazı (TR/EN): en farklı galibiyet, kıl payı maçlar, sürpriz, all-play şampiyonu, şanssız kaybeden, haftanın oyuncusu, seriler, lider ve bu haftanın maçı. Bu hafta sayfasının sonunda; "Görsel olarak paylaş" 1080×1350 bir PNG çizer (telefonda doğrudan WhatsApp'a), "WhatsApp'ta gönder" metni yollar.
+- **Bildirimler (ntfy):** `scripts/alerts.py` her güncellemede önceki durumla (`data/alerts_state.json`) karşılaştırır; skor lideri ya da tahmini favori (%57 eşiği) değişince iki takıma, kadrodaki oyuncunun sakatlık durumu değişince o takıma, yeni hafta başlayınca lig kanalına bildirim atar. Kanal adları Takımım sayfasında. Gönderim sadece Actions'ta (`NTFY_ENABLED=1`).
+- **Uygulama (PWA):** `static/` ikonları, `manifest.webmanifest` ve `sw.js` (sayfa önce ağdan, 2,5 sn'de gelmezse son kopyadan; logo ve fontlar önbellekten). Telefonda "Ana ekrana ekle".
+
 ## Takım logoları
 
 ESPN'in hazır logoları kendiliğinden gelir. Takımların kendi yüklediği resimler ESPN'de giriş yapmayı gerektirdiği için iki yol var:
