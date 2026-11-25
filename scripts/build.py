@@ -8,6 +8,7 @@ from fetch import current_season  # noqa: E402
 CATS = ["0", "6", "3", "2", "1", "17", "19", "20", "11"]
 CN = {"0": "PTS", "6": "REB", "3": "AST", "2": "STL", "1": "BLK", "17": "3PM", "19": "FG%", "20": "FT%", "11": "TO"}
 LOWER_IS_BETTER = {"11"}
+ZREF = None  # build_players oyuncu z-skoru referansı (tek maç değeri için)
 AYLAR = ["Ocak", "Şubat", "Mart", "Nisan", "Mayıs", "Haziran", "Temmuz", "Ağustos", "Eylül", "Ekim", "Kasım", "Aralık"]
 
 
@@ -206,6 +207,9 @@ def build_players(raw, season):
     fta = statistics.mean(x["fta"] for x in P) or 1
     sd_fg = statistics.pstdev([(x["s"]["FG%"] - mean["FG%"]) * x["fga"] / fga for x in P]) or 1
     sd_ft = statistics.pstdev([(x["s"]["FT%"] - mean["FT%"]) * x["fta"] / fta for x in P]) or 1
+
+    global ZREF
+    ZREF = {"mean": mean, "sd": sd, "fga": fga, "fta": fta, "sd_fg": sd_fg, "sd_ft": sd_ft}
 
     def zs(x):
         z = {}
@@ -559,6 +563,7 @@ def render_page(data, lang):
             if p.get("slot"):
                 p["slot"] = SLOT.get(p["slot"], p["slot"])
         body = body.replace('href="en.html" hreflang="en"', 'href="./" hreflang="tr"').replace('location.hash">EN<', 'location.hash">TR<')
+    body = body.replace("/*__FUN__*/", (tpl / "fun.js").read_text())
     payload = json.dumps(data, ensure_ascii=False).replace("</", "<\\/")
     page = (
         f'<!doctype html>\n<html lang="{lang}"><head><meta charset="utf-8">'
@@ -580,8 +585,6 @@ def main():
     data["players"] = build_players(raw, season)
     project_week(raw, data)
     simulate_season(raw, data)
-    for t in data["teams"]:
-        t.pop("_wk", None)
     for tid, r in sorted((data.get("sim") or {}).get("teams", {}).items(), key=lambda x: -x[1]["champ"]):
         print(f"sim {tid}: playoff %{r['po']*100:.0f} şampiyon %{r['champ']*100:.1f} kat {r['w']}-{r['l']}")
     for mt in data.get("current", {}).get("matchups", []):
@@ -602,6 +605,23 @@ def main():
     for t in data["teams"]:
         t["owner"] = okey[t["id"]]
     data["history"] = hist
+    try:
+        import fun
+        dpath = pathlib.Path("data/daily") / f"{season}.json"
+        gpath = raw_dir / "gamelogs.json"
+        daily = json.loads(dpath.read_text()) if dpath.exists() else None
+        logs = json.loads(gpath.read_text()) if gpath.exists() else {}
+        data["fun"] = fun.build_fun(raw, data, daily, logs, ZREF, seasons, season)
+        f = data["fun"] or {}
+        print("eğlence:", len(f.get("bench", [])), "takım yedek,", len((f.get("waiver") or {}).get("top", [])), "waiver,",
+              len(f.get("trades", [])), "takas,", len(f.get("regrets", [])), "pişmanlık")
+    except Exception as e:
+        import traceback
+        traceback.print_exc()
+        print("eğlence hesaplanamadı:", e)
+    for y in seasons:
+        for t in seasons[y][1]["teams"]:
+            t.pop("_wk", None)
     pathlib.Path("data/history.json").write_text(json.dumps(hist, ensure_ascii=False, indent=1))
     print("geçmiş:", len(hist["seasons"]), "sezon,", len(hist["owners"]), "menajer;",
           sum(1 for o in hist["owners"] if o["oldNames"]), "isim değiştirmiş;",

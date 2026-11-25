@@ -28,6 +28,15 @@ python scripts/build.py
 - **Power ranking:** %60 sezon all-play + %40 son iki haftanın all-play maç galibiyet oranı.
 - **Playoff/şampiyonluk ihtimali:** `simulate_season` kalan normal sezonu ve playoffları 10.000 kez oynar. Takım gücü kategori başına %50 geçmiş haftalık ortalama (shrink) + %50 güncel kadro projeksiyonu; sezon içi değişim için 200 farklı "güç dünyası" çekilir. ESPN ayarından: 21 hafta, ilk 8 playoff, kategori rekoruna göre sıralama, 1-8/4-5/2-7/3-6, tek haftalık turlar.
 
+## Eğlence sayfası
+
+`scripts/fetch.py` her gün için kadroları (hangi oyuncu hangi slotta) ve o günkü istatistikleri, tüm ekleme/bırakma/takas işlemlerini ve draftı `data/daily/<sezon>.json` dosyasına yazar; biten günler bir daha çekilmez. Oyuncu maç kayıtları her çalışmada `data/raw/<sezon>/gamelogs.json` olarak yenilenir. `scripts/fun.py` bunlardan şunları hesaplar:
+
+- **Yedekte kalanlar:** her gün, oynayan oyunculardan kurala uygun en iyi kadro (açgözlü seçim + slot eşleştirmesi) ile gerçek kadro farkı; en iyi kadroyla kazanılacak maçlar.
+- **Waiver / pişmanlık / takas:** oyuncunun aktif kadroda (ya da bırakıldıktan sonra her yerde) ürettiği, yedek seviyesinin (~132. oyuncu) üstündeki maç başı z-değeri toplamı. Takas notu %60 gerçekleşen + %40 kalan sezon değeri.
+- **Draft karnesi:** her seçim, o sıradan beklenen değerle (draft edilenler arasında n. en iyi oyuncu) karşılaştırılır.
+- **Rekorlar, rekabetler, kişilikler, sakatlık endeksi.**
+
 ## Takım logoları
 
 ESPN'in hazır logoları kendiliğinden gelir. Takımların kendi yüklediği resimler ESPN'de giriş yapmayı gerektirdiği için iki yol var:
