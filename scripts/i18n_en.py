@@ -2,6 +2,11 @@
 
 PAIRS = [
     ('</svg>Eğlence</a>', '</svg>Fun</a>'),
+    ('</svg>Lig</a>', '</svg>League</a>'),
+    ("{k:'lig',lab:'Lig',v:['siralama','haftalar','takimlar'],n:['Sıralama','Haftalar','Takımlar']}", "{k:'lig',lab:'League',v:['siralama','haftalar','takimlar'],n:['Rankings','Weeks','Teams']}"),
+    ("n:[MXN.tab1,MXN.tab2,'Oyuncular']", "n:[MXN.tab1,MXN.tab2,'Players']"),
+    ("lab:'Pazar'", "lab:'Market'"),
+    ("'Nasıl hesaplanıyor'", "'How this is calculated'"),
     ('</svg>Pazar</a>', '</svg>Market</a>'),
     ('<span class="champ">Şampiyon</span>', '<span class="champ">Champion</span>'),
     ("Playoff ve şampiyonluk ihtimalleri", "Playoff and title odds"),
@@ -44,6 +49,9 @@ PAIRS = [
      "Pick your team once and this device will remember it. Your weekly matchup, roster and free-agent suggestions will show up here. Sign-in is coming later."),
     ("Takımı değiştir", "Change team"),
     ("Bu haftaki maçın", "Your matchup this week"),
+    ("Senin maçın", "Your matchup"),
+    ("Diğer maçlar", "Other matchups"),
+    ("Öne çıkanlar", "Highlights"),
     ("'Güvende'", "'Safe'"), ("'Koru'", "'Protect'"), ("'Kovala'", "'Chase'"), ("'Zor'", "'Unlikely'"), ("'Berabere'", "'Tied'"),
     ("lab==='Güvende'", "lab==='Safe'"), ("lab==='Koru'", "lab==='Protect'"), ("lab==='Zor'", "lab==='Unlikely'"),
     ("lab==='Kovala'", "lab==='Chase'"), ("lab==='Berabere'", "lab==='Tied'"),
