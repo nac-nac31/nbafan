@@ -749,7 +749,7 @@
   ]
  },
  "league": "Fantasy 26-27",
- "updated": "26 Kasım 2026, 21:51",
+ "updated": "26 Kasım 2026, 23:10",
  "weeks": [
   1,
   2,
@@ -769,6 +769,12 @@
   "FT%",
   "TO"
  ],
+ "scoring": "H2H_CATEGORY",
+ "lower": [
+  "TO"
+ ],
+ "nOpp": 11,
+ "source": "espn",
  "teams": [
   {
    "id": 1,
@@ -3792,7 +3798,7 @@
    "pos": "PF",
    "inj": "Belirsiz",
    "team": 10,
-   "owned": 53.0,
+   "owned": 52.9,
    "gp": 6,
    "seasonGp": 15,
    "min": 28.3,
@@ -5117,7 +5123,7 @@
    "pos": "C",
    "inj": "",
    "team": 9,
-   "owned": 49.0,
+   "owned": 48.9,
    "gp": 6,
    "seasonGp": 17,
    "min": 25.8,
@@ -5594,7 +5600,7 @@
    "pos": "SG",
    "inj": "",
    "team": 0,
-   "owned": 38.0,
+   "owned": 38.1,
    "gp": 0,
    "seasonGp": 0,
    "min": 26.8,
@@ -6612,7 +6618,7 @@
    "pos": "PG",
    "inj": "",
    "team": 6,
-   "owned": 58.0,
+   "owned": 58.1,
    "gp": 8,
    "seasonGp": 18,
    "min": 29.4,
@@ -6824,7 +6830,7 @@
    "pos": "PF",
    "inj": "",
    "team": 13,
-   "owned": 53.4,
+   "owned": 53.5,
    "gp": 6,
    "seasonGp": 15,
    "min": 33.2,
@@ -7538,7 +7544,7 @@
    "pos": "SG",
    "inj": "",
    "team": 7,
-   "owned": 42.0,
+   "owned": 42.1,
    "gp": 7,
    "seasonGp": 17,
    "min": 31.6,
@@ -7856,7 +7862,7 @@
    "pos": "C",
    "inj": "Belirsiz",
    "team": 1,
-   "owned": 41.5,
+   "owned": 41.4,
    "gp": 6,
    "seasonGp": 15,
    "min": 19.5,
@@ -8054,7 +8060,7 @@
    "pos": "SG",
    "inj": "",
    "team": 13,
-   "owned": 17.0,
+   "owned": 17.1,
    "gp": 8,
    "seasonGp": 13,
    "min": 24.8,
@@ -8503,7 +8509,7 @@
    "pos": "C",
    "inj": "",
    "team": 6,
-   "owned": 39.0,
+   "owned": 38.9,
    "gp": 7,
    "seasonGp": 17,
    "min": 26.0,
@@ -8662,7 +8668,7 @@
    "pos": "SG",
    "inj": "",
    "team": 0,
-   "owned": 6.8,
+   "owned": 6.7,
    "gp": 8,
    "seasonGp": 16,
    "min": 25.0,
@@ -11085,7 +11091,7 @@
    "pos": "PG",
    "inj": "",
    "team": 14,
-   "owned": 60.1,
+   "owned": 60.0,
    "gp": 6,
    "seasonGp": 10,
    "min": 24.2,
@@ -14187,7 +14193,7 @@
    "pos": "C",
    "inj": "",
    "team": 0,
-   "owned": 31.6,
+   "owned": 31.5,
    "gp": 4,
    "seasonGp": 14,
    "min": 16.2,
@@ -17856,7 +17862,7 @@
    "pos": "SF",
    "inj": "Sakat",
    "team": 3,
-   "owned": 76.7,
+   "owned": 76.6,
    "gp": 1,
    "seasonGp": 1,
    "min": 6.0,
@@ -18650,7 +18656,7 @@
    "pos": "PG",
    "inj": "",
    "team": 0,
-   "owned": 4.1,
+   "owned": 4.0,
    "gp": 0,
    "seasonGp": 0,
    "min": 0.0,
@@ -23158,8 +23164,8 @@
     "an": "AcetXsMax",
     "bn": "Lebronspor",
     "s": [
-     9,
-     0
+     9.0,
+     0.0
     ],
     "ta": null,
     "tb": null
@@ -23172,8 +23178,8 @@
     "an": "AcetXsMax",
     "bn": "Kalifornia Bulldogs",
     "s": [
-     0,
-     9
+     0.0,
+     9.0
     ],
     "ta": null,
     "tb": null
@@ -23186,8 +23192,8 @@
     "an": "Children of Planet Earth",
     "bn": "Kerem’s Deluxe Team",
     "s": [
-     8,
-     1
+     8.0,
+     1.0
     ],
     "ta": 1,
     "tb": 4
@@ -23200,8 +23206,8 @@
     "an": "BEGE",
     "bn": "Adana Heybeliler Tekstil",
     "s": [
-     8,
-     1
+     8.0,
+     1.0
     ],
     "ta": 5,
     "tb": 10
@@ -23214,8 +23220,8 @@
     "an": "BATH CANARIES",
     "bn": "Adana Heybeliler Tekstil",
     "s": [
-     1,
-     8
+     1.0,
+     8.0
     ],
     "ta": 7,
     "tb": 10
@@ -23228,8 +23234,8 @@
     "an": "Rossonero Spurs",
     "bn": "Eczakent Thugs",
     "s": [
-     8,
-     1
+     8.0,
+     1.0
     ],
     "ta": null,
     "tb": null
@@ -23247,8 +23253,8 @@
      1
     ],
     "cats": [
-     14,
-     12
+     14.0,
+     12.0
     ],
     "n": 3,
     "close": 3
@@ -23262,8 +23268,8 @@
      0
     ],
     "cats": [
-     16,
-     11
+     16.0,
+     11.0
     ],
     "n": 3,
     "close": 0
@@ -23277,8 +23283,8 @@
      0
     ],
     "cats": [
-     17,
-     10
+     17.0,
+     10.0
     ],
     "n": 3,
     "close": 1
@@ -23292,8 +23298,8 @@
      0
     ],
     "cats": [
-     8,
-     18
+     8.0,
+     18.0
     ],
     "n": 3,
     "close": 1
@@ -23307,8 +23313,8 @@
      0
     ],
     "cats": [
-     8,
-     19
+     8.0,
+     19.0
     ],
     "n": 3,
     "close": 1
@@ -23322,8 +23328,8 @@
      0
     ],
     "cats": [
-     7,
-     20
+     7.0,
+     20.0
     ],
     "n": 3,
     "close": 1
@@ -23337,8 +23343,8 @@
      0
     ],
     "cats": [
-     9,
-     9
+     9.0,
+     9.0
     ],
     "n": 2,
     "close": 2
@@ -23352,8 +23358,8 @@
      0
     ],
     "cats": [
-     9,
-     9
+     9.0,
+     9.0
     ],
     "n": 2,
     "close": 2
@@ -23369,8 +23375,8 @@
      0
     ],
     "cats": [
-     8,
-     18
+     8.0,
+     18.0
     ],
     "n": 3,
     "close": 1
@@ -23384,8 +23390,8 @@
      1
     ],
     "cats": [
-     14,
-     12
+     14.0,
+     12.0
     ],
     "n": 3,
     "close": 3
@@ -23399,8 +23405,8 @@
      0
     ],
     "cats": [
-     15,
-     3
+     15.0,
+     3.0
     ],
     "n": 2,
     "close": 0
@@ -23414,8 +23420,8 @@
      0
     ],
     "cats": [
-     15,
-     3
+     15.0,
+     3.0
     ],
     "n": 2,
     "close": 0
@@ -23429,8 +23435,8 @@
      0
     ],
     "cats": [
-     15,
-     3
+     15.0,
+     3.0
     ],
     "n": 2,
     "close": 0
@@ -26212,7 +26218,7 @@
      "3": {
       "labels": [
        "rain",
-       "puntto"
+       "grinder"
       ],
       "best": [
        "3PM",
@@ -26242,7 +26248,7 @@
      "5": {
       "labels": [
        "puntft",
-       "rebuild"
+       "careful"
       ],
       "best": [
        "TO",
@@ -26287,7 +26293,7 @@
      "8": {
       "labels": [
        "careful",
-       "rebuild"
+       "loyal"
       ],
       "best": [
        "TO",
@@ -26330,8 +26336,8 @@
      },
      "11": {
       "labels": [
-       "puntft",
-       "loyal"
+       "loyal",
+       "balanced"
       ],
       "best": [
        "FG%",
