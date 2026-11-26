@@ -16,7 +16,7 @@
 </nav>
 
 <main><div class="in" id="app"></div></main>
-<footer><div class="in">Veri ESPN Fantasy'den, tamamlanan haftalar üzerinden her sabah otomatik hesaplanır. Devam eden hafta dahil değil.</div></footer>
+<footer><div class="in">Veri ESPN Fantasy'den, günde dört kez otomatik güncellenir.</div></footer>
 
 <script>
 const DATA=__DATA__;
@@ -182,9 +182,9 @@ V['bu-hafta']=()=>{
   const myId=getMy()??memMy, myM=myId!=null?ms.find(x=>x.home===myId||x.away===myId):null, rest=ms.filter(x=>x!==myM);
   return `<div class="hero"><span class="live">${CUR.week}. hafta · devam ediyor</span><h2>Bu hafta</h2>
    <p class="hint">Skorlar ${esc(DATA.updated)} itibarıyla. Şerit kategorilerin şu anki durumunu, altındaki çubuk haftanın sonu için kazanma ihtimalini gösterir. Tahmin, oyuncuların bu hafta kalan NBA maçlarına ve ortalamalarına dayanır.</p></div>
-  ${myM?`<section class="sec"><h2>Senin maçın</h2><div class="panel">${game(myM)}</div></section>`:''}
+  <div class="cols"><div class="col-main">${myM?`<section class="sec"><h2>Senin maçın</h2><div class="panel">${game(myM)}</div></section>`:''}
   <section class="sec"><div class="sec-h"><h2>${myM?'Diğer maçlar':'Maçlar'}</h2></div>
-   <div class="panel">${rest.map(game).join('')}</div></section>
+   <div class="panel">${rest.map(game).join('')}</div></section></div><div class="col-side">
   <section class="sec"><h2>Öne çıkanlar</h2><div class="panel heads">${heads.map(([l,t,s])=>`<a class="head" href="${link(t)}">${logo(t,36)}<div><div class="lab">${l}</div><div class="t">${esc(t.name)}</div><div class="s">${s}</div></div></a>`).join('')}</div></section>
   <div class="two">
    <section class="sec"><h2>Haftanın all-play'i</h2><p class="hint">Bu haftaki kategorilerle kaç rakip yeniliyor.</p>
@@ -192,7 +192,7 @@ V['bu-hafta']=()=>{
    <section class="sec"><h2>Sezon özeti</h2><p class="hint">Güç sıralamasının ilk beşi. Tamamı Sıralama sekmesinde.</p>
     <ol class="panel mini">${power.slice(0,5).map((t,i)=>`<li><a href="${link(t)}"><span class="n">${i+1}</span>${logo(t,32)}<span class="nm">${esc(t.name)}</span><span class="v">${rec(t.mrec)}</span></a></li>`).join('')}</ol>
     <a class="back" href="#siralama" style="color:var(--accent)">Tüm sıralama ›</a></section>
-  </div>`};
+  </div></div></div>`};
 V.siralama=()=>{
   return `<section class="sec"><div class="sec-h"><h2>Güç sıralaması</h2></div>
   <p class="hint">%60 sezon boyu all-play gücü, %40 son iki haftanın formu. Sağdaki ok, takımın gerçek lig sırasına göre farkını gösterir.</p>
@@ -312,7 +312,7 @@ function render(){const h=(location.hash||'#bu-hafta').slice(1);
   let v=h.startsWith('takim-')?'takimlar':h==='sans'?'siralama':(V[h]?h:'bu-hafta');
   const g=GROUPS.find(x=>x.v.includes(v)), gk=g?g.k:v;
   const sub=g?`<nav class="sub-nav" aria-label="${g.lab}">${g.v.map((k,i)=>`<a href="#${k}"${k===v&&!h.startsWith('takim-')?' aria-current="page"':''}>${g.n[i]}</a>`).join('')}</nav>`:'';
-  app.innerHTML=`<div class="view">${sub}${h.startsWith('takim-')?profile(+h.slice(6)):V[v]()}</div>`;
+  app.innerHTML=`<div class="view v-${h.startsWith('takim-')?'takim':v}">${sub}${h.startsWith('takim-')?profile(+h.slice(6)):V[v]()}</div>`;
   document.querySelectorAll('nav.tabs a').forEach(a=>{if(a.dataset.v===gk)a.setAttribute('aria-current','page');else a.removeAttribute('aria-current')});
   foldHints();
   app.querySelectorAll('.chips button[data-w]').forEach(b=>b.onclick=()=>{selWeek=+b.dataset.w;render()});

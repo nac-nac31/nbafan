@@ -31,7 +31,7 @@ PAIRS = [
     ("p.inj!=='Sakat'", "p.inj!=='Out'"),
     # header / nav / footer
     ("Bölümler", "Sections"),
-    ("Veri ESPN Fantasy'den, tamamlanan haftalar üzerinden her sabah otomatik hesaplanır. Devam eden hafta dahil değil.",
+    ("Veri ESPN Fantasy'den, günde dört kez otomatik güncellenir.",
      "Data from ESPN Fantasy, recalculated automatically several times a day."),
     (">Takımım<", ">My team<"),
     (">Bu hafta<", ">This week<"),
