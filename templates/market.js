@@ -44,7 +44,7 @@ document.head.insertAdjacentHTML('beforeend',`<style>
 .tcols{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}
 @media (max-width:640px){.tcols{grid-template-columns:minmax(0,1fr)}}
 .tcol{display:flex;flex-direction:column;gap:10px;min-width:0}
-.tcol .lab{font-family:var(--f-data);font-size:10.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--accent)}
+.tcol .lab{font-family:var(--f-data);font-size:10.5px;color:var(--accent)}
 .tcol .phead .nm{font-size:24px}
 .tpick{max-height:420px;overflow-y:auto}
 .tp{display:grid;grid-template-columns:20px minmax(0,1fr) auto 44px;gap:8px;align-items:center;padding:9px 12px;cursor:pointer;font-size:14px}
@@ -55,7 +55,7 @@ document.head.insertAdjacentHTML('beforeend',`<style>
 .tp:has(input:checked){background:color-mix(in srgb,var(--accent) 10%,transparent)}
 .ttab{width:100%;border-collapse:collapse;font-size:13.5px;font-variant-numeric:tabular-nums}
 .ttab th,.ttab td{padding:7px 12px;text-align:right}.ttab th:first-child,.ttab td:first-child{text-align:left}
-.ttab th{font-family:var(--f-data);font-size:10.5px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);font-weight:500}
+.ttab th{font-family:var(--f-data);font-size:10.5px;color:var(--muted);font-weight:500}
 .ttab tr+tr td{border-top:1px solid var(--line)}.ttab small{color:var(--muted)}
 #tres{display:flex;flex-direction:column;gap:14px}
 </style>`);

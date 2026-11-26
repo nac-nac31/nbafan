@@ -2,6 +2,11 @@
 
 PAIRS = [
     ('</svg>Eğlence</a>', '</svg>Fun</a>'),
+    ('</svg>Lig</a>', '</svg>League</a>'),
+    ("{k:'lig',lab:'Lig',v:['siralama','haftalar','takimlar'],n:['Sıralama','Haftalar','Takımlar']}", "{k:'lig',lab:'League',v:['siralama','haftalar','takimlar'],n:['Rankings','Weeks','Teams']}"),
+    ("n:[MXN.tab1,MXN.tab2,'Oyuncular']", "n:[MXN.tab1,MXN.tab2,'Players']"),
+    ("lab:'Pazar'", "lab:'Market'"),
+    ("'Nasıl hesaplanıyor'", "'How this is calculated'"),
     ('</svg>Pazar</a>', '</svg>Market</a>'),
     ('<span class="champ">Şampiyon</span>', '<span class="champ">Champion</span>'),
     ("Playoff ve şampiyonluk ihtimalleri", "Playoff and title odds"),
