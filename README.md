@@ -29,6 +29,8 @@ Motor kategorileri, ters kategorileri (TO), puanlama türünü, takım sayısın
 
 Başka bir ligi denemek için: `ESPN_LEAGUE_ID=<id> python scripts/fetch.py && ESPN_LEAGUE_ID=<id> python scripts/build.py` (ayrı bir klasörde, `data/` bizim ligin verisini tutuyor).
 
+**Siteye başka lig ekleme:** `leagues.json` dosyasına `{"source": "espn" | "sleeper", "id": "<lig no>", "listed": true}` satırı eklenir. Günlük güncellemede `scripts/build_all.py` her ligi kendi klasöründe (`leagues/<kaynak>-<lig no>/`) çeker ve üretir, site `…/nbafan/l/<lig no>/` adresinde yayınlanır. Bir lig hata verirse diğerleri ve bizim lig etkilenmez. `listed: false` olan ligler `l/` listesinde görünmez ve arama motorlarına kapalıdır. Diğer liglere bizim ESPN çerezlerimiz gönderilmez, yani şimdilik yalnızca açık ligler. Yerelde denemek için: `SKIP_LOGOS=1 python scripts/build_all.py [lig no]`.
+
 **Sleeper:** `SLEEPER_LEAGUE_ID=<id> python scripts/fetch_sleeper.py && SEASON=<yıl+1> python scripts/build.py`. Sleeper'ın açık API'si giriş istemez; adaptör ligi, eşleşmeleri, kadroları ve en iyi 200 serbest oyuncuyu ESPN biçimine çevirip `data/raw/<sezon>/` altına yazar (Sleeper'ın "2026" sezonu bizim 2027). Sleeper NBA ligleri puanlıdır. Sleeper günlük kadro ve haftalık NBA takvimi vermediği için eğlence sayfası ve bu haftanın kazanma tahmini yok; oyuncu değeri sezon ortalaması ve Sleeper projeksiyonundan hesaplanır.
 
 **Yahoo:** `scripts/yahoo_auth.py`, `yahoo_api.py`, `yahoo_check.py` hazır, ama Yahoo Fantasy API'si 2026 Temmuz'dan beri onaylı uygulamalara açık (sports.yahoo.com/developer/access/). Onay gelene kadar Yahoo ligleri eklenemez.

@@ -628,7 +628,7 @@ def localize_logos(teams, out):
 
 def render_page(data, lang):
     import copy
-    tpl = pathlib.Path("templates")
+    tpl = pathlib.Path(__file__).resolve().parent.parent / "templates"  # lig klasöründen çalışınca da bulunsun
     head, body = (tpl / "head.html").read_text(), (tpl / "body.html").read_text()
     if lang == "en":
         from i18n_en import PAIRS, MONTHS, INJ, SLOT
