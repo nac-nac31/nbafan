@@ -1,0 +1,9 @@
+<!doctype html><html lang="tr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Bağlantı yok</title>
+<style>:root{color-scheme:dark}body{margin:0;min-height:100vh;display:flex;align-items:center;justify-content:center;background:#0A130E;color:#EAF3EC;font:16px/1.5 system-ui,-apple-system,"Segoe UI",sans-serif;padding:24px;box-sizing:border-box;text-align:center}
+.c{max-width:320px;display:flex;flex-direction:column;align-items:center;gap:12px}img{width:88px;height:88px;border-radius:20px}h1{font-size:22px;margin:4px 0 0}p{margin:0;color:#9DB5A6}
+button{margin-top:8px;border:0;border-radius:999px;padding:12px 22px;font:600 15px system-ui,sans-serif;background:#3DB97C;color:#06170D}</style></head>
+<body><div class="c"><img src="icon.png" alt=""><h1 id="h">İnternet bağlantısı yok</h1><p id="p">Lig raporu açılamadı. Bağlantın gelince tekrar dene.</p>
+<button id="b" type="button">Tekrar dene</button></div>
+<script>if(!/^tr/i.test(navigator.language||'')){h.textContent='No internet connection';p.textContent='Could not load the league report. Try again once you are back online.';b.textContent='Try again'}
+b.onclick=()=>location.href='https://nac-nac31.github.io/nbafan/';</script></body></html>
