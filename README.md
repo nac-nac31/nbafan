@@ -37,6 +37,13 @@ python scripts/build.py
 - **Draft karnesi:** her seçim, o sıradan beklenen değerle (draft edilenler arasında n. en iyi oyuncu) karşılaştırılır.
 - **Rekorlar, rekabetler, kişilikler, sakatlık endeksi.**
 
+## Pazar: takas analizcisi ve waiver radarı
+
+`scripts/market.py` iki şey üretir, arayüzü `templates/market.js`:
+
+- **Waiver radarı:** serbest oyuncular (en çok sahiplenilen 200 + ESPN'de sahipliği en hızlı artan 100) için son 7/15/30 gün ve sezon değerleri. Radar puanı = son değer + sezon ortalamasına göre sıçrama + sahiplik ivmesi. Her oyuncu için, bırakma adayından daha faydalı olduğu takımlar arasında kategori ihtiyacına en çok uyanlar gösterilir; bir takım seçilince o takıma göre kazanç hesaplanır.
+- **Takas analizcisi:** `simulate_season` ile aynı model tarayıcıda çalışır. Takas edilen oyuncularla kadro projeksiyonu yeniden hesaplanır, sezon önce/sonra 3.000'er kez aynı rastgele sayılarla oynanır; playoff/şampiyonluk ihtimali ve haftalık kategori sıraları karşılaştırılır. Eşit olmayan takaslarda fazla oyuncu alan takım en düşük değerlisini bırakır, eksik kalan en iyi serbest oyuncuyu alır.
+
 ## Takım logoları
 
 ESPN'in hazır logoları kendiliğinden gelir. Takımların kendi yüklediği resimler ESPN'de giriş yapmayı gerektirdiği için iki yol var:

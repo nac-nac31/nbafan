@@ -40,6 +40,15 @@ def main():
     fa = get(season, ["kona_player_info"], {"x-fantasy-filter": json.dumps(FA_FILTER)}, f"&scoringPeriodId={sp}")
     (out / "freeagents.json").write_text(json.dumps(fa, ensure_ascii=False))
     print(f"{season} serbest oyuncular ok: {len(fa.get('players', []))}")
+    try:  # sahipliği en hızlı artan serbest oyuncular (waiver radarı)
+        hot = {"players": {**FA_FILTER["players"], "limit": 100, "sortPercOwned": None,
+                           "sortPercChanged": {"sortPriority": 1, "sortAsc": False}}}
+        hot["players"].pop("sortPercOwned")
+        fh = get(season, ["kona_player_info"], {"x-fantasy-filter": json.dumps(hot)}, f"&scoringPeriodId={sp}")
+        (out / "freeagents_hot.json").write_text(json.dumps(fh, ensure_ascii=False))
+        print(f"{season} yükselen serbest oyuncular ok: {len(fh.get('players', []))}")
+    except Exception as e:
+        print(f"{season} yükselen serbest oyuncular alınamadı: {e}")
     url = f"https://lm-api-reads.fantasy.espn.com/apis/v3/games/fba/seasons/{season}?view=proTeamSchedules_wl"
     with urllib.request.urlopen(urllib.request.Request(url, headers={"User-Agent": "nbafan-stats"}), timeout=60) as r:
         (out / "proschedule.json").write_text(r.read().decode())

@@ -564,6 +564,7 @@ def render_page(data, lang):
                 p["slot"] = SLOT.get(p["slot"], p["slot"])
         body = body.replace('href="en.html" hreflang="en"', 'href="./" hreflang="tr"').replace('location.hash">EN<', 'location.hash">TR<')
     body = body.replace("/*__FUN__*/", (tpl / "fun.js").read_text())
+    body = body.replace("/*__MARKET__*/", (tpl / "market.js").read_text())
     payload = json.dumps(data, ensure_ascii=False).replace("</", "<\\/")
     page = (
         f'<!doctype html>\n<html lang="{lang}"><head><meta charset="utf-8">'
@@ -577,7 +578,7 @@ def main():
     season = int(os.environ.get("SEASON") or current_season())
     raw_dir = pathlib.Path("data/raw") / str(season)
     raw = {n: json.loads((raw_dir / f"{n}.json").read_text()) for n in ("league", "matchups")}
-    for n in ("rosters", "freeagents", "proschedule"):
+    for n in ("rosters", "freeagents", "freeagents_hot", "proschedule"):
         f = raw_dir / f"{n}.json"
         if f.exists():
             raw[n] = json.loads(f.read_text())
@@ -585,6 +586,14 @@ def main():
     data["players"] = build_players(raw, season)
     project_week(raw, data)
     simulate_season(raw, data)
+    try:  # takas analizcisi + waiver radarı
+        import market
+        market.build_market(raw, data, season, ZREF, CATS, CN, LOWER_IS_BETTER, player_row)
+        print("pazar:", len(data.get("radar", [])), "radar oyuncusu,", "takas simülasyonu" if data.get("tradeSim") else "takas verisi yok")
+    except Exception as e:
+        import traceback
+        traceback.print_exc()
+        print("pazar hesaplanamadı:", e)
     for tid, r in sorted((data.get("sim") or {}).get("teams", {}).items(), key=lambda x: -x[1]["champ"]):
         print(f"sim {tid}: playoff %{r['po']*100:.0f} şampiyon %{r['champ']*100:.1f} kat {r['w']}-{r['l']}")
     for mt in data.get("current", {}).get("matchups", []):
