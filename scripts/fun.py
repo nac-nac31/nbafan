@@ -3,14 +3,38 @@ pişmanlıklar, draft karnesi, takım kişilikleri ve sakatlık şanssızlığı
 
 Girdi: build.py'nin ürettiği data + data/daily/<sezon>.json (günlük kadrolar, işlemler, draft) +
 data/raw/<sezon>/gamelogs.json (oyuncu maç kayıtları)."""
-import datetime, statistics
+import collections, datetime, statistics
 
 # fetch.GSTATS sırası
 I = {k: i for i, k in enumerate(["PTS", "REB", "AST", "STL", "BLK", "3PM", "TO", "FGM", "FGA", "FTM", "FTA", "MIN"])}
 COUNT = ["PTS", "REB", "AST", "STL", "BLK", "3PM", "TO"]
-CATS = ["PTS", "REB", "AST", "STL", "BLK", "3PM", "FG%", "FT%", "TO"]
-SID = {"PTS": "0", "REB": "6", "AST": "3", "STL": "2", "BLK": "1", "3PM": "17", "FG%": "19", "FT%": "20", "TO": "11"}
-SLOTS = {0: 1, 1: 1, 2: 1, 3: 1, 4: 1, 5: 1, 6: 1, 11: 3}  # PG SG SF PF C G F UTIL×3
+# Günlük önbellekte bu istatistikler var; ligin bunlar dışındaki kategorileri (DD, 3P% ...) burada sayılmaz.
+FUN_CATS = ["PTS", "REB", "AST", "STL", "BLK", "3PM", "FG%", "FT%", "TO"]
+PCT_LINE = {"FG%": ("FGM", "FGA"), "FT%": ("FTM", "FTA")}
+CATS = list(FUN_CATS)  # configure() ligin kategorileriyle kesiştirir
+LOWER = {"TO"}
+PW = {}  # puanlı lig: günlük önbellekteki istatistik adı -> puan (DD, TD gibi önbellekte olmayanlar dışarıda)
+SID = {"FPTS": "FP", "PTS": "0", "REB": "6", "AST": "3", "STL": "2", "BLK": "1", "3PM": "17", "FG%": "19", "FT%": "20", "TO": "11"}
+SLOTS = {0: 1, 1: 1, 2: 1, 3: 1, 4: 1, 5: 1, 6: 1, 11: 3}  # PG SG SF PF C G F UTIL×3 (ligden okunur)
+
+
+def configure(league, Z):
+    """Kategorileri ve kadro slotlarını ligin ayarlarından alır."""
+    global CATS, LOWER, SLOTS, PW
+    pts = (Z or {}).get("points") or {}
+    if pts:
+        name = {v: k for k, v in SID.items()}
+        PW = {name[k]: v for k, v in pts.items() if name.get(k) in I}
+        if "REB" not in PW and ("4" in pts or "5" in pts):  # hücum/savunma ribaundu: önbellekte sadece toplam var
+            PW["REB"] = 0.25 * pts.get("4", 0) + 0.75 * pts.get("5", 0)
+        CATS, LOWER = ["FPTS"], set()
+    elif Z and Z.get("cats"):
+        CATS = [c for c in FUN_CATS if c in Z["cats"]]
+        LOWER = set(Z.get("lower") or []) & set(CATS)
+    counts = ((league.get("settings") or {}).get("rosterSettings") or {}).get("lineupSlotCounts") or {}
+    sl = {int(k): v for k, v in counts.items() if v and int(k) not in (BENCH, IR)}
+    if sl:
+        SLOTS = sl
 BENCH, IR = 12, 13
 
 
@@ -19,12 +43,17 @@ def gz(line, Z):
     if not line:
         return 0.0
     m, sd = Z["mean"], Z["sd"]
+    if PW:
+        return (sum(w * line[I[k]] for k, w in PW.items()) - m["FPTS"]) / sd["FPTS"] * Z.get("scale", 1)
     z = 0.0
-    for c in ("PTS", "REB", "AST", "STL", "BLK", "3PM"):
-        z += (line[I[c]] - m[c]) / sd[c]
-    z -= (line[I["TO"]] - m["TO"]) / sd["TO"]
-    z += (line[I["FGM"]] - m["FG%"] * line[I["FGA"]]) / Z["fga"] / Z["sd_fg"]
-    z += (line[I["FTM"]] - m["FT%"] * line[I["FTA"]]) / Z["fta"] / Z["sd_ft"]
+    for c in CATS:
+        if c in PCT_LINE:
+            mk, ak = PCT_LINE[c]
+            z += (line[I[mk]] - m[c] * line[I[ak]]) / Z["att"][c] / Z["sd_pct"][c]
+        elif c in LOWER:
+            z -= (line[I[c]] - m[c]) / sd[c]
+        else:
+            z += (line[I[c]] - m[c]) / sd[c]
     return z
 
 
@@ -37,6 +66,8 @@ def cats_of(tot):
     out = {c: tot.get(c, 0) for c in COUNT}
     out["FG%"] = tot["FGM"] / tot["FGA"] if tot.get("FGA") else 0
     out["FT%"] = tot["FTM"] / tot["FTA"] if tot.get("FTA") else 0
+    if PW:
+        out["FPTS"] = sum(w * tot.get(k, 0) for k, w in PW.items())
     return out
 
 
@@ -44,7 +75,7 @@ def cat_score(a, b):
     w = l = 0
     for c in CATS:
         x, y = a[c], b[c]
-        if c == "TO":
+        if c in LOWER:
             x, y = -x, -y
         if abs(x - y) < 1e-9:
             continue
@@ -106,6 +137,7 @@ def line_dict(line):
 def build_fun(raw, data, daily, logs, Z, seasons=None, cur_season=None):
     if not daily or not Z:
         return None
+    configure(raw["league"], Z)
     days, tx, meta, draft = daily.get("days", {}), daily.get("tx", {}), daily.get("players", {}), daily.get("draft", [])
     teams = {t["id"]: t for t in data["teams"]}
     names = {t["id"]: t["name"] for t in data["teams"]}
@@ -116,7 +148,7 @@ def build_fun(raw, data, daily, logs, Z, seasons=None, cur_season=None):
     if not vals:  # geçmiş sezon: oyuncu değerini maç kayıtlarının ortalamasından al
         vals = sorted((statistics.mean(gz(l, Z) for l in g.values()) for g in logs.values() if len(g) >= 10), reverse=True)
     nteam = len(data["teams"])
-    repl = vals[min(len(vals) - 1, nteam * 11)] if vals else 0  # ~132. oyuncu: yedek seviyesi
+    repl = vals[min(len(vals) - 1, nteam * (sum(SLOTS.values()) + 1))] if vals else 0  # 12 takım, 10 slot: ~132. oyuncu
     # skor dönemleri -> hafta ve tarih
     sp_week, week_sps = {}, {}
     for m in raw["matchups"]["schedule"]:
@@ -192,8 +224,14 @@ def build_fun(raw, data, daily, logs, Z, seasons=None, cur_season=None):
             opp = cats_of(wk_act[(g["oppId"], w)])
             aw, al = cat_score(me_a, opp)
             ow, ol = cat_score(me_o, opp)
-            if g["res"] != "G" and ow > ol and (aw, al) == tuple(int(x) for x in g["score"].split("-")[:2]):
-                bench[t]["lost"].append({"w": w, "opp": g["oppId"], "score": g["score"], "opt": f"{ow}-{ol}"})
+            real = tuple(float(x) for x in g["score"].split("-")[:2])
+            if PW:  # puanlı lig: yeniden kurulan puan gerçeğe yakınsa (önbellekte bonuslar yok)
+                ok = abs(me_a["FPTS"] - real[0]) <= 0.03 * max(1, real[0])
+                opt = f"{me_o['FPTS']:.0f}-{opp['FPTS']:.0f}"
+            else:
+                ok, opt = (aw, al) == real, f"{ow}-{ol}"
+            if g["res"] != "G" and ow > ol and ok:
+                bench[t]["lost"].append({"w": w, "opp": g["oppId"], "score": g["score"], "opt": opt})
     out["bench"] = sorted(({"team": t, "gain": round(b["gain"], 1), "pts": int(b["pts"]), "games": b["games"],
                             "lost": b["lost"], "worst": b["worst"]} for t, b in bench.items()), key=lambda x: -x["gain"])
     out["benchWorst"] = sorted(worst_all, key=lambda x: -x["val"])[:5]
@@ -428,7 +466,7 @@ def build_fun(raw, data, daily, logs, Z, seasons=None, cur_season=None):
             continue
         hi = max(vals_c, key=lambda a: a[4][s])
         lo = min(vals_c, key=lambda a: a[4][s])
-        if c == "TO":
+        if c in LOWER:
             hi, lo = lo, hi
         rec["week"][c] = {"best": wrec(hi, s, cur_y), "worst": wrec(lo, s, cur_y)}
     best_games = {c: None for c in ("PTS", "REB", "AST", "STL", "BLK", "3PM")}
@@ -464,7 +502,7 @@ def build_fun(raw, data, daily, logs, Z, seasons=None, cur_season=None):
         for t in dy["teams"]:
             for g in t["games"]:
                 if t["id"] < g["oppId"]:
-                    a, b = (int(x) for x in g["score"].split("-")[:2])
+                    a, b = (float(x) for x in g["score"].split("-")[:2])
                     games_all.append({"y": y, "w": g["w"], "a": ok.get(t["id"]), "b": ok.get(g["oppId"]),
                                       "an": nm[t["id"]], "bn": nm[g["oppId"]], "s": [a, b],
                                       "ta": t["id"] if y in (cur_season, "cur") else None,
@@ -491,7 +529,7 @@ def build_fun(raw, data, daily, logs, Z, seasons=None, cur_season=None):
     out["owned"] = sorted(lopsided, key=lambda p: (-p["n"], -abs(p["cats"][0] - p["cats"][1])))[:5]
 
     # ---------- 9) Takım kişilikleri ----------
-    out["personality"] = personalities(data["teams"])
+    out["personality"] = {} if PW else personalities(data["teams"])  # kişilikler kategori profiline dayanır
     out["latest"] = latest
     out["days"] = len(days)
     return out
@@ -546,9 +584,12 @@ def personalities(teams):
     """Her takıma kategori profiline göre etiket; birincil etiketler mümkün olduğunca tekil."""
     med = statistics.median([t.get("adds", 0) for t in teams]) or 1
     scores = {}
+    n = max(2, len(teams))
     for t in teams:
         tt = {**t, "_addsMed": med}
-        scores[t["id"]] = {k: f(t["rank"], tt) for k, f in PERS}
+        # sıralamayı 12 takımlık ölçeğe çevir; ligde olmayan kategori ortada sayılır
+        r12 = collections.defaultdict(lambda: 6.5, {c: 1 + (v - 1) * 11 / (n - 1) for c, v in t["rank"].items()})
+        scores[t["id"]] = {k: f(r12, tt) for k, f in PERS}
     prim, used = {}, set()
     for v, tid, k in sorted(((v, tid, k) for tid, sc in scores.items() for k, v in sc.items()), reverse=True):
         if v <= 0 or tid in prim or k in used:

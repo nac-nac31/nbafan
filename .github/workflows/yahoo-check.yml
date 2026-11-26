@@ -1,0 +1,22 @@
+name: Yahoo bağlantı testi
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [claude/project-thread-2sqh4x]
+    paths: [scripts/yahoo_api.py, scripts/yahoo_check.py, .github/workflows/yahoo-check.yml]
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Yahoo'ya bağlan
+        env:
+          YAHOO_CLIENT_ID: ${{ secrets.YAHOO_CLIENT_ID }}
+          YAHOO_CLIENT_SECRET: ${{ secrets.YAHOO_CLIENT_SECRET }}
+          YAHOO_REFRESH_TOKEN: ${{ secrets.YAHOO_REFRESH_TOKEN }}
+        run: python scripts/yahoo_check.py

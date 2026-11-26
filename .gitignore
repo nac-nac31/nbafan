@@ -1,3 +1,6 @@
 data/raw/
 __pycache__/
 site/
+leagues/*/data/raw/
+leagues/*/data/stats.json
+leagues/*/data/history.json
