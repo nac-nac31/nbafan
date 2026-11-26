@@ -15,6 +15,9 @@ const MX=MEN?{
   pos:'All positions',l7:'7d',l15:'15d',l30:'30d',sea:'Season',min:'min',own:'owned',fitFor:'Best fit',instead:n=>`instead of ${n}`,
   small:'small sample',gain:'Gain vs. drop candidate',noTeam:'Choose your team on My team to see personal fit.',empty:'No players with this filter.',
   inj:{Sakat:'Out',Belirsiz:'DTD',IR:'IR',Ceza:'Susp.'},jump:'Jump',hot:'Hot',
+  impBtn:'What if I pick him up?',drop:'Drop',wk:'This week',season:'Season',vs:n=>`vs ${n}`,win:'Win chance',
+  gamesAdd:(a,b)=>`He plays ${a} game${a===1?'':'s'} in your lineup this week; the dropped player had ${b}.`,catMove:'Category chances that move',noMove:'No category chance moves by 2+ points.',
+  noWeek:'No live matchup projection right now.',impHint:'Daily lineup: on each remaining day the best players with a game start (same model as the weekly projection). Season: rest of the season and playoffs re-simulated, 3,000 times each.',
 }:{
   tab1:'Takas analizcisi',tab2:'Waiver radarı',
   tTitle:'Takas analizcisi',tIntro:'İki takımı ve takas edilecek oyuncuları seç. Sezonun kalanı ve playofflar yeni kadrolarla, playoff ihtimallerindeki modelin aynısıyla yeniden simüle edilir.',
@@ -30,6 +33,9 @@ const MX=MEN?{
   pos:'Tüm pozisyonlar',l7:'7g',l15:'15g',l30:'30g',sea:'Sezon',min:'dk',own:'sahiplik',fitFor:'En çok uyduğu',instead:n=>`${n} yerine`,
   small:'küçük örnek',gain:'Bırakma adayına göre kazanç',noTeam:'Kişisel uyum için Takımım sekmesinden takımını seç.',empty:'Bu filtreyle oyuncu yok.',
   inj:{},jump:'Sıçrama',hot:'Yükselişte',
+  impBtn:'Alırsam ne değişir?',drop:'Bırakılacak',wk:'Bu hafta',season:'Sezon',vs:n=>`${n} karşısında`,win:'Kazanma ihtimali',
+  gamesAdd:(a,b)=>`Bu hafta kadronda ${a} maç oynar; bırakılan oyuncunun ${b} maçı vardı.`,catMove:'İhtimali değişen kategoriler',noMove:'Hiçbir kategoride ihtimal 2 puandan fazla değişmiyor.',
+  noWeek:'Şu an devam eden maç tahmini yok.',impHint:'Günlük kadro: kalan her gün maçı olan en iyi oyuncular oynar (haftalık tahminle aynı model). Sezon: kalan sezon ve playofflar 3.000\'er kez yeniden oynandı.',
 };
 document.head.insertAdjacentHTML('beforeend',`<style>
 .seg a{flex:none;border:1px solid var(--line);background:var(--surface);border-radius:999px;padding:7px 14px;font-weight:600;font-size:13px;text-decoration:none}
@@ -44,7 +50,7 @@ document.head.insertAdjacentHTML('beforeend',`<style>
 .tcols{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}
 @media (max-width:640px){.tcols{grid-template-columns:minmax(0,1fr)}}
 .tcol{display:flex;flex-direction:column;gap:10px;min-width:0}
-.tcol .lab{font-family:var(--f-data);font-size:10.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--accent)}
+.imp .lab,.tcol .lab{font-family:var(--f-data);font-size:10.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--accent)}
 .tcol .phead .nm{font-size:24px}
 .tpick{max-height:420px;overflow-y:auto}
 .tp{display:grid;grid-template-columns:20px minmax(0,1fr) auto 44px;gap:8px;align-items:center;padding:9px 12px;cursor:pointer;font-size:14px}
@@ -57,6 +63,12 @@ document.head.insertAdjacentHTML('beforeend',`<style>
 .ttab th,.ttab td{padding:7px 12px;text-align:right}.ttab th:first-child,.ttab td:first-child{text-align:left}
 .ttab th{font-family:var(--f-data);font-size:10.5px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);font-weight:500}
 .ttab tr+tr td{border-top:1px solid var(--line)}.ttab small{color:var(--muted)}
+
+.imp{grid-column:1/-1;border-top:1px dashed var(--line);padding-top:10px;display:flex;flex-direction:column;gap:10px}
+.imb{margin-top:6px;font-size:12.5px;color:var(--accent);background:none;border:0;padding:0;cursor:pointer;font-weight:600;text-align:left}
+.imp .tiles{grid-template-columns:repeat(3,minmax(0,1fr))}.imp .tile .v{font-size:22px}.imp .tile{padding:10px}.imp .tile .k{font-size:9.5px}
+.imp .cm{display:flex;flex-wrap:wrap;gap:6px}.imp .cm span{font-family:var(--f-data);font-size:12px;padding:3px 8px;border-radius:8px;background:var(--surface-2)}
+.imp select{font:inherit;font-size:13px;border:1px solid var(--line);border-radius:8px;padding:6px 8px;background:var(--surface);color:var(--ink);max-width:100%}
 #tres{display:flex;flex-direction:column;gap:14px}
 </style>`);
 const mPc=x=>MEN?x+'%':'%'+x;
@@ -66,6 +78,34 @@ function mWeights(t){const w={};MCATS.forEach(c=>{const r=t.rank[c];let x=1;if(r
 function mWorst(tid){const L=P.filter(p=>p.team===tid&&!(TS&&TS.half.includes(p.id)));return L.length?L.reduce((a,b)=>b.val<a.val?b:a):null}
 
 // ---- waiver radarı ----
+const WS=DATA.weekSim||null, IMP={open:null,drop:{}}, mBase={};
+function mWeek(tid,roster){if(!WS||!WS.base[tid])return null;const out=new Set(WS.out),rem={},vr={},n={};
+  for(const d of WS.days){const pl=roster.filter(p=>p.g&&!out.has(p.id)&&(WS.games[p.pro]||[]).includes(d)).sort((a,b)=>b.val-a.val).slice(0,WS.slots);
+    for(const p of pl){n[p.id]=(n[p.id]||0)+1;for(const k in p.g){const v=p.g[k];rem[k]=(rem[k]||0)+v;vr[k]=(vr[k]||0)+Math.max(v,(.4*v)**2)}}}
+  for(const k in rem)vr[k]+=(.15*rem[k])**2;const B=WS.base[tid],tot={};new Set([...Object.keys(B),...Object.keys(rem)]).forEach(k=>tot[k]=(B[k]||0)+(rem[k]||0));
+  const mu={},sd={};for(const c of MCATS){const ks=TS.keys[c];if(ks.length===2){const at=tot[ks[1]]||1;mu[c]=(tot[ks[0]]||0)/at;sd[c]=Math.sqrt(vr[ks[0]]||0)/at}else{mu[c]=tot[ks[0]]||0;sd[c]=Math.sqrt(vr[ks[0]]||0)}}
+  return {mu,sd,n}}
+function mMatch(a,b){const pc={};let dist=[1];for(const c of MCATS){let d=a.mu[c]-b.mu[c];if(TS.lower.includes(c))d=-d;const s=Math.hypot(a.sd[c],b.sd[c]);
+  const q=s===0?(d>0?1:d<0?0:.5):mPhi(d/s);pc[c]=q;dist=dist.map((x,i)=>x*(1-q)).concat([0]).map((x,i)=>x+(i>0?dist[i-1]*q:0))}
+  return {pc,win:dist.slice(Math.floor(MCATS.length/2)+1).reduce((x,y)=>x+y,0)}}
+function impact(r,t){const mine=P.filter(p=>p.team===t.id).sort((a,b)=>a.val-b.val);if(!mine.length)return '';
+  const def=mWorst(t.id)||mine[0],dropId=IMP.drop[r.id]??def.id,drop=mine.find(p=>p.id===dropId)||def;
+  const fa={id:r.id,name:r.name,g:r.g,val:r.val,pro:r.pro};if(['Sakat','IR','Ceza'].includes(r.inj)&&!TS.half.includes(r.id))TS.half.push(r.id);
+  const R0=mRosters(),R1={...R0};R1[t.id]=R0[t.id].filter(p=>p.id!==drop.id).concat([fa]);
+  // bu hafta
+  let wk=`<p class="hint">${MX.noWeek}</p>`,wt='';const m=CUR.matchups.find(x=>x.home===t.id||x.away===t.id);
+  if(m&&WS){const o=m.home===t.id?m.away:m.home,w0=mWeek(t.id,R0[t.id]),w1=mWeek(t.id,R1[t.id]),wo=mWeek(o,R0[o]||[]);
+    if(w0&&w1&&wo){const a=mMatch(w0,wo),b=mMatch(w1,wo),d=b.win-a.win;
+      const mv=MCATS.map(c=>[c,b.pc[c]-a.pc[c]]).filter(x=>Math.abs(x[1])>=.02).sort((x,y)=>Math.abs(y[1])-Math.abs(x[1]));
+      wt=`<div class="tile"><span class="k">${MX.wk}</span><span class="v">${mPc(Math.round(b.win*100))}</span><span class="s ${Math.abs(d)<.005?'':d>0?'pos':'neg'}">${MX.before} ${mPc(Math.round(a.win*100))} · ${d>=0?'+':'−'}${Math.abs(d*100).toFixed(1)}</span></div>`;
+      wk=`<div class="lab">${MX.wk} · ${MX.vs(esc(byId[o].name))}</div>
+       <small class="hint">${MX.gamesAdd(w1.n[r.id]||0,w0.n[drop.id]||0)}</small>
+       <div class="cm">${mv.length?mv.map(([c,x])=>`<span>${c} ${mPc(Math.round(a.pc[c]*100))} → <b class="${x>0?'pos':'neg'}">${mPc(Math.round(b.pc[c]*100))}</b></span>`).join(''):`<small class="hint">${MX.noMove}</small>`}</div>`}}
+  // sezon
+  if(!mBase[t.id])mBase[t.id]=mSim(mMu(R0),3000);const s0=mBase[t.id][t.id],s1=mSim(mMu(R1),3000)[t.id];
+  const cell=(k,f)=>{const d=s1[k]-s0[k];return `<div class="tile"><span class="k">${f}</span><span class="v">${mPc(op(s1[k]))}</span><span class="s ${Math.abs(d)<.005?'':d>0?'pos':'neg'}">${MX.before} ${mPc(op(s0[k]))} · ${d>=0?'+':'−'}${Math.abs(d*100).toFixed(1)}</span></div>`};
+  return `<label class="hint">${MX.drop}: <select data-drop="${r.id}">${mine.map(p=>`<option value="${p.id}"${p.id===drop.id?' selected':''}>${esc(p.name)} (${zfmt(p.val)})</option>`).join('')}</select></label>
+   <div class="tiles">${wt}${cell('po',MX.po)}${cell('champ',MX.champ)}</div>${wk}<small class="hint">${MX.impHint}</small>`}
 const RF={team:null,sort:'score',pos:''};
 function radarFit(r,t){const w=mWeights(t),wr=mWorst(t.id);
   return MCATS.reduce((a,c)=>a+w[c]*(r.z[c]-(wr?wr.z[c]:0)),0)}
@@ -82,8 +122,8 @@ function radarRows(){const t=RF.team!=null?byId[RF.team]:null;
       :r.fit.length?`<small>${MX.fitFor}: ${r.fit.slice(0,2).map(f=>`<a href="${link(byId[f.t])}">${esc(byId[f.t].abbrev||byId[f.t].name)}</a>${f.drop?` (${MX.instead(pn(f.drop))})`:''}`).join(', ')}</small>`:'';
     return `<div class="pl rad"><div class="pn"><div class="nm">${esc(r.name)}${inj?` <span class="pill down">${inj}</span>`:''}${r.trend>=3?` <span class="pill up">${MX.hot}</span>`:''}${r.fa==='WAIVERS'?' <span class="pill flat">W</span>':''}</div>
      <small>${r.pos} · ${mPc(r.owned)} ${MX.own}${Math.abs(r.chg)>=.05?` <b class="${r.chg>0?'pos':'neg'}">${r.chg>0?'▲':'▼'}${Math.abs(r.chg).toFixed(1)}</b>`:''}${r.min.l7!=null?` · ${r.min.l7} ${MX.min}${mt!=null&&Math.abs(mt)>=3?` (<b class="${mt>0?'pos':'neg'}">${mt>0?'+':''}${mt.toFixed(0)}</b>)`:''}`:''}</small>
-     <div class="rvs">${['l7','l15','l30','sea'].map(s=>chip(r,s)).join('')}</div>${fit}</div>
-     <div class="pv"><span title="${MX.sScore}">${r.score.toFixed(1)}</span><small class="rs">${MX.jump} <b class="${r.trend>=0?'pos':'neg'}">${r.trend>=0?'↑':'↓'}${Math.abs(r.trend).toFixed(1)}</b></small></div></div>`}).join('')||`<p class="hint" style="padding:14px">${MX.empty}</p>`}
+     <div class="rvs">${['l7','l15','l30','sea'].map(s=>chip(r,s)).join('')}</div>${fit}${t&&r.g&&TS?`<button type="button" class="linkbtn imb" data-imp="${r.id}" aria-expanded="${IMP.open===r.id}">${MX.impBtn}</button>`:''}</div>
+     <div class="pv"><span title="${MX.sScore}">${r.score.toFixed(1)}</span><small class="rs">${MX.jump} <b class="${r.trend>=0?'pos':'neg'}">${r.trend>=0?'↑':'↓'}${Math.abs(r.trend).toFixed(1)}</b></small></div>${t&&IMP.open===r.id?`<div class="imp" id="imp-${r.id}">${impact(r,t)}</div>`:''}</div>`}).join('')||`<p class="hint" style="padding:14px">${MX.empty}</p>`}
 V.radar=()=>{if(RF.team==null){const my=getMy()??memMy;if(my!=null)RF.team=my}
   return `${mTabs('radar')}<section class="sec"><h2>${MX.rTitle}</h2><p class="hint">${MX.rHint}</p>
   <div class="filters">
@@ -163,7 +203,10 @@ function marketBind(h){
   if(h==='radar'){const nav=document.querySelector('nav.tabs a[data-v="takas"]');if(nav)nav.setAttribute('aria-current','page');
     const sel={rteam:'team',rpos:'pos',rsort:'sort'};
     for(const [id,k] of Object.entries(sel)){const el=document.getElementById(id);if(!el)continue;el.value=RF[k]??'';
-      el.onchange=()=>{RF[k]=k==='team'?(el.value?+el.value:null):el.value;document.getElementById('rlist').innerHTML=radarRows()}}}
+      el.onchange=()=>{RF[k]=k==='team'?(el.value?+el.value:null):el.value;IMP.open=null;document.getElementById('rlist').innerHTML=radarRows()}}
+    const rl=document.getElementById('rlist');if(rl){const redraw=()=>{rl.innerHTML=radarRows()};
+      rl.onclick=e=>{const b=e.target.closest('[data-imp]');if(!b)return;const id=+b.dataset.imp;IMP.open=IMP.open===id?null:id;b.textContent='…';setTimeout(redraw,10)};
+      rl.onchange=e=>{const s=e.target.closest('[data-drop]');if(!s)return;IMP.drop[+s.dataset.drop]=+s.value;setTimeout(redraw,10)}}}
   if(h==='takas'){const ta=document.getElementById('ta'),tb=document.getElementById('tb');if(!ta)return;
     ta.onchange=()=>{TR.a=+ta.value;TR.ga.clear();render()};tb.onchange=()=>{TR.b=tb.value?+tb.value:null;TR.gb.clear();render()};
     app.querySelectorAll('[data-tp]').forEach(cb=>cb.onchange=()=>{const s=cb.dataset.tp==='a'?TR.ga:TR.gb;cb.checked?s.add(+cb.value):s.delete(+cb.value);
