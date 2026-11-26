@@ -78,8 +78,8 @@ function loadImg(src){return new Promise(r=>{if(!src)return r(null);const i=new 
 async function drawImage(){
   const W=1080,H=1350,c=document.createElement('canvas');c.width=W;c.height=H;const x=c.getContext('2d');
   const css=getComputedStyle(document.documentElement);
-  const F='"Big Shoulders Display","Arial Narrow",sans-serif',B='Rubik,system-ui,sans-serif',M='"JetBrains Mono",monospace';
-  await Promise.all([`800 120px ${F}`,`700 64px ${F}`,`600 34px ${B}`,`500 26px ${M}`].map(f=>document.fonts.load(f).catch(()=>{})));
+  const sys='-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif',cv=k=>(css.getPropertyValue(k)||'').trim()||sys;
+  const F=cv('--f-display'),B=cv('--f-body'),M=B;
   const bg='#0A130E',head='#122A1E',acc='#3DB97C',cool='#E5844F',ink='#EAF3EC',mut='#9DB5A6',line='#21342A';
   x.fillStyle=bg;x.fillRect(0,0,W,H);
   const g=x.createLinearGradient(0,0,W,420);g.addColorStop(0,'#1d4a33');g.addColorStop(1,head);x.fillStyle=g;x.fillRect(0,0,W,330);
