@@ -29,6 +29,10 @@ Motor kategorileri, ters kategorileri (TO), puanlama türünü, takım sayısın
 
 Başka bir ligi denemek için: `ESPN_LEAGUE_ID=<id> python scripts/fetch.py && ESPN_LEAGUE_ID=<id> python scripts/build.py` (ayrı bir klasörde, `data/` bizim ligin verisini tutuyor).
 
+**Sleeper:** `SLEEPER_LEAGUE_ID=<id> python scripts/fetch_sleeper.py && SEASON=<yıl+1> python scripts/build.py`. Sleeper'ın açık API'si giriş istemez; adaptör ligi, eşleşmeleri, kadroları ve en iyi 200 serbest oyuncuyu ESPN biçimine çevirip `data/raw/<sezon>/` altına yazar (Sleeper'ın "2026" sezonu bizim 2027). Sleeper NBA ligleri puanlıdır. Sleeper günlük kadro ve haftalık NBA takvimi vermediği için eğlence sayfası ve bu haftanın kazanma tahmini yok; oyuncu değeri sezon ortalaması ve Sleeper projeksiyonundan hesaplanır.
+
+**Yahoo:** `scripts/yahoo_auth.py`, `yahoo_api.py`, `yahoo_check.py` hazır, ama Yahoo Fantasy API'si 2026 Temmuz'dan beri onaylı uygulamalara açık (sports.yahoo.com/developer/access/). Onay gelene kadar Yahoo ligleri eklenemez.
+
 ## İstatistiklerin tanımları
 
 - **All-play:** Takım her hafta diğer 11 takımın hepsiyle oynasaydı kazanacağı kategori oranı.

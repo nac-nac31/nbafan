@@ -56,9 +56,9 @@ def configure(league):
     G_KEYS = tuple(dict.fromkeys(list(G_KEYS) + keys + (["FP"] if POINTS else [])))
 
 
-def scoring_label():
+def scoring_label(lang="en"):
     if POINTS:
-        return "H2H Points"
+        return "H2H Puan" if lang == "tr" else "H2H Points"
     return f"{len(CATS)}-cat " + ("H2H" if SCORING == "H2H_CATEGORY" else "Most Cats")
 ZREF = None  # build_players oyuncu z-skoru referansı (tek maç değeri için)
 AYLAR = ["Ocak", "Şubat", "Mart", "Nisan", "Mayıs", "Haziran", "Temmuz", "Ağustos", "Eylül", "Ekim", "Kasım", "Aralık"]
@@ -192,7 +192,7 @@ def compute(raw):
         "current": current,
         "league": L["settings"]["name"], "updated": f"{now.day} {AYLAR[now.month - 1]} {now.year}, {now:%H:%M}",
         "weeks": done, "currentWeek": L["status"].get("currentMatchupPeriod"), "cats": list(CN.values()),
-        "scoring": SCORING, "lower": sorted(LOWER_N), "nOpp": n_opp,
+        "scoring": SCORING, "lower": sorted(LOWER_N), "nOpp": n_opp, "source": L.get("source", "espn"),
         "teams": teams, "beats": beats, "steals": steals,
     }
 
@@ -652,7 +652,14 @@ def render_page(data, lang):
         '<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">'
         + head + "</head><body>" + body.replace("__DATA__", payload) + "</body></html>\n"
     )
-    page = page.replace('<div class="brand">ESPN · 9-cat H2H</div>', f'<div class="brand">ESPN · {scoring_label()}</div>')
+    page = page.replace('<div class="brand">ESPN · 9-cat H2H</div>', f'<div class="brand">ESPN · {scoring_label(lang)}</div>')
+    if data.get("source") == "sleeper":  # veri kaynağının adı
+        for a, b in (("ESPN · ", "Sleeper · "), ("ESPN Fantasy'den", "Sleeper'dan"), ("ESPN Fantasy", "Sleeper"),
+                     ("ESPN'de en çok sahiplenilen 200", "Sleeper'da sezon ortalaması en iyi 200"),
+                     ("ESPN's 200 most-rostered", "the 200 best (by season average) Sleeper"),
+                     ("ESPN verisine", "Sleeper verisine"), ("ESPN data", "Sleeper data"),
+                     ("ESPN'in", "Sleeper'ın"), ("ESPN's", "Sleeper's")):
+            page = page.replace(a, b)
     return page.replace('<h1 id="lg">Fantasy 26-27</h1>', f'<h1 id="lg">{data["league"]}</h1>')
 
 
