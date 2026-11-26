@@ -2,6 +2,7 @@
 
 PAIRS = [
     ('</svg>Eğlence</a>', '</svg>Fun</a>'),
+    ('</svg>Pazar</a>', '</svg>Market</a>'),
     ('<span class="champ">Şampiyon</span>', '<span class="champ">Champion</span>'),
     ("Playoff ve şampiyonluk ihtimalleri", "Playoff and title odds"),
     ("Sezonun kalanı ve playofflar ${SIM.sims.toLocaleString('tr-TR')} kez simüle edildi. İlk ${SIM.playoffTeams} takım playoffa kalır, sıralama ${MOST||PTSL?'maç':'kategori'} galibiyetlerine göre yapılır, ${SIM.playoffTeams===8?'eşleşmeler 1-8, 4-5, 2-7, 3-6 ve ':''}her tur bir hafta. Takım gücü sezon boyu haftalık kategori ortalamaları ile şu anki kadronun projeksiyonunun karışımı. İsmin altında tahmini sezon sonu kategori skoru ve ortalama playoff sırası var.",
