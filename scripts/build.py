@@ -5,9 +5,61 @@ from zoneinfo import ZoneInfo
 sys.path.insert(0, str(pathlib.Path(__file__).parent))
 from fetch import current_season  # noqa: E402
 
+# ESPN istatistik ID'leri. Ligin kategorileri ayarlardan okunur (configure); aşağıdakiler bizim ligin varsayılanı.
+STAT = {"0": "PTS", "1": "BLK", "2": "STL", "3": "AST", "4": "OREB", "5": "DREB", "6": "REB", "11": "TO",
+        "13": "FGM", "14": "FGA", "15": "FTM", "16": "FTA", "17": "3PM", "18": "3PA", "19": "FG%", "20": "FT%",
+        "21": "3P%", "37": "DD", "38": "TD"}
+PCT = {"19": ("13", "14"), "20": ("15", "16"), "21": ("17", "18")}  # yüzde kategorisi: (isabet, deneme)
+ORDER = ["0", "6", "3", "2", "1", "17", "19", "20", "21", "11"]  # gösterim sırası
 CATS = ["0", "6", "3", "2", "1", "17", "19", "20", "11"]
-CN = {"0": "PTS", "6": "REB", "3": "AST", "2": "STL", "1": "BLK", "17": "3PM", "19": "FG%", "20": "FT%", "11": "TO"}
+CN = {c: STAT[c] for c in CATS}
 LOWER_IS_BETTER = {"11"}
+LOWER_N = {"TO"}
+SCORING = "H2H_CATEGORY"  # ya da H2H_MOST_CATEGORIES (hafta tek galibiyet sayılır)
+ACTIVE_SLOTS = 10  # ilk beş + yedek ve IR dışındaki slotlar
+G_KEYS = ("0", "6", "3", "2", "1", "17", "11", "13", "14", "15", "16")  # oyuncu maç başı tutulan istatistikler
+SUPPORTED_SCORING = ("H2H_CATEGORY", "H2H_MOST_CATEGORIES", "H2H_POINTS")
+POINTS = {}  # puanlı lig: istatistik ID -> puan. Doluysa tek "kategori" FP (fantezi puanı) olur.
+Z_SCALE = 1  # puanlı ligde tek z-skoru 9-cat toplamına benzer ölçeğe çekilir
+
+
+def fp_of(a):
+    """Bir istatistik sözlüğünün (ESPN ID anahtarlı) fantezi puanı."""
+    return sum(v * (a.get(k) or 0) for k, v in POINTS.items())
+
+
+def team_pts(side):
+    return side.get("totalPointsLive") if side.get("totalPointsLive") is not None else side.get("totalPoints", 0)
+
+
+def configure(league):
+    """Lig ayarlarından kategorileri, puanlama türünü ve kadro büyüklüğünü okur."""
+    global CATS, CN, LOWER_IS_BETTER, LOWER_N, SCORING, ACTIVE_SLOTS, G_KEYS, POINTS, Z_SCALE
+    st = league.get("settings") or {}
+    sc = st.get("scoringSettings") or {}
+    items = {str(i["statId"]): i for i in sc.get("scoringItems", [])}
+    SCORING = sc.get("scoringType") or "H2H_CATEGORY"
+    if SCORING not in SUPPORTED_SCORING:
+        sys.exit(f"Bu puanlama türü henüz desteklenmiyor: {SCORING}")
+    if SCORING == "H2H_POINTS":
+        POINTS = {c: float(i.get("points") or 0) for c, i in items.items() if i.get("points")}
+        CATS, CN, LOWER_IS_BETTER, LOWER_N, Z_SCALE = ["FP"], {"FP": "FPTS"}, set(), set(), 3
+    elif items:
+        CATS = [c for c in ORDER if c in items] + sorted((c for c in items if c not in ORDER), key=int)
+        CN = {c: STAT.get(c, c) for c in CATS}
+        LOWER_IS_BETTER = {c for c in CATS if items[c].get("isReverseItem")}
+        LOWER_N = {CN[c] for c in LOWER_IS_BETTER}
+    slots = (st.get("rosterSettings") or {}).get("lineupSlotCounts") or {}
+    if slots:
+        ACTIVE_SLOTS = sum(v for k, v in slots.items() if k not in ("12", "13")) or ACTIVE_SLOTS
+    keys = [c for c in CATS if c not in PCT] + [x for c in CATS if c in PCT for x in PCT[c]] + list(POINTS)
+    G_KEYS = tuple(dict.fromkeys(list(G_KEYS) + keys + (["FP"] if POINTS else [])))
+
+
+def scoring_label(lang="en"):
+    if POINTS:
+        return "H2H Puan" if lang == "tr" else "H2H Points"
+    return f"{len(CATS)}-cat " + ("H2H" if SCORING == "H2H_CATEGORY" else "Most Cats")
 ZREF = None  # build_players oyuncu z-skoru referansı (tek maç değeri için)
 AYLAR = ["Ocak", "Şubat", "Mart", "Nisan", "Mayıs", "Haziran", "Temmuz", "Ağustos", "Eylül", "Ekim", "Kasım", "Aralık"]
 
@@ -29,7 +81,7 @@ def pct(r):
 
 
 def is_close(c, x, y):
-    if c in ("19", "20"):
+    if c in PCT:
         return abs(x - y) < 0.01
     return abs(x - y) <= max(2, 0.05 * max(x, y))
 
@@ -46,8 +98,11 @@ def current_week(M, L, names):
         as_ = (a.get("cumulativeScore") or {}).get("scoreByStat") or {}
         if not hs or not as_:
             continue
-        hv = {c: hs[c]["score"] for c in CATS}
-        av = {c: as_[c]["score"] for c in CATS}
+        if POINTS:
+            hv, av = {"FP": team_pts(h)}, {"FP": team_pts(a)}
+        else:
+            hv = {c: (hs.get(c) or {}).get("score", 0) for c in CATS}
+            av = {c: (as_.get(c) or {}).get("score", 0) for c in CATS}
         vals[h["teamId"]], vals[a["teamId"]] = hv, av
         W, Lo, T = cmp(hv, av)
         cats = []
@@ -56,7 +111,7 @@ def current_week(M, L, names):
             better = (x < y) if c in LOWER_IS_BETTER else (x > y)
             worse = (x > y) if c in LOWER_IS_BETTER else (x < y)
             cats.append({"c": CN[c], "h": x, "a": y, "r": "H" if better else "A" if worse else "T", "close": is_close(c, x, y)})
-        rows.append({"home": h["teamId"], "away": a["teamId"], "score": [W, Lo, T], "cats": cats,
+        rows.append({"home": h["teamId"], "away": a["teamId"], "score": [round(hv["FP"], 1), round(av["FP"], 1), 0] if POINTS else [W, Lo, T], "cats": cats,
                      "closeCount": sum(k["close"] for k in cats)})
     live = {}
     for t, a in vals.items():
@@ -81,9 +136,11 @@ def compute(raw):
         w = m["matchupPeriodId"]
         for s, o in (("home", "away"), ("away", "home")):
             sc = m[s]["cumulativeScore"]["scoreByStat"]
-            weeks[w][m[s]["teamId"]] = {c: sc[c]["score"] for c in CATS}
+            weeks[w][m[s]["teamId"]] = ({"FP": m[s].get("totalPoints", 0)} if POINTS else
+                                         {c: (sc.get(c) or {}).get("score", 0) for c in CATS})
             opp[w][m[s]["teamId"]] = m[o]["teamId"]
     done = sorted(weeks)
+    n_opp = max(1, len(names) - 1)
     teams = []
     for t in names:
         cat, apc, mrec, weekly, games, wk = [0, 0, 0], [0, 0, 0], [0, 0, 0], [], [], []
@@ -102,29 +159,30 @@ def compute(raw):
             mrec["GMB".index(res)] += 1
             weekly.append(beat)
             wk.append({c: weeks[w][t][c] for c in CATS})
-            games.append({"w": w, "opp": names[o], "oppId": o, "score": f"{W}-{Lo}" + (f"-{T}" if T else ""), "res": res, "beat": beat})
+            score = f"{a['FP']:g}-{weeks[w][o]['FP']:g}" if POINTS else f"{W}-{Lo}" + (f"-{T}" if T else "")
+            games.append({"w": w, "opp": names[o], "oppId": o, "score": score, "res": res, "beat": beat})
         tc = txc[t]
         teams.append({
             "id": t, "name": names[t], "abbrev": meta[t]["abbrev"], "logo": meta[t]["logo"], "cat": cat, "catPct": pct(cat), "apPct": pct(apc), "ap": apc,
             "mrec": mrec, "weekly": weekly, "games": games, "_wk": wk,
             "avg": {CN[c]: sum(weeks[w][t][c] for w in done) / max(1, len(done)) for c in CATS},
             "adds": tc.get("acquisitions", 0), "moves": tc.get("moveToActive", 0), "trades": tc.get("trades", 0),
-            "recent": sum(weekly[-2:]) / (11 * max(1, min(2, len(weekly)))),
+            "recent": sum(weekly[-2:]) / (n_opp * max(1, min(2, len(weekly)))),
         })
     for t in teams:
         t["luck"] = t["catPct"] - t["apPct"]
         t["power"] = 0.6 * t["apPct"] + 0.4 * t["recent"]
     for c in CN.values():
-        order = sorted(teams, key=lambda t: t["avg"][c], reverse=(c != "TO"))
+        order = sorted(teams, key=lambda t: t["avg"][c], reverse=(c not in LOWER_N))
         for i, t in enumerate(order):
             t.setdefault("rank", {})[c] = i + 1
     beats, steals = [], []
     for t in teams:
         for g in t["games"]:
             ev = {"team": t["name"], "w": g["w"], "opp": g["opp"], "score": g["score"], "beat": g["beat"]}
-            if g["res"] == "M" and g["beat"] >= 8:
+            if g["res"] == "M" and g["beat"] >= round(n_opp * 8 / 11):
                 beats.append(ev)
-            if g["res"] == "G" and g["beat"] <= 3:
+            if g["res"] == "G" and g["beat"] <= round(n_opp * 3 / 11):
                 steals.append(ev)
     beats.sort(key=lambda x: (-x["beat"], x["w"]))
     steals.sort(key=lambda x: (x["beat"], x["w"]))
@@ -134,6 +192,7 @@ def compute(raw):
         "current": current,
         "league": L["settings"]["name"], "updated": f"{now.day} {AYLAR[now.month - 1]} {now.year}, {now:%H:%M}",
         "weeks": done, "currentWeek": L["status"].get("currentMatchupPeriod"), "cats": list(CN.values()),
+        "scoring": SCORING, "lower": sorted(LOWER_N), "nOpp": n_opp, "source": L.get("source", "espn"),
         "teams": teams, "beats": beats, "steals": steals,
     }
 
@@ -168,7 +227,8 @@ def player_row(pl, season, on_team):
     src = " + ".join(n for n, ok in (("son 15 gün", l15.get("42", 0) >= 3), ("sezon", sea.get("42", 0) >= 1), ("projeksiyon", bool(proj))) if ok)
 
     def pack(a):
-        return {"s": {CN[c]: a.get(c, 0) for c in CATS}, "fga": a.get("14", 0), "fta": a.get("16", 0)}
+        return {"s": {CN[c]: (fp_of(a) if c == "FP" else a.get(c, 0)) for c in CATS}, "fga": a.get("14", 0), "fta": a.get("16", 0),
+                "att": {CN[c]: a.get(PCT[c][1], 0) for c in CATS if c in PCT}}
 
     gp_now = int((l15 if l15.get("42", 0) >= 3 else sea).get("42", 0))
     mins = (l15 if l15.get("42", 0) >= 3 else sea or proj).get("40", 0)
@@ -179,7 +239,7 @@ def player_row(pl, season, on_team):
         "gp": gp_now, "seasonGp": int(sea.get("42", 0)), "min": round(mins, 1), "src": src,
         "_mix": pack(mix), "_now": pack(cur), "_proj": pack(proj) if proj else None,
         "pro": pl.get("proTeamId"),
-        "g": {k: round(mix.get(k, 0), 3) for k in ("0", "6", "3", "2", "1", "17", "11", "13", "14", "15", "16")},
+        "g": {k: round(fp_of(mix) if k == "FP" else mix.get(k, 0), 3) for k in G_KEYS},
     }
 
 
@@ -199,29 +259,29 @@ def build_players(raw, season):
             r["fa"] = p.get("status", "FREEAGENT")
             rows.append(r)
     pool = [r for r in rows if r["gp"] >= 3] or rows
-    pool = sorted(pool, key=lambda r: -r["_mix"]["s"]["PTS"])[:220]
+    lead = "PTS" if "PTS" in CN.values() else list(CN.values())[0]
+    pool = sorted(pool, key=lambda r: -r["_mix"]["s"][lead])[:220]
     P = [r["_mix"] for r in pool]
     mean = {c: statistics.mean(x["s"][c] for x in P) for c in CN.values()}
     sd = {c: statistics.pstdev(x["s"][c] for x in P) or 1 for c in CN.values()}
-    fga = statistics.mean(x["fga"] for x in P) or 1
-    fta = statistics.mean(x["fta"] for x in P) or 1
-    sd_fg = statistics.pstdev([(x["s"]["FG%"] - mean["FG%"]) * x["fga"] / fga for x in P]) or 1
-    sd_ft = statistics.pstdev([(x["s"]["FT%"] - mean["FT%"]) * x["fta"] / fta for x in P]) or 1
+    pcts = [CN[c] for c in CATS if c in PCT]
+    att = {c: statistics.mean(x["att"][c] for x in P) or 1 for c in pcts}
+    sd_p = {c: statistics.pstdev([(x["s"][c] - mean[c]) * x["att"][c] / att[c] for x in P]) or 1 for c in pcts}
 
     global ZREF
-    ZREF = {"mean": mean, "sd": sd, "fga": fga, "fta": fta, "sd_fg": sd_fg, "sd_ft": sd_ft}
+    ZREF = {"mean": mean, "sd": sd, "att": att, "sd_pct": sd_p, "cats": list(CN.values()), "lower": sorted(LOWER_N),
+            "points": POINTS, "scale": Z_SCALE,
+            "fga": att.get("FG%", 1), "fta": att.get("FT%", 1), "sd_fg": sd_p.get("FG%", 1), "sd_ft": sd_p.get("FT%", 1)}
 
     def zs(x):
         z = {}
         for c in CN.values():
-            if c == "FG%":
-                z[c] = (x["s"][c] - mean[c]) * x["fga"] / fga / sd_fg
-            elif c == "FT%":
-                z[c] = (x["s"][c] - mean[c]) * x["fta"] / fta / sd_ft
-            elif c == "TO":
+            if c in att:
+                z[c] = (x["s"][c] - mean[c]) * x["att"][c] / att[c] / sd_p[c]
+            elif c in LOWER_N:
                 z[c] = -(x["s"][c] - mean[c]) / sd[c]
             else:
-                z[c] = (x["s"][c] - mean[c]) / sd[c]
+                z[c] = (x["s"][c] - mean[c]) / sd[c] * Z_SCALE
         return z
 
     for r in rows:
@@ -240,9 +300,6 @@ def build_players(raw, season):
 def phi(x):
     import math
     return 0.5 * (1 + math.erf(x / math.sqrt(2)))
-
-
-ACTIVE_SLOTS = 10  # PG, SG, SF, PF, C, G, F, 3x UTIL
 
 
 def project_week(raw, data):
@@ -280,9 +337,11 @@ def project_week(raw, data):
             for side in ("home", "away"):
                 sc = (m[side].get("cumulativeScore") or {}).get("scoreByStat") or {}
                 mvals[m[side]["teamId"]] = {k: v["score"] for k, v in sc.items()}
+                if POINTS:
+                    mvals[m[side]["teamId"]]["FP"] = team_pts(m[side])
     proj = {}
     for tid, base in mvals.items():
-        rem = {k: 0.0 for k in ("0", "6", "3", "2", "1", "17", "11", "13", "14", "15", "16")}
+        rem = {k: 0.0 for k in G_KEYS}
         var = {k: 0.0 for k in rem}
         n = 0
         per_player = {}
@@ -300,12 +359,10 @@ def project_week(raw, data):
         tot = {k: base.get(k, 0) + rem[k] for k in rem}
         mu, sd = {}, {}
         for c in CATS:
-            if c == "19":
-                fga = tot["14"] or 1
-                mu[c], sd[c] = tot["13"] / fga, math.sqrt(var["13"]) / fga
-            elif c == "20":
-                fta = tot["16"] or 1
-                mu[c], sd[c] = tot["15"] / fta, math.sqrt(var["15"]) / fta
+            if c in PCT:
+                mk, ak = PCT[c]
+                at = tot[ak] or 1
+                mu[c], sd[c] = tot[mk] / at, math.sqrt(var[mk]) / at
             else:
                 mu[c], sd[c] = tot[c], math.sqrt(var[c])
         proj[tid] = {"mu": mu, "sd": sd, "games": n, "left": per_player}
@@ -324,8 +381,9 @@ def project_week(raw, data):
         for q in pc.values():
             dist = [(dist[i] if i < len(dist) else 0) * (1 - q) + (dist[i - 1] * q if i >= 1 else 0) for i in range(len(dist) + 1)]
         mt["proj"] = {
-            "win": round(sum(dist[5:]), 3), "pc": {k: round(v, 3) for k, v in pc.items()},
-            "score": [sum(1 for v in pc.values() if v > 0.5), sum(1 for v in pc.values() if v < 0.5)],
+            "win": round(sum(dist[len(CATS) // 2 + 1:]), 3), "pc": {k: round(v, 3) for k, v in pc.items()},
+            "score": ([round(h["mu"]["FP"]), round(a["mu"]["FP"])] if POINTS else
+                      [sum(1 for v in pc.values() if v > 0.5), sum(1 for v in pc.values() if v < 0.5)]),
             "games": [h["games"], a["games"]],
             "mu": [{CN[c]: round(h["mu"][c], 3) for c in CATS}, {CN[c]: round(a["mu"][c], 3) for c in CATS}],
         }
@@ -368,16 +426,18 @@ def simulate_season(raw, data, n_sims=10000):
     slots = {e["playerId"]: e.get("lineupSlotId") for t in raw.get("rosters", {}).get("teams", []) for e in t["roster"]["entries"]}
     rost = {}
     for tid in ids:
-        acc = {k: 0.0 for k in ("0", "6", "3", "2", "1", "17", "11", "13", "14", "15", "16")}
+        acc = {k: 0.0 for k in G_KEYS}
         for p in data["players"]:
             if p["team"] != tid or "g" not in p:
                 continue
             wgt = 0.5 if (p["inj"] in ("Sakat", "IR") or slots.get(p["id"]) == 13) else 1.0
             for k in acc:
                 acc[k] += p["g"].get(k, 0) * 3.3 * wgt
-        r = {c: acc[c] for c in ("0", "6", "3", "2", "1", "17", "11")}
-        r["19"] = acc["13"] / acc["14"] if acc["14"] else 0
-        r["20"] = acc["15"] / acc["16"] if acc["16"] else 0
+        r = {c: acc[c] for c in CATS if c not in PCT}
+        for c in CATS:
+            if c in PCT:
+                mk, ak = PCT[c]
+                r[c] = acc[mk] / acc[ak] if acc[ak] else 0
         rost[tid] = r
     mu = {}
     for c in CATS:
@@ -416,24 +476,31 @@ def simulate_season(raw, data, n_sims=10000):
     if cur_week and not cur_p:  # tahmin yoksa bu haftayı da modelle oyna
         future += [(m["matchupPeriodId"], m["home"]["teamId"], m["away"]["teamId"]) for m in M["schedule"]
                    if m.get("matchupPeriodId") == cur_week and "home" in m and "away" in m]
-    base = {t: list(teams[t]["cat"]) for t in ids}
+    most = SCORING == "H2H_MOST_CATEGORIES"  # sıralama maç galibiyetine göre
+    base = {t: (list(teams[t]["mrec"]) if most else list(teams[t]["cat"])) for t in ids}
     rr = rnd.random
     res = {t: {"po": 0, "final": 0, "champ": 0, "seed1": 0, "seedSum": 0, "w": 0.0, "l": 0.0} for t in ids}
-    bracket = [1, 8, 4, 5, 2, 7, 3, 6] if n_playoff == 8 else None
+    bracket = seed_bracket(n_playoff)
 
     def play(a, b, probs):
         wa = sum(1 for q in probs if rr() < q)
         return wa, len(probs) - wa
 
+    def add(rec, h, a, wh, wa):
+        if most:
+            i = 0 if wh > wa else 1 if wh < wa else 2
+            rec[h][i] += 1
+            rec[a][(1, 0, 2)[i]] += 1
+        else:
+            rec[h][0] += wh; rec[h][1] += wa; rec[a][0] += wa; rec[a][1] += wh
+
     for si in range(n_sims):
         P = worlds[si % len(worlds)]
         rec = {t: base[t][:] for t in ids}
         for (h, a), probs in cur_p.items():
-            wh, wa = play(h, a, probs)
-            rec[h][0] += wh; rec[h][1] += wa; rec[a][0] += wa; rec[a][1] += wh
+            add(rec, h, a, *play(h, a, probs))
         for _, h, a in future:
-            wh, wa = play(h, a, P[(h, a)])
-            rec[h][0] += wh; rec[h][1] += wa; rec[a][0] += wa; rec[a][1] += wh
+            add(rec, h, a, *play(h, a, P[(h, a)]))
         order = sorted(ids, key=lambda t: (-(rec[t][0] + 0.5 * rec[t][2]) / max(1, sum(rec[t])), rr()))
         for i, t in enumerate(order):
             res[t]["w"] += rec[t][0]; res[t]["l"] += rec[t][1]
@@ -442,12 +509,15 @@ def simulate_season(raw, data, n_sims=10000):
                 res[t]["seedSum"] += i + 1
         res[order[0]]["seed1"] += 1
         seeds = {i + 1: t for i, t in enumerate(order[:n_playoff])}
-        field = [seeds[s] for s in (bracket or range(1, n_playoff + 1))]
+        field = [seeds.get(s) for s in bracket]  # None = bay geçen üst sıra
         rank = {t: i for i, t in enumerate(order)}
         while len(field) > 1:
             nxt = []
             for i in range(0, len(field), 2):
                 a, b = field[i], field[i + 1]
+                if a is None or b is None:
+                    nxt.append(b if a is None else a)
+                    continue
                 wa, wb = play(a, b, P[(a, b)])
                 nxt.append(a if (wa > wb or (wa == wb and rank[a] < rank[b])) else b)
             if len(nxt) == 1:
@@ -461,6 +531,18 @@ def simulate_season(raw, data, n_sims=10000):
                   "w": round(r["w"] / n_sims, 1), "l": round(r["l"] / n_sims, 1)}
     data["sim"] = {"teams": out, "playoffTeams": n_playoff, "regWeeks": reg_weeks, "sims": n_sims,
                    "seedRule": ss.get("playoffSeedingRule")}
+
+
+def seed_bracket(n):
+    """Klasik eşleşme sırası (8 için 1-8, 4-5, 2-7, 3-6). 2'nin kuvveti değilse eksik yerler bay (üst sıralar geçer)."""
+    size = 1
+    while size < n:
+        size *= 2
+    order = [1]
+    while len(order) < size:
+        m = len(order) * 2 + 1
+        order = [x for s in order for x in (s, m - s)]
+    return [s if s <= n else None for s in order]
 
 
 def owner_key(team):
@@ -546,7 +628,7 @@ def localize_logos(teams, out):
 
 def render_page(data, lang):
     import copy
-    tpl = pathlib.Path("templates")
+    tpl = pathlib.Path(__file__).resolve().parent.parent / "templates"  # lig klasöründen çalışınca da bulunsun
     head, body = (tpl / "head.html").read_text(), (tpl / "body.html").read_text()
     if lang == "en":
         from i18n_en import PAIRS, MONTHS, INJ, SLOT
@@ -564,12 +646,21 @@ def render_page(data, lang):
                 p["slot"] = SLOT.get(p["slot"], p["slot"])
         body = body.replace('href="en.html" hreflang="en"', 'href="./" hreflang="tr"').replace('location.hash">EN<', 'location.hash">TR<')
     body = body.replace("/*__FUN__*/", (tpl / "fun.js").read_text())
+    body = body.replace("/*__MARKET__*/", (tpl / "market.js").read_text())
     payload = json.dumps(data, ensure_ascii=False).replace("</", "<\\/")
     page = (
         f'<!doctype html>\n<html lang="{lang}"><head><meta charset="utf-8">'
         '<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">'
         + head + "</head><body>" + body.replace("__DATA__", payload) + "</body></html>\n"
     )
+    page = page.replace('<div class="brand">ESPN · 9-cat H2H</div>', f'<div class="brand">ESPN · {scoring_label(lang)}</div>')
+    if data.get("source") == "sleeper":  # veri kaynağının adı
+        for a, b in (("ESPN · ", "Sleeper · "), ("ESPN Fantasy'den", "Sleeper'dan"), ("ESPN Fantasy", "Sleeper"),
+                     ("ESPN'de en çok sahiplenilen 200", "Sleeper'da sezon ortalaması en iyi 200"),
+                     ("ESPN's 200 most-rostered", "the 200 best (by season average) Sleeper"),
+                     ("ESPN verisine", "Sleeper verisine"), ("ESPN data", "Sleeper data"),
+                     ("ESPN'in", "Sleeper'ın"), ("ESPN's", "Sleeper's")):
+            page = page.replace(a, b)
     return page.replace('<h1 id="lg">Fantasy 26-27</h1>', f'<h1 id="lg">{data["league"]}</h1>')
 
 
@@ -577,14 +668,23 @@ def main():
     season = int(os.environ.get("SEASON") or current_season())
     raw_dir = pathlib.Path("data/raw") / str(season)
     raw = {n: json.loads((raw_dir / f"{n}.json").read_text()) for n in ("league", "matchups")}
-    for n in ("rosters", "freeagents", "proschedule"):
+    for n in ("rosters", "freeagents", "freeagents_hot", "proschedule"):
         f = raw_dir / f"{n}.json"
         if f.exists():
             raw[n] = json.loads(f.read_text())
+    configure(raw["league"])
     data = compute(raw)
     data["players"] = build_players(raw, season)
     project_week(raw, data)
     simulate_season(raw, data)
+    try:  # takas analizcisi + waiver radarı
+        import market
+        market.build_market(raw, data, season, ZREF, CATS, CN, LOWER_IS_BETTER, player_row)
+        print("pazar:", len(data.get("radar", [])), "radar oyuncusu,", "takas simülasyonu" if data.get("tradeSim") else "takas verisi yok")
+    except Exception as e:
+        import traceback
+        traceback.print_exc()
+        print("pazar hesaplanamadı:", e)
     for tid, r in sorted((data.get("sim") or {}).get("teams", {}).items(), key=lambda x: -x[1]["champ"]):
         print(f"sim {tid}: playoff %{r['po']*100:.0f} şampiyon %{r['champ']*100:.1f} kat {r['w']}-{r['l']}")
     for mt in data.get("current", {}).get("matchups", []):

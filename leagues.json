@@ -1,0 +1,7 @@
+{
+  "_not": "Siteye eklenen diğer ligler. Bizim lig (1540046349) ana adreste kalır. listed=false: lig listesinde görünmez ve arama motorlarına kapalıdır (deneme ligleri).",
+  "leagues": [
+    {"source": "espn", "id": "234626984", "listed": false, "note": "deneme: açık ESPN ligi, 8-cat, 10 takım"},
+    {"source": "sleeper", "id": "1341763186407276544", "listed": false, "note": "deneme: açık Sleeper ligi, puanlı, 8 takım"}
+  ]
+}

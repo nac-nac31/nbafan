@@ -45,6 +45,14 @@ jobs:
           git add data
           git diff --cached --quiet || git commit -m "Veri güncellemesi $(date -u +%F)"
           git push
+      - name: Diğer ligler (leagues.json, site/l/<lig no>/)
+        continue-on-error: true
+        timeout-minutes: 40
+        run: |
+          python scripts/build_all.py
+          git add leagues
+          git diff --cached --quiet || git commit -m "Diğer liglerin verisi $(date -u +%F)"
+          git push
       - uses: actions/configure-pages@v5
       - uses: actions/upload-pages-artifact@v3
         with:
