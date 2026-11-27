@@ -46,7 +46,13 @@ V.takimim=()=>{const h=baseMy();const my=getMy()??memMy;if(my==null||!NT)return 
 
 // ---- Uygulama olarak yükle
 let deferred=null;
-const standalone=()=>matchMedia('(display-mode: standalone)').matches||navigator.standalone;
+const CAP=window.Capacitor&&window.Capacitor.isNativePlatform&&window.Capacitor.isNativePlatform()?window.Capacitor:null;
+const standalone=()=>CAP||matchMedia('(display-mode: standalone)').matches||navigator.standalone;
+if(CAP){document.documentElement.classList.add('native');const SB=CAP.Plugins.StatusBar;try{SB&&SB.setBackgroundColor({color:'#122A1E'})}catch(e){}}
+// uygulama içinde: görseli önbelleğe yazıp telefonun paylaşım ekranını aç (WhatsApp, Instagram…)
+async function nativeShare(blob,name,title){const b64=await new Promise(r=>{const f=new FileReader();f.onload=()=>r(String(f.result).split(',')[1]);f.readAsDataURL(blob)});
+  const fs=CAP.Plugins.Filesystem,sh=CAP.Plugins.Share;const w=await fs.writeFile({path:name,data:b64,directory:'CACHE'});
+  await sh.share({title,text:title+' · '+location.origin+location.pathname,files:[w.uri],dialogTitle:title})}
 const isIOS=/iphone|ipad|ipod/i.test(navigator.userAgent);
 function installCard(){if(standalone()||(!deferred&&!isIOS))return '';try{if(localStorage.getItem('pwa-hide'))return ''}catch(e){}
   return `<div class="panel inst"><img src="icon-192.png" alt="" width="44" height="44"><div><b>${S.install}</b><small>${isIOS&&!deferred?S.iosHint:S.installHint}</small></div>
@@ -68,10 +74,10 @@ async function openModal(){document.getElementById('shm')?.remove();
   const m=document.createElement('div');m.id='shm';m.className='shm';m.innerHTML=`<div class="shc"><p class="hint">${S.making}</p></div>`;document.body.appendChild(m);
   m.addEventListener('click',e=>{if(e.target===m)m.remove()});
   try{const blob=await drawImage();const url=URL.createObjectURL(blob);const file=new File([blob],`hafta-${ST.week}.png`,{type:'image/png'});
-    const can=navigator.canShare&&navigator.canShare({files:[file]});
+    const can=CAP||(navigator.canShare&&navigator.canShare({files:[file]}));
     m.querySelector('.shc').innerHTML=`<img src="${url}" alt="${esc(ST.title[EN?'en':'tr'])}"><p class="hint">${S.tip}</p><div class="sact">
-     ${can?`<button type="button" class="sbtn" data-sh>${S.share}</button>`:''}<a class="sbtn ghost" href="${url}" download="hafta-${ST.week}.png">${S.dl}</a><button type="button" class="sbtn ghost" data-modal-x>${S.close}</button></div>`;
-    const sh=m.querySelector('[data-sh]');if(sh)sh.onclick=()=>navigator.share({files:[file],title:`${DATA.league} · ${ST.title[EN?'en':'tr']}`,text:location.origin+location.pathname}).catch(()=>{});
+     ${can?`<button type="button" class="sbtn" data-sh>${S.share}</button>`:''}${CAP?'':`<a class="sbtn ghost" href="${url}" download="hafta-${ST.week}.png">${S.dl}</a>`}<button type="button" class="sbtn ghost" data-modal-x>${S.close}</button></div>`;
+    const sh=m.querySelector('[data-sh]');if(sh&&CAP)sh.onclick=()=>nativeShare(blob,file.name,`${DATA.league} · ${ST.title[EN?'en':'tr']}`).catch(()=>{});else if(sh)sh.onclick=()=>navigator.share({files:[file],title:`${DATA.league} · ${ST.title[EN?'en':'tr']}`,text:location.origin+location.pathname}).catch(()=>{});
   }catch(err){m.querySelector('.shc').innerHTML=`<p class="hint">${esc(String(err))}</p><button type="button" class="sbtn ghost" data-modal-x>${S.close}</button>`}}
 
 function loadImg(src){return new Promise(r=>{if(!src)return r(null);const i=new Image();i.crossOrigin='anonymous';i.onload=()=>r(i);i.onerror=()=>r(null);i.src=src})}

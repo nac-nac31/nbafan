@@ -1,0 +1,16 @@
+{
+  "appId": "io.github.nacnac31.nbafan",
+  "appName": "Fantezi Lig",
+  "webDir": "www",
+  "server": {
+    "url": "https://nac-nac31.github.io/nbafan/",
+    "errorPath": "offline.html"
+  },
+  "backgroundColor": "#0A130E",
+  "android": { "backgroundColor": "#0A130E" },
+  "ios": { "backgroundColor": "#0A130E", "contentInset": "never" },
+  "plugins": {
+    "SplashScreen": { "launchShowDuration": 600, "launchAutoHide": true, "backgroundColor": "#122A1E", "showSpinner": false },
+    "StatusBar": { "style": "DARK", "backgroundColor": "#122A1E", "overlaysWebView": false }
+  }
+}

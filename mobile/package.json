@@ -1,0 +1,26 @@
+{
+  "name": "nbafan-mobile",
+  "private": true,
+  "version": "0.1.0",
+  "description": "Lig raporu sitesinin iOS ve Android uygulaması (Capacitor)",
+  "scripts": {
+    "assets": "capacitor-assets generate --iconBackgroundColor '#122A1E' --iconBackgroundColorDark '#122A1E' --splashBackgroundColor '#122A1E' --splashBackgroundColorDark '#0A130E'",
+    "sync": "cap sync",
+    "android": "cap open android",
+    "ios": "cap open ios"
+  },
+  "dependencies": {
+    "@capacitor/android": "8.6.3",
+    "@capacitor/app": "8.1.2",
+    "@capacitor/core": "8.6.3",
+    "@capacitor/filesystem": "8.1.5",
+    "@capacitor/ios": "8.6.3",
+    "@capacitor/share": "8.0.3",
+    "@capacitor/splash-screen": "8.0.2",
+    "@capacitor/status-bar": "8.0.4"
+  },
+  "devDependencies": {
+    "@capacitor/assets": "4.0.0",
+    "@capacitor/cli": "8.6.3"
+  }
+}

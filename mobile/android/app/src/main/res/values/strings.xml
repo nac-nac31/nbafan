@@ -1,0 +1,7 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string name="app_name">Fantezi Lig</string>
+    <string name="title_activity_main">Fantezi Lig</string>
+    <string name="package_name">io.github.nacnac31.nbafan</string>
+    <string name="custom_url_scheme">io.github.nacnac31.nbafan</string>
+</resources>
