@@ -210,7 +210,41 @@ V.playoff=()=>{if(!SIM)return '';const S=SIM.teams;
   <p class="hint">Sezonun kalanı ve playofflar ${SIM.sims.toLocaleString('tr-TR')} kez simüle edildi. İlk ${SIM.playoffTeams} takım playoffa kalır, sıralama ${MOST||PTSL?'maç':'kategori'} galibiyetlerine göre yapılır, ${SIM.playoffTeams===8?'eşleşmeler 1-8, 4-5, 2-7, 3-6 ve ':''}her tur bir hafta. Takım gücü sezon boyu haftalık kategori ortalamaları ile şu anki kadronun projeksiyonunun karışımı. İsmin altında tahmini sezon sonu kategori skoru ve ortalama playoff sırası var.</p>
   <div class="panel odds"><div class="orow oh"><span></span><span>Takım</span><span>Playoff</span><span>Final</span><span>Şamp.</span></div>
   ${rows.map(t=>{const r=S[t.id];return `<a class="orow" href="${link(t)}">${logo(t,28)}<div style="min-width:0"><div class="nm">${esc(t.name)}</div><div class="sub">${Math.round(r.w)}-${Math.round(r.l)}${r.seed?` · sıra ${r.seed.toFixed(1)}`:''}</div></div>
-   <span class="ov" style="${heat(r.po,'accent')}">%${op(r.po)}</span><span class="ov" style="${heat(r.final,'accent')}">%${op(r.final)}</span><span class="ov b" style="${heat(r.champ,'accent')}">%${op(r.champ)}</span></a>`}).join('')}</div></section>`};
+   <span class="ov" style="${heat(r.po,'accent')}">%${op(r.po)}</span><span class="ov" style="${heat(r.final,'accent')}">%${op(r.final)}</span><span class="ov b" style="${heat(r.champ,'accent')}">%${op(r.champ)}</span></a>`}).join('')}</div>
+  ${SIM.bracket?'<a class="back" href="#agac" style="color:var(--accent)">Beklenen playoff ağacı ›</a>':''}</section>`};
+
+const RN=n=>['Final','Yarı final','Çeyrek final','Son 16'][n]||`Son ${2**(n+1)}`;
+V.agac=()=>{if(!SIM||!SIM.bracket)return `<section class="sec"><h2>Playoff ağacı</h2><p class="hint" style="padding:4px 0">Bu lig için playoff simülasyonu henüz yok.</p></section>`;
+  const S=SIM.teams,B=SIM.bracket,NR=SIM.rounds,NP=SIM.playoffTeams,my=getMy()??memMy;
+  const ord=T.filter(t=>S[t.id]).sort((a,b)=>S[a.id].rank-S[b.id].rank);
+  const seedOf={};ord.slice(0,NP).forEach((t,i)=>seedOf[i+1]=t);
+  const sIdx={};ord.forEach((t,i)=>sIdx[t.id]=i+1);
+  const hw=(a,b)=>SIM.h2h&&SIM.h2h[a.id]?SIM.h2h[a.id][b.id]:null;
+  // tur r'deki j. yer: o alt ağaçta bu tura en sık gelen takım
+  const slot=(r,j)=>{const w=2**r,grp=B.slice(j*w,(j+1)*w).filter(Boolean).map(s=>seedOf[s]).filter(Boolean);
+    return grp.sort((a,b)=>S[b.id].reach[r]-S[a.id].reach[r])[0]||null};
+  const card=(t,r,o)=>{if(!t)return `<div class="bt bye"><span class="bs"></span><span class="nm">Bay</span></div>`;
+    const p=S[t.id].reach[r+1],q=o?hw(t,o):null;
+    return `<a class="bt${t.id===my?' me':''}" href="${link(t)}"><span class="bs">${sIdx[t.id]}</span>${logo(t,24)}<span class="nm">${esc(t.name)}</span>
+     <span class="bp" title="Bu turu geçme ihtimali (sezon başından)">%${op(p)}</span>${q!=null?`<span class="bq" style="--w:${Math.round(q*100)}%"></span>`:''}</a>`};
+  const cols=[];
+  for(let r=0;r<NR;r++){const n=B.length/2**(r+1),ms=[];
+    for(let j=0;j<n;j++){const a=slot(r,2*j),b=slot(r,2*j+1);
+      const qa=a&&b?hw(a,b):null;
+      ms.push(`<div class="bm">${card(a,r,b)}${card(b,r,a)}${qa!=null?`<div class="bx">Eşleşirlerse: %${Math.round(qa*100)} – %${Math.round((1-qa)*100)}</div>`:''}</div>`)}
+    cols.push(`<div class="bc"><h3 class="bh">${RN(NR-1-r)}</h3><div class="bms">${ms.join('')}</div></div>`)}
+  const ch=slot(NR,0);
+  cols.push(`<div class="bc bcw"><h3 class="bh">Şampiyon</h3><div class="bms"><div class="bm win">${ch?`<a class="bt${ch.id===my?' me':''}" href="${link(ch)}"><span class="bs">${sIdx[ch.id]}</span>${logo(ch,28)}<span class="nm">${esc(ch.name)}</span><span class="bp">%${op(S[ch.id].champ)}</span></a>`:''}</div></div></div>`);
+  const hd=['Playoff',...Array.from({length:NR},(_, k)=>k===NR-1?'Şamp.':RN(NR-2-k).replace('Çeyrek final','Çeyrek').replace('Yarı final','Yarı'))];
+  const seedT=`<div class="panel scroll"><table class="seedt"><thead><tr><th>Takım</th>${Array.from({length:NP},(_,i)=>`<th>${i+1}.</th>`).join('')}<th>Dışarıda</th></tr></thead><tbody>
+   ${ord.map(t=>{const r=S[t.id];return `<tr${t.id===my?' class="me"':''}><td class="tn"><a href="${link(t)}">${esc(t.name)}</a></td>${r.seeds.map(x=>`<td class="c" style="${heat(x,'accent')}">${x>=.005?Math.round(x*100):''}</td>`).join('')}<td class="c" style="${heat(1-r.po,'cool')}">${1-r.po>=.005?Math.round((1-r.po)*100):''}</td></tr>`}).join('')}</tbody></table></div>`;
+  const roundT=`<div class="panel scroll"><table class="seedt"><thead><tr><th>Takım</th>${hd.map(h=>`<th>${h}</th>`).join('')}</tr></thead><tbody>
+   ${[...ord].sort((a,b)=>S[b.id].champ-S[a.id].champ||S[b.id].po-S[a.id].po).map(t=>`<tr${t.id===my?' class="me"':''}><td class="tn"><a href="${link(t)}">${esc(t.name)}</a></td>${S[t.id].reach.map(x=>`<td class="c" style="${heat(x,'accent')}">%${op(x)}</td>`).join('')}</tr>`).join('')}</tbody></table></div>`;
+  return `<section class="sec"><div class="sec-h"><h2>Beklenen playoff ağacı</h2></div>
+  <p class="hint">Sezonun kalanı ve playofflar ${SIM.sims.toLocaleString('tr-TR')} kez simüle edildi. Sıralar simülasyonlardaki ortalama sezon sonu sırasına göre; her turda o kolda bu tura en sık çıkan takım gösteriliyor. Takımın yanındaki yüzde, bugünden bakınca o turu geçme ihtimali. Çubuk ve alttaki satır, iki takım o eşleşmede karşılaşırsa tek haftalık maçı kazanma ihtimali.</p>
+  <div class="bk" style="--nr:${NR+1}">${cols.join('')}</div></section>
+  <section class="sec"><h2>Tur tur ihtimaller</h2><p class="hint">Her takımın playoffa kalma ve her turu geçme ihtimali.</p>${roundT}</section>
+  <section class="sec"><h2>Sıra ihtimalleri</h2><p class="hint">Normal sezonu hangi sırada bitirme ihtimali (yüzde). İlk ${NP} sıra playoff.</p>${seedT}</section>`};
 
 V.sans=()=>{const lk=[...T].sort((a,b)=>b.luck-a.luck),M=0.2;
   const ev=(x,lost)=>{const t=T.find(z=>z.name===x.team);return `<a class="ev" href="${link(t)}" style="text-decoration:none">${logo(t,36)}<div style="min-width:0"><div class="nm">${esc(x.team)}</div><small>H${x.w} · ${lost?'kaybetti':'yendi'}: ${esc(x.opp)} · ${x.beat}/${NO}</small></div><span class="sc">${x.score}</span></a>`};
@@ -298,7 +332,7 @@ ${PTSL?'':`  <section class="sec"><h2>Kategori profili</h2>
 /*__MARKET__*/
 const app=document.getElementById('app');
 const MXN=typeof MX!=='undefined'?MX:{tab1:'Takas analizcisi',tab2:'Waiver radarı'};
-const GROUPS=[{k:'lig',lab:'Lig',v:['siralama','haftalar','takimlar'],n:['Sıralama','Haftalar','Takımlar']},
+const GROUPS=[{k:'lig',lab:'Lig',v:['siralama','agac','haftalar','takimlar'],n:['Sıralama','Playoff','Haftalar','Takımlar']},
   {k:'pazar',lab:'Pazar',v:['takas','radar','oyuncular'],n:[MXN.tab1,MXN.tab2,'Oyuncular']}];
 let hintN=0;
 function foldHints(){app.querySelectorAll('.sec>p.hint,.hero>p.hint').forEach(p=>{
