@@ -139,7 +139,7 @@ V.takimim=()=>{
   const focus=DATA.cats.filter(c=>w[c]>1.2);
   const fa=P.filter(p=>p.team===0&&p.gp>=3&&p.inj!=='Sakat'&&p.inj!=='IR').map(p=>({p,fit:DATA.cats.reduce((a,c)=>a+w[c]*p.z[c],0)})).sort((a,b)=>b.fit-a.fit).slice(0,8);
   const waiver=`<section class="sec"><h2>Serbest oyuncu önerileri</h2><p class="hint">${focus.length?`Odak kategorilerin: <b>${focus.join(', ')}</b> (zayıf olduğun ya da bu hafta kıl payı geride olduğun kategoriler). `:''}Sıralama bu kategorilere ekstra ağırlık veriyor.${drop?` Bırakma adayın <b>${esc(drop.name)}</b> (${zfmt(drop.val)}).`:''}</p>
-   <div class="panel">${fa.map(({p,fit})=>prow(p,` · %${p.owned} sahiplik${drop&&p.val>drop.val?` · <b class="pos">${esc(drop.name)} yerine alınabilir</b>`:''}`)).join('')}</div></section>`;
+   <div class="panel" id="myfa">${fa.map(({p,fit})=>prow(p,` · %${p.owned} sahiplik${drop&&p.val>drop.val?` · <b class="pos">${esc(drop.name)} yerine alınabilir</b>`:''}`)+(typeof mImpactSlot==='function'?mImpactSlot(p,t):'')).join('')}</div></section>`;
   return `<div class="phead">${logo(t,64)}<div><div class="nm">${esc(t.name)}</div><div class="sub">Güç sıralaması #${pRank(t)} · ${rec(t.mrec)} · <button type="button" class="linkbtn" data-unpick>Takımı değiştir</button></div></div></div>${week}${myOdds(t)}${roster}${waiver}
    <p class="hint">Öneriler ESPN verisine dayanan istatistiksel tahminlerdir; maç takvimi ve sakatlık haberlerini de kontrol et.</p>`};
 const CUR=DATA.current||{matchups:[],live:{}};

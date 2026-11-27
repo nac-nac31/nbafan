@@ -15,7 +15,7 @@ const MX=MEN?{
   pos:'All positions',l7:'7d',l15:'15d',l30:'30d',sea:'Season',min:'min',own:'owned',fitFor:'Best fit',instead:n=>`instead of ${n}`,
   small:'small sample',gain:'Gain vs. drop candidate',noTeam:'Choose your team on My team to see personal fit.',empty:'No players with this filter.',
   inj:{Sakat:'Out',Belirsiz:'DTD',IR:'IR',Ceza:'Susp.'},jump:'Jump',hot:'Hot',
-  impBtn:'What if I pick him up?',drop:'Drop',wk:'This week',season:'Season',vs:n=>`vs ${n}`,win:'Win chance',
+  impBtn:'What if I pick him up?',quick:(a,b)=>`This week ${a} → ${b}`,drop:'Drop',wk:'This week',season:'Season',vs:n=>`vs ${n}`,win:'Win chance',
   gamesAdd:(a,b)=>`He plays ${a} game${a===1?'':'s'} in your lineup this week; the dropped player had ${b}.`,catMove:'Category chances that move',noMove:'No category chance moves by 2+ points.',
   noWeek:'No live matchup projection right now.',impHint:'Daily lineup: on each remaining day the best players with a game start (same model as the weekly projection). Season: rest of the season and playoffs re-simulated, 3,000 times each.',
 }:{
@@ -33,7 +33,7 @@ const MX=MEN?{
   pos:'Tüm pozisyonlar',l7:'7g',l15:'15g',l30:'30g',sea:'Sezon',min:'dk',own:'sahiplik',fitFor:'En çok uyduğu',instead:n=>`${n} yerine`,
   small:'küçük örnek',gain:'Bırakma adayına göre kazanç',noTeam:'Kişisel uyum için Takımım sekmesinden takımını seç.',empty:'Bu filtreyle oyuncu yok.',
   inj:{},jump:'Sıçrama',hot:'Yükselişte',
-  impBtn:'Alırsam ne değişir?',drop:'Bırakılacak',wk:'Bu hafta',season:'Sezon',vs:n=>`${n} karşısında`,win:'Kazanma ihtimali',
+  impBtn:'Alırsam ne değişir?',quick:(a,b)=>`Bu hafta ${a} → ${b}`,drop:'Bırakılacak',wk:'Bu hafta',season:'Sezon',vs:n=>`${n} karşısında`,win:'Kazanma ihtimali',
   gamesAdd:(a,b)=>`Bu hafta kadronda ${a} maç oynar; bırakılan oyuncunun ${b} maçı vardı.`,catMove:'İhtimali değişen kategoriler',noMove:'Hiçbir kategoride ihtimal 2 puandan fazla değişmiyor.',
   noWeek:'Şu an devam eden maç tahmini yok.',impHint:'Günlük kadro: kalan her gün maçı olan en iyi oyuncular oynar (haftalık tahminle aynı model). Sezon: kalan sezon ve playofflar 3.000\'er kez yeniden oynandı.',
 };
@@ -65,6 +65,7 @@ document.head.insertAdjacentHTML('beforeend',`<style>
 .ttab tr+tr td{border-top:1px solid var(--line)}.ttab small{color:var(--muted)}
 
 .imp{grid-column:1/-1;border-top:1px dashed var(--line);padding-top:10px;display:flex;flex-direction:column;gap:10px}
+.impr{padding:0 14px 12px;display:flex;flex-wrap:wrap;gap:4px 12px;align-items:baseline}.impr .imp{flex:1 1 100%}.impr+.pl{border-top:1px solid var(--line)}.impr .imb{margin-top:0}
 .imb{margin-top:6px;font-size:12.5px;color:var(--accent);background:none;border:0;padding:0;cursor:pointer;font-weight:600;text-align:left}
 .imp .tiles{grid-template-columns:repeat(3,minmax(0,1fr))}.imp .tile .v{font-size:22px}.imp .tile{padding:10px}.imp .tile .k{font-size:9.5px}
 .imp .cm{display:flex;flex-wrap:wrap;gap:6px}.imp .cm span{font-family:var(--f-data);font-size:12px;padding:3px 8px;border-radius:8px;background:var(--surface-2)}
@@ -88,9 +89,18 @@ function mWeek(tid,roster){if(!WS||!WS.base[tid])return null;const out=new Set(W
 function mMatch(a,b){const pc={};let dist=[1];for(const c of MCATS){let d=a.mu[c]-b.mu[c];if(TS.lower.includes(c))d=-d;const s=Math.hypot(a.sd[c],b.sd[c]);
   const q=s===0?(d>0?1:d<0?0:.5):mPhi(d/s);pc[c]=q;dist=dist.map((x,i)=>x*(1-q)).concat([0]).map((x,i)=>x+(i>0?dist[i-1]*q:0))}
   return {pc,win:dist.slice(Math.floor(MCATS.length/2)+1).reduce((x,y)=>x+y,0)}}
+// Takımım: serbest oyuncu önerilerinin altında aynı hesap
+const mWk0={};
+function mImpactSlot(p,t){if(!TS||!p.g)return '';const r=RAD.find(x=>x.id===p.id&&x.g)||p;let q='';
+  const m=CUR.matchups.find(x=>x.home===t.id||x.away===t.id),drop=mWorst(t.id);
+  if(m&&WS&&drop){const o=m.home===t.id?m.away:m.home,R=mRosters();
+    if(!mWk0[t.id]){const a=mWeek(t.id,R[t.id]),b=mWeek(o,R[o]||[]);mWk0[t.id]=a&&b?{w:mMatch(a,b).win,b}:null}
+    const B=mWk0[t.id],a1=B&&mWeek(t.id,R[t.id].filter(x=>x.id!==drop.id).concat([{id:r.id,g:r.g,val:r.val,pro:r.pro}]));
+    if(a1){const w0=B.w,w1=mMatch(a1,B.b).win,d=w1-w0;q=`<small class="${Math.abs(d)<.005?'':d>0?'pos':'neg'}">${MX.quick(mPc(Math.round(w0*100)),mPc(Math.round(w1*100)))}</small>`}}
+  return `<div class="impr">${q}<button type="button" class="linkbtn imb" data-imp="${p.id}" aria-expanded="${IMP.open===p.id}">${MX.impBtn}</button>${IMP.open===p.id?`<div class="imp">${impact(r,t)}</div>`:''}</div>`}
 function impact(r,t){const mine=P.filter(p=>p.team===t.id).sort((a,b)=>a.val-b.val);if(!mine.length)return '';
   const def=mWorst(t.id)||mine[0],dropId=IMP.drop[r.id]??def.id,drop=mine.find(p=>p.id===dropId)||def;
-  const fa={id:r.id,name:r.name,g:r.g,val:r.val,pro:r.pro};if(['Sakat','IR','Ceza'].includes(r.inj)&&!TS.half.includes(r.id))TS.half.push(r.id);
+  const fa={id:r.id,name:r.name,g:r.g,val:r.val,pro:r.pro};if(['Sakat','IR','Ceza','Out','Susp.'].includes(r.inj)&&!TS.half.includes(r.id))TS.half.push(r.id);
   const R0=mRosters(),R1={...R0};R1[t.id]=R0[t.id].filter(p=>p.id!==drop.id).concat([fa]);
   // bu hafta
   let wk=`<p class="hint">${MX.noWeek}</p>`,wt='';const m=CUR.matchups.find(x=>x.home===t.id||x.away===t.id);
@@ -207,6 +217,9 @@ function marketBind(h){
     const rl=document.getElementById('rlist');if(rl){const redraw=()=>{rl.innerHTML=radarRows()};
       rl.onclick=e=>{const b=e.target.closest('[data-imp]');if(!b)return;const id=+b.dataset.imp;IMP.open=IMP.open===id?null:id;b.textContent='…';setTimeout(redraw,10)};
       rl.onchange=e=>{const s=e.target.closest('[data-drop]');if(!s)return;IMP.drop[+s.dataset.drop]=+s.value;setTimeout(redraw,10)}}}
+  if(h==='takimim'){const f=document.getElementById('myfa');if(f){
+    f.onclick=e=>{const b=e.target.closest('[data-imp]');if(!b)return;const id=+b.dataset.imp;IMP.open=IMP.open===id?null:id;b.textContent='…';setTimeout(render,10)};
+    f.onchange=e=>{const s=e.target.closest('[data-drop]');if(!s)return;IMP.drop[+s.dataset.drop]=+s.value;setTimeout(render,10)}}}
   if(h==='takas'){const ta=document.getElementById('ta'),tb=document.getElementById('tb');if(!ta)return;
     ta.onchange=()=>{TR.a=+ta.value;TR.ga.clear();render()};tb.onchange=()=>{TR.b=tb.value?+tb.value:null;TR.gb.clear();render()};
     app.querySelectorAll('[data-tp]').forEach(cb=>cb.onchange=()=>{const s=cb.dataset.tp==='a'?TR.ga:TR.gb;cb.checked?s.add(+cb.value):s.delete(+cb.value);
