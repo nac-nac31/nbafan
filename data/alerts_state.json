@@ -7,7 +7,7 @@
     4,
     0
    ],
-   "win": 0.929,
+   "win": 0.918,
    "fav": true
   },
   "2-6": {
@@ -16,7 +16,7 @@
     5,
     0
    ],
-   "win": 0.562,
+   "win": 0.541,
    "fav": null
   },
   "7-5": {
@@ -25,7 +25,7 @@
     3,
     0
    ],
-   "win": 0.977,
+   "win": 0.978,
    "fav": true
   },
   "14-10": {
@@ -34,7 +34,7 @@
     6,
     0
    ],
-   "win": 0.024,
+   "win": 0.025,
    "fav": false
   },
   "13-1": {
@@ -43,7 +43,7 @@
     2,
     0
    ],
-   "win": 0.831,
+   "win": 0.821,
    "fav": true
   },
   "12-4": {
@@ -67,50 +67,45 @@
    "",
    "Nikola Jokic"
   ],
-  "3936299": [
-   3,
-   "",
-   "Jamal Murray"
-  ],
   "3975": [
    12,
    "Sakat",
    "Stephen Curry"
+  ],
+  "3936299": [
+   3,
+   "",
+   "Jamal Murray"
   ],
   "3136195": [
    1,
    "",
    "Karl-Anthony Towns"
   ],
-  "6450": [
-   14,
-   "Sakat",
-   "Kawhi Leonard"
+  "3032977": [
+   2,
+   "Belirsiz",
+   "Giannis Antetokounmpo"
   ],
   "4396993": [
    13,
    "Sakat",
    "Tyrese Haliburton"
   ],
-  "3032977": [
-   2,
-   "Belirsiz",
-   "Giannis Antetokounmpo"
-  ],
-  "4594268": [
-   12,
+  "6450": [
+   14,
    "Sakat",
-   "Anthony Edwards"
-  ],
-  "4431671": [
-   2,
-   "",
-   "Jaden McDaniels"
+   "Kawhi Leonard"
   ],
   "6583": [
    6,
    "",
    "Anthony Davis"
+  ],
+  "4594268": [
+   12,
+   "Sakat",
+   "Anthony Edwards"
   ],
   "4278073": [
    6,
@@ -122,6 +117,11 @@
    "",
    "Luka Doncic"
   ],
+  "4431671": [
+   2,
+   "",
+   "Jaden McDaniels"
+  ],
   "4432166": [
    3,
    "Sakat",
@@ -132,60 +132,60 @@
    "",
    "Desmond Bane"
   ],
-  "4431678": [
-   10,
-   "",
-   "Tyrese Maxey"
+  "3059318": [
+   7,
+   "Belirsiz",
+   "Joel Embiid"
   ],
   "4066261": [
    9,
    "",
    "Bam Adebayo"
   ],
-  "3059318": [
-   7,
-   "Belirsiz",
-   "Joel Embiid"
-  ],
   "4433134": [
    13,
    "",
    "Scottie Barnes"
   ],
-  "3908809": [
-   7,
+  "4431678": [
+   10,
    "",
-   "Donovan Mitchell"
+   "Tyrese Maxey"
   ],
   "4684742": [
    1,
    "",
    "Ausar Thompson"
   ],
-  "4566434": [
-   12,
+  "3908809": [
+   7,
    "",
-   "Franz Wagner"
+   "Donovan Mitchell"
   ],
   "4433255": [
    10,
    "Sakat",
    "Chet Holmgren"
   ],
-  "3992": [
-   10,
+  "4566434": [
+   12,
    "",
-   "James Harden"
+   "Franz Wagner"
   ],
-  "4683021": [
-   7,
+  "4065733": [
+   13,
    "",
-   "Deni Avdija"
+   "Ty Jerome"
   ],
   "1966": [
    9,
    "",
    "LeBron James"
+  ],
+  "4065648": [
+   1,
+   "",
+   "Jayson Tatum"
   ],
   "4251": [
    13,
@@ -197,75 +197,80 @@
    "Sakat",
    "Austin Reaves"
   ],
-  "4065733": [
-   13,
-   "",
-   "Ty Jerome"
-  ],
-  "4065648": [
-   1,
-   "",
-   "Jayson Tatum"
-  ],
-  "6430": [
-   2,
-   "Sakat",
-   "Jimmy Butler III"
-  ],
-  "4869342": [
-   2,
-   "",
-   "Dyson Daniels"
-  ],
-  "4397189": [
+  "3992": [
    10,
-   "Belirsiz",
-   "Jalen Smith"
-  ],
-  "5124612": [
-   6,
    "",
-   "VJ Edgecombe"
-  ],
-  "4431767": [
-   2,
-   "",
-   "Christian Braun"
-  ],
-  "3136193": [
-   1,
-   "",
-   "Devin Booker"
-  ],
-  "6442": [
-   5,
-   "",
-   "Kyrie Irving"
-  ],
-  "5041939": [
-   4,
-   "",
-   "Cooper Flagg"
-  ],
-  "4395725": [
-   12,
-   "",
-   "Tyler Herro"
+   "James Harden"
   ],
   "5041935": [
    6,
    "Sakat",
    "Cameron Boozer"
   ],
-  "5105565": [
-   10,
+  "4431767": [
+   2,
    "",
-   "Donovan Clingan"
+   "Christian Braun"
+  ],
+  "6430": [
+   2,
+   "Sakat",
+   "Jimmy Butler III"
+  ],
+  "4683021": [
+   7,
+   "",
+   "Deni Avdija"
+  ],
+  "4869342": [
+   2,
+   "",
+   "Dyson Daniels"
+  ],
+  "5124612": [
+   6,
+   "",
+   "VJ Edgecombe"
+  ],
+  "3136193": [
+   1,
+   "",
+   "Devin Booker"
+  ],
+  "4397189": [
+   10,
+   "Belirsiz",
+   "Jalen Smith"
+  ],
+  "5041939": [
+   4,
+   "",
+   "Cooper Flagg"
+  ],
+  "6442": [
+   5,
+   "",
+   "Kyrie Irving"
   ],
   "4903027": [
    13,
    "",
    "Cedric Coward"
+  ],
+  "5105565": [
+   10,
+   "",
+   "Donovan Clingan"
+  ],
+  "4395725": [
+   12,
+   "",
+   "Tyler Herro"
+  ],
+  "3202": [
+   5,
+   "",
+   "Kevin Durant"
   ],
   "4871144": [
    2,
@@ -277,30 +282,30 @@
    "Sakat",
    "Jalen Duren"
   ],
-  "3202": [
-   5,
-   "",
-   "Kevin Durant"
-  ],
-  "5037871": [
-   4,
-   "Sakat",
-   "Dylan Harper"
-  ],
   "4278053": [
    13,
    "",
    "Davion Mitchell"
   ],
-  "3934672": [
-   9,
-   "",
-   "Jalen Brunson"
-  ],
   "4066336": [
    3,
    "Sakat",
    "Lauri Markkanen"
+  ],
+  "4845367": [
+   7,
+   "",
+   "Stephon Castle"
+  ],
+  "4432158": [
+   14,
+   "Sakat",
+   "Evan Mobley"
+  ],
+  "3934672": [
+   9,
+   "",
+   "Jalen Brunson"
   ],
   "3907498": [
    6,
@@ -312,11 +317,6 @@
    "",
    "Cam Spencer"
   ],
-  "4432158": [
-   14,
-   "Sakat",
-   "Evan Mobley"
-  ],
   "3155942": [
    3,
    "",
@@ -327,165 +327,145 @@
    "",
    "Trey Murphy III"
   ],
-  "4277905": [
-   9,
-   "",
-   "Trae Young"
-  ],
-  "4845367": [
-   7,
-   "",
-   "Stephon Castle"
-  ],
   "6606": [
    3,
    "",
    "Damian Lillard"
-  ],
-  "3133628": [
-   9,
-   "",
-   "Myles Turner"
-  ],
-  "2991230": [
-   4,
-   "",
-   "Fred VanVleet"
-  ],
-  "4432194": [
-   1,
-   "",
-   "Day'Ron Sharpe"
-  ],
-  "3934719": [
-   14,
-   "Sakat",
-   "OG Anunoby"
-  ],
-  "4278039": [
-   4,
-   "",
-   "Nickeil Alexander-Walker"
-  ],
-  "4066383": [
-   6,
-   "",
-   "Miles Bridges"
-  ],
-  "4396907": [
-   1,
-   "",
-   "Darius Garland"
-  ],
-  "4701230": [
-   4,
-   "",
-   "Jalen Johnson"
-  ],
-  "3149673": [
-   13,
-   "",
-   "Pascal Siakam"
-  ],
-  "4395628": [
-   5,
-   "",
-   "Zion Williamson"
-  ],
-  "4433136": [
-   13,
-   "",
-   "Walker Kessler"
-  ],
-  "3907497": [
-   12,
-   "Sakat",
-   "Dejounte Murray"
-  ],
-  "5095151": [
-   1,
-   "Sakat",
-   "Caleb Wilson"
   ],
   "3064514": [
    3,
    "",
    "Julius Randle"
   ],
-  "4432573": [
-   7,
-   "Sakat",
-   "Paolo Banchero"
-  ],
-  "5174563": [
-   12,
+  "4277905": [
+   9,
    "",
-   "Kyshawn George"
+   "Trae Young"
   ],
-  "4397014": [
-   3,
+  "3133628": [
+   9,
    "",
-   "Quentin Grimes"
+   "Myles Turner"
   ],
-  "6440": [
-   5,
-   "Sakat",
-   "Tobias Harris"
-  ],
-  "4066328": [
-   12,
-   "",
-   "Jarrett Allen"
-  ],
-  "4432816": [
-   10,
-   "Belirsiz",
-   "LaMelo Ball"
-  ],
-  "4684740": [
-   12,
-   "",
-   "Amen Thompson"
-  ],
-  "4431680": [
-   1,
-   "",
-   "Onyeka Okongwu"
-  ],
-  "4397002": [
-   1,
-   "",
-   "Ayo Dosunmu"
-  ],
-  "2991350": [
-   5,
-   "",
-   "Alex Caruso"
-  ],
-  "4433287": [
-   14,
-   "",
-   "Brandon Miller"
-  ],
-  "4279888": [
+  "4278039": [
    4,
-   "Sakat",
-   "Ja Morant"
-  ],
-  "3995": [
-   6,
    "",
-   "Jrue Holiday"
+   "Nickeil Alexander-Walker"
   ],
   "5160992": [
    14,
    "",
    "Alex Sarr"
   ],
-  "4222252": [
+  "4066383": [
+   6,
+   "",
+   "Miles Bridges"
+  ],
+  "4701230": [
+   4,
+   "",
+   "Jalen Johnson"
+  ],
+  "4396907": [
+   1,
+   "",
+   "Darius Garland"
+  ],
+  "4432573": [
+   7,
+   "Sakat",
+   "Paolo Banchero"
+  ],
+  "4711294": [
+   10,
+   "",
+   "Matas Buzelis"
+  ],
+  "5174563": [
+   12,
+   "",
+   "Kyshawn George"
+  ],
+  "3934719": [
+   14,
+   "Sakat",
+   "OG Anunoby"
+  ],
+  "4432194": [
+   1,
+   "",
+   "Day'Ron Sharpe"
+  ],
+  "5095151": [
+   1,
+   "Sakat",
+   "Caleb Wilson"
+  ],
+  "4433136": [
+   13,
+   "",
+   "Walker Kessler"
+  ],
+  "4395628": [
+   5,
+   "",
+   "Zion Williamson"
+  ],
+  "4397014": [
+   3,
+   "",
+   "Quentin Grimes"
+  ],
+  "3907497": [
+   12,
+   "Sakat",
+   "Dejounte Murray"
+  ],
+  "4431680": [
+   1,
+   "",
+   "Onyeka Okongwu"
+  ],
+  "6440": [
+   5,
+   "Sakat",
+   "Tobias Harris"
+  ],
+  "4432816": [
+   10,
+   "Belirsiz",
+   "LaMelo Ball"
+  ],
+  "4397002": [
+   1,
+   "",
+   "Ayo Dosunmu"
+  ],
+  "4684740": [
+   12,
+   "",
+   "Amen Thompson"
+  ],
+  "4433287": [
    14,
    "",
-   "Isaiah Hartenstein"
+   "Brandon Miller"
+  ],
+  "3149673": [
+   13,
+   "",
+   "Pascal Siakam"
+  ],
+  "4279888": [
+   4,
+   "Sakat",
+   "Ja Morant"
+  ],
+  "5037871": [
+   4,
+   "Sakat",
+   "Dylan Harper"
   ],
   "3064440": [
    4,
@@ -497,60 +477,100 @@
    "",
    "Moussa Diabate"
   ],
-  "4711294": [
-   10,
+  "2991230": [
+   4,
    "",
-   "Matas Buzelis"
+   "Fred VanVleet"
   ],
   "4065732": [
    1,
    "",
    "De'Andre Hunter"
   ],
-  "3157465": [
-   3,
-   "Sakat",
-   "Duncan Robinson"
-  ],
-  "4278104": [
-   2,
+  "4433627": [
+   10,
    "",
-   "Michael Porter Jr."
+   "Keyonte George"
+  ],
+  "4222252": [
+   14,
+   "",
+   "Isaiah Hartenstein"
   ],
   "3917376": [
    9,
    "Sakat",
    "Jaylen Brown"
   ],
-  "5107199": [
-   5,
-   "",
-   "Daniss Jenkins"
+  "4600663": [
+   1,
+   "Belirsiz",
+   "Zach Edey"
   ],
-  "3078576": [
-   2,
+  "3157465": [
+   3,
+   "Sakat",
+   "Duncan Robinson"
+  ],
+  "4066328": [
+   12,
    "",
-   "Derrick White"
+   "Jarrett Allen"
+  ],
+  "4397136": [
+   3,
+   "",
+   "Saddiq Bey"
+  ],
+  "3995": [
+   6,
+   "",
+   "Jrue Holiday"
   ],
   "3448": [
    6,
    "",
    "Brook Lopez"
   ],
+  "5107199": [
+   5,
+   "",
+   "Daniss Jenkins"
+  ],
+  "4277847": [
+   14,
+   "",
+   "Wendell Carter Jr."
+  ],
+  "4395724": [
+   10,
+   "",
+   "Immanuel Quickley"
+  ],
   "5105623": [
    13,
    "",
    "Kel'el Ware"
   ],
-  "4433627": [
-   10,
-   "",
-   "Keyonte George"
+  "5174983": [
+   13,
+   "Sakat",
+   "Aday Mara"
   ],
-  "4397136": [
-   3,
+  "2595516": [
+   2,
+   "Sakat",
+   "Norman Powell"
+  ],
+  "2991350": [
+   5,
    "",
-   "Saddiq Bey"
+   "Alex Caruso"
+  ],
+  "4277956": [
+   13,
+   "",
+   "Jordan Poole"
   ],
   "4395630": [
    7,
@@ -562,50 +582,30 @@
    "Sakat",
    "Grayson Allen"
   ],
-  "2595516": [
-   2,
-   "Sakat",
-   "Norman Powell"
-  ],
-  "4277847": [
-   14,
+  "6475": [
+   5,
    "",
-   "Wendell Carter Jr."
+   "Klay Thompson"
   ],
   "2490149": [
    5,
    "Sakat",
    "CJ McCollum"
   ],
-  "6475": [
-   5,
+  "4277919": [
+   6,
    "",
-   "Klay Thompson"
+   "Mo Bamba"
   ],
-  "4600663": [
-   1,
-   "Belirsiz",
-   "Zach Edey"
-  ],
-  "4395724": [
-   10,
+  "4278104": [
+   2,
    "",
-   "Immanuel Quickley"
+   "Michael Porter Jr."
   ],
-  "4432639": [
-   14,
+  "5144091": [
+   3,
    "",
-   "Jabari Smith Jr."
-  ],
-  "4277956": [
-   13,
-   "",
-   "Jordan Poole"
-  ],
-  "4873138": [
-   9,
-   "",
-   "Ace Bailey"
+   "Jeremiah Fears"
   ],
   "4277961": [
    4,
@@ -617,275 +617,260 @@
    "",
    "P.J. Washington"
   ],
-  "4017837": [
-   3,
-   "",
-   "Ivica Zubac"
-  ],
-  "5144091": [
-   3,
-   "",
-   "Jeremiah Fears"
-  ],
-  "5174983": [
-   13,
-   "Sakat",
-   "Aday Mara"
-  ],
   "4278562": [
    6,
    "",
    "Paul Reed"
   ],
-  "4277919": [
-   6,
-   "",
-   "Mo Bamba"
-  ],
-  "3138196": [
-   9,
-   "",
-   "Cameron Johnson"
-  ],
-  "4278585": [
-   12,
-   "",
-   "Collin Gillespie"
-  ],
-  "3908845": [
-   3,
-   "",
-   "John Collins"
-  ],
-  "5175737": [
-   7,
-   "",
-   "Yaxel Lendeborg"
-  ],
-  "4396971": [
-   4,
-   "",
-   "Naz Reid"
-  ],
-  "4592479": [
-   13,
-   "",
-   "Julian Champagnie"
-  ],
-  "4397424": [
-   2,
-   "",
-   "Neemias Queta"
-  ],
-  "4278067": [
-   12,
-   "",
-   "Nic Claxton"
-  ],
-  "4709138": [
-   13,
-   "",
-   "Brandin Podziemski"
-  ],
-  "4278049": [
+  "4432639": [
    14,
    "",
-   "Daniel Gafford"
-  ],
-  "3134908": [
-   12,
-   "",
-   "Jakob Poeltl"
-  ],
-  "5041955": [
-   1,
-   "",
-   "Darryn Peterson"
-  ],
-  "4395625": [
-   3,
-   "Sakat",
-   "RJ Barrett"
-  ],
-  "4592691": [
-   4,
-   "",
-   "Jake LaRavia"
-  ],
-  "5041951": [
-   2,
-   "",
-   "Meleek Thomas"
-  ],
-  "4437244": [
-   12,
-   "",
-   "Jalen Green"
-  ],
-  "4683692": [
-   9,
-   "Sakat",
-   "Cason Wallace"
-  ],
-  "4900671": [
-   13,
-   "",
-   "Ajay Mitchell"
-  ],
-  "4395626": [
-   6,
-   "",
-   "Tre Jones"
+   "Jabari Smith Jr."
   ],
   "4871145": [
    7,
    "",
    "Josh Giddey"
   ],
-  "4431736": [
-   10,
+  "4278585": [
+   12,
    "",
-   "Toumani Camara"
+   "Collin Gillespie"
   ],
-  "4066259": [
-   9,
-   "Belirsiz",
-   "De'Aaron Fox"
-  ],
-  "3062679": [
-   7,
+  "3134908": [
+   12,
    "",
-   "Josh Hart"
+   "Jakob Poeltl"
   ],
-  "4576087": [
-   9,
+  "3908845": [
+   3,
    "",
-   "Peyton Watson"
+   "John Collins"
   ],
-  "5211175": [
-   9,
+  "4396971": [
+   4,
    "",
-   "Zaccharie Risacher"
+   "Naz Reid"
   ],
-  "4712849": [
-   9,
-   "",
-   "Anthony Black"
-  ],
-  "4702382": [
+  "3078576": [
    2,
    "",
-   "Tristan da Silva"
+   "Derrick White"
   ],
-  "4066648": [
+  "4592691": [
+   4,
+   "",
+   "Jake LaRavia"
+  ],
+  "4017837": [
+   3,
+   "",
+   "Ivica Zubac"
+  ],
+  "5175737": [
+   7,
+   "",
+   "Yaxel Lendeborg"
+  ],
+  "4873138": [
    9,
    "",
-   "Rui Hachimura"
-  ],
-  "3147657": [
-   10,
-   "",
-   "Mikal Bridges"
+   "Ace Bailey"
   ],
   "5142718": [
    14,
    "",
    "AJ Dybantsa"
   ],
-  "2991070": [
-   4,
-   "Sakat",
-   "Jerami Grant"
-  ],
-  "2991139": [
-   5,
-   "",
-   "Kris Dunn"
-  ],
-  "4395651": [
+  "4278049": [
    14,
    "",
-   "Coby White"
+   "Daniel Gafford"
   ],
-  "5082206": [
+  "4278067": [
+   12,
+   "",
+   "Nic Claxton"
+  ],
+  "4397424": [
    2,
    "",
-   "Brayden Burries"
+   "Neemias Queta"
   ],
-  "4066354": [
-   1,
+  "3147657": [
+   10,
    "",
-   "Payton Pritchard"
+   "Mikal Bridges"
+  ],
+  "4395626": [
+   6,
+   "",
+   "Tre Jones"
   ],
   "5093267": [
    1,
    "",
    "Collin Murray-Boyles"
   ],
+  "3062679": [
+   7,
+   "",
+   "Josh Hart"
+  ],
+  "3138196": [
+   9,
+   "",
+   "Cameron Johnson"
+  ],
+  "4592479": [
+   13,
+   "",
+   "Julian Champagnie"
+  ],
+  "4437244": [
+   12,
+   "",
+   "Jalen Green"
+  ],
+  "4900671": [
+   13,
+   "",
+   "Ajay Mitchell"
+  ],
+  "4395625": [
+   3,
+   "Sakat",
+   "RJ Barrett"
+  ],
+  "4066354": [
+   1,
+   "",
+   "Payton Pritchard"
+  ],
+  "4683692": [
+   9,
+   "Sakat",
+   "Cason Wallace"
+  ],
+  "4576087": [
+   9,
+   "",
+   "Peyton Watson"
+  ],
+  "5041955": [
+   1,
+   "",
+   "Darryn Peterson"
+  ],
+  "5211175": [
+   9,
+   "",
+   "Zaccharie Risacher"
+  ],
+  "4066648": [
+   9,
+   "",
+   "Rui Hachimura"
+  ],
+  "5041951": [
+   2,
+   "",
+   "Meleek Thomas"
+  ],
+  "4709138": [
+   13,
+   "",
+   "Brandin Podziemski"
+  ],
+  "4702382": [
+   2,
+   "",
+   "Tristan da Silva"
+  ],
+  "5082206": [
+   2,
+   "",
+   "Brayden Burries"
+  ],
+  "2991070": [
+   4,
+   "Sakat",
+   "Jerami Grant"
+  ],
+  "4395651": [
+   14,
+   "",
+   "Coby White"
+  ],
+  "2991139": [
+   5,
+   "",
+   "Kris Dunn"
+  ],
+  "4431736": [
+   10,
+   "",
+   "Toumani Camara"
+  ],
   "4433247": [
    2,
    "",
    "Jonathan Kuminga"
   ],
-  "4397077": [
-   10,
-   "Belirsiz",
-   "Jaxson Hayes"
-  ],
-  "3064290": [
-   5,
+  "4712849": [
+   9,
    "",
-   "Aaron Gordon"
-  ],
-  "4869780": [
-   12,
-   "",
-   "Derik Queen"
-  ],
-  "4432848": [
-   7,
-   "",
-   "Jaime Jaquez Jr."
+   "Anthony Black"
   ],
   "5061589": [
    10,
    "",
    "Yves Missi"
   ],
-  "6589": [
+  "3064290": [
    5,
    "",
-   "Draymond Green"
+   "Aaron Gordon"
   ],
-  "5142620": [
-   6,
-   "",
-   "Darius Acuff Jr."
-  ],
-  "4397183": [
-   5,
-   "",
-   "Aaron Wiggins"
-  ],
-  "4395712": [
-   14,
-   "",
-   "Andrew Nembhard"
+  "4397077": [
+   10,
+   "Belirsiz",
+   "Jaxson Hayes"
   ],
   "4683778": [
    7,
    "",
    "Jared McCain"
   ],
+  "5142620": [
+   6,
+   "",
+   "Darius Acuff Jr."
+  ],
+  "4869780": [
+   12,
+   "",
+   "Derik Queen"
+  ],
+  "4066259": [
+   9,
+   "Belirsiz",
+   "De'Aaron Fox"
+  ],
   "5279133": [
    2,
    "",
    "Joan Beringer"
   ],
-  "5107173": [
-   10,
+  "4397183": [
+   5,
    "",
-   "Danny Wolf"
+   "Aaron Wiggins"
+  ],
+  "6589": [
+   5,
+   "",
+   "Draymond Green"
   ],
   "3155526": [
    7,
@@ -907,6 +892,11 @@
    "",
    "Jalen Suggs"
   ],
+  "4432848": [
+   7,
+   "",
+   "Jaime Jaquez Jr."
+  ],
   "4591725": [
    4,
    "",
@@ -916,6 +906,16 @@
    7,
    "",
    "Rudy Gobert"
+  ],
+  "5107173": [
+   10,
+   "",
+   "Danny Wolf"
+  ],
+  "4395712": [
+   14,
+   "",
+   "Andrew Nembhard"
   ],
   "4601023": [
    6,
