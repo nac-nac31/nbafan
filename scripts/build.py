@@ -481,8 +481,10 @@ def simulate_season(raw, data, n_sims=10000):
     most = SCORING == "H2H_MOST_CATEGORIES"  # sıralama maç galibiyetine göre
     base = {t: (list(teams[t]["mrec"]) if most else list(teams[t]["cat"])) for t in ids}
     rr = rnd.random
-    res = {t: {"po": 0, "final": 0, "champ": 0, "seed1": 0, "seedSum": 0, "w": 0.0, "l": 0.0} for t in ids}
     bracket = seed_bracket(n_playoff)
+    n_rounds = max(1, (len(bracket) - 1).bit_length())
+    res = {t: {"po": 0, "final": 0, "champ": 0, "seed1": 0, "seedSum": 0, "w": 0.0, "l": 0.0, "rankSum": 0,
+               "seeds": [0] * n_playoff, "reach": [0] * (n_rounds + 1)} for t in ids}
 
     def play(a, b, probs):
         wa = sum(1 for q in probs if rr() < q)
@@ -506,13 +508,16 @@ def simulate_season(raw, data, n_sims=10000):
         order = sorted(ids, key=lambda t: (-(rec[t][0] + 0.5 * rec[t][2]) / max(1, sum(rec[t])), rr()))
         for i, t in enumerate(order):
             res[t]["w"] += rec[t][0]; res[t]["l"] += rec[t][1]
+            res[t]["rankSum"] += i + 1
             if i < n_playoff:
                 res[t]["po"] += 1
                 res[t]["seedSum"] += i + 1
+                res[t]["seeds"][i] += 1
         res[order[0]]["seed1"] += 1
         seeds = {i + 1: t for i, t in enumerate(order[:n_playoff])}
         field = [seeds.get(s) for s in bracket]  # None = bay geçen üst sıra
         rank = {t: i for i, t in enumerate(order)}
+        rnd_i = 0
         while len(field) > 1:
             nxt = []
             for i in range(0, len(field), 2):
@@ -525,14 +530,27 @@ def simulate_season(raw, data, n_sims=10000):
             if len(nxt) == 1:
                 res[field[0]]["final"] += 1; res[field[1]]["final"] += 1
             field = nxt
+            rnd_i += 1
+            for t in field:
+                res[t]["reach"][rnd_i] += 1  # bu turun galibi (bir sonraki tura kaldı)
         res[field[0]]["champ"] += 1
     out = {}
     for t, r in res.items():
         out[t] = {"po": round(r["po"] / n_sims, 4), "final": round(r["final"] / n_sims, 4), "champ": round(r["champ"] / n_sims, 4),
                   "seed1": round(r["seed1"] / n_sims, 4), "seed": round(r["seedSum"] / r["po"], 2) if r["po"] else None,
-                  "w": round(r["w"] / n_sims, 1), "l": round(r["l"] / n_sims, 1)}
+                  "w": round(r["w"] / n_sims, 1), "l": round(r["l"] / n_sims, 1),
+                  "rank": round(r["rankSum"] / n_sims, 2), "seeds": [round(x / n_sims, 4) for x in r["seeds"]],
+                  "reach": [round(r["po"] / n_sims, 4)] + [round(x / n_sims, 4) for x in r["reach"][1:]]}
+    # beklenen ağaç için: iki takım tek haftalık maçta karşılaşırsa kazanma ihtimali (taban güçlerle)
+    def match_win(a, b):
+        dist = [1.0]
+        for q in (pcat(a, b, c) for c in CATS):
+            dist = [x * (1 - q) + (dist[i - 1] * q if i else 0) for i, x in enumerate(dist)] + [dist[-1] * q]
+        n = len(CATS)  # eşitlikte yarım say (simülasyonda üst sıra geçer)
+        return sum(dist[k] for k in range(n + 1) if 2 * k > n) + sum(dist[k] for k in range(n + 1) if 2 * k == n) / 2
+    h2h = {a: {b: round(match_win(a, b), 3) for b in ids if b != a} for a in ids}
     data["sim"] = {"teams": out, "playoffTeams": n_playoff, "regWeeks": reg_weeks, "sims": n_sims,
-                   "seedRule": ss.get("playoffSeedingRule")}
+                   "seedRule": ss.get("playoffSeedingRule"), "bracket": bracket, "rounds": n_rounds, "h2h": h2h}
 
 
 def seed_bracket(n):
