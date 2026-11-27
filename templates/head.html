@@ -301,6 +301,31 @@ a.orow:hover{background:var(--surface-2)}
 .ov{font-family:var(--f-data);font-size:12.5px;text-align:center;padding:5px 0;border-radius:6px;font-variant-numeric:tabular-nums}
 .ov.b{font-weight:700}
 
+
+/* ---- Paylaşım / bildirim / uygulama ---- */
+.chip2{font-family:var(--f-data);font-size:11px;color:var(--muted);background:var(--surface-2);border:1px solid var(--line);border-radius:999px;padding:3px 9px}
+.sbody{padding:16px;display:flex;flex-direction:column;gap:10px}
+.sbody p{margin:0;font-size:14.5px;line-height:1.5}
+.sbody p.lead{font-family:var(--f-display);font-weight:700;font-size:24px;line-height:1.15;text-transform:none}
+.sbody p+p{padding-top:10px;border-top:1px dashed var(--line)}
+.sact{display:flex;gap:8px;flex-wrap:wrap;margin-top:4px}
+.sbtn{display:inline-flex;align-items:center;gap:8px;border:0;border-radius:999px;padding:10px 16px;font:600 14px var(--f-body);background:var(--accent);color:var(--accent-ink);cursor:pointer;text-decoration:none}
+.sbtn svg{width:18px;height:18px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+.sbtn.wa{background:#25D366;color:#06170D}
+.sbtn.ghost{background:var(--surface-2);color:var(--ink);border:1px solid var(--line)}
+.sbtn:focus-visible{outline:2px solid var(--ink);outline-offset:2px}
+.shm{position:fixed;inset:0;z-index:50;background:rgba(5,10,7,.72);display:flex;align-items:center;justify-content:center;padding:16px}
+.shc{background:var(--surface);border-radius:18px;padding:14px;max-width:440px;width:100%;max-height:92vh;overflow:auto;display:flex;flex-direction:column;gap:10px}
+.shc img{width:100%;height:auto;border-radius:10px;display:block}
+.inst{display:flex;align-items:center;gap:12px;padding:12px 14px;position:relative}
+.inst img{border-radius:10px;flex:none}
+.inst div{flex:1;min-width:0;display:flex;flex-direction:column;gap:2px}
+.inst small{font-size:12px;color:var(--muted)}
+.inst .x{background:none;border:0;color:var(--muted);font-size:22px;line-height:1;cursor:pointer;padding:4px}
+.ntf ol{margin:0;padding:14px 14px 14px 34px;display:flex;flex-direction:column;gap:12px}
+.ntf li{font-size:14px}
+.ntrow{display:flex;gap:12px;align-items:center;flex-wrap:wrap;margin-top:6px}
+.ntrow code{font-family:var(--f-data);font-size:12.5px;background:var(--surface-2);border:1px solid var(--line);border-radius:8px;padding:4px 8px;word-break:break-all}
 /* ---- Eğlence ---- */
 .seg{display:inline-flex;align-self:flex-start;background:var(--surface-2);border:1px solid var(--line);border-radius:999px;padding:3px;gap:2px}
 .seg button{border:0;background:none;border-radius:999px;padding:6px 14px;font-family:var(--f-data);font-size:12.5px;font-weight:600;color:var(--muted);cursor:pointer}
