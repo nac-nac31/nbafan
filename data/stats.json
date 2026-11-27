@@ -749,7 +749,7 @@
   ]
  },
  "league": "Fantasy 26-27",
- "updated": "27 Kasım 2026, 03:10",
+ "updated": "27 Kasım 2026, 03:12",
  "weeks": [
   1,
   2,
@@ -33414,5 +33414,168 @@
     "days": 167
    }
   }
+ },
+ "story": {
+  "week": 5,
+  "results": [
+   {
+    "a": 7,
+    "b": 10,
+    "s": [
+     1,
+     8
+    ],
+    "beat": [
+     4,
+     10
+    ]
+   },
+   {
+    "a": 4,
+    "b": 13,
+    "s": [
+     2,
+     7
+    ],
+    "beat": [
+     0,
+     4
+    ]
+   },
+   {
+    "a": 6,
+    "b": 9,
+    "s": [
+     7,
+     2
+    ],
+    "beat": [
+     11,
+     8
+    ]
+   },
+   {
+    "a": 12,
+    "b": 14,
+    "s": [
+     7,
+     2
+    ],
+    "beat": [
+     2,
+     1
+    ]
+   },
+   {
+    "a": 1,
+    "b": 3,
+    "s": [
+     2,
+     6
+    ],
+    "beat": [
+     6,
+     9
+    ]
+   },
+   {
+    "a": 2,
+    "b": 5,
+    "s": [
+     5,
+     4
+    ],
+    "beat": [
+     6,
+     4
+    ]
+   }
+  ],
+  "tr": [
+   "5. haftanın en sert sonucu Adana Heybeliler Tekstil imzalı: BATH CANARIES karşısında 8-1.",
+   "Kıl payı biten maç: CHADELITES 5-4 BEGE.",
+   "Haftanın sürprizi: güç sıralamasında 7. olan 31 Chechkers, 3. sıradaki Children of Planet Earth takımını 6-2 yendi.",
+   "All-play şampiyonu Acibadem Elephants: bu haftaki istatistikleriyle ligdeki 11 rakibi yenerdi.",
+   "Şanssızlar köşesi: Kalifornia Bulldogs ligin 8 takımını yenecek istatistik yaptı ama tam da Acibadem Elephants ile eşleşti.",
+   "Haftanın oyuncusu Victor Wembanyama (BEGE): 3 maçta ortalama 35.7 sayı, 15.7 ribaund, 2 top çalma, 2.3 blok.",
+   "Kerem’s Deluxe Team üst üste 5 maçtır kaybediyor.",
+   "Zirvede 31 Chechkers var: kategori rekoru 28-16-1.",
+   "Bu haftanın maçı CHADELITES – Acibadem Elephants: model kazanma ihtimalini %56 – %44 görüyor."
+  ],
+  "en": [
+   "The statement win of week 5 belongs to Adana Heybeliler Tekstil: 8-1 over BATH CANARIES.",
+   "One went down to the wire: CHADELITES edged BEGE 5-4.",
+   "Upset of the week: 31 Chechkers (No. 7 in the power rankings) beat No. 3 Children of Planet Earth 6-2.",
+   "All-play champ: Acibadem Elephants, whose numbers would have beaten 11 of 11 teams.",
+   "Hard-luck loser: Kalifornia Bulldogs put up numbers good enough to beat 8 teams, and still ran into Acibadem Elephants.",
+   "Player of the week: Victor Wembanyama (BEGE), averaging 35.7 pts, 15.7 reb, 2 stl, 2.3 blk over 3 games.",
+   "Kerem’s Deluxe Team has lost 5 straight.",
+   "31 Chechkers sits on top with a 28-16-1 category record.",
+   "Game of the week: CHADELITES vs Acibadem Elephants, which the model has at 56% – 44%."
+  ],
+  "nOpp": 11,
+  "points": false,
+  "pw": {
+   "pid": 5104157,
+   "team": 5,
+   "z": 54.9,
+   "n": 3,
+   "name": "Victor Wembanyama",
+   "pg": {
+    "PTS": 35.7,
+    "REB": 15.7,
+    "AST": 2.7,
+    "STL": 2.0,
+    "BLK": 2.3,
+    "3PM": 2.7
+   }
+  },
+  "best": {
+   "pid": 5104157,
+   "team": 5,
+   "z": 38.8,
+   "name": "Victor Wembanyama",
+   "line": {
+    "PTS": 50.0,
+    "REB": 18.0,
+    "AST": 1.0,
+    "STL": 4.0,
+    "BLK": 5.0,
+    "3PM": 5.0,
+    "TO": 3.0,
+    "FGM": 20.0,
+    "FGA": 29.0,
+    "FTM": 5.0,
+    "FTA": 6.0,
+    "MIN": 32.0
+   }
+  },
+  "blow": {
+   "a": 7,
+   "b": 10,
+   "s": [
+    1,
+    8
+   ],
+   "beat": [
+    4,
+    10
+   ]
+  },
+  "king": 6,
+  "kingBeat": 11,
+  "next": {
+   "a": 2,
+   "b": 6,
+   "p": 56
+  },
+  "title": {
+   "tr": "5. hafta özeti",
+   "en": "Week 5 recap"
+  }
+ },
+ "notify": {
+  "server": "https://ntfy.sh",
+  "prefix": "nbafan-f9edd290"
  }
 }
