@@ -291,9 +291,7 @@ def build_players(raw, season):
         r["valNow"] = round(sum(zs(r["_now"]).values()), 2)
         r["valProj"] = round(sum(zs(r["_proj"]).values()), 2) if r["_proj"] else None
         r["s"] = {c: (round(v, 3) if "%" in c else round(v, 1)) for c, v in r["_now"]["s"].items()}
-        del r["_mix"], r["_now"], r["_proj"]
-        if r["team"] == 0:
-            del r["g"]
+        del r["_mix"], r["_now"], r["_proj"]  # serbest oyuncuların "g"si de kalır: Takımım/radar ekleme etkisi
     return sorted(rows, key=lambda r: -r["val"])
 
 
