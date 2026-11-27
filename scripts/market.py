@@ -50,7 +50,7 @@ def team_weights(team, cn_vals, n_teams):
     return w
 
 
-def build_radar(raw, data, season, zref, cats, cn):
+def build_radar(raw, data, season, zref, cats, cn, row_fn=None):
     zs = zfun(zref, cats, cn)
     cv = [cn[c] for c in cats]
     seen, players = set(), []
@@ -105,6 +105,10 @@ def build_radar(raw, data, season, zref, cats, cn):
                 fits.append((round(match, 2), round(mine - theirs, 2), t["id"], wr["id"] if wr else None))
         fits.sort(reverse=True)
         r = rows_by_id.get(pl["id"])
+        g = None
+        if row_fn:  # maç başı ham istatistik: haftalık ve sezonluk etki hesabı için
+            pr = row_fn(pl, season, 0)
+            g = pr["g"] if pr else None
         out.append({
             "id": pl["id"], "name": pl.get("fullName", ""), "pos": (r or {}).get("pos", ""),
             "inj": INJ.get(pl.get("injuryStatus") or "", ""), "fa": p.get("status", "FREEAGENT"),
@@ -112,7 +116,8 @@ def build_radar(raw, data, season, zref, cats, cn):
             "owned": round(own.get("percentOwned", 0), 1), "chg": round(own.get("percentChange", 0), 2),
             "gp": gp, "v": vals, "min": mins, "trend": trend,
             "z": {c: round(zf[c], 2) for c in cv},
-            "fit": [{"t": tid, "m": m, "g": g, "drop": d} for m, g, tid, d in fits[:3]],
+            "fit": [{"t": tid, "m": m, "g": gn, "drop": d} for m, gn, tid, d in fits[:3]],
+            "g": g, "val": (r or {}).get("val", vals.get("l15", vals.get("sea", 0))),
         })
     # radar puanı: son haftalardaki değer + yükseliş + sahiplik ivmesi
     for r in out:
@@ -182,7 +187,7 @@ def best_free_agents(raw, data, season, row_fn, n=8):
 
 def build_market(raw, data, season, zref, cats, cn, lower, row_fn=None):
     if zref:
-        data["radar"] = build_radar(raw, data, season, zref, cats, cn)
+        data["radar"] = build_radar(raw, data, season, zref, cats, cn, row_fn)
     ti = trade_inputs(raw, data, cats, cn, lower)
     if ti:
         ti["fa"] = best_free_agents(raw, data, season, row_fn) if row_fn else []

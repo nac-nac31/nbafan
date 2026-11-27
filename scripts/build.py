@@ -394,6 +394,10 @@ def project_week(raw, data):
         if p["team"]:
             p["left"] = left.get(p["id"], 0)
     cur["days"] = [start, start + length - 1]
+    # waiver radarı "alırsam ne olur" hesabı için: tarayıcı aynı günlük kadro modelini tekrar kurar
+    data["weekSim"] = {"days": list(days), "games": {str(k): v for k, v in games.items()}, "slots": ACTIVE_SLOTS,
+                       "base": {tid: {k: b.get(k, 0) for k in G_KEYS if k in b} for tid, b in mvals.items()},
+                       "out": [p["id"] for p in data["players"] if p["team"] and (slots.get(p["id"]) == 13 or p["inj"] in ("Sakat", "IR"))]}
 
 
 def simulate_season(raw, data, n_sims=10000):
